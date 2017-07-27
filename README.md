@@ -3,18 +3,18 @@
 HereticOS-ObjectSystem是一款C++语言开发的windows平台的轻量级分布式对象系统，使用代码生成器做对象序列化代码生成，对象序列化后可以存储到key value模式的对象服务器中，对象服务器为不同业务程序做对象共享与持久化，是一种敏捷开发利器。  
   
 ####代码目录说明 
-|  目录    |  描述    |
-| :-------- | --------:|
+|  目录    |  描述    |  
+| :-------- | --------:|  
 |other\    | 序列化库目录  |
-|other\ObjectSystem      |          ObjectSystem第一版   |
-|other\ObjectSystem2     |          ObjectSystem第二版  |
-|Example\CodeRender            |    对象序列化代码生成器  |
-|Example\ObjectSystemComServer     第一版ObjectSystem的MSSOAP对象服务器  |
-|Example\project_WhiteBoxStudio    第一版ObjectSystem框架基础上设计的一款软件，体现敏捷开发的思路。|  
-|Example\XMLObjectTest1        |    c++对象序列化例子  |
-|Example\ObjectSystem2Test     |    ObjectSystem第二版测试例子，以及一款击鼓传花的例子。  |
-  
-  
+|other\ObjectSystem      |          ObjectSystem第一版   |  
+|other\ObjectSystem2     |          ObjectSystem第二版  |  
+|Example\CodeRender            |    对象序列化代码生成器  |  
+|Example\ObjectSystemComServer     第一版ObjectSystem的MSSOAP对象服务器  |  
+|Example\project_WhiteBoxStudio    第一版ObjectSystem框架基础上设计的一款软件，体现敏捷开发的思路。|    
+|Example\XMLObjectTest1        |    c++对象序列化例子  |  
+|Example\ObjectSystem2Test     |    ObjectSystem第二版测试例子，以及一款击鼓传花的例子。  |  
+    
+    
 ####第一版ObjectSystem介绍  
   
 第一版实做了C++对象序列化，以及对象服务器的基本功能UpdataObject GetObject以及对象锁等，系统在设计时使用KV查询模式，如果需要在不同组件中同步对象，则需要应用自行在KV上设计邮箱，并自行轮询，多组件对相同对象写时需要对对象上锁，以防止对象被不同角色篡改。  
