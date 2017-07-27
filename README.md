@@ -5,7 +5,7 @@ HereticOS-ObjectSystem是一款C++语言开发的windows平台的轻量级分布
 ####代码目录说明 
 |  目录    |  描述    |  
 | :-------- | --------:|  
-|other\    | 序列化库目录  |
+|other\    | 序列化库目录  |  
 |other\ObjectSystem      |          ObjectSystem第一版   |  
 |other\ObjectSystem2     |          ObjectSystem第二版  |  
 |Example\CodeRender            |    对象序列化代码生成器  |  
