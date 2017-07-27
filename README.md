@@ -2,7 +2,7 @@
 
 HereticOS-ObjectSystem是一款C++语言开发的windows平台的轻量级分布式对象系统，使用代码生成器做对象序列化代码生成，对象序列化后可以存储到key value模式的对象服务器中，对象服务器为不同业务程序做对象共享与持久化，是一种敏捷开发利器。  
   
-####代码目录说明 
+##代码目录说明 
 |  目录    |  描述    |  
 | :-------- | --------:|  
 |other\    | 序列化库目录  |  
@@ -15,7 +15,7 @@ HereticOS-ObjectSystem是一款C++语言开发的windows平台的轻量级分布
 |Example\ObjectSystem2Test     |    ObjectSystem第二版测试例子，以及一款击鼓传花的例子。  |  
     
     
-####第一版ObjectSystem介绍  
+##第一版ObjectSystem介绍  
   
 第一版实做了C++对象序列化，以及对象服务器的基本功能UpdataObject GetObject以及对象锁等，系统在设计时使用KV查询模式，如果需要在不同组件中同步对象，则需要应用自行在KV上设计邮箱，并自行轮询，多组件对相同对象写时需要对对象上锁，以防止对象被不同角色篡改。  
 第一版传输层使用MSSOAP来实现。  
@@ -23,7 +23,7 @@ HereticOS-ObjectSystem是一款C++语言开发的windows平台的轻量级分布
 ####第二版ObjectSystem介绍  
 第二版在第一版基础上使用C++11中的lambda闭包技术实现了异步事件机制，因此增加消息推送能力，从而实现了基于KV模型的发布订阅模式，业务可以注册关注指定对象的UpdataObject NeedObject等事件，由于项目需要第二版ObjectSystem做了不部分重构，暂时去掉了MSSOAP传输层，实做了UDP传输层，未来可能会支持Win10 UWP等。  
   
-####ObjectSystem2Test 击鼓传花例子介绍  
+##ObjectSystem2Test 击鼓传花例子介绍  
   
 //  
 //1. 发布订阅传递模式  适合需要及时更新业务数据的场合  
@@ -44,7 +44,7 @@ HereticOS-ObjectSystem是一款C++语言开发的windows平台的轻量级分布
 //   所有游戏用户关注公告牌，其中用户传递等待时间是管理员动态设置。  
 //  
 
-####ObjectSystem V2使用说明  
+##ObjectSystem V2使用说明  
 ObjectSystem2Test设计用例：  
 1. 设计业务数据对象 RotationalFlowersDataMode.h  
 2. 编辑CodeRender\结构体序列化1.1\1.txt脚本，配置好指定代码生成器脚本（MakeTransportProtocol.mk），业务头文件目录（RotationalFlowersDataMode.h），代码输出目录（AppProtocol）等。  
@@ -54,12 +54,12 @@ ObjectSystem2Test设计用例：
 6. 编写业务逻辑RotationalFlowers.h  
 
 
-####CodeRender 原理以及使用介绍
+##CodeRender 原理以及使用介绍
 CodeRender是学生时代的一个玩具，主要做自定义语法文法的模式提取变换，当时网上找到一个C语言编译器的例子用了它的词法分析器然后改了改，上层用借鉴专家系统模式识别的思想做了AST语义树生成，有了AST语义树，同样再用专家系统对AST树做模式识别变换到自己设计的予以模式。
 该代码生成器之前做过COM代码HOOK 按照需要做一层Wrap,从而完成一些枯燥的代码编写工作，减少错误。
 现在用于对象序列化代码生成。
 
-#####语义分析语法，实例可以参看CodeRender\结构体序列化1.1\structtree.mk
+###语义分析语法，实例可以参看CodeRender\结构体序列化1.1\structtree.mk
 
 语言解析表达式规范
 \+  连接两个规则表达式名称，表示两个规则名指定的表达式按照先后顺序必须都匹配成功（形成多个代码对象）
@@ -77,7 +77,7 @@ G(xxx)	表示一个表达式 G(表达式名1|表达式名2)	暂时不支持
 WORD(xxx)	表匹配一个词 比如WORD(;)
  
 
-#####代码生成表达式定义，实例可参看 CodeRender\结构体序列化1.1\结构预处理MAKE.mk
+###代码生成表达式定义，实例可参看 CodeRender\结构体序列化1.1\结构预处理MAKE.mk
 
 表达式为真，则代码返回给上层表达式
 MAKE_N<代码节点,第一个代码节点MAKE,中间的过程代码节点MAKE,末尾的代码节点MAKE> 穷举所有符合代码节点表达   式的代码节点，然后交由后面的MAKE表达式处理   
