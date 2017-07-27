@@ -2,15 +2,17 @@
 
 HereticOS-ObjectSystem是一款C++语言开发的windows平台的轻量级分布式对象系统，使用代码生成器做对象序列化代码生成，对象序列化后可以存储到key value模式的对象服务器中，对象服务器为不同业务程序做对象共享与持久化，是一种敏捷开发利器。  
   
-####代码目录说明  
-other\  序列化库目录  
-other\ObjectSystem                ObjectSystem第一版   
-other\ObjectSystem2               ObjectSystem第二版  
-Example\CodeRender                对象序列化代码生成器  
-Example\ObjectSystemComServer     第一版ObjectSystem的MSSOAP对象服务器  
-Example\project_WhiteBoxStudio    第一版ObjectSystem框架基础上设计的一款软件，体现敏捷开发的思路。  
-Example\XMLObjectTest1            c++对象序列化例子  
-Example\ObjectSystem2Test         ObjectSystem第二版测试例子，以及一款击鼓传花的例子。  
+####代码目录说明 
+|  目录    |  描述    |
+| :-------- | --------:|
+|other\    | 序列化库目录  |
+|other\ObjectSystem      |          ObjectSystem第一版   |
+|other\ObjectSystem2     |          ObjectSystem第二版  |
+|Example\CodeRender            |    对象序列化代码生成器  |
+|Example\ObjectSystemComServer     第一版ObjectSystem的MSSOAP对象服务器  |
+|Example\project_WhiteBoxStudio    第一版ObjectSystem框架基础上设计的一款软件，体现敏捷开发的思路。|  
+|Example\XMLObjectTest1        |    c++对象序列化例子  |
+|Example\ObjectSystem2Test     |    ObjectSystem第二版测试例子，以及一款击鼓传花的例子。  |
   
   
 ####第一版ObjectSystem介绍  
@@ -78,19 +80,19 @@ WORD(xxx)	表匹配一个词 比如WORD(;)
 #####代码生成表达式定义，实例可参看 CodeRender\结构体序列化1.1\结构预处理MAKE.mk
 
 表达式为真，则代码返回给上层表达式
-MAKE_N<代码节点,第一个代码节点MAKE,中间的过程代码节点MAKE,末尾的代码节点MAKE> 穷举所有符合代码节点表达式的代码节点，然后交由后面的MAKE表达式处理
-MAKE_ONE<代码节点,代码节点MAKE> 只MAKE处理第一个符合代码节点表达式的代码节点 
-MAKE_ADD<MAKE表达式字符串的表达式名称>	添加或者设置一条表达式
-WORD(x) 返回字符串，如果字符串中有"则需要在前面加\
+MAKE_N<代码节点,第一个代码节点MAKE,中间的过程代码节点MAKE,末尾的代码节点MAKE> 穷举所有符合代码节点表达   式的代码节点，然后交由后面的MAKE表达式处理   
+MAKE_ONE<代码节点,代码节点MAKE> 只MAKE处理第一个符合代码节点表达式的代码节点   
+MAKE_ADD<MAKE表达式字符串的表达式名称>	添加或者设置一条表达式  
+WORD(x) 返回字符串，如果字符串中有"则需要在前面加\  
 NOT<MAKE表达式> 如果MAKE表达式成功则返回假，用于条件控制执行，并将MAKE表达式的结果抛弃不加入结果链
 IF<MAKE表达式> 如果MAKE表达式成功则返回真，用于条件控制执行，并将MAKE表达式的结果抛弃不加入结果链
-DEBUGOUT<"字符串">	打印字符串
-DEBUGOUT<MAKE表达式> 打印MAKE表达式生成的结果，并影响参与计算的表达式真假状态
-MAKE_TO<MAKE表达式,保存目标对象名> 如果MAKE表达式为真则将其结果保存到目标对象名指定的对象中去
-MAKE_MAKECODE<需要解析处理的源对象,处理源对象的脚本对象>  对象可以是一个MAKE表达式返回的字符串，也可以直接是一个对象字符串如文件路径
-MAKE_CODE_TO<源对象,处理源对象的MAKE表达式,输出对象> 对象可以是文件路径字符串或者是一个MAKE表达式结果,处理源对象的MAKE表达式 对 源对象分析处理后的结果存入 输出对象
-MAKE_BIND_ROUTING<被绑定的虚路径名字符串,需要映射到虚路径的真实路径字符串>
-\+  表达式结果连接并流程控制 A+B 如果A为真则执行B，AB都为真则返回真
-&  表达式结果连接并流程控制 A&B 不管A执行是否成功，都需执行B, AB只要有一个为真则返回真
-\#  表达式结果连接并流程控制 A#B 与+意义相同只是返回的结果不是用句连接，而是词的融合
-|  表达式结果连接并流程控制 A|B	如果A为真，则不执行B，跳过B执行下一个表达式，如果A为假，则执行B,返回结果为A或B,返回的代码是真值的那个表达式MAKE结果
+DEBUGOUT<"字符串">	打印字符串  
+DEBUGOUT<MAKE表达式> 打印MAKE表达式生成的结果，并影响参与计算的表达式真假状态  
+MAKE_TO<MAKE表达式,保存目标对象名> 如果MAKE表达式为真则将其结果保存到目标对象名指定的对象中去  
+MAKE_MAKECODE<需要解析处理的源对象,处理源对象的脚本对象>  对象可以是一个MAKE表达式返回的字符串，也可以直接是一个对象字符串如文件路径  
+MAKE_CODE_TO<源对象,处理源对象的MAKE表达式,输出对象> 对象可以是文件路径字符串或者是一个MAKE表达式结果,处理源对象的MAKE表达式 对 源对象分析处理后的结果存入 输出对象  
+MAKE_BIND_ROUTING<被绑定的虚路径名字符串,需要映射到虚路径的真实路径字符串>  
+\+  表达式结果连接并流程控制 A+B 如果A为真则执行B，AB都为真则返回真  
+&  表达式结果连接并流程控制 A&B 不管A执行是否成功，都需执行B, AB只要有一个为真则返回真  
+\#  表达式结果连接并流程控制 A#B 与+意义相同只是返回的结果不是用句连接，而是词的融合  
+|  表达式结果连接并流程控制 A|B	如果A为真，则不执行B，跳过B执行下一个表达式，如果A为假，则执行B,返回结果为A或B,返回的代码是真值的那个表达式MAKE结果  
