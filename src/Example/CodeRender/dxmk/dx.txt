@@ -1,0 +1,522 @@
+ #pragma once
+
+class  ComHook_IDirect3D8
+			: public IDirect3D8 
+			, public ComHookPacketBase
+{
+	DECLARE_INTERFACE_LIST
+
+	/*=======================IDirect3D8接口函数声明=======================*/
+
+	virtual UINT STDMETHODCALLTYPE GetAdapterCount( );
+ 
+	virtual UINT STDMETHODCALLTYPE GetAdapterModeCount( UINT Adapter );
+ 
+	virtual HMONITOR STDMETHODCALLTYPE GetAdapterMonitor( UINT Adapter );
+ 
+	virtual HRESULT STDMETHODCALLTYPE RegisterSoftwareDevice( void * pInitializeFunction );
+ 
+	virtual HRESULT STDMETHODCALLTYPE GetAdapterIdentifier( UINT Adapter , DWORD Flags , D3DADAPTER_IDENTIFIER8 * pIdentifier );
+ 
+	virtual HRESULT STDMETHODCALLTYPE EnumAdapterModes( UINT Adapter , UINT Mode , D3DDISPLAYMODE * pMode );
+ 
+	virtual HRESULT STDMETHODCALLTYPE GetAdapterDisplayMode( UINT Adapter , D3DDISPLAYMODE * pMode );
+ 
+	virtual HRESULT STDMETHODCALLTYPE CheckDeviceType( UINT Adapter , D3DDEVTYPE CheckType , D3DFORMAT DisplayFormat , D3DFORMAT BackBufferFormat , BOOL Windowed );
+ 
+	virtual HRESULT STDMETHODCALLTYPE CheckDeviceFormat( UINT Adapter , D3DDEVTYPE DeviceType , D3DFORMAT AdapterFormat , DWORD Usage , D3DRESOURCETYPE RType , D3DFORMAT CheckFormat );
+ 
+	virtual HRESULT STDMETHODCALLTYPE CheckDeviceMultiSampleType( UINT Adapter , D3DDEVTYPE DeviceType , D3DFORMAT SurfaceFormat , BOOL Windowed , D3DMULTISAMPLE_TYPE MultiSampleType );
+ 
+	virtual HRESULT STDMETHODCALLTYPE CheckDepthStencilMatch( UINT Adapter , D3DDEVTYPE DeviceType , D3DFORMAT AdapterFormat , D3DFORMAT RenderTargetFormat , D3DFORMAT DepthStencilFormat );
+ 
+	virtual HRESULT STDMETHODCALLTYPE GetDeviceCaps( UINT Adapter , D3DDEVTYPE DeviceType , D3DCAPS8 * pCaps );
+ 
+	virtual HRESULT STDMETHODCALLTYPE CreateDevice( UINT Adapter , D3DDEVTYPE DeviceType , HWND hFocusWindow , DWORD BehaviorFlags , D3DPRESENT_PARAMETERS * pPresentationParameters , IDirect3DDevice8 * * ppReturnedDeviceInterface );
+
+
+	/*=======================IDirect3D8接口函数声明 End=======================*/
+
+
+};
+ #pragma once
+
+class  ComHook_IDirect3DBaseTexture8
+			: public IDirect3DBaseTexture8 
+			, public ComHookPacketBase
+{
+	DECLARE_INTERFACE_LIST
+
+	/*=======================IDirect3DBaseTexture8接口函数声明=======================*/
+
+	virtual DWORD STDMETHODCALLTYPE SetPriority( DWORD PriorityNew );
+ 
+	virtual DWORD STDMETHODCALLTYPE GetPriority( );
+ 
+	virtual void STDMETHODCALLTYPE PreLoad( );
+ 
+	virtual D3DRESOURCETYPE STDMETHODCALLTYPE GetType( );
+ 
+	virtual DWORD STDMETHODCALLTYPE SetLOD( DWORD LODNew );
+ 
+	virtual DWORD STDMETHODCALLTYPE GetLOD( );
+ 
+	virtual DWORD STDMETHODCALLTYPE GetLevelCount( );
+ 
+	virtual HRESULT STDMETHODCALLTYPE GetDevice( IDirect3DDevice8 * * ppDevice );
+ 
+	virtual HRESULT STDMETHODCALLTYPE SetPrivateData( REFGUID refguid , CONST void * pData , DWORD SizeOfData , DWORD Flags );
+ 
+	virtual HRESULT STDMETHODCALLTYPE GetPrivateData( REFGUID refguid , void * pData , DWORD * pSizeOfData );
+ 
+	virtual HRESULT STDMETHODCALLTYPE FreePrivateData( REFGUID refguid );
+
+
+	/*=======================IDirect3DBaseTexture8接口函数声明 End=======================*/
+
+
+};
+ #pragma once
+
+class  ComHook_IDirect3DSwapChain8
+			: public IDirect3DSwapChain8 
+			, public ComHookPacketBase
+{
+	DECLARE_INTERFACE_LIST
+
+	/*=======================IDirect3DSwapChain8接口函数声明=======================*/
+
+	virtual HRESULT STDMETHODCALLTYPE Present( CONST RECT * pSourceRect , CONST RECT * pDestRect , HWND hDestWindowOverride , CONST RGNDATA * pDirtyRegion );
+ 
+	virtual HRESULT STDMETHODCALLTYPE GetBackBuffer( UINT BackBuffer , D3DBACKBUFFER_TYPE Type , IDirect3DSurface8 * * ppBackBuffer );
+
+
+	/*=======================IDirect3DSwapChain8接口函数声明 End=======================*/
+
+
+};
+ 
+#include "command.h"
+
+#include "ComHook_IDirect3D8.h"
+
+ 
+BEGIN_INTERFACE_LIST( ComHookPacketBase )
+	IMPLEMENT_INTERFACE( IDirect3D8 )
+ 	IMPLEMENT_INTERFACE( IDirect3DBaseTexture8 )
+ 	IMPLEMENT_INTERFACE( IDirect3DSwapChain8 )
+	BEGIN_INTERFACE_MAP(IDirect3D8)
+		MAP_INTERFACE(IDirect3D8 , IDirect3D8)
+ 		MAP_INTERFACE(IDirect3DBaseTexture8 , IDirect3DBaseTexture8)
+ 		MAP_INTERFACE(IDirect3DSwapChain8 , IDirect3DSwapChain8)
+END_INTERFACE_LIST 
+
+
+ 
+UINT ComHook_IDirect3D8::GetAdapterCount( )
+{
+	 return  m_pIDirect3D8->GetAdapterCount( ) ;
+}
+ 
+UINT ComHook_IDirect3D8::GetAdapterModeCount( UINT Adapter )
+{
+	 return  m_pIDirect3D8->GetAdapterModeCount( Adapter ) ;
+}
+ 
+HMONITOR ComHook_IDirect3D8::GetAdapterMonitor( UINT Adapter )
+{
+	 return  m_pIDirect3D8->GetAdapterMonitor( Adapter ) ;
+}
+ 
+HRESULT ComHook_IDirect3D8::RegisterSoftwareDevice( void * pInitializeFunction )
+{
+	 return  m_pIDirect3D8->RegisterSoftwareDevice( pInitializeFunction ) ;
+}
+ 
+HRESULT ComHook_IDirect3D8::GetAdapterIdentifier( UINT Adapter , DWORD Flags , D3DADAPTER_IDENTIFIER8 * pIdentifier )
+{
+	 return  m_pIDirect3D8->GetAdapterIdentifier( Adapter , Flags , pIdentifier ) ;
+}
+ 
+HRESULT ComHook_IDirect3D8::EnumAdapterModes( UINT Adapter , UINT Mode , D3DDISPLAYMODE * pMode )
+{
+	 return  m_pIDirect3D8->EnumAdapterModes( Adapter , Mode , pMode ) ;
+}
+ 
+HRESULT ComHook_IDirect3D8::GetAdapterDisplayMode( UINT Adapter , D3DDISPLAYMODE * pMode )
+{
+	 return  m_pIDirect3D8->GetAdapterDisplayMode( Adapter , pMode ) ;
+}
+ 
+HRESULT ComHook_IDirect3D8::CheckDeviceType( UINT Adapter , D3DDEVTYPE CheckType , D3DFORMAT DisplayFormat , D3DFORMAT BackBufferFormat , BOOL Windowed )
+{
+	 return  m_pIDirect3D8->CheckDeviceType( Adapter , CheckType , DisplayFormat , BackBufferFormat , Windowed ) ;
+}
+ 
+HRESULT ComHook_IDirect3D8::CheckDeviceFormat( UINT Adapter , D3DDEVTYPE DeviceType , D3DFORMAT AdapterFormat , DWORD Usage , D3DRESOURCETYPE RType , D3DFORMAT CheckFormat )
+{
+	 return  m_pIDirect3D8->CheckDeviceFormat( Adapter , DeviceType , AdapterFormat , Usage , RType , CheckFormat ) ;
+}
+ 
+HRESULT ComHook_IDirect3D8::CheckDeviceMultiSampleType( UINT Adapter , D3DDEVTYPE DeviceType , D3DFORMAT SurfaceFormat , BOOL Windowed , D3DMULTISAMPLE_TYPE MultiSampleType )
+{
+	 return  m_pIDirect3D8->CheckDeviceMultiSampleType( Adapter , DeviceType , SurfaceFormat , Windowed , MultiSampleType ) ;
+}
+ 
+HRESULT ComHook_IDirect3D8::CheckDepthStencilMatch( UINT Adapter , D3DDEVTYPE DeviceType , D3DFORMAT AdapterFormat , D3DFORMAT RenderTargetFormat , D3DFORMAT DepthStencilFormat )
+{
+	 return  m_pIDirect3D8->CheckDepthStencilMatch( Adapter , DeviceType , AdapterFormat , RenderTargetFormat , DepthStencilFormat ) ;
+}
+ 
+HRESULT ComHook_IDirect3D8::GetDeviceCaps( UINT Adapter , D3DDEVTYPE DeviceType , D3DCAPS8 * pCaps )
+{
+	 return  m_pIDirect3D8->GetDeviceCaps( Adapter , DeviceType , pCaps ) ;
+}
+ 
+HRESULT ComHook_IDirect3D8::CreateDevice( UINT Adapter , D3DDEVTYPE DeviceType , HWND hFocusWindow , DWORD BehaviorFlags , D3DPRESENT_PARAMETERS * pPresentationParameters , IDirect3DDevice8 * * ppReturnedDeviceInterface )
+{
+	 return  m_pIDirect3D8->CreateDevice( Adapter , DeviceType , hFocusWindow , BehaviorFlags , pPresentationParameters , ppReturnedDeviceInterface ) ;
+}
+ 
+#include "command.h"
+
+#include "ComHook_IDirect3DBaseTexture8.h"
+
+ 
+BEGIN_INTERFACE_LIST( ComHookPacketBase )
+	IMPLEMENT_INTERFACE( IDirect3D8 )
+ 	IMPLEMENT_INTERFACE( IDirect3DBaseTexture8 )
+ 	IMPLEMENT_INTERFACE( IDirect3DSwapChain8 )
+	BEGIN_INTERFACE_MAP(IDirect3DBaseTexture8)
+		MAP_INTERFACE(IDirect3D8 , IDirect3D8)
+ 		MAP_INTERFACE(IDirect3DBaseTexture8 , IDirect3DBaseTexture8)
+ 		MAP_INTERFACE(IDirect3DSwapChain8 , IDirect3DSwapChain8)
+END_INTERFACE_LIST 
+
+
+ 
+DWORD ComHook_IDirect3DBaseTexture8::SetPriority( DWORD PriorityNew )
+{
+	 return  m_pIDirect3DBaseTexture8->SetPriority( PriorityNew ) ;
+}
+ 
+DWORD ComHook_IDirect3DBaseTexture8::GetPriority( )
+{
+	 return  m_pIDirect3DBaseTexture8->GetPriority( ) ;
+}
+ 
+void ComHook_IDirect3DBaseTexture8::PreLoad( )
+{
+	 return  m_pIDirect3DBaseTexture8->PreLoad( ) ;
+}
+ 
+D3DRESOURCETYPE ComHook_IDirect3DBaseTexture8::GetType( )
+{
+	 return  m_pIDirect3DBaseTexture8->GetType( ) ;
+}
+ 
+DWORD ComHook_IDirect3DBaseTexture8::SetLOD( DWORD LODNew )
+{
+	 return  m_pIDirect3DBaseTexture8->SetLOD( LODNew ) ;
+}
+ 
+DWORD ComHook_IDirect3DBaseTexture8::GetLOD( )
+{
+	 return  m_pIDirect3DBaseTexture8->GetLOD( ) ;
+}
+ 
+DWORD ComHook_IDirect3DBaseTexture8::GetLevelCount( )
+{
+	 return  m_pIDirect3DBaseTexture8->GetLevelCount( ) ;
+}
+ 
+HRESULT ComHook_IDirect3DBaseTexture8::GetDevice( IDirect3DDevice8 * * ppDevice )
+{
+	 return  m_pIDirect3DBaseTexture8->GetDevice( ppDevice ) ;
+}
+ 
+HRESULT ComHook_IDirect3DBaseTexture8::SetPrivateData( REFGUID refguid , CONST void * pData , DWORD SizeOfData , DWORD Flags )
+{
+	 return  m_pIDirect3DBaseTexture8->SetPrivateData( refguid , pData , SizeOfData , Flags ) ;
+}
+ 
+HRESULT ComHook_IDirect3DBaseTexture8::GetPrivateData( REFGUID refguid , void * pData , DWORD * pSizeOfData )
+{
+	 return  m_pIDirect3DBaseTexture8->GetPrivateData( refguid , pData , pSizeOfData ) ;
+}
+ 
+HRESULT ComHook_IDirect3DBaseTexture8::FreePrivateData( REFGUID refguid )
+{
+	 return  m_pIDirect3DBaseTexture8->FreePrivateData( refguid ) ;
+}
+ 
+#include "command.h"
+
+#include "ComHook_IDirect3DSwapChain8.h"
+
+ 
+BEGIN_INTERFACE_LIST( ComHookPacketBase )
+	IMPLEMENT_INTERFACE( IDirect3D8 )
+ 	IMPLEMENT_INTERFACE( IDirect3DBaseTexture8 )
+ 	IMPLEMENT_INTERFACE( IDirect3DSwapChain8 )
+	BEGIN_INTERFACE_MAP(IDirect3DSwapChain8)
+		MAP_INTERFACE(IDirect3D8 , IDirect3D8)
+ 		MAP_INTERFACE(IDirect3DBaseTexture8 , IDirect3DBaseTexture8)
+ 		MAP_INTERFACE(IDirect3DSwapChain8 , IDirect3DSwapChain8)
+END_INTERFACE_LIST 
+
+
+ 
+HRESULT ComHook_IDirect3DSwapChain8::Present( CONST RECT * pSourceRect , CONST RECT * pDestRect , HWND hDestWindowOverride , CONST RGNDATA * pDirtyRegion )
+{
+	 return  m_pIDirect3DSwapChain8->Present( pSourceRect , pDestRect , hDestWindowOverride , pDirtyRegion ) ;
+}
+ 
+HRESULT ComHook_IDirect3DSwapChain8::GetBackBuffer( UINT BackBuffer , D3DBACKBUFFER_TYPE Type , IDirect3DSurface8 * * ppBackBuffer )
+{
+	 return  m_pIDirect3DSwapChain8->GetBackBuffer( BackBuffer , Type , ppBackBuffer ) ;
+}
+ 
+#include "ComHookPacketBase.h"
+
+ 
+#include "ComHookPacketBase_IDirect3D8.cpp"
+ 
+#include "ComHookPacketBase_IDirect3DBaseTexture8.cpp"
+ 
+#include "ComHookPacketBase_IDirect3DSwapChain8.cpp"
+ #pragma once
+
+class  ComHookPacketBase 
+ 			: public KcgComHook
+			, public IDirect3D8 
+ 			, public IDirect3DBaseTexture8 
+ 			, public IDirect3DSwapChain8 
+{
+
+
+	/*=======================接口原始指针表=======================*/
+
+	ComPointer<IDirect3D8> m_pIDirect3D8 ;
+ 
+	ComPointer<IDirect3DBaseTexture8> m_pIDirect3DBaseTexture8 ;
+ 
+	ComPointer<IDirect3DSwapChain8> m_pIDirect3DSwapChain8 ;
+
+
+	/*=======================接口原始指针表 End=======================*/
+
+
+ 
+	/*=======================IDirect3D8接口函数声明=======================*/
+
+	virtual UINT STDMETHODCALLTYPE GetAdapterCount( );
+ 
+	virtual UINT STDMETHODCALLTYPE GetAdapterModeCount( UINT Adapter );
+ 
+	virtual HMONITOR STDMETHODCALLTYPE GetAdapterMonitor( UINT Adapter );
+ 
+	virtual HRESULT STDMETHODCALLTYPE RegisterSoftwareDevice( void * pInitializeFunction );
+ 
+	virtual HRESULT STDMETHODCALLTYPE GetAdapterIdentifier( UINT Adapter , DWORD Flags , D3DADAPTER_IDENTIFIER8 * pIdentifier );
+ 
+	virtual HRESULT STDMETHODCALLTYPE EnumAdapterModes( UINT Adapter , UINT Mode , D3DDISPLAYMODE * pMode );
+ 
+	virtual HRESULT STDMETHODCALLTYPE GetAdapterDisplayMode( UINT Adapter , D3DDISPLAYMODE * pMode );
+ 
+	virtual HRESULT STDMETHODCALLTYPE CheckDeviceType( UINT Adapter , D3DDEVTYPE CheckType , D3DFORMAT DisplayFormat , D3DFORMAT BackBufferFormat , BOOL Windowed );
+ 
+	virtual HRESULT STDMETHODCALLTYPE CheckDeviceFormat( UINT Adapter , D3DDEVTYPE DeviceType , D3DFORMAT AdapterFormat , DWORD Usage , D3DRESOURCETYPE RType , D3DFORMAT CheckFormat );
+ 
+	virtual HRESULT STDMETHODCALLTYPE CheckDeviceMultiSampleType( UINT Adapter , D3DDEVTYPE DeviceType , D3DFORMAT SurfaceFormat , BOOL Windowed , D3DMULTISAMPLE_TYPE MultiSampleType );
+ 
+	virtual HRESULT STDMETHODCALLTYPE CheckDepthStencilMatch( UINT Adapter , D3DDEVTYPE DeviceType , D3DFORMAT AdapterFormat , D3DFORMAT RenderTargetFormat , D3DFORMAT DepthStencilFormat );
+ 
+	virtual HRESULT STDMETHODCALLTYPE GetDeviceCaps( UINT Adapter , D3DDEVTYPE DeviceType , D3DCAPS8 * pCaps );
+ 
+	virtual HRESULT STDMETHODCALLTYPE CreateDevice( UINT Adapter , D3DDEVTYPE DeviceType , HWND hFocusWindow , DWORD BehaviorFlags , D3DPRESENT_PARAMETERS * pPresentationParameters , IDirect3DDevice8 * * ppReturnedDeviceInterface );
+
+
+	/*=======================IDirect3D8接口函数声明 End=======================*/
+
+
+ 
+	/*=======================IDirect3DBaseTexture8接口函数声明=======================*/
+
+	virtual DWORD STDMETHODCALLTYPE SetPriority( DWORD PriorityNew );
+ 
+	virtual DWORD STDMETHODCALLTYPE GetPriority( );
+ 
+	virtual void STDMETHODCALLTYPE PreLoad( );
+ 
+	virtual D3DRESOURCETYPE STDMETHODCALLTYPE GetType( );
+ 
+	virtual DWORD STDMETHODCALLTYPE SetLOD( DWORD LODNew );
+ 
+	virtual DWORD STDMETHODCALLTYPE GetLOD( );
+ 
+	virtual DWORD STDMETHODCALLTYPE GetLevelCount( );
+ 
+	virtual HRESULT STDMETHODCALLTYPE GetDevice( IDirect3DDevice8 * * ppDevice );
+ 
+	virtual HRESULT STDMETHODCALLTYPE SetPrivateData( REFGUID refguid , CONST void * pData , DWORD SizeOfData , DWORD Flags );
+ 
+	virtual HRESULT STDMETHODCALLTYPE GetPrivateData( REFGUID refguid , void * pData , DWORD * pSizeOfData );
+ 
+	virtual HRESULT STDMETHODCALLTYPE FreePrivateData( REFGUID refguid );
+
+
+	/*=======================IDirect3DBaseTexture8接口函数声明 End=======================*/
+
+
+ 
+	/*=======================IDirect3DSwapChain8接口函数声明=======================*/
+
+	virtual HRESULT STDMETHODCALLTYPE Present( CONST RECT * pSourceRect , CONST RECT * pDestRect , HWND hDestWindowOverride , CONST RGNDATA * pDirtyRegion );
+ 
+	virtual HRESULT STDMETHODCALLTYPE GetBackBuffer( UINT BackBuffer , D3DBACKBUFFER_TYPE Type , IDirect3DSurface8 * * ppBackBuffer );
+
+
+	/*=======================IDirect3DSwapChain8接口函数声明 End=======================*/
+
+
+};
+ 
+#include "ComHookPacketBase.h"
+
+ 
+UINT ComHookPacketBase::GetAdapterCount( )
+{
+	 return  m_pIDirect3D8->GetAdapterCount( ) ;
+}
+ 
+UINT ComHookPacketBase::GetAdapterModeCount( UINT Adapter )
+{
+	 return  m_pIDirect3D8->GetAdapterModeCount( Adapter ) ;
+}
+ 
+HMONITOR ComHookPacketBase::GetAdapterMonitor( UINT Adapter )
+{
+	 return  m_pIDirect3D8->GetAdapterMonitor( Adapter ) ;
+}
+ 
+HRESULT ComHookPacketBase::RegisterSoftwareDevice( void * pInitializeFunction )
+{
+	 return  m_pIDirect3D8->RegisterSoftwareDevice( pInitializeFunction ) ;
+}
+ 
+HRESULT ComHookPacketBase::GetAdapterIdentifier( UINT Adapter , DWORD Flags , D3DADAPTER_IDENTIFIER8 * pIdentifier )
+{
+	 return  m_pIDirect3D8->GetAdapterIdentifier( Adapter , Flags , pIdentifier ) ;
+}
+ 
+HRESULT ComHookPacketBase::EnumAdapterModes( UINT Adapter , UINT Mode , D3DDISPLAYMODE * pMode )
+{
+	 return  m_pIDirect3D8->EnumAdapterModes( Adapter , Mode , pMode ) ;
+}
+ 
+HRESULT ComHookPacketBase::GetAdapterDisplayMode( UINT Adapter , D3DDISPLAYMODE * pMode )
+{
+	 return  m_pIDirect3D8->GetAdapterDisplayMode( Adapter , pMode ) ;
+}
+ 
+HRESULT ComHookPacketBase::CheckDeviceType( UINT Adapter , D3DDEVTYPE CheckType , D3DFORMAT DisplayFormat , D3DFORMAT BackBufferFormat , BOOL Windowed )
+{
+	 return  m_pIDirect3D8->CheckDeviceType( Adapter , CheckType , DisplayFormat , BackBufferFormat , Windowed ) ;
+}
+ 
+HRESULT ComHookPacketBase::CheckDeviceFormat( UINT Adapter , D3DDEVTYPE DeviceType , D3DFORMAT AdapterFormat , DWORD Usage , D3DRESOURCETYPE RType , D3DFORMAT CheckFormat )
+{
+	 return  m_pIDirect3D8->CheckDeviceFormat( Adapter , DeviceType , AdapterFormat , Usage , RType , CheckFormat ) ;
+}
+ 
+HRESULT ComHookPacketBase::CheckDeviceMultiSampleType( UINT Adapter , D3DDEVTYPE DeviceType , D3DFORMAT SurfaceFormat , BOOL Windowed , D3DMULTISAMPLE_TYPE MultiSampleType )
+{
+	 return  m_pIDirect3D8->CheckDeviceMultiSampleType( Adapter , DeviceType , SurfaceFormat , Windowed , MultiSampleType ) ;
+}
+ 
+HRESULT ComHookPacketBase::CheckDepthStencilMatch( UINT Adapter , D3DDEVTYPE DeviceType , D3DFORMAT AdapterFormat , D3DFORMAT RenderTargetFormat , D3DFORMAT DepthStencilFormat )
+{
+	 return  m_pIDirect3D8->CheckDepthStencilMatch( Adapter , DeviceType , AdapterFormat , RenderTargetFormat , DepthStencilFormat ) ;
+}
+ 
+HRESULT ComHookPacketBase::GetDeviceCaps( UINT Adapter , D3DDEVTYPE DeviceType , D3DCAPS8 * pCaps )
+{
+	 return  m_pIDirect3D8->GetDeviceCaps( Adapter , DeviceType , pCaps ) ;
+}
+ 
+HRESULT ComHookPacketBase::CreateDevice( UINT Adapter , D3DDEVTYPE DeviceType , HWND hFocusWindow , DWORD BehaviorFlags , D3DPRESENT_PARAMETERS * pPresentationParameters , IDirect3DDevice8 * * ppReturnedDeviceInterface )
+{
+	 return  m_pIDirect3D8->CreateDevice( Adapter , DeviceType , hFocusWindow , BehaviorFlags , pPresentationParameters , ppReturnedDeviceInterface ) ;
+}
+ 
+#include "ComHookPacketBase.h"
+
+ 
+DWORD ComHookPacketBase::SetPriority( DWORD PriorityNew )
+{
+	 return  m_pIDirect3DBaseTexture8->SetPriority( PriorityNew ) ;
+}
+ 
+DWORD ComHookPacketBase::GetPriority( )
+{
+	 return  m_pIDirect3DBaseTexture8->GetPriority( ) ;
+}
+ 
+void ComHookPacketBase::PreLoad( )
+{
+	 return  m_pIDirect3DBaseTexture8->PreLoad( ) ;
+}
+ 
+D3DRESOURCETYPE ComHookPacketBase::GetType( )
+{
+	 return  m_pIDirect3DBaseTexture8->GetType( ) ;
+}
+ 
+DWORD ComHookPacketBase::SetLOD( DWORD LODNew )
+{
+	 return  m_pIDirect3DBaseTexture8->SetLOD( LODNew ) ;
+}
+ 
+DWORD ComHookPacketBase::GetLOD( )
+{
+	 return  m_pIDirect3DBaseTexture8->GetLOD( ) ;
+}
+ 
+DWORD ComHookPacketBase::GetLevelCount( )
+{
+	 return  m_pIDirect3DBaseTexture8->GetLevelCount( ) ;
+}
+ 
+HRESULT ComHookPacketBase::GetDevice( IDirect3DDevice8 * * ppDevice )
+{
+	 return  m_pIDirect3DBaseTexture8->GetDevice( ppDevice ) ;
+}
+ 
+HRESULT ComHookPacketBase::SetPrivateData( REFGUID refguid , CONST void * pData , DWORD SizeOfData , DWORD Flags )
+{
+	 return  m_pIDirect3DBaseTexture8->SetPrivateData( refguid , pData , SizeOfData , Flags ) ;
+}
+ 
+HRESULT ComHookPacketBase::GetPrivateData( REFGUID refguid , void * pData , DWORD * pSizeOfData )
+{
+	 return  m_pIDirect3DBaseTexture8->GetPrivateData( refguid , pData , pSizeOfData ) ;
+}
+ 
+HRESULT ComHookPacketBase::FreePrivateData( REFGUID refguid )
+{
+	 return  m_pIDirect3DBaseTexture8->FreePrivateData( refguid ) ;
+}
+ 
+#include "ComHookPacketBase.h"
+
+ 
+HRESULT ComHookPacketBase::Present( CONST RECT * pSourceRect , CONST RECT * pDestRect , HWND hDestWindowOverride , CONST RGNDATA * pDirtyRegion )
+{
+	 return  m_pIDirect3DSwapChain8->Present( pSourceRect , pDestRect , hDestWindowOverride , pDirtyRegion ) ;
+}
+ 
+HRESULT ComHookPacketBase::GetBackBuffer( UINT BackBuffer , D3DBACKBUFFER_TYPE Type , IDirect3DSurface8 * * ppBackBuffer )
+{
+	 return  m_pIDirect3DSwapChain8->GetBackBuffer( BackBuffer , Type , ppBackBuffer ) ;
+}

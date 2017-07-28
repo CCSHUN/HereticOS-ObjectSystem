@@ -1,0 +1,26 @@
+HKCR
+{
+	ObjectSystemComServer.ObjectSystem.1 = s 'ObjectSystem Class'
+	{
+		CLSID = s '{81AF9FBD-95AF-4FA2-8B07-2844B3599891}'
+	}
+	ObjectSystemComServer.ObjectSystem = s 'ObjectSystem Class'
+	{
+		CLSID = s '{81AF9FBD-95AF-4FA2-8B07-2844B3599891}'
+		CurVer = s 'ObjectSystemComServer.ObjectSystem.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {81AF9FBD-95AF-4FA2-8B07-2844B3599891} = s 'ObjectSystem Class'
+		{
+			ProgID = s 'ObjectSystemComServer.ObjectSystem.1'
+			VersionIndependentProgID = s 'ObjectSystemComServer.ObjectSystem'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Free'
+			}
+			'TypeLib' = s '{5E2DD6D2-11A4-4F7E-9DEF-6DB67D34F866}'
+		}
+	}
+}

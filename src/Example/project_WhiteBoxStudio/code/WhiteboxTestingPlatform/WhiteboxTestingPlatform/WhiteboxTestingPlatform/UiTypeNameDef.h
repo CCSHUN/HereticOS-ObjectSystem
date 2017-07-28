@@ -1,0 +1,32 @@
+#pragma once
+
+//测试用工作界面定义
+#define TEST_REPORT_MAKE_WORKSPACE			 _T("报告工作区")
+#define TEST_REPORT_MAKE_WORKSPACE_COMPLATE		_T("已完成")
+#define TEST_REPORT_MAKE_WORKSPACE_MANUAL_MAKE	_T("人工复查")
+#define TEST_REPORT_MAKE_WORKSPACE_NOFINDSTANDARD _T("标准补齐")
+#define TEST_REPORT_MAKE_WORKSPACE_DEVREPORT _T("开发反馈报告")
+#define TEST_REPORT_MAKE_WORKSPACE_CODEVIEW _T("代码定位")
+#define TEST_REPORT_MAKE_WORKSPACE_UNITREPORT _T("单元测试报告")
+
+
+#define TEST_WORKSHEET_EDIT_WORKSPACE _T("工作单")
+#define TEST_PROJECTCONFIG_WORKSPACE _T("项目配置")
+
+
+
+#define TEST_STANDARD_WORKSPACE				_T("标准管理器")
+#define TEST_STANDARD_UNITE_WORKSPACE		_T("统一标准管理")
+#define TEST_STANDARD_THIRD_WORKSPACE		_T("第三方标准管理")
+#define TEST_STANDARD_ERROR_TYPE_WORKSPACE	_T("错误类型管理")
+
+
+#define ADMIN_USER_WORKSPACE				_T("用户管理")
+#define ADMIN_STRUCT_DESIGN_WORKSPACE		_T("业务类型设计")
+
+#define MSG_WORKSPACE				_T("消息管理")
+
+
+
+
+

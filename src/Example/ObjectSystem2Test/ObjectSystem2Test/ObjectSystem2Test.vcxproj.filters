@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ObjectSystem2">
+      <UniqueIdentifier>{4e9414d6-cf3d-4816-8429-383f0029fdd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SerLib">
+      <UniqueIdentifier>{cffb9f01-da57-4bcb-8866-a91b8d4c3f16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectSystem2\ProtocalSer">
+      <UniqueIdentifier>{d6838cd7-490a-4ea1-9682-6c694625f34c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FlowerGame">
+      <UniqueIdentifier>{0d9e9c2c-28fd-41eb-ad30-256271e07fc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FlowerGame\AppDataMode">
+      <UniqueIdentifier>{7b43c5f1-49e4-4872-a468-4027a596930f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\ObjectSystem2\ObjectFileOperation.h">
+      <Filter>ObjectSystem2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\ObjectSystem2\ObjectSystem.h">
+      <Filter>ObjectSystem2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\ObjectSystem2\ObjectSystem_Local.h">
+      <Filter>ObjectSystem2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\AutoLock.h">
+      <Filter>SerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\AutoVar.h">
+      <Filter>SerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\Base64.h">
+      <Filter>SerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\BaseFunctionTool.h">
+      <Filter>SerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\BaseObjectSerialize.h">
+      <Filter>SerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\MacroTool.h">
+      <Filter>SerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\Serialize.h">
+      <Filter>SerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\SerializeInterface.h">
+      <Filter>SerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\SerIni.h">
+      <Filter>SerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\Sexp.h">
+      <Filter>SerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\StorageObject.h">
+      <Filter>SerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\XmlRender.h">
+      <Filter>SerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\ObjectSystem2\TransportProtocol.h">
+      <Filter>ObjectSystem2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagCallParameter_StructInfo.h">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagDirectoryInfo_StructInfo.h">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagDirectoryInfoSet_StructInfo.h">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagObjectState_StructInfo.h">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagstrParameter_StructInfo.h">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\CommonTypeDef.h">
+      <Filter>ObjectSystem2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagObjectSystemEvent_StructInfo.h">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\ObjectSystem2\Transport.h">
+      <Filter>ObjectSystem2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\ObjectSystem2\TransportMiniUDP.h">
+      <Filter>ObjectSystem2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagKeepAlivedPar_StructInfo.h">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClInclude>
+    <ClInclude Include="AppProtocol\_tagBulletinBoard_StructInfo.h">
+      <Filter>FlowerGame\AppDataMode</Filter>
+    </ClInclude>
+    <ClInclude Include="AppProtocol\_tagFlowerSlot_StructInfo.h">
+      <Filter>FlowerGame\AppDataMode</Filter>
+    </ClInclude>
+    <ClInclude Include="AppProtocol\_tagMangerBroadcast_StructInfo.h">
+      <Filter>FlowerGame\AppDataMode</Filter>
+    </ClInclude>
+    <ClInclude Include="RotationalFlowersDataMode.h">
+      <Filter>FlowerGame</Filter>
+    </ClInclude>
+    <ClInclude Include="RotationalFlowers.h">
+      <Filter>FlowerGame</Filter>
+    </ClInclude>
+    <ClInclude Include="AppProtocol\CommonTypeDef.h">
+      <Filter>FlowerGame\AppDataMode</Filter>
+    </ClInclude>
+    <ClInclude Include="AppProtocol\_tagNeedSlot_StructInfo.h">
+      <Filter>FlowerGame\AppDataMode</Filter>
+    </ClInclude>
+    <ClInclude Include="AppProtocol\_tagNeedSlotRet_StructInfo.h">
+      <Filter>FlowerGame\AppDataMode</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectSystem2Test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\other\ObjectSystem2\ObjectFileOperation.cpp">
+      <Filter>ObjectSystem2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\other\ObjectSystem2\ObjectSystem.cpp">
+      <Filter>ObjectSystem2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\other\ObjectSystem2\ObjectSystem_Local.cpp">
+      <Filter>ObjectSystem2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\other\Base64.cpp">
+      <Filter>SerLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\other\BaseFunctionTool.cpp">
+      <Filter>SerLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\other\XmlRender.cpp">
+      <Filter>SerLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagCallParameter_StructInfo.cpp">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagDirectoryInfo_StructInfo.cpp">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagDirectoryInfoSet_StructInfo.cpp">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagObjectState_StructInfo.cpp">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagstrParameter_StructInfo.cpp">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagObjectSystemEvent_StructInfo.cpp">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagKeepAlivedPar_StructInfo.cpp">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClCompile>
+    <ClCompile Include="AppProtocol\_tagBulletinBoard_StructInfo.cpp">
+      <Filter>FlowerGame\AppDataMode</Filter>
+    </ClCompile>
+    <ClCompile Include="AppProtocol\_tagFlowerSlot_StructInfo.cpp">
+      <Filter>FlowerGame\AppDataMode</Filter>
+    </ClCompile>
+    <ClCompile Include="AppProtocol\_tagMangerBroadcast_StructInfo.cpp">
+      <Filter>FlowerGame\AppDataMode</Filter>
+    </ClCompile>
+    <ClCompile Include="AppProtocol\_tagNeedSlot_StructInfo.cpp">
+      <Filter>FlowerGame\AppDataMode</Filter>
+    </ClCompile>
+    <ClCompile Include="AppProtocol\_tagNeedSlotRet_StructInfo.cpp">
+      <Filter>FlowerGame\AppDataMode</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

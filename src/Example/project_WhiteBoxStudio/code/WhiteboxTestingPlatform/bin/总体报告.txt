@@ -1,0 +1,1409 @@
+<?xml version="1.0" encoding="GBK"?>
+<OutputReport>
+	<Overall>
+		<nDescTotal>26</nDescTotal>
+		<nErrorTotal>53</nErrorTotal>
+		<nComplateTotal>26</nComplateTotal>
+		<nManaualTotal>11</nManaualTotal>
+		<nIgnoreTotal>16</nIgnoreTotal>
+	</Overall>
+	<Summary>
+		<Summary>
+			<nCurPos>1</nCurPos>
+			<szDesc>catch语句的参数不是引用类型</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>1</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>110</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>2</nCurPos>
+			<szDesc>printf函数族没有使用格式化字符串参数</szDesc>
+			<nErrorTotal>3</nErrorTotal>
+			<nComplateTotal>3</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>321</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>3</nCurPos>
+			<szDesc>scanf函数族的格式化字符串要求是指针类型参数</szDesc>
+			<nErrorTotal>2</nErrorTotal>
+			<nComplateTotal>0</nComplateTotal>
+			<nManaualTotal>2</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>错误（高）</szWaringType>
+			<szUniteNum>59</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>4</nCurPos>
+			<szDesc>一个类只定义了构造和析构函数，可能该类是无用的；但也有例外，比如stl::auto_ptr的实现</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>0</nComplateTotal>
+			<nManaualTotal>1</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>75</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>5</nCurPos>
+			<szDesc>不安全的宏定义</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>1</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>66</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>6</nCurPos>
+			<szDesc>优先级容易造成歧义或函数没有功能实现</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>0</nComplateTotal>
+			<nManaualTotal>1</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>114</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>7</nCurPos>
+			<szDesc>保有的指针（由new赋值）没有被释放，也没有被返回</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>0</nComplateTotal>
+			<nManaualTotal>1</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>指针使用类</szErrorType>
+			<szWaringType>错误（高）</szWaringType>
+			<szUniteNum>313</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>8</nCurPos>
+			<szDesc>冗余的boolean测试</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>1</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>指针使用类</szErrorType>
+			<szWaringType>建议（高）</szWaringType>
+			<szUniteNum>306</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>9</nCurPos>
+			<szDesc>函数的类型应该可以声明为const类型</szDesc>
+			<nErrorTotal>2</nErrorTotal>
+			<nComplateTotal>2</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>44</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>10</nCurPos>
+			<szDesc>函数的返回值被忽略</szDesc>
+			<nErrorTotal>2</nErrorTotal>
+			<nComplateTotal>0</nComplateTotal>
+			<nManaualTotal>2</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>49</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>11</nCurPos>
+			<szDesc>变量' Symbol'赋值时出现内存泄漏 </szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>0</nComplateTotal>
+			<nManaualTotal>1</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>错误（高）</szWaringType>
+			<szUniteNum>322</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>12</nCurPos>
+			<szDesc>变量的前一次赋值是无用的</szDesc>
+			<nErrorTotal>5</nErrorTotal>
+			<nComplateTotal>5</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>80</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>13</nCurPos>
+			<szDesc>变量的最后一次赋值是无用的</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>1</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>81</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>14</nCurPos>
+			<szDesc>可能的数组访问越界</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>1</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>错误（高）</szWaringType>
+			<szUniteNum>400</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>15</nCurPos>
+			<szDesc>在条件语句中进行赋值语句</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>0</nComplateTotal>
+			<nManaualTotal>1</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>109</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>16</nCurPos>
+			<szDesc>对于模块所include的头文件，但模块没有直接引用该头文件中的任何标识符和函数</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>1</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>62</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>17</nCurPos>
+			<szDesc>局部变量的定义和全局变量冲突</szDesc>
+			<nErrorTotal>3</nErrorTotal>
+			<nComplateTotal>3</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>错误（高）</szWaringType>
+			<szUniteNum>70</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>18</nCurPos>
+			<szDesc>常量参与逻辑运算</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>0</nComplateTotal>
+			<nManaualTotal>1</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>错误（高）</szWaringType>
+			<szUniteNum>69</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>19</nCurPos>
+			<szDesc>指针参数应该可以被声明为const类型</szDesc>
+			<nErrorTotal>2</nErrorTotal>
+			<nComplateTotal>2</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>40</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>20</nCurPos>
+			<szDesc>指针的释放操作不正确</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>1</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>指针使用类</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>320</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>21</nCurPos>
+			<szDesc>标识符没有被引用</szDesc>
+			<nErrorTotal>2</nErrorTotal>
+			<nComplateTotal>1</nComplateTotal>
+			<nManaualTotal>1</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>79</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>22</nCurPos>
+			<szDesc>类的成员变量未被初始化</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>1</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>55</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>23</nCurPos>
+			<szDesc>表示pc-lint报表已经成功生成</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>0</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>1</nIgnoreTotal>
+			<szErrorType>通常可以忽略的问题</szErrorType>
+			<szWaringType>建议（低）</szWaringType>
+			<szUniteNum>1004</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>24</nCurPos>
+			<szDesc>表达式的计算结果依靠变量的求值顺序（不是运算顺序）；C语言为了追求效率，很多求值顺序都没有明确，所以这种代码风格是禁止的</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>1</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>61</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>25</nCurPos>
+			<szDesc>该消息已经出现过</szDesc>
+			<nErrorTotal>15</nErrorTotal>
+			<nComplateTotal>0</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>15</nIgnoreTotal>
+			<szErrorType>代码规范问题</szErrorType>
+			<szWaringType>建议（中）</szWaringType>
+			<szUniteNum>1000</szUniteNum>
+		</Summary>
+		<Summary>
+			<nCurPos>26</nCurPos>
+			<szDesc>非法创建的指针</szDesc>
+			<nErrorTotal>1</nErrorTotal>
+			<nComplateTotal>1</nComplateTotal>
+			<nManaualTotal>0</nManaualTotal>
+			<nIgnoreTotal>0</nIgnoreTotal>
+			<szErrorType>指针使用类</szErrorType>
+			<szWaringType>警告（中）</szWaringType>
+			<szUniteNum>316</szUniteNum>
+		</Summary>
+	</Summary>
+	<Detailed>
+		<Detailed>
+
+第(1)条
+错误描述: catch语句的参数不是引用类型
+总计条数: 1
+完成总计条数: 1
+需要人工复查总计条数: 0
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 警告（中）
+统一规范编号: 110
+详细描述: 
+[统一规范描述: ]
+catch语句的参数不是引用类型
+[统一规范详细建议与描述:]
+如果你以一个throw语句中抛出一个对象类型，在catch处也是通过一个对象接收，那么该对象经历了两次复制，即调用了两次复制构造函数
+[第三方规范描述: ]
+catch parameter Integer is not a reference 
+[第三方规范详细建议与描述: ]
+1752   catch parameter Integer is not a reference  -- This message is
+       issued for every catch parameter that is not a reference and is
+       not numeric.  The problem with pointers is a problem of ownership
+       and delete responsibilities; the problem with a non-ref object is
+       the problem of slicing away derivedness [23, Item 13].
+
+错误状态: 检查通过  第三方规范编号: 1752  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(41)
+错误描述:	catch parameter is not a reference
+
+</Detailed>
+		<Detailed>
+
+第(2)条
+错误描述: printf函数族没有使用格式化字符串参数
+总计条数: 3
+完成总计条数: 3
+需要人工复查总计条数: 0
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 警告（中）
+统一规范编号: 321
+详细描述: 
+[统一规范描述: ]
+printf函数族没有使用格式化字符串参数
+[统一规范详细建议与描述:]
+例如:
+char msg[100];
+ ...
+printf( msg );
+       
+This can easily be rewritten to the relatively safe:
+       
+char msg[100];
+ ...
+printf( "%s", msg );
+[第三方规范描述: ]
+Non-literal format specifier used without arguments 
+[第三方规范详细建议与描述: ]
+592    Non-literal format specifier used without arguments  -- A
+       printf/scanf style function received a non-literal format
+       specifier without trailing arguments.  For example:
+       
+                 char msg[100];
+                 ...
+                 printf( msg );
+       
+       This can easily be rewritten to the relatively safe:
+       
+                 char msg[100];
+                 ...
+                 printf( "%s", msg );
+       
+       The danger lies in the fact that msg can contain hidden format
+       codes.  If msg is read from user input, then in the first
+       example, a naive user could cause a glitch or a crash and a
+       malicious user might exploit this to undermine system security.
+       Since the unsafe form can easily be transformed into the safe
+       form the latter should always be used.
+
+错误状态: 检查通过  第三方规范编号: 592  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(26)
+错误描述:	Non-literal format specifier used without arguments
+
+错误状态: 检查通过  第三方规范编号: 592  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(93)
+错误描述:	Non-literal format specifier used without arguments
+
+错误状态: 检查通过  第三方规范编号: 592  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(94)
+错误描述:	Non-literal format specifier used without arguments
+
+</Detailed>
+		<Detailed>
+
+第(3)条
+错误描述: scanf函数族的格式化字符串要求是指针类型参数
+总计条数: 2
+完成总计条数: 0
+需要人工复查总计条数: 2
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 错误（高）
+统一规范编号: 59
+详细描述: 
+[统一规范描述: ]
+scanf函数族的格式化字符串要求是指针类型参数
+[统一规范详细建议与描述:]
+如
+scanf( "%f", 3.5 )
+对于printf函数族，当格式化字符串要求是%s,%n时，也应该输入指针参数
+[第三方规范描述: ]
+argument no. Integer should be a pointer
+[第三方规范详细建议与描述: ]
+       argument no. Integer should be a pointer  -- The given argument
+       (to one of the scanf or printf family of functions) should be a
+       pointer.  For the scanf family, all arguments corresponding to a
+       format specification should be pointers to areas that are to be
+       modified (receive the results of scanning).  For the printf
+       family, arguments corresponding to %s or %n also need to be
+       pointers.
+
+       Argument counts begin at 1 and include file, string and format
+       specifications.  For example
+
+               scanf( "%f", 3.5 )
+
+       will generate the message that argument no. 2 should be a
+       pointer.
+
+错误状态: 需要人工复查  第三方规范编号: 560  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(61)
+错误描述:	argument no. 4 should be a pointer
+
+错误状态: 需要人工复查  第三方规范编号: 560  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(64)
+错误描述:	argument no. 4 should be a pointer
+
+</Detailed>
+		<Detailed>
+
+第(4)条
+错误描述: 一个类只定义了构造和析构函数，可能该类是无用的；但也有例外，比如stl::auto_ptr的实现
+总计条数: 1
+完成总计条数: 0
+需要人工复查总计条数: 1
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 警告（中）
+统一规范编号: 75
+详细描述: 
+[统一规范描述: ]
+一个类只定义了构造和析构函数，可能该类是无用的；但也有例外，比如stl::auto_ptr的实现
+[统一规范详细建议与描述:]
+
+[第三方规范描述: ]
+Variable 'Symbol' (Location) (type 'Name') is referenced only by its constructor or destructor 
+[第三方规范详细建议与描述: ]
+1788   Variable 'Symbol' (Location) (type 'Name') is referenced only by
+       its constructor or destructor  -- A variable has not been
+       referenced other than by the constructor which formed its initial
+       value or by its destructor or both.  The location of the symbol
+       and also its type is given in the message.  For example:
+       
+                 class A {  A(); };
+                 void f()
+                     {
+                     A a;
+                     }
+       
+       will produce a 1788 for variable 'a' and for type 'A'.
+
+       It very well may be that this is exactly what the programmer
+       wants to do in which case you may suppress this message for this
+       variable using the option -esym(1788,a).  It may also be that the
+       normal use of class A is to employ it in this fashion.  That is,
+       to obtain the effects of construction and, possibly, destruction
+       but have no other reference to the variable.  In this case the
+       option of choice would be -esym(1788,A).
+
+错误状态: 需要人工复查  第三方规范编号: 1788  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(125)
+错误描述:	Variable 'string' (line 124) (type 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>') is referenced only by its constructor or destructor
+
+</Detailed>
+		<Detailed>
+
+第(5)条
+错误描述: 不安全的宏定义
+总计条数: 1
+完成总计条数: 1
+需要人工复查总计条数: 0
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 警告（中）
+统一规范编号: 66
+详细描述: 
+[统一规范描述: ]
+不安全的宏定义
+[统一规范详细建议与描述:]
+例如
+#define A  B + 1
+f( A * 2 );//结果可能不是预期的
+
+//应改为如下形式
+#define A  （B + 1）
+[第三方规范描述: ]
+Expression-like macro 'Symbol' not parenthesized
+[第三方规范详细建议与描述: ]
+773    Expression-like macro 'Symbol' not parenthesized  -- A macro that
+       appeared to be an expression contained unparenthesized binary
+       operators and therefore may result in unexpected associations
+       when used with other operators.  For example,
+
+               #define A  B + 1
+
+       may be used later in the context:
+
+               f( A * 2 );
+
+       with the surprising result that B+2 gets passed to f and not the
+       (B+1)*2 corrective action is to define A as:
+
+               #define A  (B + 1)
+
+       Lowest precedence binary operators are not reported upon.  Thus:
+
+               #define A  s.x
+
+       does not elicit this message because this case does not seem to
+       represent a problem.  Also, unparenthesized unary operators
+       (including casts) do not generate this message.  Information
+       about such unparenthesized parameters can be found by enabling
+       Elective Note 973.  [22, ?0.5]
+
+错误状态: 检查通过  第三方规范编号: 773  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(184)
+错误描述:	Expression-like macro 'A' not parenthesized
+
+</Detailed>
+		<Detailed>
+
+第(6)条
+错误描述: 优先级容易造成歧义或函数没有功能实现
+总计条数: 1
+完成总计条数: 0
+需要人工复查总计条数: 1
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 警告（中）
+统一规范编号: 114
+详细描述: 
+[统一规范描述: ]
+优先级容易造成歧义或函数没有功能实现
+[统一规范详细建议与描述:]
+
+[第三方规范描述: ]
+Highest operator or function lacks side-effects 
+[第三方规范详细建议与描述: ]
+522    Highest operator or function lacks side-effects  -- If a
+       statement consists only of an expression, it should either be one
+       of the privileged operators: assignment, increment, decrement or
+       call to an impure function or one modifying its argument(s).  For
+       example if operator * is the built-in operator, the statement
+       *p++; draws this message but p++; does not.  This is because the
+       highest operator is '*' which has no side effects.
+
+       The definition of pure and impure functions and function calls
+       which have side effects are given in the discussion of the pure
+       semantic in section 4. Semantics
+
+错误状态: 需要人工复查  第三方规范编号: 522  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(227)
+错误描述:	Highest operation, function 'TestNullFunc', lacks side-effects
+
+</Detailed>
+		<Detailed>
+
+第(7)条
+错误描述: 保有的指针（由new赋值）没有被释放，也没有被返回
+总计条数: 1
+完成总计条数: 0
+需要人工复查总计条数: 1
+忽略总计条数: 0
+错误类型: 指针使用类
+问题等级: 错误（高）
+统一规范编号: 313
+详细描述: 
+[统一规范描述: ]
+保有的指针（由new赋值）没有被释放，也没有被返回
+[统一规范详细建议与描述:]
+1. 如    int *p = new int[20]; 
+      int *q = p;       
+      p = new int[20]; 
+      q = p + 0;      
+这时第一次分配的内存就会丢失
+2. 如果程序没有问题，可用sem屏蔽此警告-sem(ISystem::AddEvent,1p,custodial(1))，1p表示第一个参数，custodial(1)表示第一个参数被保留起来
+3. 如果是递归调用，参数名和形参名相同时也会出现该警告，必须将参数名改名
+4. 在父函数中分配了内存，传递到子函数中时，如果子函数中有return语句时，也会出现该警告，这是plint的bug。
+5. 如果指针使用了stl::auto_ptr来管理，则需人工检查代码是否有问题
+[第三方规范描述: ]
+Custodial pointer 'Symbol' (Location) has not been freed or returned  
+[第三方规范详细建议与描述: ]
+429    Custodial pointer 'Symbol' (Location) has not been freed or
+       returned  -- A pointer of auto storage class was allocated
+       storage which was neither freed nor returned to the caller.  This
+       represents a "memory leak".  A pointer is considered custodial if
+       it uniquely points to the storage area.  It is not considered
+       custodial if it has been copied.  Thus:
+       
+               int *p = new int[20];  // p is a custodial pointer
+               int *q = p;            // p is no longer custodial
+               p = new int[20];       // p again becomes custodial
+               q = p + 0;             // p remains custodial
+
+       Here p does not lose its custodial property by merely
+       participating in an arithmetic operation.
+
+       A pointer can lose its custodial property by passing the pointer
+       to a function.  If the parameter of the function is typed pointer
+       to const or if the function is a library function, that
+       assumption is not made.  For example
+       
+               p = malloc(10);
+               strcpy (p, "hello");
+
+       Then p still has custody of storage allocated.
+
+       It is possible to indicate via semantic options that a function
+       will take custody of a pointer.
+
+错误状态: 需要人工复查  第三方规范编号: 429  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(78)
+错误描述:	Custodial pointer 'pBuf' (line 71) has not been freed or returned
+
+</Detailed>
+		<Detailed>
+
+第(8)条
+错误描述: 冗余的boolean测试
+总计条数: 1
+完成总计条数: 1
+需要人工复查总计条数: 0
+忽略总计条数: 0
+错误类型: 指针使用类
+问题等级: 建议（高）
+统一规范编号: 306
+详细描述: 
+[统一规范描述: ]
+冗余的boolean测试
+[统一规范详细建议与描述:]
+  如： m_pNameTable->HashDestroy();
+       if (m_pNameTable != NULL){。。。}
+显然这个if判断是多余的
+[第三方规范描述: ]
+Boolean within 'String' always evaluates to [True/False]
+[第三方规范详细建议与描述: ]
+774    Boolean within 'String' always evaluates to [True/False]  -- The
+       indicated clause (String is one of if, while or for (2nd
+       expression)) has an argument that appears to always evaluate to
+       either 'True' or 'False' (as indicated in the message).
+       Information is gleaned from a variety of sources including prior
+       assignment statements and initializers.  Compare this with
+       message 506 which is based on testing constants or combinations
+       of constants.  Also compare with the Elective Note 944 which can
+       sometimes provide more detailed information.
+
+错误状态: 检查通过  第三方规范编号: 774  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(161)
+错误描述:	Boolean within 'if' always evaluates to True [Reference: file E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp: line 161]
+
+</Detailed>
+		<Detailed>
+
+第(9)条
+错误描述: 函数的类型应该可以声明为const类型
+总计条数: 2
+完成总计条数: 2
+需要人工复查总计条数: 0
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 警告（中）
+统一规范编号: 44
+详细描述: 
+[统一规范描述: ]
+函数的类型应该可以声明为const类型
+[统一规范详细建议与描述:]
+该函数不修改任何成员变量，函数参数或全局变量，因此应该使用const来修饰函数定义
+[第三方规范描述: ]
+Member function 'Symbol' could be made const
+[第三方规范详细建议与描述: ]
+       Member function 'Symbol' could be made const  -- The indicated
+       (non-static) member function did not modify member data and did
+       not call non-const functions.  Moreover, it does not make any
+       deep modification to the class member.  A modification is
+       considered deep if it modifies information indirectly through a
+       class member pointer.  Therefore it could and probably should be
+       declared as a const member function.  See also Info 1763 and
+       Elective Note 1962.
+
+错误状态: 检查通过  第三方规范编号: 1762  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(27)
+错误描述:	Member function 'ClassTest::FuncTest1(char *)' could be made const
+
+错误状态: 检查通过  第三方规范编号: 1762  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(34)
+错误描述:	Member function 'ClassTest::Err(void)' could be made const
+
+</Detailed>
+		<Detailed>
+
+第(10)条
+错误描述: 函数的返回值被忽略
+总计条数: 2
+完成总计条数: 0
+需要人工复查总计条数: 2
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 警告（中）
+统一规范编号: 49
+详细描述: 
+[统一规范描述: ]
+函数的返回值被忽略
+[统一规范详细建议与描述:]
+如果返回值有必要处理，就必须处理函数的返回值；如果返回值没有必要处理，就使用(void)func(); 来避免该警告，或者将函数定义为void类型
+[第三方规范描述: ]
+Ignoring return value of function 'Symbol' (compare with Location)
+[第三方规范详细建议与描述: ]
+       Ignoring return value of function 'Symbol' (compare with
+       Location)  -- A function that returns a value is called just for
+       side effects as, for example, in a statement by itself or the
+       left-hand side of a comma operator.  Try: (void) function(); to
+       call a function and ignore its return value.  See also the fvr,
+       fvo and fdr flags.
+
+错误状态: 需要人工复查  第三方规范编号: 534  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(221)
+错误描述:	Ignoring return value of function 'TestReturn(int &)' (compare with line 128)
+
+错误状态: 需要人工复查  第三方规范编号: 534  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(227)
+错误描述:	Ignoring return value of function 'TestNullFunc(void)' (compare with line 141)
+
+</Detailed>
+		<Detailed>
+
+第(11)条
+错误描述: 变量' Symbol'赋值时出现内存泄漏 
+总计条数: 1
+完成总计条数: 0
+需要人工复查总计条数: 1
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 错误（高）
+统一规范编号: 322
+详细描述: 
+[统一规范描述: ]
+变量' Symbol'赋值时出现内存泄漏 
+[统一规范详细建议与描述:]
+
+[第三方规范描述: ]
+Creation of memory leak in assignment to variable 'Symbol'
+[第三方规范详细建议与描述: ]
+423    Creation of memory leak in assignment to variable 'Symbol'  -- An
+       assignment was made to a pointer variable (designated by Symbol)
+       which appeared to already be holding the address of an allocated
+       object which had not been freed.  The allocation of memory which
+       is not freed is considered a memory leak.
+
+错误状态: 需要人工复查  第三方规范编号: 423  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(102)
+错误描述:	Creation of memory leak in assignment to 'pBuf'
+
+</Detailed>
+		<Detailed>
+
+第(12)条
+错误描述: 变量的前一次赋值是无用的
+总计条数: 5
+完成总计条数: 5
+需要人工复查总计条数: 0
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 警告（中）
+统一规范编号: 80
+详细描述: 
+[统一规范描述: ]
+变量的前一次赋值是无用的
+[统一规范详细建议与描述:]
+例如
+y = 1;
+if( n > 0 ) y = 2;
+y = 4;    // Info 838
+...
+[第三方规范描述: ]
+Previously assigned value to variable 'Symbol' has not been used
+[第三方规范详细建议与描述: ]
+838    Previously assigned value to variable 'Symbol' has not been used
+       -- An assignment statement was encountered that apparently
+       obliterated a previously assigned value that had never had the
+       opportunity of being used.  For example, consider the following
+       code fragment:
+       
+                 y = 1;
+                 if( n > 0 ) y = 2;
+                 y = 4;              // Info 838
+                 ...
+       
+       Here we can report that the assignment of 4 to y obliterates
+       previously assigned values that were not used.  We, of course,
+       cannot report anything unusual about the assignment of 2.  This
+       will assign over a prior value of 1 that so far had not been used
+       but the existence of an alternative path means that the value of
+       1 can still be employed later in the code and is accepted for the
+       time being as reasonable.  It is only the final assignment that
+       raises alarm bells.  See also Warning 438 in Section 13.3.
+
+错误状态: 检查通过  第三方规范编号: 838  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(102)
+错误描述:	Previously assigned value to variable 'pBuf' has not been used
+
+错误状态: 检查通过  第三方规范编号: 838  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(161)
+错误描述:	Previously assigned value to variable 's' has not been used
+
+错误状态: 检查通过  第三方规范编号: 838  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(198)
+错误描述:	Previously assigned value to variable 's' has not been used
+
+错误状态: 检查通过  第三方规范编号: 838  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(209)
+错误描述:	Previously assigned value to variable 's' has not been used
+
+错误状态: 检查通过  第三方规范编号: 838  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(210)
+错误描述:	Previously assigned value to variable 's' has not been used
+
+</Detailed>
+		<Detailed>
+
+第(13)条
+错误描述: 变量的最后一次赋值是无用的
+总计条数: 1
+完成总计条数: 1
+需要人工复查总计条数: 0
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 警告（中）
+统一规范编号: 81
+详细描述: 
+[统一规范描述: ]
+变量的最后一次赋值是无用的
+[统一规范详细建议与描述:]
+例如：
+void f( int n )
+{
+    int x = 0, y = 1;
+    if( n > 0 )
+    {
+        int z;
+         z = x + y;
+         if( n > z ){ x = 3; return; }
+         z = 12;
+     }
+}
+[第三方规范描述: ]
+Last value assigned to variable 'Symbol' not used
+[第三方规范详细建议与描述: ]
+438    Last value assigned to variable 'Symbol' not used  -- A value had
+       been assigned to a variable that was not subsequently used.  The
+       message is issued either at a return statement or at the end of a
+       block when the variable goes out of scope.  For example, consider
+       the following function:
+       
+                 void f( int n )
+                     {
+                     int x = 0, y = 1;
+                     if( n > 0 )
+                         {
+                         int z;
+                         z = x + y;
+                         if( n > z ) { x = 3; return; }
+                         z = 12;
+                         }
+                     }
+       
+       Here we can report that x was assigned a value that had not been
+       used by the time the return statement had been encountered.  We
+       also report that the most recently assigned value to z is unused
+       at the point that z goes out of scope.  See message 838 in
+       Section 13.4 C Informational Messages and flags -fiw and -fiz in
+       Sections 2.3.6 Initialization-is-considered-a-Write flag (-fiw)
+       and 2.3.7 Initialization-by-Zero-is-considered-a-Write flag
+       (-fiz) .
+
+       This message is suppressed if the variable's address is assigned
+       to a pointer (or, equivalently, the variable is used to directly
+       initialize a reference to non-const).
+
+错误状态: 检查通过  第三方规范编号: 438  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(212)
+错误描述:	Last value assigned to variable 's' (defined at line 196) not used
+
+</Detailed>
+		<Detailed>
+
+第(14)条
+错误描述: 可能的数组访问越界
+总计条数: 1
+完成总计条数: 1
+需要人工复查总计条数: 0
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 错误（高）
+统一规范编号: 400
+详细描述: 
+[统一规范描述: ]
+可能的数组访问越界
+[统一规范详细建议与描述:]
+例如
+               int a[10];
+               if( n <= 10 ) a[n] = 0;
+[第三方规范描述: ]
+access of out-of-bounds pointer ('Integer' beyond end of data) by operator 'String'
+[第三方规范详细建议与描述: ]
+415    access of out-of-bounds pointer ('Integer' beyond end of data) by
+       operator 'String'  -- An out-of-bounds pointer was accessed.
+       String designates the operator.  The parameter 'Integer' gives
+       some idea how far out of bounds the pointer may be.  It is
+       measured in units given by the size of the pointed to object.
+       The value is relative to the last item of good data and therefore
+       should always be greater than zero.  For example:
+       
+               int a[10];
+               a[10] = 0;
+
+       results in an overflow message containing the phrase '1 beyond
+       end of data'.
+
+错误状态: 检查通过  第三方规范编号: 415  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(89)
+错误描述:	Likely access of out-of-bounds pointer (1 beyond end of data) by operator '[' [Reference: file E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp: line 89]
+
+</Detailed>
+		<Detailed>
+
+第(15)条
+错误描述: 在条件语句中进行赋值语句
+总计条数: 1
+完成总计条数: 0
+需要人工复查总计条数: 1
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 警告（中）
+统一规范编号: 109
+详细描述: 
+[统一规范描述: ]
+在条件语句中进行赋值语句
+[统一规范详细建议与描述:]
+
+[第三方规范描述: ]
+Boolean test of assignment 
+[第三方规范详细建议与描述: ]
+720    Boolean test of assignment  -- An assignment was found in a
+       context that requires a Boolean (such as in an if() or while()
+       clause or as an operand to && or ||).  This may be legitimate or
+       it could have resulted from a mistaken use of = for ==.
+
+
+错误状态: 需要人工复查  第三方规范编号: 720  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(161)
+错误描述:	Boolean test of assignment
+
+</Detailed>
+		<Detailed>
+
+第(16)条
+错误描述: 对于模块所include的头文件，但模块没有直接引用该头文件中的任何标识符和函数
+总计条数: 1
+完成总计条数: 1
+需要人工复查总计条数: 0
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 警告（中）
+统一规范编号: 62
+详细描述: 
+[统一规范描述: ]
+对于模块所include的头文件，但模块没有直接引用该头文件中的任何标识符和函数
+[统一规范详细建议与描述:]
+
+[第三方规范描述: ]
+Header file FileName not used in module String
+[第三方规范详细建议与描述: ]
+       Header file FileName not used in module String  -- The named
+       header file was directly #include'd in the named module but the
+       #include can be removed because it was not used in processing the
+       named module or in any header included by the module.  It
+       contained no macro, typedef, struct, union or enum tag or
+       component, or declaration referenced by the module.  One of the
+       reasons a particular #include can be removed is because it had
+       been included by an earlier header file.  Warning 537 can be used
+       to detect such cases.
+
+错误状态: 检查通过  第三方规范编号: 766  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\stdafx.cpp(9)
+错误描述:	Header file 'E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\stdafx.h' not used in module 'E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\stdafx.cpp'
+
+</Detailed>
+		<Detailed>
+
+第(17)条
+错误描述: 局部变量的定义和全局变量冲突
+总计条数: 3
+完成总计条数: 3
+需要人工复查总计条数: 0
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 错误（高）
+统一规范编号: 70
+详细描述: 
+[统一规范描述: ]
+局部变量的定义和全局变量冲突
+[统一规范详细建议与描述:]
+
+[第三方规范描述: ]
+Declaration of symbol 'Symbol' hides symbol 'Symbol' (Location)
+[第三方规范详细建议与描述: ]
+578    Declaration of symbol 'Symbol' hides symbol 'Symbol' (Location)
+       -- A local symbol has the identical name as a global symbol ( or
+       possibly another local symbol).  This could be dangerous.  Was
+       this deliberate?  It is usually best to rename the local symbol.
+
+错误状态: 检查通过  第三方规范编号: 578  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(112)
+错误描述:	Declaration of symbol 'g_ss' hides symbol 'g_ss' (line 108)
+
+错误状态: 检查通过  第三方规范编号: 578  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(120)
+错误描述:	Declaration of symbol 'i' hides symbol 'i' (line 115)
+
+错误状态: 检查通过  第三方规范编号: 578  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(124)
+错误描述:	Declaration of symbol 'string' hides symbol 'std::string' (line 2210, file C:\Program Files\Microsoft Visual Studio 9.0\VC\include\xstring)
+
+</Detailed>
+		<Detailed>
+
+第(18)条
+错误描述: 常量参与逻辑运算
+总计条数: 1
+完成总计条数: 0
+需要人工复查总计条数: 1
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 错误（高）
+统一规范编号: 69
+详细描述: 
+[统一规范描述: ]
+常量参与逻辑运算
+[统一规范详细建议与描述:]
+例如：
+if(2 || flags)
+   ……;
+
+但有时常量在宏中定义，是正常的
+[第三方规范描述: ]
+Constant value Boolean
+[第三方规范详细建议与描述: ]
+506    Constant value Boolean  -- A Boolean, i.e., a quantity found in a
+       context that requires a Boolean such as an argument to && or ||
+       or an if() or while() clause or ! was found to be a constant and
+       hence will evaluate the same way each time.
+
+错误状态: 需要人工复查  第三方规范编号: 506  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(161)
+错误描述:	Constant value Boolean
+
+</Detailed>
+		<Detailed>
+
+第(19)条
+错误描述: 指针参数应该可以被声明为const类型
+总计条数: 2
+完成总计条数: 2
+需要人工复查总计条数: 0
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 警告（中）
+统一规范编号: 40
+详细描述: 
+[统一规范描述: ]
+指针参数应该可以被声明为const类型
+[统一规范详细建议与描述:]
+安全起见，如果指针参数没有被函数修改，则应该声明为const类型
+[第三方规范描述: ]
+Pointer parameter 'Symbol' (Location) could be declared ptr to const
+[第三方规范详细建议与描述: ]
+       Pointer parameter 'Symbol' (Location) could be declared ptr to
+       const  -- As an example:
+
+            int f( int *p ) { return *p; }
+
+       can be redeclared as:
+
+            int f( const int *p ) { return *p; }
+
+错误状态: 检查通过  第三方规范编号: 818  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(27)
+错误描述:	Pointer parameter 'pTest' (line 24) could be declared as pointing to const
+
+错误状态: 检查通过  第三方规范编号: 818  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(230)
+错误描述:	Pointer parameter 'argv' (line 215) could be declared as pointing to const
+
+</Detailed>
+		<Detailed>
+
+第(20)条
+错误描述: 指针的释放操作不正确
+总计条数: 1
+完成总计条数: 1
+需要人工复查总计条数: 0
+忽略总计条数: 0
+错误类型: 指针使用类
+问题等级: 警告（中）
+统一规范编号: 320
+详细描述: 
+[统一规范描述: ]
+指针的释放操作不正确
+[统一规范详细建议与描述:]
+指针释放时的地址和分配的地址不一致
+[第三方规范描述: ]
+Inappropriate deallocation (Name1) for 'Name2' data.
+[第三方规范详细建议与描述: ]
+424    Inappropriate deallocation (Name1) for 'Name2' data.  -- This
+       message indicates that a deallocation (free(), delete, or
+       delete[]) as specified by String1 is inappropriate for the data
+       being freed.  [12, Item 5]
+
+       The kind of data (specified by String2) is one or more of:
+       malloc, new, new[], static, auto, member, modified or constant.
+       These have the meanings as described below:
+
+       malloc    data is data obtained from a call to malloc, calloc or
+                 realloc.
+       new and new[]  data is data derived from calls to new.
+       static    data is either static data within a function or
+                 external data.
+       auto      data is non-static data in a function.
+       member    data is a component of a structure (and hence can't be
+                 independently freed).
+       modified  data is the result of applying pointer arithmetic to
+                 some other pointer.  E.g.
+       
+                     p = malloc(100);
+                     free( p+1 );    // warning
+
+                 p+1 is considered modified.
+       constant  data is the result of casting a constant to a pointer.
+                 E.g.
+       
+                     int *p = (int *) Ox80002;
+                     free(p);    // warning
+
+错误状态: 检查通过  第三方规范编号: 424  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(103)
+错误描述:	Inappropriate deallocation (delete[]) for 'auto' data
+
+</Detailed>
+		<Detailed>
+
+第(21)条
+错误描述: 标识符没有被引用
+总计条数: 2
+完成总计条数: 1
+需要人工复查总计条数: 1
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 警告（中）
+统一规范编号: 79
+详细描述: 
+[统一规范描述: ]
+标识符没有被引用
+[统一规范详细建议与描述:]
+
+[第三方规范描述: ]
+Symbol 'Symbol' (Location) not accessed
+[第三方规范详细建议与描述: ]
+550    Symbol 'Symbol' (Location) not accessed  -- A variable (local to
+       some function) was not accessed.  This means that the value of a
+       variable was never used.  Perhaps the variable was assigned a
+       value but was never used.  Note that a variable's value is not
+       considered accessed by autoincrementing or autodecrementing
+       unless the autoincrement/decrement appears within a larger
+       expression which uses the resulting value.  The same applies to a
+       construct of the form: var += expression.  If an address of a
+       variable is taken, its value is assumed to be accessed. An array,
+       struct or union is considered accessed if any portion thereof is
+       accessed.
+
+错误状态: 需要人工复查  第三方规范编号: 550  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(230)
+错误描述:	Symbol 'argv' (line 215) not accessed
+
+错误状态: 检查通过  第三方规范编号: 754  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(22)
+错误描述:	local structure member 'ClassTest::m_Testnum1' (line 22, file E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp) not referenced
+
+</Detailed>
+		<Detailed>
+
+第(22)条
+错误描述: 类的成员变量未被初始化
+总计条数: 1
+完成总计条数: 1
+需要人工复查总计条数: 0
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 警告（中）
+统一规范编号: 55
+详细描述: 
+[统一规范描述: ]
+类的成员变量未被初始化
+[统一规范详细建议与描述:]
+
+[第三方规范描述: ]
+member 'Symbol' (Location) not initialized by constructor
+[第三方规范详细建议与描述: ]
+       member 'Symbol' (Location) not initialized by constructor  -- The
+       indicated member symbol was not initialized by a constructor.
+       Was this an oversight?
+
+错误状态: 检查通过  第三方规范编号: 1401  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(20)
+错误描述:	member 'ClassTest::m_Testnum1' (line 22) not initialized by constructor
+
+</Detailed>
+		<Detailed>
+
+第(23)条
+错误描述: 表示pc-lint报表已经成功生成
+总计条数: 1
+完成总计条数: 0
+需要人工复查总计条数: 0
+忽略总计条数: 1
+错误类型: 通常可以忽略的问题
+问题等级: 建议（低）
+统一规范编号: 1004
+详细描述: 
+[统一规范描述: ]
+表示pc-lint报表已经成功生成
+[统一规范详细建议与描述:]
+
+[第三方规范描述: ]
+Successful completion, 'Integer' messages produced 
+[第三方规范详细建议与描述: ]
+900    Successful completion, 'Integer' messages produced  -- This
+       message exists to provide some way of ensuring that an output
+       message is always produced, even if there are no other messages.
+       This is required for some windowing systems.  For this purpose
+       use the option +e900.
+
+错误状态: 忽略  第三方规范编号: 900  错误位置: (0)
+错误描述:	Successful completion, 52 messages produced
+
+</Detailed>
+		<Detailed>
+
+第(24)条
+错误描述: 表达式的计算结果依靠变量的求值顺序（不是运算顺序）；C语言为了追求效率，很多求值顺序都没有明确，所以这种代码风格是禁止的
+总计条数: 1
+完成总计条数: 1
+需要人工复查总计条数: 0
+忽略总计条数: 0
+错误类型: 代码规范问题
+问题等级: 警告（中）
+统一规范编号: 61
+详细描述: 
+[统一规范描述: ]
+表达式的计算结果依靠变量的求值顺序（不是运算顺序）；C语言为了追求效率，很多求值顺序都没有明确，所以这种代码风格是禁止的
+[统一规范详细建议与描述:]
+如 n + n++
+另外，volatile变量有些特殊，如下使用会造成该警告
+volatile char *p; 
+volatile char f(); 
+n = (f() << 8) | f();  
+n = (*p << 8) | *p; 
+[第三方规范描述: ]
+variable 'Symbol' depends on order of evaluation
+[第三方规范详细建议与描述: ]
+       variable 'Symbol' depends on order of evaluation  -- The named
+       variable was both modified and accessed in the same expression in
+       such a way that the result depends on whether the order of
+       evaluation is left-to-right or right-to-left.  One such example
+       is:  n + n++ since there is no guarantee that the first access to
+       n occurs before the increment of n.  Other, more typical cases,
+       are given in the manual.  Volatile variables are also checked for
+       repeated use in an expression.
+
+错误状态: 检查通过  第三方规范编号: 564  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(179)
+错误描述:	variable 'n' depends on order of evaluation
+
+</Detailed>
+		<Detailed>
+
+第(25)条
+错误描述: 该消息已经出现过
+总计条数: 15
+完成总计条数: 0
+需要人工复查总计条数: 0
+忽略总计条数: 15
+错误类型: 代码规范问题
+问题等级: 建议（中）
+统一规范编号: 1000
+详细描述: 
+[统一规范描述: ]
+该消息已经出现过
+[统一规范详细建议与描述:]
+
+[第三方规范描述: ]
+Location cited in prior message 
+[第三方规范详细建议与描述: ]
+830    Location cited in prior message  -- Message 830 is a vehicle to
+       convey in 'canonical form' the location information embedded
+       within some other message.  For example, consider the (somewhat
+       simplified) message:
+
+       
+         file x.c line 37:  Declaration for 'x' conflicts with line 22
+       
+
+       This contains the location ("line 22") embedded in the text of
+       the message.  Embedded location information is not normally
+       understood by editors and IDE's (Interactive Development
+       Environments) which can only position to the nominal location
+       (line 37 in this example).  By adding this additional message
+       with the nominal location of line 22 the user can, by stepping to
+       the next message and, in this case, see what the 'conflict' is
+       all about.  This message and message 831 below do not follow the
+       ordinary rules for message suppression.  If they did then when
+       the option -w2 was employed to turn the warning level down to 2
+       these messages (at level 3) would also vanish.  Instead they
+       continue to function as expected.  To inhibit them you need to
+       explicitly turn them off using one of:
+       
+             -e830
+             -e831
+       
+       They may be restored via +e830 and +e831;  they state of
+       suppression can be saved and restored via the -save -restore
+       options.  Options such as -e8* and -e{831} will have no effect.
+
+错误状态: 忽略  第三方规范编号: 830  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(22)
+错误描述:	Location cited in prior message
+
+错误状态: 忽略  第三方规范编号: 830  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(24)
+错误描述:	Location cited in prior message
+
+错误状态: 忽略  第三方规范编号: 830  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(71)
+错误描述:	Location cited in prior message
+
+错误状态: 忽略  第三方规范编号: 831  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(87)
+错误描述:	Reference cited in prior message
+
+错误状态: 忽略  第三方规范编号: 831  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(89)
+错误描述:	Reference cited in prior message
+
+错误状态: 忽略  第三方规范编号: 830  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(108)
+错误描述:	Location cited in prior message
+
+错误状态: 忽略  第三方规范编号: 830  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(115)
+错误描述:	Location cited in prior message
+
+错误状态: 忽略  第三方规范编号: 830  错误位置: C:\Program Files\Microsoft Visual Studio 9.0\VC\include\xstring(2210)
+错误描述:	Location cited in prior message
+
+错误状态: 忽略  第三方规范编号: 830  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(124)
+错误描述:	Location cited in prior message
+
+错误状态: 忽略  第三方规范编号: 831  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(161)
+错误描述:	Reference cited in prior message
+
+错误状态: 忽略  第三方规范编号: 830  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(196)
+错误描述:	Location cited in prior message
+
+错误状态: 忽略  第三方规范编号: 830  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(128)
+错误描述:	Location cited in prior message
+
+错误状态: 忽略  第三方规范编号: 830  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(141)
+错误描述:	Location cited in prior message
+
+错误状态: 忽略  第三方规范编号: 830  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(215)
+错误描述:	Location cited in prior message
+
+错误状态: 忽略  第三方规范编号: 830  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(215)
+错误描述:	Location cited in prior message
+
+</Detailed>
+		<Detailed>
+
+第(26)条
+错误描述: 非法创建的指针
+总计条数: 1
+完成总计条数: 1
+需要人工复查总计条数: 0
+忽略总计条数: 0
+错误类型: 指针使用类
+问题等级: 警告（中）
+统一规范编号: 316
+详细描述: 
+[统一规范描述: ]
+非法创建的指针
+[统一规范详细建议与描述:]
+例如
+               int a[10];
+                 ... 
+               f( a + 11 );
+或者
+               int a[10];
+               if( n <= 20 ) f( a + n );
+[第三方规范描述: ]
+creation of out-of-bounds pointer ('Integer' beyond end of data) by operator 'String'  
+[第三方规范详细建议与描述: ]
+416    creation of out-of-bounds pointer ('Integer' beyond end of data)
+       by operator 'String'  -- An out-of-bounds pointer was created.
+       See message 415 for a description of the parameters Integer and
+       String.  For example:
+       
+               int a[10];
+
+                 ... 
+               f( a + 11 );
+
+       Here, an illicit pointer value is created and is flagged as such
+       by PC-lint/FlexeLint.  Note that the pointer a+10 is not
+       considered by PC-lint/FlexeLint to be the creation of an
+       out-of-bounds pointer.  This is because ANSI C explicitly allows
+       pointing just beyond an array.  Access through a+10, however, as
+       in *(a+10) or the more familiar a[10], would be considered
+       erroneous but in that case message 415 would be issued.
+
+错误状态: 检查通过  第三方规范编号: 416  错误位置: E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp(87)
+错误描述:	Likely creation of out-of-bounds pointer (2 beyond end of data) by operator 'ptr+int' [Reference: file E:\svn\project\project_WhiteBoxStudio\code\CodeTest\CodeTest\CodeTest.cpp: line 87]
+
+</Detailed>
+	</Detailed>
+</OutputReport>

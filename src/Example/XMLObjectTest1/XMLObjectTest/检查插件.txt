@@ -1,0 +1,320 @@
+#include "..\..\other\RegTool.h"
+#include "objbase.h"
+	//
+struct PluginInfoSet
+{
+public:
+	tstring szType;
+	tstring szName;
+	tstring szDllPath;
+};
+struct PluginInfo
+{
+	typedef std::map<tstring, PluginInfoSet, less<tstring> > PluginInfoMapT;
+	PluginInfoMapT PluginMap;
+};
+
+bool GetComInfo(TCHAR * pComID, tstring & szComName, tstring & szComPath)
+{
+	tstring szBaseName = _T("CLSID\\");
+	szBaseName += pComID;
+	tstring szKeyName = szBaseName + _T("\\InprocServer32");
+	CRegFind find;
+	find(HKEY_CLASSES_ROOT, (TCHAR*)szKeyName.c_str());
+	find.QueryKey(
+		[](HKEY hKey, TCHAR *pKeyName){
+			
+			return;
+		},
+		[=, &szComPath](HKEY hKey, TCHAR * pValueName, CAutoVal & Val){
+			tstring szVal = Val;
+			tstring szValName = pValueName;
+			if (szValName.length() == 0)
+			{
+				szComPath = szVal;
+			}
+			return;
+		},
+		[](){});
+
+	szKeyName = szBaseName;
+	find(HKEY_CLASSES_ROOT, (TCHAR*)szKeyName.c_str());
+	find.QueryKey(
+		[](HKEY hKey, TCHAR *pKeyName){
+
+		return;
+	},
+		[=, &szComName](HKEY hKey, TCHAR * pValueName, CAutoVal & Val){
+		tstring szVal = Val;
+		tstring szValName = pValueName;
+		if (szValName.length() == 0)
+		{
+			szComName = szVal;
+		}
+		return;
+	},
+	[](){});
+
+	if (szComName.length() == 0)
+	{
+		szKeyName = szBaseName + _T("\\ProgID");
+		find(HKEY_CLASSES_ROOT, (TCHAR*)szKeyName.c_str());
+		find.QueryKey(
+			[](HKEY hKey, TCHAR *pKeyName){
+
+			return;
+		},
+			[=, &szComName](HKEY hKey, TCHAR * pValueName, CAutoVal & Val){
+			tstring szVal = Val;
+			tstring szValName = pValueName;
+			if (szValName.length() == 0)
+			{
+				szComName = szVal;
+			}
+			return;
+		},
+		[](){});
+	}
+	if (szComName.length() == 0)
+	{
+		CLSID cid;
+		if (CLSIDFromString(pComID, &cid) == NOERROR)
+		{
+			WCHAR * pRetName = NULL;
+			if (ProgIDFromCLSID(cid, &pRetName) == S_OK)
+			{
+				szComName = pRetName;
+			}
+		}
+	}
+	
+	return true;
+}
+void GetIEBHOPlugininfo(PluginInfo & InfoMap)
+{
+	DWORD SubKeyIndex = 0;
+	DWORD SubValudeIndex = 0;
+	CRegFind reg(HKEY_LOCAL_MACHINE, _T("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Browser Helper Objects"));
+	
+	reg.QueryKey(
+		[&InfoMap, &SubKeyIndex](HKEY hKey, TCHAR * pKeyName){
+		//printf_t(_T("SubKeyIndex=%d KeyName=%s\n"), (unsigned int)SubKeyIndex, pKeyName);
+		//printf_t(_T("\r\n\r\n\r\nkey (%d) %s\n"), SubKeyIndex, pKeyName);
+		SubKeyIndex++;
+		CRegFind SubKey(hKey, pKeyName);
+		DWORD SubKeyIndex1 = 0;
+		DWORD SubValudeIndex1 = 0;
+		tstring szComName;
+		tstring szComPath;
+		GetComInfo(pKeyName, szComName, szComPath);
+		PluginInfo  InfoMapTmp;
+
+		SubKey.QueryKey(
+			[&SubKeyIndex1](HKEY hKey, TCHAR *pKeyName){
+			//printf_t(_T("key1 (%d) %s\n"), SubKeyIndex1, pKeyName);
+
+			return;
+			},
+			[&SubKeyIndex, &pKeyName, &szComName](HKEY hKey, TCHAR * pValueName, CAutoVal & Val){
+			tstring szVal = Val;
+			tstring szValueName = pValueName;
+
+			if ((szComName.length() == 0) && (szValueName.length() == 0))
+			{
+				szComName = szVal;
+			}
+
+			return;
+		},
+		[&InfoMap, &SubKeyIndex, &pKeyName, &szComName, &szComPath]()mutable{
+			PluginInfoSet Set;
+			Set.szType = _T("BHO");
+			Set.szName = szComName;
+			Set.szDllPath = szComPath;
+			//InfoMapTmp.PluginMap[tstring(pKeyName)] = Set;
+			InfoMap.PluginMap[tstring(pKeyName)] = Set;
+			//InfoMapTmp.szTy = tstring(_T("222"));
+			return;
+		});
+		return;
+	},
+		[=](HKEY hKey, TCHAR * pKeyName, CAutoVal & Val){
+		return;
+	},
+	[](){}
+	);
+}
+
+
+
+void GetIEExtensionsPlugininfo(PluginInfo & InfoMap)
+{
+	DWORD SubKeyIndex = 0;
+	DWORD SubValudeIndex = 0;
+	CRegFind reg(HKEY_LOCAL_MACHINE, _T("SOFTWARE\\Microsoft\\Internet Explorer\\Extensions"));
+
+	reg.QueryKey(
+		[&InfoMap, &SubKeyIndex](HKEY hKey, TCHAR * pKeyName){
+		//printf_t(_T("SubKeyIndex=%d KeyName=%s\n"), (unsigned int)SubKeyIndex, pKeyName);
+		//printf_t(_T("\r\n\r\n\r\nkey (%d) %s\n"), SubKeyIndex, pKeyName);
+		SubKeyIndex++;
+		CRegFind SubKey(hKey, pKeyName);
+		DWORD SubKeyIndex1 = 0;
+		DWORD SubValudeIndex1 = 0;
+		tstring szComName;
+		tstring szComPath;
+		
+		PluginInfo  InfoMapTmp;
+
+		SubKey.QueryKey(
+			[&SubKeyIndex1](HKEY hKey, TCHAR *pKeyName){
+			//printf_t(_T("key1 (%d) %s\n"), SubKeyIndex1, pKeyName);
+
+			return;
+			},
+			[&InfoMap,&SubKeyIndex, &pKeyName, &szComName, &szComPath](HKEY hKey, TCHAR * pValueName, CAutoVal & Val)mutable{
+				tstring szVal = Val;
+				tstring szValueName = pValueName;
+				
+				if (szValueName == _T("ClsidExtension"))
+				{
+					szComName = szVal;
+					GetComInfo((TCHAR*)szVal.c_str(), szComName, szComPath);
+					PluginInfoSet Set;
+					Set.szType = _T("IEExtensions");
+					Set.szName = szComName;
+					Set.szDllPath = szComPath;
+					//InfoMapTmp.PluginMap[tstring(pKeyName)] = Set;
+					if (InfoMap.PluginMap.find(tstring(pKeyName)) == InfoMap.PluginMap.end())InfoMap.PluginMap[tstring(pKeyName)] = Set;
+				}
+
+				return;
+			},
+				[&InfoMap, &SubKeyIndex, &pKeyName, &szComName, &szComPath]()mutable{
+			
+			
+			//InfoMapTmp.szTy = tstring(_T("222"));
+			return;
+		});
+		return;
+	},
+		[=](HKEY hKey, TCHAR * pKeyName, CAutoVal & Val){
+		return;
+	},
+		[](){}
+	);
+}
+
+void GetIEMenuLinkPlugininfo(PluginInfo & InfoMap)
+{
+	DWORD SubKeyIndex = 0;
+	DWORD SubValudeIndex = 0;
+	CRegFind reg(HKEY_CURRENT_USER, _T("Software\\Microsoft\\Internet Explorer\\MenuExt"));
+
+	reg.QueryKey(
+		[&InfoMap, &SubKeyIndex](HKEY hKey, TCHAR * pKeyName){
+		//printf_t(_T("SubKeyIndex=%d KeyName=%s\n"), (unsigned int)SubKeyIndex, pKeyName);
+		//printf_t(_T("\r\n\r\n\r\nkey (%d) %s\n"), SubKeyIndex, pKeyName);
+		SubKeyIndex++;
+		CRegFind SubKey(hKey, pKeyName);
+		DWORD SubKeyIndex1 = 0;
+		DWORD SubValudeIndex1 = 0;
+		tstring szLinkName;
+		tstring szLinkPath;
+		//GetComInfo(pKeyName, szComName, szComPath);
+		PluginInfo  InfoMapTmp;
+		szLinkName = pKeyName;
+		SubKey.QueryKey(
+			[&SubKeyIndex1](HKEY hKey, TCHAR *pKeyName){
+			//printf_t(_T("key1 (%d) %s\n"), SubKeyIndex1, pKeyName);
+			return;
+		},
+			[&SubKeyIndex, &pKeyName, &szLinkPath](HKEY hKey, TCHAR * pValueName, CAutoVal & Val){
+			tstring szValueName = pValueName;
+			if ((szValueName.length() == 0))
+			{
+				szLinkPath = Val;
+			}
+			return;
+		},
+			[&InfoMap, &SubKeyIndex, &pKeyName, &szLinkName, &szLinkPath]()mutable{
+			PluginInfoSet Set;
+			Set.szType = _T("MenuLink");
+			Set.szName = szLinkName;
+			Set.szDllPath = szLinkPath;
+			if(InfoMap.PluginMap.find(tstring(pKeyName)) == InfoMap.PluginMap.end()) InfoMap.PluginMap[tstring(pKeyName)] = Set;
+			return;
+		});
+		return;
+	},
+		[=](HKEY hKey, TCHAR * pKeyName, CAutoVal & Val){
+		return;
+	},
+		[](){}
+	);
+}
+
+void GetIESetPlugininfo(PluginInfo & InfoMap)
+{
+	DWORD SubKeyIndex = 0;
+	DWORD SubValudeIndex = 0;
+	//HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\MenuExt
+
+	CRegFind reg(HKEY_CURRENT_USER, _T("Software\\Microsoft\\Windows\\CurrentVersion\\Ext\\Settings"));
+
+	reg.QueryKey(
+		[&InfoMap, &SubKeyIndex](HKEY hKey, TCHAR * pKeyName){
+		//printf_t(_T("SubKeyIndex=%d KeyName=%s\n"), (unsigned int)SubKeyIndex, pKeyName);
+		//printf_t(_T("\r\n\r\n\r\nkey (%d) %s\n"), SubKeyIndex, pKeyName);
+		SubKeyIndex++;
+		CRegFind SubKey(hKey, pKeyName);
+		DWORD SubKeyIndex1 = 0;
+		DWORD SubValudeIndex1 = 0;
+		tstring szComName;
+		tstring szComPath;
+		GetComInfo(pKeyName, szComName, szComPath);
+		PluginInfo  InfoMapTmp;
+
+		SubKey.QueryKey(
+			[&SubKeyIndex1](HKEY hKey, TCHAR *pKeyName){
+			//printf_t(_T("key1 (%d) %s\n"), SubKeyIndex1, pKeyName);
+
+			return;
+		},
+		[&SubKeyIndex, &pKeyName, &szComName](HKEY hKey, TCHAR * pValueName, CAutoVal & Val){
+
+			return;
+		},
+		[&InfoMap, &SubKeyIndex, &pKeyName, &szComName, &szComPath]()mutable{
+			PluginInfoSet Set;
+			Set.szType = _T("Setting");
+			Set.szName = szComName;
+			Set.szDllPath = szComPath;
+			//InfoMapTmp.PluginMap[tstring(pKeyName)] = Set;
+			if (InfoMap.PluginMap.find(tstring(pKeyName)) == InfoMap.PluginMap.end()) InfoMap.PluginMap[tstring(pKeyName)] = Set;
+			//InfoMapTmp.szTy = tstring(_T("222"));
+			return;
+		});
+		return;
+	},
+		[=](HKEY hKey, TCHAR * pKeyName, CAutoVal & Val){
+		return;
+	},
+		[](){}
+	);
+}
+
+
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	//printf_t(_T("%d"), StringEncode<_T("123456789"),0>::nRet);
+	CRegFind find;
+	//HKEY_CLASSES_ROOT\CLSID\{20E1725C-7237-41A9-954A-04DCCB1FD16C}
+	//find(HKEY_CLASSES_ROOT, _T("{20E1725C-7237-41A9-954A-04DCCB1FD16C}"));
+	PluginInfo  InfoMap;
+	GetIEBHOPlugininfo(InfoMap);
+	GetIEExtensionsPlugininfo(InfoMap);
+	GetIESetPlugininfo(InfoMap);
+	GetIEMenuLinkPlugininfo(InfoMap);

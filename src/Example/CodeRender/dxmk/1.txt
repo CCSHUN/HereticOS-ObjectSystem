@@ -1,0 +1,6 @@
+
+
+	//ROOT_MAKE<ROOT_MAKE>=MAKE_MAKECODE<"e:\\work\\KCG\\V2.0\\Code\\Plugins\\Display\\d3d_8_9b.h","c:\\dx8.mk">
+	//ROOT_MAKE<ROOT_MAKE>=MAKE_MAKECODE<"e:\\work\\KCG\\V2.0\\Code\\Plugins\\Display\\d3d8test.h","c:\\dx8.mk">
+	//ROOT_MAKE<ROOT_MAKE>=MAKE_MAKECODE<"E:\\work\\tool\\dxsdk\\Include\\d3d9.h","c:\\dx9.mk">
+	ROOT_MAKE<ROOT_MAKE>=MAKE_MAKECODE<"C:\\结构体序列化\\test.h","C:\\结构体序列化\\makestruct.mk">

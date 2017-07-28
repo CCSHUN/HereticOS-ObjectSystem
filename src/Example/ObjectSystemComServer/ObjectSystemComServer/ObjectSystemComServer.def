@@ -1,0 +1,10 @@
+; ObjectSystemComServer.def : 定义模块参数。
+
+LIBRARY      "ObjectSystemComServer.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE
+	DllInstall		PRIVATE

@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{630CFDCF-0417-4CCF-A494-1FA4946DBB89}</ProjectGuid>
+    <RootNamespace>ObjectSystemComServer</RootNamespace>
+    <Keyword>AtlProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfAtl>Dynamic</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfAtl>Dynamic</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)ObjectSystemComServer.tlb</TypeLibraryName>
+      <HeaderFileName>ObjectSystemComServer_i.h</HeaderFileName>
+      <DllDataFileName>
+      </DllDataFileName>
+      <InterfaceIdentifierFileName>ObjectSystemComServer_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>ObjectSystemComServer_p.c</ProxyFileName>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\WhiteboxTestingPlatform\WhiteboxTestingPlatform\WhiteboxTestingPlatform;..\..\ModelTest\;..\..\ModelTest\common\SerializeFunction\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <RegisterOutput>true</RegisterOutput>
+      <OutputFile>E:\WhiteBoxSoapServer\$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>..\..\ModelTest\common\SerializeFunction\zlib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>.\ObjectSystemComServer.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)ObjectSystemComServer.tlb</TypeLibraryName>
+      <HeaderFileName>ObjectSystemComServer_i.h</HeaderFileName>
+      <DllDataFileName>
+      </DllDataFileName>
+      <InterfaceIdentifierFileName>ObjectSystemComServer_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>ObjectSystemComServer_p.c</ProxyFileName>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <RegisterOutput>true</RegisterOutput>
+      <OutputFile>..\..\bin\$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>..\..\ModelTest\common\SerializeFunction\zlib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>.\ObjectSystemComServer.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="ObjectSystem.cpp" />
+    <ClCompile Include="ObjectSystemComServer.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="ObjectSystemComServer_i.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\ModelTest\common\SerializeFunction\Base64.cpp" />
+    <ClCompile Include="..\..\ModelTest\common\SerializeFunction\BaseFunctionTool.cpp" />
+    <ClCompile Include="..\..\ModelTest\common\SerializeFunction\XmlRender.cpp" />
+    <ClCompile Include="..\..\ModelTest\ObjectFileOperation.cpp" />
+    <ClCompile Include="..\..\ModelTest\ObjectSystem_Local.cpp" />
+    <ClCompile Include="..\..\ModelTest\ObjectSystem_SoapService.cpp" />
+    <ClCompile Include="..\..\ModelTest\Architecture\ModuleManger.cpp" />
+    <ClCompile Include="..\..\ModelTest\Architecture\WorldSystem.cpp" />
+    <ClCompile Include="..\..\ModelTest\FunctionModule\DebugFunctionModule.cpp" />
+    <ClCompile Include="..\..\ModelTest\FunctionModule\YDConfig.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ObjectSystemComServer.def" />
+    <None Include="ObjectSystem.rgs" />
+    <None Include="ObjectSystemComServer.rgs" />
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="ObjectSystemComServer.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\ModelTest\DataModuleDef.h" />
+    <ClInclude Include="dllmain.h" />
+    <ClInclude Include="ObjectSystem.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="ObjectSystemComServer_i.h" />
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\Base64.h" />
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\BaseFunctionTool.h" />
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\BaseObjectSerialize.h" />
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\InterlayerContainer.h" />
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\Serialize.h" />
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\SerializeInterface.h" />
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\SerIni.h" />
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\StorageObject.h" />
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\XmlRender.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectFileOperation.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSystem.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSystem_Local.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSystem_SoapService.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_S_PROJECT_CONFIG_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_S_REPORT1_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_S_REPORT_ITEM1_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_S_REPORT_ITEM_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_S_REPORT_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_S_WORKSHEET_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagCallParameter_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagDirectoryInfoSetSoap_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagDirectoryInfoSoap_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagErrorWarningArray_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagErrorWarningSet_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardLib_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardSet_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardSpecify_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardTypeLib_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardTypeSet_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagObjectStateSoap_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagPCLintReportItem_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagProjectConfig_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagProjectState_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagReportLog_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagstrParameter_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagTestHexString_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagThirdStandardlib_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagThirdStandardSet_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagUserMapSet_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagUserOwnProjectTab_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagUserProjectSet_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagYDConfig_StructInfo.h" />
+    <ClInclude Include="..\..\ModelTest\Architecture\ModuleInterface.h" />
+    <ClInclude Include="..\..\ModelTest\Architecture\ModuleManger.h" />
+    <ClInclude Include="..\..\ModelTest\Architecture\WorldSystem.h" />
+    <ClInclude Include="..\..\ModelTest\FunctionModule\DebugFunctionModule.h" />
+    <ClInclude Include="..\..\ModelTest\FunctionModule\YDConfig.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ObjectSystemComServer.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

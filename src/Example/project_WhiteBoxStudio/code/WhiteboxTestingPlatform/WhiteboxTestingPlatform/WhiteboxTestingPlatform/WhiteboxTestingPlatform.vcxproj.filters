@@ -1,0 +1,1092 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{138b8d56-f893-4826-a2bf-3cb7747d5f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\ObjectSystem">
+      <UniqueIdentifier>{a72aa6a5-729b-4e32-98da-667edfe368ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\SerializeFunction">
+      <UniqueIdentifier>{238f9f8a-637d-44f5-8c46-196b3cb9e488}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\Architecture">
+      <UniqueIdentifier>{0de89e95-5109-4672-b68a-12aafc7ab0c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\ObjectSerDef">
+      <UniqueIdentifier>{5a4296e1-7b9d-4c69-bae3-25e92f9bcf7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="业务数据逻辑">
+      <UniqueIdentifier>{b1146a79-20eb-48c3-a410-69514bdb4ec8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="垃圾站">
+      <UniqueIdentifier>{c9729c01-b966-4aaf-93c1-dd5a9132a9ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{226eefa0-fc4c-40bd-8d2f-f2cf23eba935}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务窗口管理器">
+      <UniqueIdentifier>{ba0f6f34-fd13-4588-bee7-3605b3630b90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\框架">
+      <UniqueIdentifier>{087c5499-c1e8-4cfd-a5c7-c3c86b9a178c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务UI">
+      <UniqueIdentifier>{1cb11d29-fa1c-4754-9585-15c962f8d2e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务UI\项目工作区UI">
+      <UniqueIdentifier>{af474c0a-9deb-4cc1-9316-4b94df9535a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务UI\项目工作区UI\主工作区">
+      <UniqueIdentifier>{f5d61c0a-afa1-46c0-be62-8d58c68b2a3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务UI\项目工作区UI\子工作区">
+      <UniqueIdentifier>{190034f5-ee3e-4a2c-aff0-bfec069e56ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务UI\标准工作区UI">
+      <UniqueIdentifier>{d1932970-847e-4093-8b63-b27823c7cd37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务UI\标准工作区UI\主工作区">
+      <UniqueIdentifier>{1ab68e8e-cf29-46f2-bfae-4351c9d135e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务UI\标准工作区UI\子工作区">
+      <UniqueIdentifier>{3f1189d1-01b5-4039-aa1e-74a6aba6eb34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务UI\管理员工作区UI">
+      <UniqueIdentifier>{895436f8-0878-4feb-a904-340b6a4367c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务UI\管理员工作区UI\主工作区">
+      <UniqueIdentifier>{97e11f21-a964-4b52-9732-b1849ae72020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务UI\管理员工作区UI\子工作区">
+      <UniqueIdentifier>{2fe9628b-8c04-4909-b674-9cd62709b8a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务UI\消息管理">
+      <UniqueIdentifier>{c00f8b56-a3c4-4e8f-aeb3-affae4b71461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务UI\消息管理\主工作区">
+      <UniqueIdentifier>{92ab0011-98e4-4392-923d-573bd3f12031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务UI\消息管理\子工作区">
+      <UniqueIdentifier>{a59e2cb8-c636-45cb-94a9-a7087340d377}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务UI\业务数据设计区">
+      <UniqueIdentifier>{7c3e2908-f1db-4388-871c-bee0784245f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\业务UI\白盒测试系统">
+      <UniqueIdentifier>{b372eeff-9ce0-4941-9985-23e891bc9da4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\登陆">
+      <UniqueIdentifier>{c9743a0b-99ae-48fa-9c3b-208dcf0f1229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\工具控件">
+      <UniqueIdentifier>{6e51d991-2d3e-47b4-b739-7c4420fa11bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FunctionModule">
+      <UniqueIdentifier>{140f9aee-8efb-4fd6-aa14-bf2fa18928d6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CommonFunc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageEx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MsgShowView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="myworkthread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NewPost.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputWnd.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Report.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TabSheet.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSystem\ObjectFileOperation.cpp">
+      <Filter>common\ObjectSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem.cpp">
+      <Filter>common\ObjectSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem_Local.cpp">
+      <Filter>common\ObjectSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem_SoapClient.cpp">
+      <Filter>common\ObjectSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem_SoapService.cpp">
+      <Filter>common\ObjectSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSystem\SoapOperation.cpp">
+      <Filter>common\ObjectSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\common\SerializeFunction\Base64.cpp">
+      <Filter>common\SerializeFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\common\SerializeFunction\BaseFunctionTool.cpp">
+      <Filter>common\SerializeFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\common\SerializeFunction\XmlRender.cpp">
+      <Filter>common\SerializeFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\Architecture\ModuleManger.cpp">
+      <Filter>common\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\Architecture\WorldSystem.cpp">
+      <Filter>common\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_S_PROJECT_CONFIG_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_S_REPORT_ITEM_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_S_REPORT_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_S_WORKSHEET_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagCallParameter_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagDirectoryInfoSetSoap_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagDirectoryInfoSoap_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagErrorWarningArray_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagErrorWarningSet_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoStructDataDesign\ObjectSerDef\_tagExp_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoStructDataDesign\ObjectSerDef\_tagExpLib_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoStructDataDesign\ObjectSerDef\_tagFuncDef_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoStructDataDesign\ObjectSerDef\_tagFuncLib_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoStructDataDesign\ObjectSerDef\_tagIDRecover_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardLib_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardSet_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardSpecify_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardTypeLib_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardTypeSet_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagMsgBody_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagMsgData_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagObjectStateSoap_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoStructDataDesign\ObjectSerDef\_tagParamDef_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagPCLintReportItem_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectConfig_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectOwnUser_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectOwnUserSet_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectState_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagReportLog_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_Detailed_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_Overall_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_Summary_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagstrParameter_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagTestHexString_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\project_AutoEvaluate\AutoEvaluate\AutoEvaluate\ObjectSerDef\_tagTestParam_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagThirdStandardlib_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagThirdStandardSet_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagUnitReport_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagUnitReportSet_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagUserMapSet_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagUserMsgInfo_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagUserOwnProjectTab_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagUserProjectSet_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagYDConfig_StructInfo.cpp">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClCompile>
+    <ClCompile Include="AccessControl_Local.cpp">
+      <Filter>业务数据逻辑</Filter>
+    </ClCompile>
+    <ClCompile Include="MsgDataModule.cpp">
+      <Filter>业务数据逻辑</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectDataModel.cpp">
+      <Filter>业务数据逻辑</Filter>
+    </ClCompile>
+    <ClCompile Include="StandardDataModel.cpp">
+      <Filter>业务数据逻辑</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdStandardDataModel.cpp">
+      <Filter>业务数据逻辑</Filter>
+    </ClCompile>
+    <ClCompile Include="UniteStandardDataModel.cpp">
+      <Filter>业务数据逻辑</Filter>
+    </ClCompile>
+    <ClCompile Include="UserDataModel.cpp">
+      <Filter>业务数据逻辑</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassView.cpp">
+      <Filter>垃圾站</Filter>
+    </ClCompile>
+    <ClCompile Include="FileView.cpp">
+      <Filter>垃圾站</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertiesWnd.cpp">
+      <Filter>垃圾站</Filter>
+    </ClCompile>
+    <ClCompile Include="ReportDoc.cpp">
+      <Filter>垃圾站</Filter>
+    </ClCompile>
+    <ClCompile Include="ReportView.cpp">
+      <Filter>垃圾站</Filter>
+    </ClCompile>
+    <ClCompile Include="TestingTaskDoc.cpp">
+      <Filter>垃圾站</Filter>
+    </ClCompile>
+    <ClCompile Include="TestingTaskView.cpp">
+      <Filter>垃圾站</Filter>
+    </ClCompile>
+    <ClCompile Include="WorkSheetView.cpp">
+      <Filter>垃圾站</Filter>
+    </ClCompile>
+    <ClCompile Include="BusinessWorkPageWndManger.cpp">
+      <Filter>UI\业务窗口管理器</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressNavigate.cpp">
+      <Filter>UI\框架</Filter>
+    </ClCompile>
+    <ClCompile Include="ChildFrm.cpp">
+      <Filter>UI\框架</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatWnd.cpp">
+      <Filter>UI\框架</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>UI\框架</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewTree.cpp">
+      <Filter>UI\框架</Filter>
+    </ClCompile>
+    <ClCompile Include="WhiteboxTestingPlatform.cpp">
+      <Filter>UI\框架</Filter>
+    </ClCompile>
+    <ClCompile Include="WhiteboxTestingPlatformDoc.cpp">
+      <Filter>UI\框架</Filter>
+    </ClCompile>
+    <ClCompile Include="WhiteboxTestingPlatformView.cpp">
+      <Filter>UI\框架</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateProject.cpp">
+      <Filter>UI\业务UI\项目工作区UI\主工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectView.cpp">
+      <Filter>UI\业务UI\项目工作区UI\主工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseReportInfoDlg.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="CodeView.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="CodeViewDlg.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="DevUserReportDlg2.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="DevUserReportView.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="SubProjectManger.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="TestingTaskConfigDoc.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="TestingTaskConfigView.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUserReportComplateView.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUserReportManualMakeView.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUserReportNoFindStandardView.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUserWorkSheetView.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitAutoReport.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitNewEdit.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTestEndTimeDlg.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="WorkSheetDoc.cpp">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="SpecifyView.cpp">
+      <Filter>UI\业务UI\标准工作区UI\主工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="StandardErrorTypeEditView.cpp">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUserNewStandard.cpp">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUserStandardThirdEditDlg.cpp">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUserStandardThirdNewDlg.cpp">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUserStandardThirdView.cpp">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUserStandardUniteEditDlg.cpp">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUserStandardUniteNewDlg.cpp">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUserStandardUniteView.cpp">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="AdminTreeView.cpp">
+      <Filter>UI\业务UI\管理员工作区UI\主工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="AdminUserAddEditDlg.cpp">
+      <Filter>UI\业务UI\管理员工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="AdminUserEditView.cpp">
+      <Filter>UI\业务UI\管理员工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoStructDesignView.cpp">
+      <Filter>UI\业务UI\管理员工作区UI\子工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="MsgTreeView.cpp">
+      <Filter>UI\业务UI\消息管理\主工作区</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoDesignTestLibMgr.cpp">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoStructDataDesign\AutoStructDataDesignDlg.cpp">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoStructDataDesign\ExpMake.cpp">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroMake.cpp">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoStructDataDesign\MainWindow.cpp">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoStructDataDesign\UseCaseExpMakeDlg.cpp">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigDlg.cpp">
+      <Filter>UI\登陆</Filter>
+    </ClCompile>
+    <ClCompile Include="LogoninDlg.cpp">
+      <Filter>UI\登陆</Filter>
+    </ClCompile>
+    <ClCompile Include="CodeHtmlView.cpp">
+      <Filter>UI\工具控件</Filter>
+    </ClCompile>
+    <ClCompile Include="htmlui\src\DHtmlViewSpec.cpp">
+      <Filter>UI\工具控件</Filter>
+    </ClCompile>
+    <ClCompile Include="ListCtlStringSort.cpp">
+      <Filter>UI\工具控件</Filter>
+    </ClCompile>
+    <ClCompile Include="QuestionResponse.cpp">
+      <Filter>UI\工具控件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\FunctionModule\DebugFunctionModule.cpp">
+      <Filter>FunctionModule</Filter>
+    </ClCompile>
+    <ClCompile Include="TemplateTool.cpp">
+      <Filter>FunctionModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ModelTest\FunctionModule\YDConfig.cpp">
+      <Filter>FunctionModule</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CommonFunc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageEx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MsgShowView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="myworkthread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NewPost.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputWnd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Report.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDataDesign\resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TabSheet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\commondef\CommonTypeDef.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\commondef\DataModuleDef.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSystem\ObjectFileOperation.h">
+      <Filter>common\ObjectSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem.h">
+      <Filter>common\ObjectSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem_Local.h">
+      <Filter>common\ObjectSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem_SoapClient.h">
+      <Filter>common\ObjectSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem_SoapService.h">
+      <Filter>common\ObjectSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSystem\SoapOperation.h">
+      <Filter>common\ObjectSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\Base64.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\BaseFunctionTool.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\BaseObjectSerialize.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\InterlayerContainer.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\Serialize.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\SerializeInterface.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\SerIni.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\StorageObject.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\XmlRender.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\Architecture\ModuleInterface.h">
+      <Filter>common\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\Architecture\ModuleManger.h">
+      <Filter>common\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\Architecture\WorldSystem.h">
+      <Filter>common\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_S_PROJECT_CONFIG_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_S_REPORT_ITEM_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_S_REPORT_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_S_WORKSHEET_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagCallParameter_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagDirectoryInfoSetSoap_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagDirectoryInfoSoap_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagErrorWarningArray_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagErrorWarningSet_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDataDesign\ObjectSerDef\_tagExp_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDataDesign\ObjectSerDef\_tagExpLib_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDataDesign\ObjectSerDef\_tagFuncDef_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDataDesign\ObjectSerDef\_tagFuncLib_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDataDesign\ObjectSerDef\_tagIDRecover_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardLib_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardSet_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardSpecify_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardTypeLib_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardTypeSet_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagMsgBody_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagMsgData_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagObjectStateSoap_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDataDesign\ObjectSerDef\_tagParamDef_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagPCLintReportItem_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectConfig_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectOwnUser_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectOwnUserSet_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectState_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagReportLog_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_Detailed_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_Overall_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_Summary_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagstrParameter_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagTestHexString_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\project_AutoEvaluate\AutoEvaluate\AutoEvaluate\ObjectSerDef\_tagTestParam_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagThirdStandardlib_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagThirdStandardSet_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagUnitReport_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagUnitReportSet_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagUserMapSet_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagUserMsgInfo_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagUserOwnProjectTab_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagUserProjectSet_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagYDConfig_StructInfo.h">
+      <Filter>common\ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="AccessControl_Local.h">
+      <Filter>业务数据逻辑</Filter>
+    </ClInclude>
+    <ClInclude Include="MsgDataModule.h">
+      <Filter>业务数据逻辑</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectDataModel.h">
+      <Filter>业务数据逻辑</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardDataModel.h">
+      <Filter>业务数据逻辑</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdStandardDataModel.h">
+      <Filter>业务数据逻辑</Filter>
+    </ClInclude>
+    <ClInclude Include="UniteStandardDataModel.h">
+      <Filter>业务数据逻辑</Filter>
+    </ClInclude>
+    <ClInclude Include="UserDataModel.h">
+      <Filter>业务数据逻辑</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassView.h">
+      <Filter>垃圾站</Filter>
+    </ClInclude>
+    <ClInclude Include="FileView.h">
+      <Filter>垃圾站</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertiesWnd.h">
+      <Filter>垃圾站</Filter>
+    </ClInclude>
+    <ClInclude Include="ReportDoc.h">
+      <Filter>垃圾站</Filter>
+    </ClInclude>
+    <ClInclude Include="ReportView.h">
+      <Filter>垃圾站</Filter>
+    </ClInclude>
+    <ClInclude Include="TestingTaskDoc.h">
+      <Filter>垃圾站</Filter>
+    </ClInclude>
+    <ClInclude Include="TestingTaskView.h">
+      <Filter>垃圾站</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkSheetView.h">
+      <Filter>垃圾站</Filter>
+    </ClInclude>
+    <ClInclude Include="BusinessWorkPageWndManger.h">
+      <Filter>UI\业务窗口管理器</Filter>
+    </ClInclude>
+    <ClInclude Include="UiStructDef.h">
+      <Filter>UI\业务窗口管理器</Filter>
+    </ClInclude>
+    <ClInclude Include="UiTypeNameDef.h">
+      <Filter>UI\业务窗口管理器</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressNavigate.h">
+      <Filter>UI\框架</Filter>
+    </ClInclude>
+    <ClInclude Include="ChildFrm.h">
+      <Filter>UI\框架</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatWnd.h">
+      <Filter>UI\框架</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>UI\框架</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewTree.h">
+      <Filter>UI\框架</Filter>
+    </ClInclude>
+    <ClInclude Include="WhiteboxTestingPlatform.h">
+      <Filter>UI\框架</Filter>
+    </ClInclude>
+    <ClInclude Include="WhiteboxTestingPlatformDoc.h">
+      <Filter>UI\框架</Filter>
+    </ClInclude>
+    <ClInclude Include="WhiteboxTestingPlatformView.h">
+      <Filter>UI\框架</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateProject.h">
+      <Filter>UI\业务UI\项目工作区UI\主工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectView.h">
+      <Filter>UI\业务UI\项目工作区UI\主工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseReportInfoDlg.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="CodeView.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="CodeViewDlg.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="DevUserReportDlg2.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="DevUserReportView.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="SubProjectManger.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="TestingTaskConfigDoc.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="TestingTaskConfigView.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUserReportComplateView.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUserReportManualMakeView.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUserReportNoFindStandardView.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUserWorkSheetView.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitAutoReport.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitNewEdit.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTestEndTimeDlg.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkSheetDoc.h">
+      <Filter>UI\业务UI\项目工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="SpecifyView.h">
+      <Filter>UI\业务UI\标准工作区UI\主工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardErrorTypeEditView.h">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUserNewStandard.h">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUserStandardThirdEditDlg.h">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUserStandardThirdNewDlg.h">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUserStandardThirdView.h">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUserStandardUniteEditDlg.h">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUserStandardUniteNewDlg.h">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUserStandardUniteView.h">
+      <Filter>UI\业务UI\标准工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="AdminTreeView.h">
+      <Filter>UI\业务UI\管理员工作区UI\主工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="AdminUserAddEditDlg.h">
+      <Filter>UI\业务UI\管理员工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="AdminUserEditView.h">
+      <Filter>UI\业务UI\管理员工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDesignView.h">
+      <Filter>UI\业务UI\管理员工作区UI\子工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="MsgTreeView.h">
+      <Filter>UI\业务UI\消息管理\主工作区</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoDesignTestLibMgr.h">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDataDesign\AutoStructDataDesignDlg.h">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDataDesign\ExecAllTestUseCase.h">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDataDesign\ExpMake.h">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroMake.h">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDataDesign\MainWindow.h">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDataDesign\TestConfig.h">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDataDesign\TestLibDataMode.h">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDataDesign\TestLibDataModeNew.h">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoStructDataDesign\UseCaseExpMakeDlg.h">
+      <Filter>UI\业务UI\白盒测试系统</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigDlg.h">
+      <Filter>UI\登陆</Filter>
+    </ClInclude>
+    <ClInclude Include="LogoninDlg.h">
+      <Filter>UI\登陆</Filter>
+    </ClInclude>
+    <ClInclude Include="CodeHtmlView.h">
+      <Filter>UI\工具控件</Filter>
+    </ClInclude>
+    <ClInclude Include="htmlui\src\DHtmlViewSpec.h">
+      <Filter>UI\工具控件</Filter>
+    </ClInclude>
+    <ClInclude Include="ListCtlStringSort.h">
+      <Filter>UI\工具控件</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestionResponse.h">
+      <Filter>UI\工具控件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\FunctionModule\DebugFunctionModule.h">
+      <Filter>FunctionModule</Filter>
+    </ClInclude>
+    <ClInclude Include="TemplateTool.h">
+      <Filter>FunctionModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ModelTest\FunctionModule\YDConfig.h">
+      <Filter>FunctionModule</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\class_view.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\class_view_hc.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\classview.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\classview_hc.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\download.gif">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\explorer.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\explorer_hc.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\file_view.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\file_view_hc.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\fileview.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\fileview_hc.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\locked.gif">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\logo.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\..\..\Users\Administrator\Desktop\FloatWnd\codefans.net\FloatWnd\logo.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\menuimages.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\menuimages_hc.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\output_wnd.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\output_wnd_hc.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\properties.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\properties_hc.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\properties_wnd.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\properties_wnd_hc.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\sort.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\sort_hc.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\toolbar1.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\Toolbar256.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\u0.gif">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="UserImages.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\WhiteboxTestingPlatform.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\WhiteboxTestingPlatformDoc.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\gif1.bin">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\gif2.bin">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\WhiteboxTestingPlatform.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="NewPost.htm" />
+    <None Include="AutoStructDataDesign\UseCaseExpMakeDlg.htm" />
+    <None Include="res\UseCaseExpMakeDlg.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WhiteboxTestingPlatform.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+</Project>

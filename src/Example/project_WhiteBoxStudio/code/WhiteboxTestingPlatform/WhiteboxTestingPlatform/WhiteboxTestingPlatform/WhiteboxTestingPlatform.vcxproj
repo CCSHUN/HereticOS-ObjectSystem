@@ -1,0 +1,593 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="DebugFor64|Win32">
+      <Configuration>DebugFor64</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseFor64|Win32">
+      <Configuration>ReleaseFor64</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{74A05A64-A551-4EC2-B806-32A32F5FFCDA}</ProjectGuid>
+    <RootNamespace>WhiteboxTestingPlatform</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseFor64|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugFor64|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseFor64|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugFor64|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.26323.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugFor64|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseFor64|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\;.\AutoStructDataDesign;..\..\..\..\..\project_AutoEvaluate\AutoEvaluate\AutoEvaluate;.\AutoStructDataDesign\ObjectSerDef\;..\..\..\ModelTest\ObjectSystem;..\..\..\ModelTest\FunctionModule;..\..\..\ModelTest\Architecture;..\..\..\ModelTest\ObjectSerDef;..\..\..\ModelTest\commondef;..\..\..\ModelTest\common\SerializeFunction;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>..\..\bin\WhiteboxTestingPlatform.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\ModelTest\common\SerializeFunction\zlib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>..\debug\$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>.\;.\AutoStructDataDesign;..\..\..\..\..\project_AutoEvaluate\AutoEvaluate\AutoEvaluate;.\AutoStructDataDesign\ObjectSerDef\;..\..\..\ModelTest\ObjectSystem;..\..\..\ModelTest\FunctionModule;..\..\..\ModelTest\Architecture;..\..\..\ModelTest\ObjectSerDef;..\..\..\ModelTest\commondef;..\..\..\ModelTest\common\SerializeFunction;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>..\..\bin\WhiteboxTestingPlatform.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\ModelTest\common\SerializeFunction\zlib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugFor64|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\;.\AutoStructDataDesign;..\..\..\..\..\project_AutoEvaluate\AutoEvaluate\AutoEvaluate;.\AutoStructDataDesign\ObjectSerDef\;..\..\..\ModelTest\ObjectSystem;..\..\..\ModelTest\FunctionModule;..\..\..\ModelTest\Architecture;..\..\..\ModelTest\ObjectSerDef;..\..\..\ModelTest\commondef;..\..\..\ModelTest\common\SerializeFunction;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;X86FOR64SYS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>..\..\bin\WhiteboxTestingPlatform.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\ModelTest\common\SerializeFunction\zlib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>..\debug\$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseFor64|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>.\;.\AutoStructDataDesign;..\..\..\..\..\project_AutoEvaluate\AutoEvaluate\AutoEvaluate;.\AutoStructDataDesign\ObjectSerDef\;..\..\..\ModelTest\ObjectSystem;..\..\..\ModelTest\FunctionModule;..\..\..\ModelTest\Architecture;..\..\..\ModelTest\ObjectSerDef;..\..\..\ModelTest\commondef;..\..\..\ModelTest\common\SerializeFunction;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;X86FOR64SYS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>..\..\bin\WhiteboxTestingPlatform.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\ModelTest\common\SerializeFunction\zlib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\project_AutoEvaluate\AutoEvaluate\AutoEvaluate\ObjectSerDef\_tagTestParam_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\Architecture\ModuleManger.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\Architecture\WorldSystem.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\common\SerializeFunction\Base64.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\common\SerializeFunction\BaseFunctionTool.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\common\SerializeFunction\XmlRender.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\FunctionModule\DebugFunctionModule.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\FunctionModule\YDConfig.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_S_PROJECT_CONFIG_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_S_REPORT_ITEM_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_S_REPORT_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_S_WORKSHEET_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagCallParameter_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagDirectoryInfoSetSoap_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagDirectoryInfoSoap_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagErrorWarningArray_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagErrorWarningSet_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardLib_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardSet_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardSpecify_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardTypeLib_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardTypeSet_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagMsgBody_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagMsgData_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagObjectStateSoap_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagPCLintReportItem_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectConfig_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectOwnUserSet_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectOwnUser_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectState_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagReportLog_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_Detailed_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_Overall_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_Summary_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagstrParameter_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagTestHexString_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagThirdStandardlib_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagThirdStandardSet_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagUnitReportSet_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagUnitReport_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagUserMapSet_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagUserMsgInfo_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagUserOwnProjectTab_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagUserProjectSet_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSerDef\_tagYDConfig_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSystem\ObjectFileOperation.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem_Local.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem_SoapClient.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem_SoapService.cpp" />
+    <ClCompile Include="..\..\..\ModelTest\ObjectSystem\SoapOperation.cpp" />
+    <ClCompile Include="AccessControl_Local.cpp" />
+    <ClCompile Include="AddressNavigate.cpp" />
+    <ClCompile Include="AdminTreeView.cpp" />
+    <ClCompile Include="AdminUserAddEditDlg.cpp" />
+    <ClCompile Include="AdminUserEditView.cpp" />
+    <ClCompile Include="AutoDesignTestLibMgr.cpp" />
+    <ClCompile Include="AutoStructDataDesign\AutoStructDataDesignDlg.cpp" />
+    <ClCompile Include="AutoStructDataDesign\ExpMake.cpp" />
+    <ClCompile Include="AutoStructDataDesign\MainWindow.cpp" />
+    <ClCompile Include="AutoStructDataDesign\ObjectSerDef\_tagExpLib_StructInfo.cpp" />
+    <ClCompile Include="AutoStructDataDesign\ObjectSerDef\_tagExp_StructInfo.cpp" />
+    <ClCompile Include="AutoStructDataDesign\ObjectSerDef\_tagFuncDef_StructInfo.cpp" />
+    <ClCompile Include="AutoStructDataDesign\ObjectSerDef\_tagFuncLib_StructInfo.cpp" />
+    <ClCompile Include="AutoStructDataDesign\ObjectSerDef\_tagIDRecover_StructInfo.cpp" />
+    <ClCompile Include="AutoStructDataDesign\ObjectSerDef\_tagParamDef_StructInfo.cpp" />
+    <ClCompile Include="AutoStructDataDesign\UseCaseExpMakeDlg.cpp" />
+    <ClCompile Include="AutoStructDesignView.cpp" />
+    <ClCompile Include="BaseReportInfoDlg.cpp" />
+    <ClCompile Include="BusinessWorkPageWndManger.cpp" />
+    <ClCompile Include="ChildFrm.cpp" />
+    <ClCompile Include="ClassView.cpp" />
+    <ClCompile Include="CodeHtmlView.cpp" />
+    <ClCompile Include="CodeView.cpp" />
+    <ClCompile Include="CodeViewDlg.cpp" />
+    <ClCompile Include="CommonFunc.cpp" />
+    <ClCompile Include="ConfigDlg.cpp" />
+    <ClCompile Include="CreateProject.cpp" />
+    <ClCompile Include="DevUserReportDlg2.cpp" />
+    <ClCompile Include="DevUserReportView.cpp" />
+    <ClCompile Include="FileView.cpp" />
+    <ClCompile Include="FloatWnd.cpp" />
+    <ClCompile Include="htmlui\src\DHtmlViewSpec.cpp" />
+    <ClCompile Include="ImageEx.cpp" />
+    <ClCompile Include="ListCtlStringSort.cpp" />
+    <ClCompile Include="LogoninDlg.cpp" />
+    <ClCompile Include="MacroMake.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MsgDataModule.cpp" />
+    <ClCompile Include="MsgShowView.cpp" />
+    <ClCompile Include="MsgTreeView.cpp" />
+    <ClCompile Include="myworkthread.cpp" />
+    <ClCompile Include="NewPost.cpp" />
+    <ClCompile Include="OutputWnd.cpp" />
+    <ClCompile Include="ProjectDataModel.cpp" />
+    <ClCompile Include="ProjectView.cpp" />
+    <ClCompile Include="PropertiesWnd.cpp" />
+    <ClCompile Include="QuestionResponse.cpp" />
+    <ClCompile Include="Report.cpp" />
+    <ClCompile Include="ReportDoc.cpp" />
+    <ClCompile Include="ReportView.cpp" />
+    <ClCompile Include="SpecifyView.cpp" />
+    <ClCompile Include="StandardDataModel.cpp" />
+    <ClCompile Include="StandardErrorTypeEditView.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugFor64|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ReleaseFor64|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="SubProjectManger.cpp" />
+    <ClCompile Include="TabSheet.cpp" />
+    <ClCompile Include="TemplateTool.cpp" />
+    <ClCompile Include="TestingTaskConfigDoc.cpp" />
+    <ClCompile Include="TestingTaskConfigView.cpp" />
+    <ClCompile Include="TestingTaskDoc.cpp" />
+    <ClCompile Include="TestingTaskView.cpp" />
+    <ClCompile Include="TestUserNewStandard.cpp" />
+    <ClCompile Include="TestUserReportComplateView.cpp" />
+    <ClCompile Include="TestUserReportManualMakeView.cpp" />
+    <ClCompile Include="TestUserReportNoFindStandardView.cpp" />
+    <ClCompile Include="TestUserStandardThirdEditDlg.cpp" />
+    <ClCompile Include="TestUserStandardThirdNewDlg.cpp" />
+    <ClCompile Include="TestUserStandardThirdView.cpp" />
+    <ClCompile Include="TestUserStandardUniteEditDlg.cpp" />
+    <ClCompile Include="TestUserStandardUniteNewDlg.cpp" />
+    <ClCompile Include="TestUserStandardUniteView.cpp" />
+    <ClCompile Include="TestUserWorkSheetView.cpp" />
+    <ClCompile Include="ThirdStandardDataModel.cpp" />
+    <ClCompile Include="UnitAutoReport.cpp" />
+    <ClCompile Include="UniteStandardDataModel.cpp" />
+    <ClCompile Include="UnitNewEdit.cpp" />
+    <ClCompile Include="UnitTestEndTimeDlg.cpp" />
+    <ClCompile Include="UserDataModel.cpp" />
+    <ClCompile Include="ViewTree.cpp" />
+    <ClCompile Include="WhiteboxTestingPlatform.cpp" />
+    <ClCompile Include="WhiteboxTestingPlatformDoc.cpp" />
+    <ClCompile Include="WhiteboxTestingPlatformView.cpp" />
+    <ClCompile Include="WorkSheetDoc.cpp" />
+    <ClCompile Include="WorkSheetView.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\project_AutoEvaluate\AutoEvaluate\AutoEvaluate\ObjectSerDef\_tagTestParam_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\Architecture\ModuleInterface.h" />
+    <ClInclude Include="..\..\..\ModelTest\Architecture\ModuleManger.h" />
+    <ClInclude Include="..\..\..\ModelTest\Architecture\WorldSystem.h" />
+    <ClInclude Include="..\..\..\ModelTest\commondef\CommonTypeDef.h" />
+    <ClInclude Include="..\..\..\ModelTest\commondef\DataModuleDef.h" />
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\Base64.h" />
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\BaseFunctionTool.h" />
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\BaseObjectSerialize.h" />
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\InterlayerContainer.h" />
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\Serialize.h" />
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\SerializeInterface.h" />
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\SerIni.h" />
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\StorageObject.h" />
+    <ClInclude Include="..\..\..\ModelTest\common\SerializeFunction\XmlRender.h" />
+    <ClInclude Include="..\..\..\ModelTest\FunctionModule\DebugFunctionModule.h" />
+    <ClInclude Include="..\..\..\ModelTest\FunctionModule\YDConfig.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_S_PROJECT_CONFIG_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_S_REPORT_ITEM_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_S_REPORT_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_S_WORKSHEET_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagCallParameter_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagDirectoryInfoSetSoap_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagDirectoryInfoSoap_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagErrorWarningArray_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagErrorWarningSet_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardLib_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardSet_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardSpecify_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardTypeLib_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardTypeSet_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagMsgBody_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagMsgData_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagObjectStateSoap_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagPCLintReportItem_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectConfig_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectOwnUserSet_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectOwnUser_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagProjectState_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagReportLog_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_Detailed_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_Overall_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagReportOutput_Summary_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagstrParameter_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagTestHexString_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagThirdStandardlib_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagThirdStandardSet_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagUnitReportSet_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagUnitReport_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagUserMapSet_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagUserMsgInfo_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagUserOwnProjectTab_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagUserProjectSet_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSerDef\_tagYDConfig_StructInfo.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSystem\ObjectFileOperation.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem_Local.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem_SoapClient.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSystem\ObjectSystem_SoapService.h" />
+    <ClInclude Include="..\..\..\ModelTest\ObjectSystem\SoapOperation.h" />
+    <ClInclude Include="AccessControl_Local.h" />
+    <ClInclude Include="AddressNavigate.h" />
+    <ClInclude Include="AdminTreeView.h" />
+    <ClInclude Include="AdminUserAddEditDlg.h" />
+    <ClInclude Include="AdminUserEditView.h" />
+    <ClInclude Include="AutoDesignTestLibMgr.h" />
+    <ClInclude Include="AutoStructDataDesign\AutoStructDataDesignDlg.h" />
+    <ClInclude Include="AutoStructDataDesign\ExecAllTestUseCase.h" />
+    <ClInclude Include="AutoStructDataDesign\ExpMake.h" />
+    <ClInclude Include="AutoStructDataDesign\MainWindow.h" />
+    <ClInclude Include="AutoStructDataDesign\ObjectSerDef\_tagExpLib_StructInfo.h" />
+    <ClInclude Include="AutoStructDataDesign\ObjectSerDef\_tagExp_StructInfo.h" />
+    <ClInclude Include="AutoStructDataDesign\ObjectSerDef\_tagFuncDef_StructInfo.h" />
+    <ClInclude Include="AutoStructDataDesign\ObjectSerDef\_tagFuncLib_StructInfo.h" />
+    <ClInclude Include="AutoStructDataDesign\ObjectSerDef\_tagIDRecover_StructInfo.h" />
+    <ClInclude Include="AutoStructDataDesign\ObjectSerDef\_tagParamDef_StructInfo.h" />
+    <ClInclude Include="AutoStructDataDesign\resource.h" />
+    <ClInclude Include="AutoStructDataDesign\TestConfig.h" />
+    <ClInclude Include="AutoStructDataDesign\TestLibDataMode.h" />
+    <ClInclude Include="AutoStructDataDesign\TestLibDataModeNew.h" />
+    <ClInclude Include="AutoStructDataDesign\UseCaseExpMakeDlg.h" />
+    <ClInclude Include="AutoStructDesignView.h" />
+    <ClInclude Include="BaseReportInfoDlg.h" />
+    <ClInclude Include="BusinessWorkPageWndManger.h" />
+    <ClInclude Include="ChildFrm.h" />
+    <ClInclude Include="ClassView.h" />
+    <ClInclude Include="CodeHtmlView.h" />
+    <ClInclude Include="CodeView.h" />
+    <ClInclude Include="CodeViewDlg.h" />
+    <ClInclude Include="CommonFunc.h" />
+    <ClInclude Include="ConfigDlg.h" />
+    <ClInclude Include="CreateProject.h" />
+    <ClInclude Include="DevUserReportDlg2.h" />
+    <ClInclude Include="DevUserReportView.h" />
+    <ClInclude Include="FileView.h" />
+    <ClInclude Include="FloatWnd.h" />
+    <ClInclude Include="htmlui\src\DHtmlViewSpec.h" />
+    <ClInclude Include="ImageEx.h" />
+    <ClInclude Include="ListCtlStringSort.h" />
+    <ClInclude Include="LogoninDlg.h" />
+    <ClInclude Include="MacroMake.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MsgDataModule.h" />
+    <ClInclude Include="MsgShowView.h" />
+    <ClInclude Include="MsgTreeView.h" />
+    <ClInclude Include="myworkthread.h" />
+    <ClInclude Include="NewPost.h" />
+    <ClInclude Include="OutputWnd.h" />
+    <ClInclude Include="ProjectDataModel.h" />
+    <ClInclude Include="ProjectView.h" />
+    <ClInclude Include="PropertiesWnd.h" />
+    <ClInclude Include="QuestionResponse.h" />
+    <ClInclude Include="Report.h" />
+    <ClInclude Include="ReportDoc.h" />
+    <ClInclude Include="ReportView.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="SpecifyView.h" />
+    <ClInclude Include="StandardDataModel.h" />
+    <ClInclude Include="StandardErrorTypeEditView.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SubProjectManger.h" />
+    <ClInclude Include="TabSheet.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="TemplateTool.h" />
+    <ClInclude Include="TestingTaskConfigDoc.h" />
+    <ClInclude Include="TestingTaskConfigView.h" />
+    <ClInclude Include="TestingTaskDoc.h" />
+    <ClInclude Include="TestingTaskView.h" />
+    <ClInclude Include="TestUserNewStandard.h" />
+    <ClInclude Include="TestUserReportComplateView.h" />
+    <ClInclude Include="TestUserReportManualMakeView.h" />
+    <ClInclude Include="TestUserReportNoFindStandardView.h" />
+    <ClInclude Include="TestUserStandardThirdEditDlg.h" />
+    <ClInclude Include="TestUserStandardThirdNewDlg.h" />
+    <ClInclude Include="TestUserStandardThirdView.h" />
+    <ClInclude Include="TestUserStandardUniteEditDlg.h" />
+    <ClInclude Include="TestUserStandardUniteNewDlg.h" />
+    <ClInclude Include="TestUserStandardUniteView.h" />
+    <ClInclude Include="TestUserWorkSheetView.h" />
+    <ClInclude Include="ThirdStandardDataModel.h" />
+    <ClInclude Include="UiStructDef.h" />
+    <ClInclude Include="UiTypeNameDef.h" />
+    <ClInclude Include="UnitAutoReport.h" />
+    <ClInclude Include="UniteStandardDataModel.h" />
+    <ClInclude Include="UnitNewEdit.h" />
+    <ClInclude Include="UnitTestEndTimeDlg.h" />
+    <ClInclude Include="UserDataModel.h" />
+    <ClInclude Include="ViewTree.h" />
+    <ClInclude Include="WhiteboxTestingPlatform.h" />
+    <ClInclude Include="WhiteboxTestingPlatformDoc.h" />
+    <ClInclude Include="WhiteboxTestingPlatformView.h" />
+    <ClInclude Include="WorkSheetDoc.h" />
+    <ClInclude Include="WorkSheetView.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\..\..\Users\Administrator\Desktop\FloatWnd\codefans.net\FloatWnd\logo.bmp" />
+    <Image Include="res\classview.bmp" />
+    <Image Include="res\classview_hc.bmp" />
+    <Image Include="res\class_view.ico" />
+    <Image Include="res\class_view_hc.ico" />
+    <Image Include="res\download.gif" />
+    <Image Include="res\explorer.bmp" />
+    <Image Include="res\explorer_hc.bmp" />
+    <Image Include="res\fileview.bmp" />
+    <Image Include="res\fileview_hc.bmp" />
+    <Image Include="res\file_view.ico" />
+    <Image Include="res\file_view_hc.ico" />
+    <Image Include="res\locked.gif" />
+    <Image Include="res\logo.bmp" />
+    <Image Include="res\menuimages.bmp" />
+    <Image Include="res\menuimages_hc.bmp" />
+    <Image Include="res\output_wnd.ico" />
+    <Image Include="res\output_wnd_hc.ico" />
+    <Image Include="res\properties.bmp" />
+    <Image Include="res\properties_hc.bmp" />
+    <Image Include="res\properties_wnd.ico" />
+    <Image Include="res\properties_wnd_hc.ico" />
+    <Image Include="res\sort.bmp" />
+    <Image Include="res\sort_hc.bmp" />
+    <Image Include="res\Toolbar.bmp" />
+    <Image Include="res\toolbar1.bmp" />
+    <Image Include="res\Toolbar256.bmp" />
+    <Image Include="res\u0.gif" />
+    <Image Include="res\WhiteboxTestingPlatform.ico" />
+    <Image Include="res\WhiteboxTestingPlatformDoc.ico" />
+    <Image Include="UserImages.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AutoStructDataDesign\UseCaseExpMakeDlg.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="NewPost.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\gif1.bin" />
+    <None Include="res\gif2.bin" />
+    <None Include="res\UseCaseExpMakeDlg.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\WhiteboxTestingPlatform.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WhiteboxTestingPlatform.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="WhiteboxTestingPlatform.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,283 @@
+//==================================基础信息 ROOT=======================================
+MAKE_结构体ROOT<MAKE>=ROOTROOT.ROOT.结构声明
+MAKE_变量声明ROOT<MAKE>=结构声明FIX.结构声明体.结构声明体内容
+//MAKE_变量声明ROOT1<MAKE>=结构声明2.结构声明体.结构声明体内容
+MAKE_变量类型<MAKE>=MAKE_ONE<MAKE_变量类型ROOTROOT,MAKE_变量类型1>
+MAKE_变量类型1<MAKE>=MAKE_ONE<MAKE_变量类型相对ROOT,MAKE_变量类型2>
+MAKE_变量类型2<MAKE>=MAKE_变量类型_模板变量类型|MAKE_变量类型_普通变量类型
+MAKE_变量类型_普通变量类型<MAKE>=MAKE_变量类型_普通变量类型前缀&MAKE_变量类型_普通变量类型1
+MAKE_变量类型_普通变量类型1<MAKE>=O.变量类型2
+MAKE_变量类型_普通变量类型前缀<MAKE>=O.变量类型2.变量声明前缀.变量声明前缀1
+
+MAKE_变量类型_模板变量类型<MAKE>=MAKE_模板变量类型
+MAKE_变量类型ROOTROOT<MAKE>=结构声明体内容6.变量声明
+MAKE_变量类型相对ROOT<MAKE>=O.变量类型
+MAKE_变量类型相对结构体内容ROOT<MAKE>=结构声明体内容6.变量声明.变量类型
+//MAKE_变量数组数相对结构体内容ROOT<MAKE>=结构声明体内容6.变量声明.变量数目
+
+MAKE_模板类型名<MAKE>=O.变量类型1.模板型
+MAKE_模板参数表ROOT<MAKE>=O.变量类型1.模板型.模板参数体.模板参数
+
+MAKE_模板参数_整数类型<MAKE>=O.整数类型
+MAKE_模板参数<MAKE>=MAKE_ONE<MAKE_变量类型相对ROOT,MAKE_变量类型2>|MAKE_模板参数_整数类型
+MAKE_模板参数_BEGIN<MAKE>=MAKE_模板参数
+MAKE_模板参数_PROC<MAKE>=WORD(",")#MAKE_模板参数#WORD(",")
+MAKE_模板参数_END<MAKE>=WORD(",")#MAKE_模板参数
+MAKE_模板参数表<MAKE>=MAKE_N<MAKE_模板参数表ROOT,MAKE_模板参数_BEGIN,MAKE_模板参数_PROC,MAKE_模板参数_END>
+MAKE_模板变量类型<MAKE>=MAKE_模板类型名#WORD(<)#MAKE_模板参数表#WORD(>)
+
+
+
+MAKE_变量名称<MAKE>=结构声明体内容6.变量声明.变量名称
+MAKE_字段所属结构名<MAKE>=PARENT.PARENT.结构体名
+MAKE_变量数目1<MAKE>=结构声明体内容6.变量声明.变量数目.变量数目1
+MAKE_变量数目<MAKE>=MAKE_变量数目1|WORD("0")
+
+MAKE_变量声明前缀1<MAKE>=结构声明体内容6.变量声明.变量声明前缀.变量声明前缀1
+MAKE_变量声明前缀2<MAKE>=MAKE_变量声明前缀1+WORD("")
+MAKE_变量声明前缀<MAKE>=MAKE_变量声明前缀2|WORD("")
+MAKE_字段偏移<MAKE>=WORD("OfficesetField(")#MAKE_字段所属结构名#WORD(",")#MAKE_变量名称#WORD(")")
+//==================================基础信息 ROOT=======================================
+
+//==================================型别类型判断Begin===================================
+MAKE_是否是数组型变量<MAKE>=IF<MAKE_变量数目1>
+
+MAKE_非模板型别<MAKE>=O.变量类型2
+MAKE_是否是模板型别<MAKE>=O.变量类型1
+MAKE_是否是基础型别<MAKE>=IF<MAKE_是否是基础内存型别>|IF<MAKE_是否是基础对象型别>
+MAKE_是否是基础内存型别<MAKE>=IF<MAKE_是否是字符串型别>|IF<MAKE_是否是数值型别>
+MAKE_是否是基础对象型别<MAKE>=IF<MAKE_是否是vector模板>|IF<MAKE_是否是map模板>
+
+MAKE_是否是数值型别<MAKE>=MAKE_是否是数值内存型别|MAKE_是否是数值对象型别
+MAKE_是否是数值内存型别<MAKE>=O.int|O.DWORD|O.ULONGLONG|O.CHAR|O.short|O.SHORT|O.USHORT|O.BYTE|O.LONGLOING|O.SIZE_T|O.double|O.__int64|O.BOOL
+MAKE_是否是数值对象型别<MAKE>=O.tstring|O.变量类型1.SER_TO_X
+
+MAKE_是否是字符串型别<MAKE>=IF<MAKE_是否是字符串型别char数组>
+MAKE_是否是数组_相对类型偏移<MAKE>=O.PARENT.变量数目.变量数目1
+//MAKE_是否是数值型_相对类型偏移<MAKE>=O.变量类型2
+
+MAKE_是否是字符串型别char数组<MAKE>=MAKE_是否是数组_相对类型偏移+O.TCHAR
+MAKE_是否是vector模板<MAKE>=IF<MAKE_是否是模板型别>+O.变量类型1.vector
+MAKE_是否是map模板<MAKE>=IF<MAKE_是否是模板型别>+O.变量类型1.map
+//==================================型别类型判断End  ===================================
+
+
+//==========================代码生成字段信息地址 Begin==================================
+
+MAKE_字段信息地址_MAKE<MAKE>=WORD("MAKE_字段信息地址1<MAKE>=ROOTROOT.ROOT.结构声明.结构声明FIX.")#MAKE_变量类型
+MAKE_设置字段信息地址<MAKE>=IF<MAKE_变量类型>+MAKE_ADD<MAKE_字段信息地址_MAKE>+DEBUGOUT<MAKE_变量类型>+DEBUGOUT<MAKE_字段信息地址_MAKE>
+MAKE_字段信息地址3<MAKE>=IF<MAKE_变量类型>+MAKE_字段信息地址1
+//MAKE_字段信息地址4<MAKE>=WORD("g_StructInfo_")#MAKE_字段信息地址3
+MAKE_字段信息地址4<MAKE>=WORD("g_StructInfo_")#MAKE_变量类型
+MAKE_字段信息地址<MAKE>=MAKE_字段信息地址4|WORD("NULL")
+
+//==========================代码生成字段信息地址 End==================================
+
+//==========================代码生成过程 Begin==================================
+
+MAKE_STRUCTINFO_HEAD<MAKE>=WORD("StructInfoSet")+WORD("g_StructInfo_")#MAKE_字段所属结构名#WORD("[]=")
+MAKE_STRUCTINFO<MAKE>=MAKE_设置字段信息地址&WORD("{")#MAKE_字段信息地址#WORD(",\t\t")#MAKE_字段偏移#WORD(",\t\t\"")#MAKE_变量声明前缀#MAKE_变量类型#WORD("\",\t\t")#WORD("\"")#MAKE_变量名称#WORD("\",\t\t")#MAKE_变量数目#WORD("}")
+MAKE_STRUCTINFO_BEGIN<MAKE>=MAKE_STRUCTINFO_HEAD#WORD("{\r\n\t")#MAKE_STRUCTINFO
+MAKE_STRUCTINFO_PROC<MAKE>=WORD(",\r\n\t")#MAKE_STRUCTINFO
+MAKE_STRUCTINFO_END<MAKE>=WORD(",\r\n\t")#MAKE_STRUCTINFO#WORD(",\r\n\t{NULL,0,NULL,NULL,0}\r\n};\r\n")
+MAKE_ALL_STRUCTINFO<MAKE>=MAKE_N<MAKE_变量声明ROOT,MAKE_STRUCTINFO_BEGIN,MAKE_STRUCTINFO_PROC,MAKE_STRUCTINFO_END>
+
+//==========================代码生成过程 End==================================
+	
+	
+//==========================型别拷贝 Begin=====================================
+//MAKE_
+//==========================型别拷贝 End=====================================
+
+
+//==========================序列化代码生成过程 Begin==================================
+MAKE_序列化代码结构名ROOT<MAKE>=O.结构声明FIX.结构体名
+MAKE_序列化代码头<MAKE>=WORD("#pragma once\r\n#include \"Serialize.h\"\r\n\r\nclass Serialize_")#MAKE_序列化代码结构名ROOT#WORD(" : public Serialize_StructBase<")#MAKE_序列化代码结构名ROOT#WORD(",Serialize_")#MAKE_序列化代码结构名ROOT#WORD(">\r\n{\r\n\tpublic:\r\n\ttypedef ")#MAKE_序列化代码结构名ROOT#WORD(" _MyObjectType;\r\n")
+MAKE_序列化代码_构造析构函数<MAKE>=WORD("\tSerialize_")#MAKE_序列化代码结构名ROOT#WORD("(){};\r\n\t~Serialize_")#MAKE_序列化代码结构名ROOT#WORD("(){};\r\n")
+MAKE_序列化代码_赋值函数<MAKE>=WORD("\t_Myt& operator=(")#MAKE_序列化代码结构名ROOT#WORD(" & _X)\r\n\t{\r\n\t\tSetData(_X);\r\n\t\treturn *this;\r\n\t}\r\n")
+
+
+//==========================序列化代码生成过程 GetData Begin==================================
+MAKE_序列化代码_GetData遍历结构元素初始化1<MAKE>=WORD("MAKE_STRUCTINFO_BEGIN<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_GetData遍历结构元素初始化2<MAKE>=WORD("MAKE_STRUCTINFO_PROC<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_GetData遍历结构元素初始化3<MAKE>=WORD("MAKE_STRUCTINFO_END<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_GetData遍历结构元素初始化4<MAKE>=WORD("MAKE_STRUCTINFO<MAKE>=基础内存型别数组型反序列化拷贝|一般型反序列化拷贝")
+是否是基础型别数组型<MAKE>=MAKE_是否是数组型变量+MAKE_ONE<MAKE_变量类型相对结构体内容ROOT,MAKE_是否是基础内存型别>
+一般型反序列化拷贝<MAKE>=WORD("m_Val.")#MAKE_变量名称#WORD("=")#MAKE_变量名称
+基础内存型别数组型反序列化拷贝<MAKE>=IF<是否是基础型别数组型>+WORD("memcpy(m_Val.")#MAKE_变量名称#WORD(",(")#MAKE_变量类型#WORD("*)")#MAKE_变量名称#WORD(",sizeof(m_Val.")#MAKE_变量名称#WORD("))")
+MAKE_序列化代码_GetData遍历结构元素初始化<MAKE>=DEBUGOUT<MAKE_序列化代码_GetData遍历结构元素初始化1>&MAKE_ADD<MAKE_序列化代码_GetData遍历结构元素初始化1>+MAKE_ADD<MAKE_序列化代码_GetData遍历结构元素初始化2>+MAKE_ADD<MAKE_序列化代码_GetData遍历结构元素初始化3>+MAKE_ADD<MAKE_序列化代码_GetData遍历结构元素初始化4>
+MAKE_序列化代码_GetData遍历结构元素生成拷贝代码<MAKE>=MAKE_序列化代码_GetData遍历结构元素初始化+MAKE_ALL_STRUCTINFO
+MAKE_序列化代码_GetData<MAKE>=WORD("\tvoid GetData()\r\n\t{")#MAKE_序列化代码_GetData遍历结构元素生成拷贝代码#WORD("\r\n\t}\r\n")
+//==========================序列化代码生成过程 GetData End==================================
+
+
+//==========================序列化代码生成过程 SetData Begin==================================
+MAKE_序列化代码_SetData遍历结构元素初始化1<MAKE>=WORD("MAKE_STRUCTINFO_BEGIN<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_SetData遍历结构元素初始化2<MAKE>=WORD("MAKE_STRUCTINFO_PROC<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_SetData遍历结构元素初始化3<MAKE>=WORD("MAKE_STRUCTINFO_END<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_SetData遍历结构元素初始化4<MAKE>=WORD("MAKE_STRUCTINFO<MAKE>=SetData一般型序列化拷贝")
+SetData一般型序列化拷贝<MAKE>=MAKE_变量名称#WORD("=_X.")#MAKE_变量名称
+MAKE_序列化代码_SetData遍历结构元素初始化<MAKE>=DEBUGOUT<MAKE_序列化代码_SetData遍历结构元素初始化1>&MAKE_ADD<MAKE_序列化代码_SetData遍历结构元素初始化1>+MAKE_ADD<MAKE_序列化代码_SetData遍历结构元素初始化2>+MAKE_ADD<MAKE_序列化代码_SetData遍历结构元素初始化3>+MAKE_ADD<MAKE_序列化代码_SetData遍历结构元素初始化4>
+MAKE_序列化代码_SetData遍历结构元素生成代码<MAKE>=MAKE_序列化代码_SetData遍历结构元素初始化+MAKE_ALL_STRUCTINFO
+MAKE_序列化代码_SetData<MAKE>=WORD("\tvoid SetData(")#MAKE_序列化代码结构名ROOT#WORD(" & _X)\r\n\t{")#MAKE_序列化代码_SetData遍历结构元素生成代码#WORD("\r\n\t}\r\n")
+//==========================序列化代码生成过程 SetData End==================================
+
+
+//==========================序列化代码生成过程 Construct Begin==================================
+MAKE_序列化代码_Construct遍历结构元素初始化1<MAKE>=WORD("MAKE_STRUCTINFO_BEGIN<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_Construct遍历结构元素初始化2<MAKE>=WORD("MAKE_STRUCTINFO_PROC<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_Construct遍历结构元素初始化3<MAKE>=WORD("MAKE_STRUCTINFO_END<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_Construct遍历结构元素初始化4<MAKE>=WORD("MAKE_STRUCTINFO<MAKE>=Construct一般型序列化初始化")
+Construct一般型序列化初始化<MAKE>=MAKE_变量名称#WORD(".init(this,_T(\"")#MAKE_变量名称#WORD("\"),0,pOutObject)")
+MAKE_序列化代码_Construct遍历结构元素初始化<MAKE>=DEBUGOUT<MAKE_序列化代码_Construct遍历结构元素初始化1>&MAKE_ADD<MAKE_序列化代码_Construct遍历结构元素初始化1>+MAKE_ADD<MAKE_序列化代码_Construct遍历结构元素初始化2>+MAKE_ADD<MAKE_序列化代码_Construct遍历结构元素初始化3>+MAKE_ADD<MAKE_序列化代码_Construct遍历结构元素初始化4>
+MAKE_序列化代码_Construct遍历结构元素生成代码<MAKE>=MAKE_序列化代码_Construct遍历结构元素初始化+MAKE_ALL_STRUCTINFO
+MAKE_序列化代码_Construct<MAKE>=WORD("\tBOOL Construct(StorageObjectInterface * pOutObject)\r\n\t{")#MAKE_序列化代码_Construct遍历结构元素生成代码#WORD("\r\n\t\treturn TRUE;\r\n\t}\r\n")
+//==========================序列化代码生成过程 Construct End==================================
+
+
+//==========================序列化代码生成过程 LoadGetCurSerializeObject Begin==================================
+MAKE_序列化代码_GetCur遍历结构元素初始化1<MAKE>=WORD("MAKE_STRUCTINFO_BEGIN<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO")
+MAKE_序列化代码_GetCur遍历结构元素初始化2<MAKE>=WORD("MAKE_STRUCTINFO_PROC<MAKE>=WORD(\"else \")#MAKE_STRUCTINFO")
+MAKE_序列化代码_GetCur遍历结构元素初始化3<MAKE>=WORD("MAKE_STRUCTINFO_END<MAKE>=WORD(\"else \")#MAKE_STRUCTINFO")
+MAKE_序列化代码_GetCur遍历结构元素初始化4<MAKE>=WORD("MAKE_STRUCTINFO<MAKE>=GetCur一般型序列化")
+//GetCur_vector型序列化|GetCur一般型序列化")
+
+GetCur一般型序列化<MAKE>=GetCur序列化容器代码Begin#WORD("*RetObj=&")#MAKE_变量名称#GetCur序列化容器代码End
+GetCur序列化容器代码Begin<MAKE>=WORD("if(tstring(CurFieldAddr.pFieldName)==tstring(_T(\"")#MAKE_变量名称#WORD("\")))\r\n\t\t{\r\n\t\t\t")
+GetCur序列化容器代码End<MAKE>=WORD(";\r\n\t\t}")
+
+是否是vector型<MAKE>=NOT<MAKE_是否是数组型变量>+MAKE_ONE<MAKE_变量类型相对结构体内容ROOT,MAKE_是否是vector模板>
+GetCur_vector型序列化<MAKE>=IF<是否是vector型>+GetCur序列化容器代码Begin#WORD("return ")#MAKE_变量名称#WORD(".LoadGetCurSerializeObject(CurFieldAddr,RetObj)")#GetCur序列化容器代码End
+MAKE_序列化代码_GetCur遍历结构元素初始化<MAKE>=DEBUGOUT<MAKE_序列化代码_GetCur遍历结构元素初始化1>&MAKE_ADD<MAKE_序列化代码_GetCur遍历结构元素初始化1>+MAKE_ADD<MAKE_序列化代码_GetCur遍历结构元素初始化2>+MAKE_ADD<MAKE_序列化代码_GetCur遍历结构元素初始化3>+MAKE_ADD<MAKE_序列化代码_GetCur遍历结构元素初始化4>
+MAKE_序列化代码_GetCur遍历结构元素生成代码<MAKE>=MAKE_序列化代码_GetCur遍历结构元素初始化+MAKE_ALL_STRUCTINFO
+MAKE_序列化代码_GetCur<MAKE>=WORD("\tBOOL LoadGetCurSerializeObject(FieldAddr & CurFieldAddr, SerializeLoadSaveInterface * * RetObj)\r\n\t{\r\n\t\t*RetObj=0;")#MAKE_序列化代码_GetCur遍历结构元素生成代码#WORD("\r\n\t\tif(*RetObj) return TRUE;\r\n\t\treturn FALSE;\r\n\t}\r\n")
+//==========================序列化代码生成过程 LoadGetCurSerializeObject End==================================
+
+
+//==========================序列化代码生成过程 Save Begin==================================
+MAKE_序列化代码_Save遍历结构元素初始化1<MAKE>=WORD("MAKE_STRUCTINFO_BEGIN<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_Save遍历结构元素初始化2<MAKE>=WORD("MAKE_STRUCTINFO_PROC<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_Save遍历结构元素初始化3<MAKE>=WORD("MAKE_STRUCTINFO_END<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_Save遍历结构元素初始化4<MAKE>=WORD("MAKE_STRUCTINFO<MAKE>=Save一般型序列化拷贝")
+Save一般型序列化拷贝<MAKE>=MAKE_变量名称#WORD(".Save(pStorageObject)")
+MAKE_序列化代码_Save遍历结构元素初始化<MAKE>=DEBUGOUT<MAKE_序列化代码_Save遍历结构元素初始化1>&MAKE_ADD<MAKE_序列化代码_Save遍历结构元素初始化1>+MAKE_ADD<MAKE_序列化代码_Save遍历结构元素初始化2>+MAKE_ADD<MAKE_序列化代码_Save遍历结构元素初始化3>+MAKE_ADD<MAKE_序列化代码_Save遍历结构元素初始化4>
+MAKE_序列化代码_Save遍历结构元素生成代码<MAKE>=MAKE_序列化代码_Save遍历结构元素初始化+MAKE_ALL_STRUCTINFO
+MAKE_序列化代码_Save<MAKE>=WORD("\tBOOL Save(StorageObjectInterface * pStorageObject)\r\n\t{\r\n\t\tpStorageObject->PushNodeCtlBegin(_T(\"")#MAKE_序列化代码结构名ROOT#WORD("\"),this);\r\n")#MAKE_序列化代码_Save遍历结构元素生成代码#WORD("\r\n\r\n\t\tpStorageObject->PushNodeCtlEnd(_T(\"")#MAKE_序列化代码结构名ROOT#WORD("\"),this);\r\n\t\treturn TRUE;\r\n\t}\r\n")
+//==========================序列化代码生成过程 Save End==================================
+
+//==========================序列化代码生成过程 成员Map Begin==================================
+MAKE_序列化代码_GetObjectMap遍历结构元素初始化1<MAKE>=WORD("MAKE_STRUCTINFO_BEGIN<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_GetObjectMap遍历结构元素初始化2<MAKE>=WORD("MAKE_STRUCTINFO_PROC<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_GetObjectMap遍历结构元素初始化3<MAKE>=WORD("MAKE_STRUCTINFO_END<MAKE>=WORD(\"\\r\\n\\t\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_GetObjectMap遍历结构元素初始化4<MAKE>=WORD("MAKE_STRUCTINFO<MAKE>=GetObjectMap一般型序列化拷贝")
+GetObjectMap一般型序列化拷贝<MAKE>=WORD("ObjectInterfaceMap.push_back((SerializeObjectInterface *)&")#MAKE_变量名称#WORD(")")
+MAKE_序列化代码_GetObjectMap遍历结构元素初始化<MAKE>=DEBUGOUT<MAKE_序列化代码_GetObjectMap遍历结构元素初始化1>&MAKE_ADD<MAKE_序列化代码_GetObjectMap遍历结构元素初始化1>+MAKE_ADD<MAKE_序列化代码_GetObjectMap遍历结构元素初始化2>+MAKE_ADD<MAKE_序列化代码_GetObjectMap遍历结构元素初始化3>+MAKE_ADD<MAKE_序列化代码_GetObjectMap遍历结构元素初始化4>
+MAKE_序列化代码_GetObjectMap遍历结构元素生成代码<MAKE>=MAKE_序列化代码_GetObjectMap遍历结构元素初始化+MAKE_ALL_STRUCTINFO
+MAKE_序列化代码_GetObjectMap<MAKE>=WORD("\tBOOL GetObjectMap(IN OUT vector<SerializeObjectInterface *> & ObjectInterfaceMap)\r\n\t{\r\n")#MAKE_序列化代码_GetObjectMap遍历结构元素生成代码#WORD("\r\n\t\treturn TRUE;\r\n\t}\r\n")
+
+//==========================序列化代码生成过程 成员Map End==================================
+
+
+
+//==========================序列化代码生成过程 成员声明 Begin==================================
+
+是否是char数组型_递归<MAKE>=MAKE_是否是数组_相对类型偏移+MAKE_是否是字符串型别char数组
+是否是基础型别数组型_递归<MAKE>=MAKE_是否是数组_相对类型偏移+MAKE_是否是基础内存型别
+是否是数值内存型别数组型_递归<MAKE>=MAKE_是否是数组_相对类型偏移+MAKE_是否是数值内存型别
+是否是map型_递归<MAKE>=NOT<MAKE_是否是数组_相对类型偏移>+MAKE_是否是map模板
+是否是vector型_递归<MAKE>=NOT<MAKE_是否是数组_相对类型偏移>+MAKE_是否是vector模板
+是否是基础非数组数值型别_递归<MAKE>=NOT<是否是基础型别数组型_递归>+MAKE_是否是数值型别
+是否是基础非数组数值对象型别_递归<MAKE>=NOT<MAKE_是否是数组_相对类型偏移>+MAKE_是否是数值对象型别
+
+
+
+成员声明一般型序列化声明类型<MAKE>=WORD(Serialize_)#MAKE_变量类型2
+基础非数组数值型别声明类型<MAKE>=IF<是否是基础非数组数值型别_递归>+WORD("Serialize_BaseObject<")#MAKE_变量类型2#WORD(">")
+
+基础型别char数组型对象声明类型<MAKE>=IF<是否是char数组型_递归>+WORD("Serialize_BaseObjectStringArray<")#MAKE_变量类型2#WORD(",")#MAKE_是否是数组_相对类型偏移#WORD(">")
+基础数值内存型别数组型对象声明类型<MAKE>=IF<是否是数值内存型别数组型_递归>+WORD("Serialize_BaseObjectBinaryArray<")#MAKE_变量类型2#WORD(",")#MAKE_是否是数组_相对类型偏移#WORD(">")
+vector型对象声明类型<MAKE>=IF<是否是vector型_递归>+WORD("Serialize_vector<")&MAKE_ONE<MAKE_模板参数表ROOT,序列化声明类型1>#WORD(">")
+
+
+map模板参数Begin<MAKE>=序列化声明类型1
+map模板参数Proc<MAKE>=WORD(",")#序列化声明类型1
+map模板参数End<MAKE>=WORD(",")#MAKE_变量类型1
+map型对象声明类型<MAKE>=IF<是否是map型_递归>+WORD("Serialize_map<")#MAKE_N<MAKE_模板参数表ROOT,map模板参数Begin,map模板参数Proc,map模板参数End>#WORD(">")
+//#MAKE_变量名称#WORD(",(")#MAKE_变量类型#WORD("*)")#MAKE_变量名称#WORD(",sizeof(m_Val.")#MAKE_变量名称#WORD("))")
+
+
+
+MAKE_序列化代码_成员声明遍历结构元素初始化<MAKE>=DEBUGOUT<MAKE_序列化代码_成员声明遍历结构元素初始化1>&MAKE_ADD<MAKE_序列化代码_成员声明遍历结构元素初始化1>+MAKE_ADD<MAKE_序列化代码_成员声明遍历结构元素初始化2>+MAKE_ADD<MAKE_序列化代码_成员声明遍历结构元素初始化3>+MAKE_ADD<MAKE_序列化代码_成员声明遍历结构元素初始化4>
+MAKE_序列化代码_成员声明遍历结构元素生成代码<MAKE>=MAKE_序列化代码_成员声明遍历结构元素初始化+MAKE_ALL_STRUCTINFO
+MAKE_序列化代码_成员声明<MAKE>=WORD("\r\n")#MAKE_序列化代码_成员声明遍历结构元素生成代码#WORD("\r\n")
+
+
+MAKE_序列化代码_成员声明遍历结构元素初始化1<MAKE>=WORD("MAKE_STRUCTINFO_BEGIN<MAKE>=WORD(\"\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_成员声明遍历结构元素初始化2<MAKE>=WORD("MAKE_STRUCTINFO_PROC<MAKE>=WORD(\"\\r\\n\\t\")#MAKE_STRUCTINFO#WORD(\";\")")
+MAKE_序列化代码_成员声明遍历结构元素初始化3<MAKE>=WORD("MAKE_STRUCTINFO_END<MAKE>=WORD(\"\\r\\n\\t\")#MAKE_STRUCTINFO#WORD(\";\\r\\n\")")
+MAKE_序列化代码_成员声明遍历结构元素初始化4<MAKE>=WORD("MAKE_STRUCTINFO<MAKE>=序列化声明类型+MAKE_变量名称")
+
+序列化声明类型<MAKE>=MAKE_ONE<MAKE_变量类型相对结构体内容ROOT,序列化声明类型2>
+序列化声明类型1_偏移ROOT<MAKE>=O.变量类型
+序列化声明类型1<MAKE>=MAKE_ONE<序列化声明类型1_偏移ROOT,序列化声明类型2>
+序列化声明类型2<MAKE>=基础非数组数值型别声明类型|基础型别char数组型对象声明类型|基础数值内存型别数组型对象声明类型|vector型对象声明类型|map型对象声明类型|成员声明一般型序列化声明类型
+
+
+
+//==========================序列化代码生成过程 成员声明 End==================================
+
+
+MAKE_生成序列化代码2<MAKE>=MAKE_序列化代码_GetObjectMap+WORD("\r\n\r\n};\r\n")
+
+MAKE_生成序列化代码1<MAKE>=MAKE_序列化代码_GetData+MAKE_序列化代码_Construct+MAKE_序列化代码_SetData+MAKE_序列化代码_GetCur+MAKE_序列化代码_Save+MAKE_生成序列化代码2
+
+MAKE_生成序列化代码<MAKE>=MAKE_序列化代码头+MAKE_序列化代码_成员声明+MAKE_序列化代码_构造析构函数+MAKE_序列化代码_赋值函数+MAKE_生成序列化代码1
+//MAKE_序列化代码_成员声明
+//MAKE_序列化代码头+MAKE_序列化代码_成员声明+MAKE_序列化代码_构造析构函数+MAKE_序列化代码_赋值函数+MAKE_生成序列化代码1
+
+//==========================序列化代码生成过程 End==================================
+
+
+MAKE_HPP1<MAKE>=MAKE_TO<MAKE_HPP体,接口类生成路径>
+接口类生成路径<MAKE>=生成文件基目录#WORD("StructInfo_")#类生成H文件名
+
+MAKE_HPP体<MAKE>=MAKE_ALL_STRUCTINFO
+
+
+
+//枚举批处理指令执行批处理指令
+MAKE_预处理指令ROOT<MAKE>=ROOTROOT.ROOT.预处理命令
+MAKE_预处理指令_生成结构体信息到头文件_ROOT<MAKE>=生成结构体信息到头文件
+MAKE_预处理指令_生成头文件结构体序列化信息到头文件_ROOT<MAKE>=生成头文件结构体序列化信息到头文件
+MAKE_预处理指令_生成结构体序列化到XML的代码_ROOT<MAKE>=生成结构体序列化到XML的代码
+
+
+//==================预处理_生成结构体信息到头文件 Begin=======================
+MAKE_预处理目标当前名称_生成结构体信息到头文件<MAKE>=生成结构体信息到头文件.结构体名
+MAKE_当前预处理结构体ROOT_MAKE<MAKE>=WORD("MAKE_当前预处理结构体ROOT<MAKE>=ROOTROOT.ROOT.结构声明.结构声明FIX.")#MAKE_预处理目标当前名称_生成结构体信息到头文件#WORD(".PARENT.PARENT")
+
+MAKE_预处理指令_生成结构体信息到头文件MAKE<MAKE>=MAKE_ONE<MAKE_当前预处理结构体ROOT,MAKE_生成序列化代码>
+
+MAKE_预处理指令_生成结构体信息到头文件_RUN1<MAKE>=MAKE_ADD<MAKE_当前预处理结构体ROOT_MAKE>&DEBUGOUT<MAKE_当前预处理结构体ROOT_MAKE>&MAKE_预处理指令_生成结构体信息到头文件MAKE
+
+类生成路径_MAKE<MAKE>=WORD("类生成路径<MAKE>=代码根目录#MAKE_预处理目标当前名称_生成结构体信息到头文件#WORD(\"_StructInfo.h\")")
+MAKE_预处理指令_生成结构体信息到头文件_RUN<MAKE>=MAKE_ADD<类生成路径_MAKE>&DEBUGOUT<类生成路径>&MAKE_TO<MAKE_预处理指令_生成结构体信息到头文件_RUN1,类生成路径>
+
+MAKE_预处理指令_生成结构体信息到头文件<MAKE>=MAKE_N<MAKE_预处理指令_生成结构体信息到头文件_ROOT,MAKE_预处理指令_生成结构体信息到头文件_RUN,MAKE_预处理指令_生成结构体信息到头文件_RUN,MAKE_预处理指令_生成结构体信息到头文件_RUN>
+
+//==================预处理_生成结构体信息到头文件 END=========================
+
+
+
+
+代码根目录<MAKE>=WORD("E:\\白盒测试\\svn\\project\\project_WhiteBoxStudio\\code\\ModelTest\\ObjectSerDef\\")
+类生成路径<MAKE>=WORD("c:\\aaa")
+
+
+MAKE_初始化ROUTINGBIND<MAKE>=MAKE_BIND_ROUTING<"结构声明FIX","结构声明1">&MAKE_BIND_ROUTING<"结构声明FIX","结构声明2">
+
+MAKE_预处理MAKE_RUN<MAKE>=MAKE_初始化ROUTINGBIND&MAKE_预处理指令_生成结构体信息到头文件_RUN
+MAKE_HPP_CPP<MAKE>=MAKE_N<MAKE_预处理指令ROOT,MAKE_预处理MAKE_RUN,MAKE_预处理MAKE_RUN,MAKE_预处理MAKE_RUN>
+
+
+

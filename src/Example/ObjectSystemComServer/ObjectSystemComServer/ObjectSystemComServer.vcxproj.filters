@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="生成的文件">
+      <UniqueIdentifier>{e6a80ba6-a1b7-480e-9839-9dada33720e0}</UniqueIdentifier>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{58348dd1-ad5d-4069-a4a8-cf199ff5fa85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\SerializeFunction">
+      <UniqueIdentifier>{4ce1d9b6-3858-4cc7-aca8-90fe98f5036f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\ObjectSystem">
+      <UniqueIdentifier>{0ccf62cc-ae99-48e3-bbad-fc7d6c955114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectSerDef">
+      <UniqueIdentifier>{cfaa87bf-b8dd-4a9e-a0cd-d7851ad3d071}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Architecture">
+      <UniqueIdentifier>{da8818b8-bf5c-4be2-be89-650a232f6c13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FunctionModule">
+      <UniqueIdentifier>{6a6a8c51-ed27-4819-ad17-0a29d4a62bc5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectSystem.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectSystemComServer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectSystemComServer_i.c">
+      <Filter>生成的文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ModelTest\common\SerializeFunction\Base64.cpp">
+      <Filter>common\SerializeFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ModelTest\common\SerializeFunction\BaseFunctionTool.cpp">
+      <Filter>common\SerializeFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ModelTest\common\SerializeFunction\XmlRender.cpp">
+      <Filter>common\SerializeFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ModelTest\ObjectFileOperation.cpp">
+      <Filter>common\ObjectSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ModelTest\ObjectSystem_Local.cpp">
+      <Filter>common\ObjectSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ModelTest\ObjectSystem_SoapService.cpp">
+      <Filter>common\ObjectSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ModelTest\Architecture\ModuleManger.cpp">
+      <Filter>Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ModelTest\Architecture\WorldSystem.cpp">
+      <Filter>Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ModelTest\FunctionModule\DebugFunctionModule.cpp">
+      <Filter>FunctionModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ModelTest\FunctionModule\YDConfig.cpp">
+      <Filter>FunctionModule</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ObjectSystemComServer.def">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="ObjectSystem.rgs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="ObjectSystemComServer.rgs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="ObjectSystemComServer.idl">
+      <Filter>源文件</Filter>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\ModelTest\DataModuleDef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dllmain.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectSystem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectSystemComServer_i.h">
+      <Filter>生成的文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\Base64.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\BaseFunctionTool.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\BaseObjectSerialize.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\InterlayerContainer.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\Serialize.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\SerializeInterface.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\SerIni.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\StorageObject.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\common\SerializeFunction\XmlRender.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectFileOperation.h">
+      <Filter>common\ObjectSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSystem.h">
+      <Filter>common\ObjectSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSystem_Local.h">
+      <Filter>common\ObjectSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSystem_SoapService.h">
+      <Filter>common\ObjectSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_S_PROJECT_CONFIG_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_S_REPORT1_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_S_REPORT_ITEM1_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_S_REPORT_ITEM_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_S_REPORT_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_S_WORKSHEET_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagCallParameter_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagDirectoryInfoSetSoap_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagDirectoryInfoSoap_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagErrorWarningArray_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagErrorWarningSet_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardLib_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardSet_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardSpecify_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardTypeLib_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagMachineCheckStandardTypeSet_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagObjectStateSoap_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagPCLintReportItem_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagProjectConfig_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagProjectState_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagReportLog_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagstrParameter_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagTestHexString_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagThirdStandardlib_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagThirdStandardSet_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagUserMapSet_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagUserOwnProjectTab_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagUserProjectSet_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\ObjectSerDef\_tagYDConfig_StructInfo.h">
+      <Filter>ObjectSerDef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\Architecture\ModuleInterface.h">
+      <Filter>Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\Architecture\ModuleManger.h">
+      <Filter>Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\Architecture\WorldSystem.h">
+      <Filter>Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\FunctionModule\DebugFunctionModule.h">
+      <Filter>FunctionModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ModelTest\FunctionModule\YDConfig.h">
+      <Filter>FunctionModule</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ObjectSystemComServer.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

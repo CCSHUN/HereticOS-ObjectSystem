@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="kindeditor/kindeditor.js"></script>
+<script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
+<script src="jquery-1.10.1.min.js"></script>
+<script language="javascript">
+			function InsertMessage(msg)
+			{
+				$('#allpost').append(msg);
+			}
+			function EmptyMessage()
+			{
+				$('#allpost').empty();
+			}
+</script>
+<script>
+var post_content = '';
+var editor;
+KindEditor.ready(function(K) {
+	editor = K.create('textarea[name="content2"]', {
+		allowFileManager : true
+	});
+	K('input[name=getHtml]').click(function(e) {
+		alert(editor.html());
+	});
+	K('input[name=isEmpty]').click(function(e) {
+		alert(editor.isEmpty());
+	});
+	K('input[name=getText]').click(function(e) {
+		alert(editor.text());
+	});
+	K('input[name=selectedHtml]').click(function(e) {
+		alert(editor.selectedHtml());
+	});
+	K('input[name=setHtml]').click(function(e) {
+		editor.html('<h3>Hello KindEditor</h3>');
+	});
+	K('input[name=setText]').click(function(e) {
+		editor.text('<h3>Hello KindEditor</h3>');
+	});
+	K('input[name=insertHtml]').click(function(e) {
+		editor.insertHtml('<strong>插入HTML</strong>');
+	});
+	K('input[name=appendHtml]').click(function(e) {
+		editor.appendHtml('<strong>添加HTML</strong>');
+	});
+	K('input[name=clear]').click(function(e) {
+		editor.html('');
+	});
+});
+
+var post_single_1 = 
+	'<div id="container" >'+
+	'<div id="header">'+
+	'<span><b>###PostTime###</b></span>' +
+	'</div>'+
+	'<div>'+
+	'<div id="menu">'+
+	'<h2></h2>'+
+	'<ul>'+
+	'<li>###UserInfo###</li>'+
+	'</ul>'+
+	'</div>'+
+	'<div id="content">';
+var post_single_3 = 
+	'</div>'+
+	'</div>'+
+	'<div id="footer"></div>'+
+	'<div id="end"></div>'+
+	'</div>';
+var post_single = '';
+	
+$(document).ready(function(){
+  $("#new_post").click(function(){
+    //$("ol").append("<li>Appended item</li>");
+    
+    //$("#container").clone(true).appendTo("#allpost");
+	post_single = post_single_1 + editor.html() + post_single_3;
+	document.body.external.OnPostEdit(editor.html());
+    //$('#allpost').append(post_single);
+  });
+  
+  $("#new_post2").click(function(){
+    $("ol").append("<li>Appended item</li><li>Appended item</li><li>Appended item</li>");
+    var hi =$("#content").height();
+    $("#menu").height( hi);
+    
+    //$("#container").clone(true).appendTo("#allpost");
+	post_single = post_single_1 + editor.html() + post_single_3;
+    $('#allpost').append(post_single);
+    editor.html('');
+  });
+});
+</script>
+
+<script></script>
+
+<style type="text/css">
+	div#container{width:100%}
+	div#header {background-color:#99bbbb;}
+	div#menu {background-color:#ffff99;min-height:50px;width:15%;float:left;}
+	div#content {background-color:#EEEEEE;min-height:50px;width:85%;float:left;}
+	div#footer {background-color:#ffff99;min-height:12px;clear:both;text-align:center;}
+	div#end {background-color:#EEEEEE;min-height:3px;clear:both;text-align:center;}
+	h1 {margin-bottom:0;}
+	h2 {margin-bottom:0;font-size:18px;}
+	ul {margin:0;}
+	li {list-style:none;}
+</style>
+</head>
+
+<body>
+<div id="allpost">	
+<div id="container" style="display: block">
+<div id="header">
+<span><b>发表于2013年4月5日 14:45</b></span>
+</div>
+
+<div id="menu">
+<h2></h2>
+<ul>
+<li>用户：小强</li>
+<li>部门：开发一部</li>
+</ul>
+</div>
+
+<div id="content">Content goes here
+<ol style="display:none">
+<li>List item 1</li>
+<li>List item 2</li>
+<li>List item 3</li>
+</ol>
+</div>
+
+<div id="footer"><a href="#">====================================颐东网络===================================</a></div>
+</div>
+</div>
+
+<br />
+<div style="width: 85%;float:left">
+<form>
+	<textarea name="content2" style="width:100%;height:100px;visibility:hidden;"></textarea>
+	<p style="display: none">
+		<input type="button" name="getHtml" value="取得HTML" />
+		<input type="button" name="isEmpty" value="判断是否为空" />
+		<input type="button" name="getText" value="取得文本(包含img,embed)" />
+		<input type="button" name="selectedHtml" value="取得选中HTML" />
+		<br />
+		<br />
+		<input type="button" name="setHtml" value="设置HTML" />
+		<input type="button" name="setText" value="设置文本" />
+		<input type="button" name="insertHtml" value="插入HTML" />
+		<input type="button" name="appendHtml" value="添加HTML" />
+		<input type="button" name="clear" value="清空内容" />
+		<input type="reset" name="reset" value="Reset" />
+	</p>
+	
+</form>
+</div>
+
+<div style="width: 15%;float:left;vertical-align:middle;"><br /><br /><br />&nbsp;
+	<input type="button" id="new_post" value="回   复" style="width: 85px; height: 30px;" />
+</div>	
+</body>
+</html>

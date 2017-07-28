@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="ModelTest">
+</Property><Property Name="解决方案文件" Value="E:\白盒测试\svn\project\project_WhiteBoxStudio\code\ModelTest\ModelTest.sln">
+</Property><Property Name="Date" Value="2013年4月9日">
+</Property><Property Name="Time" Value="16:26">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="ModelTest.sln" Description="文件已成功备份为 E:\白盒测试\svn\project\project_WhiteBoxStudio\code\ModelTest\ModelTest.sln.old">
+</Event><Event ErrorLevel="0" Project="ModelTest" Source="ModelTest.vcproj" Description="Converting project file 'E:\白盒测试\svn\project\project_WhiteBoxStudio\code\ModelTest\ModelTest.vcproj'.">
+</Event><Event ErrorLevel="1" Project="ModelTest" Source="ModelTest.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="ModelTest" Source="ModelTest.vcproj" Description="MSB8012: $(TargetPath) ('E:\白盒测试\svn\project\project_WhiteBoxStudio\code\ModelTest\.\Release\ModelTest.exe') does not match the Linker's OutputFile property value '.\Release/ModelTest.exe' ('E:\白盒测试\svn\project\project_WhiteBoxStudio\code\ModelTest\Release/ModelTest.exe') in project configuration 'Release|Win32'. This may cause your project to build incorrectly. To correct this, please make sure that $(TargetPath) property value matches the value specified in %(Link.OutputFile).">
+</Event><Event ErrorLevel="1" Project="ModelTest" Source="ModelTest.vcproj" Description="MSB8012: $(TargetPath) ('E:\白盒测试\svn\project\project_WhiteBoxStudio\code\ModelTest\.\Debug\ModelTest.exe') does not match the Linker's OutputFile property value '.\Debug/ModelTest.exe' ('E:\白盒测试\svn\project\project_WhiteBoxStudio\code\ModelTest\Debug/ModelTest.exe') in project configuration 'Debug|Win32'. This may cause your project to build incorrectly. To correct this, please make sure that $(TargetPath) property value matches the value specified in %(Link.OutputFile).">
+</Event><Event ErrorLevel="0" Project="ModelTest" Source="ModelTest.vcproj" Description="Done converting to new project file 'E:\白盒测试\svn\project\project_WhiteBoxStudio\code\ModelTest\ModelTest.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="ModelTest" Source="ModelTest.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="ModelTest.sln" Description="成功转换解决方案">
+</Event><Event ErrorLevel="3" Project="" Source="ModelTest.sln" Description="Converted">
+</Event></UpgradeLog>

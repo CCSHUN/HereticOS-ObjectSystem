@@ -1,0 +1,58 @@
+//*********************************** Standard lint options ***************************************//
+co-msc90.lnt
+lib-atl.lnt lib-mfc.lnt lib-stl.lnt lib-w32.lnt lib-wnt.lnt
+-si4 -sp4
+
+
+//***************************************** report format *********************************************//
+//guid is 6F9619FF-8B86-D011-B42D-00C04FC96477
+-"format=###CF50A6A3-7BDB-9134-1D56-C79BA8CB647E###%F###CF50A6A3-7BDB-9134-1D56-C79BA8CB647E###%n###CF50A6A3-7BDB-9134-1D56-C79BA8CB647E###%l###CF50A6A3-7BDB-9134-1D56-C79BA8CB647E###%m"     //  Messages will contain
+//-"format=6F9619FF-8B86-D011-B42D-00C04FC96477%F6F9619FF-8B86-D011-B42D-00C04FC96477%n6F9619FF-8B86-D011-B42D-00C04FC96477%l6F9619FF-8B86-D011-B42D-00C04FC96477%m"     //  Messages will contain
+//-"format=%(%F(%l):%) error %n: (%t -- %m)"     //  Messages will contain %F %n %l %m
+	//  file information (%F), the line number (%l), the
+	//  message number (%n), message type (%t) and message text (%m).
+
+-hF2    //  Make sure we ALWAYS provide file information ('F') and use 2
+        //  lines (one for the source line in error and one for the message).
+
+-width(0) //  don't break messages at any particular width
+-t4       //  Presume that tabs are every 4 stops
++e900     //  issue a message at termination.
+
+
+//******************************************** options ***********************************************//
+
+
+
+//******************************************* include file list *******************************************//
+-i"C:\Program Files\Microsoft Visual Studio 9.0\VC\include"
+-i"C:\Program Files\Microsoft Visual Studio 9.0\VC\atlmfc\include"
+-i"C:\Program Files\Microsoft SDKs\Windows\v6.0A\Include"
+//-i"C:\project\project\project_WhiteBoxStudio\code\ModelTest"
+//-i"C:\project\project\project_WhiteBoxStudio\code\ModelTest\common\SerializeFunction"
+
+
+//***************************************** source file list ***************************************//
+C:\project\test2\test2\*.cpp
+C:\project\test\test\*.cpp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

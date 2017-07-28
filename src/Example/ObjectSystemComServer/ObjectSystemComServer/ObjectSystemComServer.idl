@@ -1,0 +1,37 @@
+// ObjectSystemComServer.idl : ObjectSystemComServer 的 IDL 源
+//
+
+// 此文件将由 MIDL 工具处理以
+// 产生类型库(ObjectSystemComServer.tlb)和封送处理代码。
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(EE8C24CA-76D4-46AC-9AA9-A5F6D581962A),
+	dual,
+	helpstring("IObjectSystem 接口"),
+	pointer_default(unique)
+]
+interface IObjectSystem : IDispatch{
+	[id(1), helpstring("方法CallInterface")] HRESULT CallInterface([in] BSTR szUserName, [in] BSTR szConversation, [in] int nOpCode, [in] BSTR szCallParameter, [out,retval] BSTR* szRetXml);
+};
+[
+	uuid(5E2DD6D2-11A4-4F7E-9DEF-6DB67D34F866),
+	version(1.0),
+	helpstring("ObjectSystemComServer 1.0 类型库")
+]
+library ObjectSystemComServerLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+	[
+		uuid(81AF9FBD-95AF-4FA2-8B07-2844B3599891),
+		helpstring("ObjectSystem Class")
+	]
+	coclass ObjectSystem
+	{
+		[default] interface IObjectSystem;
+	};
+};

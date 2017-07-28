@@ -1,0 +1,20 @@
+
+
+	//ROOT_MAKE<ROOT_MAKE>=MAKE_MAKECODE<"e:\\work\\KCG\\V2.0\\Code\\Plugins\\Display\\d3d_8_9b.h","c:\\dx8.mk">
+	//ROOT_MAKE<ROOT_MAKE>=MAKE_MAKECODE<"e:\\work\\KCG\\V2.0\\Code\\Plugins\\Display\\d3d8test.h","c:\\dx8.mk">
+	//ROOT_MAKE<ROOT_MAKE>=MAKE_MAKECODE<"E:\\work\\tool\\dxsdk\\Include\\d3d9.h","c:\\dx9.mk">
+	//ROOT_MAKE<ROOT_MAKE>=MAKE_MAKECODE<"C:\\结构体序列化\\test.h","C:\\结构体序列化\\makestruct.mk">
+	
+	ObjectSystem2代码根目录<MAKE>=WORD("E:/work2017/project/other/ObjectSystem2/")	
+	TransportProtocol头文件<MAKE>=ObjectSystem2代码根目录#WORD("TransportProtocol.h")
+	TransportProtocolMAKE文件<MAKE>=WORD("E:/work2017/project/Example/CodeRender/结构体序列化1.1/MakeTransportProtocol.mk")
+	MAKE_TransportProtocol生成文件基目录<MAKE>=WORD("生成文件基目录<MAKE>=WORD(\"")#ObjectSystem2代码根目录#WORD("./SerTransportProtocol/")#WORD("\")")		
+	
+	//ROOT_MAKE<ROOT_MAKE>=MAKE_ADD<MAKE_TransportProtocol生成文件基目录>+MAKE_MAKECODE<TransportProtocol头文件,TransportProtocolMAKE文件>
+
+	ObjectSystem2Test代码根目录<MAKE>=WORD("E:/work2017/project/Example/ObjectSystem2Test/ObjectSystem2Test/")	
+	AppProtocol头文件<MAKE>=ObjectSystem2Test代码根目录#WORD("RotationalFlowersDataMode.h")
+	AppProtocolMAKE文件<MAKE>=WORD("E:/work2017/project/Example/CodeRender/结构体序列化1.1/MakeTransportProtocol.mk")
+	MAKE_AppProtocol生成文件基目录<MAKE>=WORD("生成文件基目录<MAKE>=WORD(\"")#ObjectSystem2Test代码根目录#WORD("./AppProtocol/")#WORD("\")")		
+	
+	ROOT_MAKE<ROOT_MAKE>=MAKE_ADD<MAKE_AppProtocol生成文件基目录>+MAKE_MAKECODE<AppProtocol头文件,AppProtocolMAKE文件>

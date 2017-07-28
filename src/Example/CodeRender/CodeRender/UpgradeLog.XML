@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="CodeRender">
+</Property><Property Name="解决方案文件" Value="E:\白盒测试\me\导出数据\CodeRender\CodeRender\CodeRender.sln">
+</Property><Property Name="Date" Value="2013年4月2日">
+</Property><Property Name="Time" Value="17:12:52">
+</Property></Properties><Event ErrorLevel="0" Project="CodeRender" Source="CodeRender.vcproj" Description="Converting project file 'E:\白盒测试\me\导出数据\CodeRender\CodeRender\CodeRender.vcproj'.">
+</Event><Event ErrorLevel="1" Project="CodeRender" Source="CodeRender.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="CodeRender" Source="CodeRender.vcproj" Description="Done converting to new project file 'E:\白盒测试\me\导出数据\CodeRender\CodeRender\CodeRender.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="CodeRender" Source="CodeRender.vcproj" Description="Converted">
+</Event></UpgradeLog>

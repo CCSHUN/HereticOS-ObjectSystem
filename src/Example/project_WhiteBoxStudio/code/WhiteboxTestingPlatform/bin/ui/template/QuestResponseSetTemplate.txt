@@ -1,0 +1,17 @@
+<div id="allpost">	
+<div id="container" class="container">
+<div id="header">
+<span style="font-size:15px;"><b>###PostTime###</b></span>
+</div>
+<div id="menu" class="menu">
+<h2></h2>
+<ul>
+<li>###UserInfo###</li>
+</ul>
+</div>
+<div id="content">
+###PostData###
+</div>
+<div id="footer"><a href="#">====================================ÒÃ¶«ÍøÂç===================================</a></div>
+</div>
+</div>

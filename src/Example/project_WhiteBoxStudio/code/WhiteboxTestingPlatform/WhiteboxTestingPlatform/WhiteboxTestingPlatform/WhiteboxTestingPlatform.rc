@@ -1,0 +1,1593 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\WhiteboxTestingPlatform.rc2""  // 非 Microsoft Visual C++ 编辑的资源\r\n"
+    "#include ""l.CHS\\afxres.rc""          // 标准组件\r\n"
+    "#if !defined(_AFXDLL)\r\n"
+    "#include ""l.CHS\\afxprint.rc""                // 打印/打印预览资源\r\n"
+    "#include ""l.CHS\\afxribbon.rc""               // MFC 功能区和控件条资源\r\n"
+    "#endif\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\WhiteboxTestingPlatform.ico"
+IDR_WhiteboxTestingTYPE ICON                    "res\\WhiteboxTestingPlatformDoc.ico"
+IDI_FILE_VIEW           ICON                    "res\\file_view.ico"
+IDI_FILE_VIEW_HC        ICON                    "res\\file_view_hc.ico"
+IDI_CLASS_VIEW          ICON                    "res\\class_view.ico"
+IDI_CLASS_VIEW_HC       ICON                    "res\\class_view_hc.ico"
+IDI_OUTPUT_WND          ICON                    "res\\output_wnd.ico"
+IDI_OUTPUT_WND_HC       ICON                    "res\\output_wnd_hc.ico"
+IDI_PROPERTIES_WND      ICON                    "res\\properties_wnd.ico"
+IDI_PROPERTIES_WND_HC   ICON                    "res\\properties_wnd_hc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+IDR_MAINFRAME_256       BITMAP                  "res\\Toolbar256.bmp"
+IDR_SORT                BITMAP                  "res\\sort.bmp"
+IDB_SORT_24             BITMAP                  "res\\sort_hc.bmp"
+IDB_FILE_VIEW           BITMAP                  "res\\fileview.bmp"
+IDB_FILE_VIEW_24        BITMAP                  "res\\fileview_hc.bmp"
+IDB_CLASS_VIEW          BITMAP                  "res\\classview.bmp"
+IDB_CLASS_VIEW_24       BITMAP                  "res\\classview_hc.bmp"
+IDR_EXPLORER            BITMAP                  "res\\explorer.bmp"
+IDB_EXPLORER_24         BITMAP                  "res\\explorer_hc.bmp"
+IDR_MENU_IMAGES         BITMAP                  "res\\menuimages.bmp"
+IDB_MENU_IMAGES_24      BITMAP                  "res\\menuimages_hc.bmp"
+IDR_PROPERTIES          BITMAP                  "res\\properties.bmp"
+IDB_PROPERTIES_HC       BITMAP                  "res\\properties_hc.bmp"
+IDB_BITMAP_OK           BITMAP                  "res\\logo.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR  16, 16
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+END
+
+IDR_MAINFRAME_256 TOOLBAR  16, 16
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+    BUTTON      ID_BUTTON32820
+    BUTTON      ID_BUTTON32821
+    BUTTON      ID_BUTTON32822
+    BUTTON      ID_BUTTON32823
+END
+
+IDR_SORT TOOLBAR  16, 16
+BEGIN
+    BUTTON      ID_SORT_MENU
+    BUTTON      ID_NEW_FOLDER
+END
+
+IDR_EXPLORER TOOLBAR  16, 16
+BEGIN
+    BUTTON      ID_PROPERTIES
+END
+
+IDR_MENU_IMAGES TOOLBAR  16, 16
+BEGIN
+    BUTTON      ID_WINDOW_MANAGER
+    SEPARATOR
+    BUTTON      ID_WINDOW_CASCADE
+    BUTTON      ID_WINDOW_TILE_HORZ
+    BUTTON      ID_TOOLS_MACRO
+    BUTTON      ID_SORTING_SORTALPHABETIC
+    BUTTON      ID_SORTING_SORTBYTYPE
+    BUTTON      ID_SORTING_SORTBYACCESS
+    BUTTON      ID_SORTING_GROUPBYTYPE
+END
+
+IDR_PROPERTIES TOOLBAR  16, 16
+BEGIN
+    BUTTON      ID_EXPAND_ALL
+    BUTTON      ID_SORTPROPERTIES
+    BUTTON      ID_PROPERTIES1
+    BUTTON      ID_PROPERTIES2
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "文件(&F)"
+    BEGIN
+        MENUITEM "新建(&N)\tCtrl+N",              ID_FILE_NEW
+        MENUITEM "打开(&O)...\tCtrl+O",           ID_FILE_OPEN
+        MENUITEM "关闭(&C)",                      ID_FILE_CLOSE
+        MENUITEM SEPARATOR
+        MENUITEM "最近的文件",                       ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "退出(&X)",                      ID_APP_EXIT
+    END
+    POPUP "视图(&V)"
+    BEGIN
+        POPUP "工具栏和停靠窗口(&T)"
+        BEGIN
+            MENUITEM "<占位符>",                       ID_VIEW_TOOLBAR
+        END
+        MENUITEM "状态栏(&S)",                     ID_VIEW_STATUS_BAR
+        POPUP "应用程序外观(&A)"
+        BEGIN
+            MENUITEM "Windows 2000(&2)",            ID_VIEW_APPLOOK_WIN_2000
+            MENUITEM "Office XP(&X)",               ID_VIEW_APPLOOK_OFF_XP
+            MENUITEM "Windows XP(&W)",              ID_VIEW_APPLOOK_WIN_XP
+            MENUITEM "Office 2003(&3)",             ID_VIEW_APPLOOK_OFF_2003
+            MENUITEM "Visual Studio.NET 2005(&5)",  ID_VIEW_APPLOOK_VS_2005
+            POPUP "Office 2007(&7)"
+            BEGIN
+                MENUITEM "蓝色样式(&B)",                    ID_VIEW_APPLOOK_OFF_2007_BLUE
+                MENUITEM "黑色样式(&L)",                    ID_VIEW_APPLOOK_OFF_2007_BLACK
+                MENUITEM "银色样式(&S)",                    ID_VIEW_APPLOOK_OFF_2007_SILVER
+                MENUITEM "水绿色样式(&A)",                   ID_VIEW_APPLOOK_OFF_2007_AQUA
+            END
+        END
+    END
+    POPUP "帮助(&H)"
+    BEGIN
+        MENUITEM "关于 WhiteboxTestingPlatform(&A)...", ID_APP_ABOUT
+    END
+END
+
+IDR_WhiteboxTestingTYPE MENU 
+BEGIN
+    POPUP "文件(&F)"
+    BEGIN
+        MENUITEM "新建(&N)\tCtrl+N",              ID_FILE_NEW
+        MENUITEM "打开(&O)...\tCtrl+O",           ID_FILE_OPEN
+        MENUITEM "关闭(&C)",                      ID_FILE_CLOSE
+        MENUITEM "保存(&S)\tCtrl+S",              ID_FILE_SAVE
+        MENUITEM "另存为(&A)...",                  ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "最近的文件",                       ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "退出(&X)",                      ID_APP_EXIT
+    END
+    POPUP "编辑(&E)"
+    BEGIN
+        MENUITEM "撤消(&U)\tCtrl+Z",              ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "剪切(&T)\tCtrl+X",              ID_EDIT_CUT
+        MENUITEM "复制(&C)\tCtrl+C",              ID_EDIT_COPY
+        MENUITEM "粘贴(&P)\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "视图(&V)"
+    BEGIN
+        POPUP "工具栏和停靠窗口(&T)"
+        BEGIN
+            MENUITEM "<占位符>",                       ID_VIEW_TOOLBAR
+        END
+        MENUITEM "状态栏(&S)",                     ID_VIEW_STATUS_BAR
+        POPUP "应用程序外观(&A)"
+        BEGIN
+            MENUITEM "Windows 2000(&2)",            ID_VIEW_APPLOOK_WIN_2000
+            MENUITEM "Office XP(&X)",               ID_VIEW_APPLOOK_OFF_XP
+            MENUITEM "Windows XP(&W)",              ID_VIEW_APPLOOK_WIN_XP
+            MENUITEM "Office 2003(&3)",             ID_VIEW_APPLOOK_OFF_2003
+            MENUITEM "Visual Studio.NET 2005(&5)",  ID_VIEW_APPLOOK_VS_2005
+            POPUP "Office 2007(&7)"
+            BEGIN
+                MENUITEM "蓝色样式(&B)",                    ID_VIEW_APPLOOK_OFF_2007_BLUE
+                MENUITEM "黑色样式(&L)",                    ID_VIEW_APPLOOK_OFF_2007_BLACK
+                MENUITEM "银色样式(&S)",                    ID_VIEW_APPLOOK_OFF_2007_SILVER
+                MENUITEM "水绿色样式(&A)",                   ID_VIEW_APPLOOK_OFF_2007_AQUA
+            END
+        END
+        POPUP "Test"
+        BEGIN
+            MENUITEM "切换到SOAP",                     ID_TEST_001
+            MENUITEM "更新框架",                        ID_TEST_002
+            MENUITEM "3",                           ID_TEST_003
+            MENUITEM "4",                           ID_TEST_004
+            MENUITEM "5",                           ID_TEST_005
+            MENUITEM "6",                           ID_TEST_006
+            MENUITEM "7",                           ID_TEST_007
+            MENUITEM "8",                           ID_TEST_008
+            MENUITEM "9",                           ID_TEST_009
+            MENUITEM "10",                          ID_TEST_010
+        END
+    END
+    POPUP "窗口(&W)"
+    BEGIN
+        MENUITEM "新建窗口(&N)",                    ID_WINDOW_NEW
+    END
+    POPUP "帮助(&H)"
+    BEGIN
+        MENUITEM "关于 WhiteboxTestingPlatform(&A)...", ID_APP_ABOUT
+    END
+END
+
+IDR_POPUP_EDIT MENU 
+BEGIN
+    POPUP "编辑"
+    BEGIN
+        MENUITEM "剪切(&T)\tCtrl+X",              ID_EDIT_CUT
+        MENUITEM "复制(&C)\tCtrl+C",              ID_EDIT_COPY
+        MENUITEM "粘贴(&P)\tCtrl+V",              ID_EDIT_PASTE
+    END
+END
+
+IDR_POPUP_SORT MENU 
+BEGIN
+    POPUP "排序"
+    BEGIN
+        MENUITEM "按字母顺序排序(&S)",                 ID_SORTING_SORTALPHABETIC
+        MENUITEM "按类型排序(&T)",                   ID_SORTING_SORTBYTYPE
+        MENUITEM "按访问排序(&E)",                   ID_SORTING_SORTBYACCESS
+        MENUITEM "按类型分组(&Y)",                   ID_SORTING_GROUPBYTYPE
+    END
+END
+
+IDR_POPUP_EXPLORER MENU 
+BEGIN
+    POPUP "资源管理器"
+    BEGIN
+        MENUITEM "打开(&O)",                      ID_OPEN
+        MENUITEM "打开方式(&W)....",                ID_OPEN_WITH
+        MENUITEM SEPARATOR
+        MENUITEM "编译(&C)",                      ID_DUMMY_COMPILE
+        MENUITEM SEPARATOR
+        MENUITEM "剪切(&T)\tCtrl+X",              ID_EDIT_CUT
+        MENUITEM "复制(&C)\tCtrl+C",              ID_EDIT_COPY
+        MENUITEM "删除(&R)",                      ID_EDIT_CLEAR
+        MENUITEM SEPARATOR
+        MENUITEM "属性(&P)...",                   ID_PROPERTIES
+    END
+END
+
+IDR_OUTPUT_POPUP MENU 
+BEGIN
+    POPUP "弹出项"
+    BEGIN
+        MENUITEM "复制(&C)",                      ID_EDIT_COPY
+        MENUITEM "清除(&C)",                      ID_EDIT_CLEAR
+        MENUITEM SEPARATOR
+        MENUITEM "隐藏(&H)",                      ID_VIEW_OUTPUTWND
+    END
+END
+
+IDR_THEME_MENU MENU 
+BEGIN
+    MENUITEM "Office 2007 (蓝色样式)(&B)",      ID_VIEW_APPLOOK_OFF_2007_BLUE
+    MENUITEM "Office 2007 (黑色样式)(&L)",      ID_VIEW_APPLOOK_OFF_2007_BLACK
+    MENUITEM "Office 2007 (银色样式)(&S)",      ID_VIEW_APPLOOK_OFF_2007_SILVER
+    MENUITEM "Office 2007 (水绿色样式)(&A)",     ID_VIEW_APPLOOK_OFF_2007_AQUA
+END
+
+IDR_PROJECTVIEW_POPUP MENU 
+BEGIN
+    POPUP "项目视图"
+    BEGIN
+        MENUITEM "Build(&B)",                   ID_BUILD_REPORT
+        MENUITEM "Rebuild(&R)",                 ID_REBUILD_REPORT
+        MENUITEM "停止build",                     ID_STOP_BUILD
+        MENUITEM SEPARATOR
+        MENUITEM "创建测试项目(&C)",                  ID_CREATE_PROJECT
+        MENUITEM "创建目录(&E)",                    ID_CREATE_DIRECTORY
+        MENUITEM "创建测试子项目(&S)",                 ID_CREATE_TASK
+        MENUITEM "删除(&D)",                      ID_PROJECTVIEW_DEL
+        MENUITEM "重新获取项目列表",                    ID_PROJECTTREE_REGET
+        MENUITEM SEPARATOR
+        MENUITEM "项目解锁",                        ID_PROJECT_UNLOCK
+        MENUITEM "项目管理",                        ID_PROJECT_MANGER
+    END
+END
+
+IDR_STANDARD_MENU MENU 
+BEGIN
+    POPUP "标准视图"
+    BEGIN
+        MENUITEM "新建标准",                        ID_STANDARD_MENU_NEW
+        MENUITEM "删除标准",                        ID_STANDARD_MENU_DELETE
+        MENUITEM "刷新",                          ID_STANDARD_MENU_UPDATA
+        MENUITEM "重新获取选定标准",                    ID_STANDARD_MENU_REGET
+    END
+END
+
+IDR_OBJECT_LOCK_MENU MENU 
+BEGIN
+    POPUP "对象锁定"
+    BEGIN
+        MENUITEM "申请编辑",                        ID_OBJ_GETLOCK
+        MENUITEM "重新获取",                        ID_OBJ_REGET
+        MENUITEM "释放锁定",                        ID_OBJ_RELEASE_LOCK
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 229, 68
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 WhiteboxTestingPlatform"
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,14,14,20,20
+    LTEXT           "WhiteboxTestingPlatform，1.1 版",IDC_STATIC,42,14,114,8,SS_NOPREFIX
+    LTEXT           "作者：叶树深，张新\r\n\r\nCopyright (C) 2013",IDC_STATIC,42,26,114,24
+    DEFPUSHBUTTON   "确定",IDOK,172,47,50,14,WS_GROUP
+END
+
+IDD_WHITEBOXTESTINGPLATFORM_FORM DIALOGEX 0, 0, 673, 415
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT1,66,8,34,13,ES_AUTOHSCROLL
+    LTEXT           "错误号",IDC_STATIC,34,10,22,7
+    CONTROL         "",IDC_REPORT_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,8,32,447,155
+    LTEXT           "描述：",IDC_STATIC,22,243,22,9
+    EDITTEXT        IDC_DESCRIPTION,49,241,404,16,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT7,49,266,404,105,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "详细说明与建议：",IDC_STATIC,15,278,29,24
+    PUSHBUTTON      "新建标准",IDC_NEW_STANDARD,480,32,43,13
+    PUSHBUTTON      "编辑标准",IDC_NEW_STANDARD2,480,63,43,13
+    LTEXT           "统一规范错误编号",IDC_ERROR_NUM,48,210,56,7
+    PUSHBUTTON      "编辑标准",IDC_COMPLATE_STANDARD,480,333,43,38
+    PUSHBUTTON      "删除该条标准",IDC_DELETE_CUR,480,91,43,13
+    PUSHBUTTON      "Button1",IDC_BUTTON1,474,151,50,14
+    PUSHBUTTON      "Button3",IDC_BUTTON3,490,199,50,14
+END
+
+IDD_TESTINGTASKVIEW DIALOGEX 0, 0, 649, 401
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 9, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    LISTBOX         IDC_LIST1,70,89,168,43,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "任务名称：",IDC_STATIC,34,29,35,8
+    EDITTEXT        IDC_EDIT1,74,26,75,14,ES_AUTOHSCROLL
+END
+
+IDD_TESTINGTASKCONFIGVIEW DIALOGEX 0, 0, 646, 374
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 9, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_EDIT_STANDARDPARAM,35,106,331,153,ES_MULTILINE | ES_AUTOHSCROLL | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "命令参数：",IDC_STATIC,34,79,35,8
+    PUSHBUTTON      "保存",IDC_BUTTON1,546,79,61,19
+    GROUPBOX        "标准配置",IDC_STATIC,19,9,602,54,0,WS_EX_TRANSPARENT
+    GROUPBOX        "PC-lint配置",IDC_STATIC,19,65,602,205,0,WS_EX_TRANSPARENT
+    LTEXT           "规范名称：",IDC_STATIC,35,42,35,8
+    LTEXT           "子测试项目名称：",IDC_STATIC,26,24,56,8
+    COMBOBOX        IDC_COMBO_SPECIFYNAME,71,40,538,83,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "在这里显示。。。",IDC_STATIC_SUBPROJECT_NAME,88,24,333,8
+    LTEXT           "在这里显示。。。",IDC_STATIC_CMDPARAM,73,77,459,19
+    LTEXT           "公共参数：",IDC_STATIC,36,96,34,8
+    LTEXT           "私有参数：",IDC_STATIC,373,95,35,8
+    EDITTEXT        IDC_EDIT_PRIVATEPARAM,372,106,235,153,ES_MULTILINE | ES_AUTOHSCROLL | WS_VSCROLL | WS_HSCROLL
+END
+
+IDD_WORKSHEETVIEW DIALOGEX 0, 0, 521, 384
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 9, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    LTEXT           "项目编号：",IDC_STATIC,30,23,35,8
+    EDITTEXT        IDC_EDIT1,70,20,85,14,ES_AUTOHSCROLL
+    LTEXT           "模块编号：",IDC_STATIC,30,47,35,8
+    EDITTEXT        IDC_EDIT2,70,44,85,14,ES_AUTOHSCROLL
+    LTEXT           "工作单编号：",IDC_STATIC,193,23,42,8
+    EDITTEXT        IDC_EDIT3,238,20,114,14,ES_AUTOHSCROLL
+    LTEXT           "申请人：",IDC_STATIC,37,70,28,8
+    EDITTEXT        IDC_EDIT4,70,67,85,14,ES_AUTOHSCROLL
+    LTEXT           "申请日期：",IDC_STATIC,198,70,35,8
+    EDITTEXT        IDC_EDIT5,239,67,114,14,ES_AUTOHSCROLL
+    LTEXT           "责任人：",IDC_STATIC,37,94,28,8
+    EDITTEXT        IDC_EDIT6,70,91,283,14,ES_AUTOHSCROLL
+    LTEXT           "项目检查规范：",IDC_STATIC,16,118,49,8
+    EDITTEXT        IDC_EDIT7,70,115,283,14,ES_AUTOHSCROLL
+    CONTROL         "增量检查",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,70,141,43,10
+    LTEXT           "检查类型：",IDC_STATIC,30,141,35,8
+    CONTROL         "全部检查",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,118,141,43,10
+    LTEXT           "上次工作单编号：",IDC_STATIC,180,141,56,8
+    EDITTEXT        IDC_EDIT8,239,138,114,14,ES_AUTOHSCROLL
+    LTEXT           "SVN代码库路径：",IDC_STATIC,10,165,55,8
+    EDITTEXT        IDC_EDIT9,70,161,283,14,ES_AUTOHSCROLL
+    LTEXT           "检查人：",IDC_STATIC,37,287,28,8
+    EDITTEXT        IDC_EDIT12,70,284,85,14,ES_AUTOHSCROLL
+    LTEXT           "检查日期：",IDC_STATIC,200,287,35,8
+    EDITTEXT        IDC_EDIT13,240,284,114,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "保存",IDC_BUTTON1,442,33,50,14
+    GROUPBOX        "项目信息",IDC_STATIC,7,7,389,194
+    GROUPBOX        "项目信息",IDC_STATIC,7,225,389,145
+END
+
+IDD_REPORTVIEW DIALOGEX 0, 0, 485, 427
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 9, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_LIST_REPORT,"SysListView32",LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,22,22,432,115
+    LTEXT           "状态：",IDC_STATIC,23,178,22,8
+    COMBOBOX        IDC_COMBO1,50,176,76,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "编号：",IDC_STATIC,23,157,22,8
+    EDITTEXT        IDC_EDIT2,50,154,76,14,ES_AUTOHSCROLL
+    LTEXT           "内容：",IDC_STATIC,23,197,22,8
+    EDITTEXT        IDC_EDIT3,50,197,404,32,ES_AUTOHSCROLL
+    LTEXT           "行号：",IDC_STATIC,23,243,22,8
+    EDITTEXT        IDC_EDIT4,50,239,404,16,ES_AUTOHSCROLL
+    LTEXT           "源文件：",IDC_STATIC,17,268,28,8
+    EDITTEXT        IDC_EDIT5,50,264,404,16,ES_AUTOHSCROLL
+    LTEXT           "描述：",IDC_STATIC,23,292,22,8
+    EDITTEXT        IDC_EDIT6,50,288,404,16,ES_AUTOHSCROLL
+    LTEXT           "反馈状态：",IDC_STATIC,10,316,35,8
+    COMBOBOX        IDC_COMBO2,50,314,91,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "交流记录：",IDC_STATIC,10,336,35,8
+    EDITTEXT        IDC_EDIT7,50,335,404,57,ES_AUTOHSCROLL
+END
+
+IDD_TEST_WORKSHEET_VIEW DIALOGEX 0, 0, 616, 468
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT_PROJECTNO,82,22,99,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_WORKNO,278,22,133,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_MODULENO,82,42,99,15,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_CHECKRANGE,278,43,134,98,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_DATE_APPLY,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_LONGDATEFORMAT | WS_TABSTOP,277,63,135,15
+    EDITTEXT        IDC_EDIT_CHECKMAN_LIST,391,390,99,15,ES_AUTOHSCROLL | NOT WS_VISIBLE
+    CONTROL         "增量检查",IDC_RADIO_CHECKTYPE_ADD,"Button",BS_AUTORADIOBUTTON,133,87,50,11
+    CONTROL         "全部检查",IDC_RADIO_CHECKTYPE_ALL,"Button",BS_AUTORADIOBUTTON,81,87,50,11
+    EDITTEXT        IDC_EDIT_PREWORKNO,278,84,134,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_SVNPATH,82,106,330,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_SOURCELIST,81,129,330,50,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_SUGGEST,81,208,330,67,ES_AUTOHSCROLL
+    CONTROL         "正常终止(工作正常执行完毕)",IDC_RADIO_CHECKRESULT_SUCC,"Button",BS_AUTORADIOBUTTON | WS_GROUP,79,283,116,11
+    CONTROL         "非正常终止",IDC_RADIO_CHECKRESULT_FAIL,"Button",BS_AUTORADIOBUTTON,206,282,53,11
+    EDITTEXT        IDC_EDIT_CHECKRESULT_DES,269,281,143,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CHECKMAN,81,304,99,15,ES_AUTOHSCROLL
+    CONTROL         "",IDC_DATE_CHECK,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_LONGDATEFORMAT | WS_TABSTOP,278,303,135,15
+    LTEXT           "项目编号：",IDC_STATIC,35,25,41,9
+    LTEXT           "模块编号：",IDC_STATIC,35,45,41,9
+    LTEXT           "工作单编号：",IDC_STATIC,225,25,49,9
+    LTEXT           "申请人(负责人)：",IDC_STATIC,13,66,61,9
+    LTEXT           "申请日期：",IDC_STATIC,233,66,41,9
+    LTEXT           "人工走读责任人：",IDC_STATIC,320,393,64,9,NOT WS_VISIBLE
+    LTEXT           "源文件列表：",IDC_STATIC,27,130,50,9
+    LTEXT           "检查类型：",IDC_STATIC,35,87,41,9
+    LTEXT           "上次工作单编号：",IDC_STATIC,210,87,65,9
+    LTEXT           "SVN代码库路径：",IDC_STATIC,15,110,61,9
+    LTEXT           "检查人：",IDC_STATIC,43,307,33,9
+    LTEXT           "检查日期：",IDC_STATIC,233,307,41,9
+    PUSHBUTTON      "保存",IDC_BUTTON_SAVE,461,41,97,38
+    GROUPBOX        "反馈信息",IDC_STATIC,7,196,443,131,0,WS_EX_TRANSPARENT
+    LTEXT           "问题意见：",IDC_STATIC,34,210,42,9
+    LTEXT           "代码走读检查范围：",IDC_STATIC,201,46,75,9
+    LTEXT           "检查结果：",IDC_STATIC,36,284,43,9
+    GROUPBOX        "反馈信息",IDC_STATIC,7,7,443,181,0,WS_EX_TRANSPARENT
+    COMBOBOX        IDC_COMBO_APPLY,81,64,101,98,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_TESTUSER_REPORT_COMPLATE_VIEW DIALOGEX 0, 0, 714, 427
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "查看第三方描述",IDC_LOOKTHIRD,607,71,65,22,NOT WS_VISIBLE
+    CONTROL         "",IDC_LIST_REPORT,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,0,0,559,112
+    PUSHBUTTON      "提交",IDC_SUBMIT,645,119,49,40
+    PUSHBUTTON      "刷新",IDC_REFRESH,645,308,49,19
+    LTEXT           "UID：",IDC_STATIC,585,11,21,8
+    LTEXT           "TID：",IDC_STATIC,586,29,20,8
+    LTEXT           "###",IDC_ERROR_NUM_UNITE,611,11,17,8
+    LTEXT           "###",IDC_ERROR_NUM_THIRD,612,29,15,8
+    LTEXT           "错误类型：",IDC_STATIC,565,43,41,8
+    LTEXT           "###",IDC_ERROR_TYPE,611,44,69,8
+    LTEXT           "警告级别：",IDC_STATIC,565,57,41,8
+    LTEXT           "###",IDC_ERROR_CLASS,612,58,68,8
+    PUSHBUTTON      "生成报告总结",IDC_MAKE_SUMMARY,583,84,65,14
+    PUSHBUTTON      "新建问题",IDC_SENDPOST,645,224,49,20
+    PUSHBUTTON      "完成报告",IDC_COMPLATE_REPORT,645,172,49,39
+    CONTROL         "",IDC_TAB_DATA,"SysTabControl32",TCS_VERTICAL | TCS_BUTTONS | TCS_MULTILINE | WS_BORDER,0,119,620,301,WS_EX_TRANSPARENT | WS_EX_CLIENTEDGE
+    PUSHBUTTON      "编辑问题",IDC_EDITREPORT,645,250,49,20
+    PUSHBUTTON      "删除问题",IDC_DELREPORT,645,276,49,20
+END
+
+IDD_TESTUSER_REPORT_MANUAL_MAKE_VIEW DIALOGEX 0, 0, 702, 408
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_HSCROLL
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "统一规范错误编号：",IDC_STATIC,490,6,73,8
+    LTEXT           "第三方规范错误编号：",IDC_STATIC,482,23,81,8
+    LTEXT           "行号：",IDC_STATIC,25,166,26,9
+    EDITTEXT        IDC_LINE_NUM,57,161,332,17,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "源文件：",IDC_STATIC,18,143,33,9
+    EDITTEXT        IDC_FILENAME,57,138,331,17,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "描述：",IDC_STATIC,25,212,26,9
+    EDITTEXT        IDC_DESCRIPTION,57,207,332,17,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CHECK_MEMO,410,154,285,96,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "建议：",IDC_STATIC,25,231,26,11
+    PUSHBUTTON      "完成当前错误",IDC_COMPLATE_CUR_REPORT,630,261,65,40
+    PUSHBUTTON      "查看第三方描述",IDC_LOOKTHIRD,614,87,65,40
+    EDITTEXT        IDC_EDIT_SUGGEST,57,230,332,68,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_HSCROLL,WS_EX_LEFTSCROLLBAR
+    RTEXT           "复查指导说明：",IDC_STATIC,407,138,59,11
+    CONTROL         "",IDC_LIST_REPORT,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,0,0,452,128
+    LTEXT           "###",IDC_ERROR_NUM_UNITE,572,6,16,8
+    LTEXT           "###",IDC_ERROR_NUM_THIRD,572,22,15,8
+    LTEXT           "错误描述：",IDC_STATIC,9,189,42,9
+    EDITTEXT        IDC_ERROR_DESCRIPTION,57,184,332,17,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "刷新",IDC_REFRESH,484,261,65,40
+    LTEXT           "错误类型：",IDC_STATIC,522,41,41,8
+    LTEXT           "警告级别：",IDC_STATIC,522,57,41,8
+    COMBOBOX        IDC_COMBO_ERROR_TYPE,570,38,125,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_ERROR_CLASS,570,54,86,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "忽略当前错误",IDC_IGNORE_CUR_REPORT,557,261,65,40
+    PUSHBUTTON      "提交",IDC_SUBMIT,410,261,65,40
+    PUSHBUTTON      "删除选中的忽略项",IDC_DELSELIG,484,87,72,40
+END
+
+IDD_TESTUSER_REPORT_NO_FIND_STANDARD_VIEW DIALOGEX 0, 0, 658, 404
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "第三方规范错误编号",IDC_STATIC,549,42,73,8
+    LTEXT           "行号：",IDC_STATIC,27,216,26,9
+    EDITTEXT        IDC_LINE_NUM,59,212,471,17,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "源文件：",IDC_STATIC,20,193,33,9
+    EDITTEXT        IDC_FILENAME,59,189,471,17,ES_AUTOHSCROLL | ES_READONLY
+    RTEXT           "错误描述：",IDC_STATIC,8,239,43,9
+    EDITTEXT        IDC_ERROR_DESCRIPTION,59,235,471,17,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "重新生成",IDC_REBUILD_CUR,549,213,65,40
+    PUSHBUTTON      "编辑标准库",IDC_EDIT_THIRD,549,80,65,40
+    CONTROL         "",IDC_LIST_REPORT,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,0,0,513,176
+    LTEXT           "###",IDC_ERROR_NUM_THIRD,574,51,17,8
+    PUSHBUTTON      "刷新",IDC_REFRESH,549,166,65,40
+END
+
+IDD_TESTUSER_STANDARD_UNITE_VIEW DIALOGEX 0, 0, 664, 470
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "描述：",IDC_STATIC,27,185,26,9
+    EDITTEXT        IDC_ERROR_DESC,59,181,475,17,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_ERROR_SUG,59,202,475,78,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "详细说明与建议：",IDC_STATIC,19,223,33,26
+    PUSHBUTTON      "新建标准",IDC_NEW_STANDARD,563,40,50,14
+    PUSHBUTTON      "编辑标准",IDC_EDIT_STANDARD,563,72,50,14
+    PUSHBUTTON      "应用标准",IDC_COMPLATE_STANDARD,565,239,50,41
+    PUSHBUTTON      "删除该条标准",IDC_DELETE_CUR,563,104,50,14
+    EDITTEXT        IDC_ERROR_NUM,60,160,107,17,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "编号：",IDC_STATIC,24,164,26,9
+    EDITTEXT        IDC_ERROR_TYPE,231,160,107,17,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "错误类型：",IDC_STATIC,185,164,43,9
+    EDITTEXT        IDC_EDIT1,575,13,40,14,ES_AUTOHSCROLL
+    LTEXT           "错误号:",IDC_STATIC,542,16,28,8
+    CONTROL         "",IDC_UINTE_STANDARD_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,13,10,521,145
+    EDITTEXT        IDC_ERROR_CLASS,427,160,107,17,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "错误严重类型：",IDC_STATIC,367,164,58,9
+END
+
+IDD_TESTUSER_STANDARD_THIRD_VIEW DIALOGEX 0, 0, 654, 504
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT1,591,6,40,14,ES_AUTOHSCROLL
+    LTEXT           "错误号:",IDC_STATIC,558,8,28,8
+    CONTROL         "",IDC_REPORT_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,15,9,521,115
+    LTEXT           "描述：",IDC_STATIC,24,153,26,9
+    EDITTEXT        IDC_ERROR_DESC,54,148,482,17,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_ERROR_SUG,54,183,236,125,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "详细说明与建议：",IDC_STATIC,54,170,92,9
+    PUSHBUTTON      "新建标准",IDC_NEW_STANDARD,558,31,50,14
+    PUSHBUTTON      "编辑标准",IDC_EDIT_STANDARD,558,65,50,14
+    LTEXT           "",IDC_ERROR_NUM,68,133,31,11
+    PUSHBUTTON      "应用标准",IDC_COMPLATE_STANDARD,558,267,50,41
+    PUSHBUTTON      "删除该条标准",IDC_DELETE_CUR,558,95,50,14
+    EDITTEXT        IDC_ERROR_CHECKSUG,298,183,238,124,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "人工复查指导说明：",IDC_STATIC,298,169,95,10
+    CONTROL         "需要复查",IDC_ERROR_MANUAL,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,424,133,48,10
+    CONTROL         "不关注",IDC_ERROR_NOCHECK,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,497,133,40,10
+    LTEXT           "错误编号:",IDC_ERROR_NUM2,17,133,38,11
+    LTEXT           "检查工具:",IDC_ERROR_NUM3,261,133,38,11
+    EDITTEXT        IDC_ERROR_TOOLTYPE,308,130,69,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "",IDC_ERROR_UNITENUM,200,133,33,11
+    LTEXT           "统一规范编号:",IDC_ERROR_NUM5,116,133,56,11
+END
+
+IDD_TESTUSER_STANDARD_UNITE_EDIT DIALOGEX 0, 0, 727, 413
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_BORDER
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "确定",IDC_OK,46,392,50,14
+    PUSHBUTTON      "取消",IDC_CANCEL,480,392,50,14
+    LTEXT           "描述：",IDC_STATIC,7,283,26,9
+    EDITTEXT        IDC_ERROR_SUG,392,225,321,145,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "详细说明与建议：",IDC_STATIC,341,279,33,26
+    EDITTEXT        IDC_ERROR_DESC,46,225,268,145,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    EDITTEXT        IDC_ERROR_NUM,47,201,107,17,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "编号：",IDC_STATIC,11,205,26,9
+    LTEXT           "错误类型：",IDC_STATIC,169,205,40,9
+    LTEXT           "错误严重类型：",IDC_STATIC,542,205,58,9
+    COMBOBOX        IDC_COMBO_ERROR_TYPE,213,202,309,98,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_ERROR_CLASS1,608,202,105,98,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_LIST_USING,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,392,26,321,159
+    LTEXT           "第三方规范引用列表",IDC_STATIC,392,7,85,8
+    PUSHBUTTON      ">>添加>>",IDC_ADD_THIRD_TO_USINGLIST,329,59,50,14
+    PUSHBUTTON      "<<移除<<",IDC_REMOVE,329,120,50,14
+    CONTROL         "",IDC_LIST_NOUSING,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,26,307,159
+    LTEXT           "第三方未引用规范",IDC_STATIC,7,7,85,8
+END
+
+IDD_TESTUSER_STANDARD_UNITE_NEW DIALOGEX 0, 0, 725, 416
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_BORDER | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_LIST_USING,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,392,26,321,159
+    LTEXT           "第三方规范引用列表",IDC_STATIC,392,7,85,8
+    PUSHBUTTON      ">>添加>>",IDC_ADD_THIRD_TO_USINGLIST,329,59,50,14
+    PUSHBUTTON      "<<移除<<",IDC_REMOVE,329,120,50,14
+    LTEXT           "描述：",IDC_STATIC,12,276,26,9
+    EDITTEXT        IDC_ERROR_SUG,392,226,321,144,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "详细说明与建议：",IDC_STATIC,348,274,33,26
+    EDITTEXT        IDC_ERROR_DESC,46,226,268,144,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    PUSHBUTTON      "确定",IDC_OK,46,385,50,14
+    PUSHBUTTON      "取消",IDC_CANCEL,522,385,50,14
+    EDITTEXT        IDC_ERROR_NUM,47,201,107,17,ES_AUTOHSCROLL
+    LTEXT           "编号：",IDC_STATIC,11,205,26,9
+    LTEXT           "错误类型：",IDC_STATIC,169,205,40,9
+    LTEXT           "错误严重类型：",IDC_STATIC,542,205,58,9
+    COMBOBOX        IDC_COMBO_ERROR_TYPE,213,202,309,98,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_ERROR_CLASS1,608,202,105,98,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_LIST_NOUSING,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,26,307,159
+    LTEXT           "第三方未引用规范",IDC_STATIC,7,7,85,8
+END
+
+IDD_TESTUSER_STANDARD_THIRD_NEW DIALOGEX 0, 0, 596, 403
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_BORDER
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "新增标准",IDC_NEW,101,353,50,14
+    PUSHBUTTON      "取消",IDC_CANCEL,357,353,50,14
+    LTEXT           "描述：",IDC_STATIC,21,53,26,9
+    EDITTEXT        IDC_ERROR_NUM,56,20,107,17,ES_AUTOHSCROLL | ES_WANTRETURN
+    EDITTEXT        IDC_ERROR_SUG,56,76,471,113,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "详细说明与建议：",IDC_STATIC,16,89,33,26
+    LTEXT           "编号：",IDC_STATIC,21,24,26,9
+    EDITTEXT        IDC_ERROR_DESC,56,50,471,17,ES_AUTOHSCROLL | ES_WANTRETURN
+    CONTROL         "需要人工复查",IDC_ERROR_MANUAL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,55,201,64,10
+    CONTROL         "不关注",IDC_ERROR_NOCHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,166,201,40,10
+    EDITTEXT        IDC_ERROR_CHECKSUG,55,223,471,113,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "人工复查说明与建议：",IDC_STATIC,15,260,33,26
+    LTEXT           "检查工具:",IDC_STATIC,278,201,36,8
+    COMBOBOX        IDC_COMBO_TOOLTYPE,324,198,108,119,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_TESTUSER_STANDARD_THIRD_EDIT DIALOGEX 0, 0, 554, 417
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_BORDER
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "确定",IDC_OK,101,353,50,14
+    PUSHBUTTON      "取消",IDC_CANCEL,357,353,50,14
+    LTEXT           "描述：",IDC_STATIC,21,53,26,9
+    EDITTEXT        IDC_ERROR_NUM,56,20,107,17,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_ERROR_SUG,56,76,471,113,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "详细说明与建议：",IDC_STATIC,12,78,33,26
+    LTEXT           "编号：",IDC_STATIC,21,24,26,9
+    EDITTEXT        IDC_ERROR_DESC,56,50,471,17,ES_AUTOHSCROLL | ES_WANTRETURN
+    CONTROL         "需要人工复查",IDC_ERROR_MANUAL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,55,201,64,10
+    CONTROL         "不关注",IDC_ERROR_NOCHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,166,201,40,10
+    EDITTEXT        IDC_ERROR_CHECKSUG,55,223,471,113,ES_MULTILINE | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "人工复查指导说明：",IDC_STATIC,7,223,42,26
+    LTEXT           "检查工具:",IDC_STATIC,278,201,36,8
+    COMBOBOX        IDC_COMBO_TOOLTYPE,324,198,108,87,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_DLG_CREATE_PROJECT DIALOGEX 0, 0, 316, 163
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "创建"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,89,89,50,14
+    PUSHBUTTON      "取消",IDCANCEL,176,89,50,14
+    LTEXT           "名称：",IDC_STATIC,19,48,25,8
+    EDITTEXT        IDC_EDIT_NAME,49,45,235,14,ES_AUTOHSCROLL
+END
+
+IDD_TESTUSER_STANDARD_NEW DIALOGEX 0, 0, 316, 149
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_BORDER | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,7,128,50,14
+    PUSHBUTTON      "取消",IDCANCEL,259,128,50,14
+    EDITTEXT        IDC_EDIT1,113,63,129,14,ES_AUTOHSCROLL
+    LTEXT           "标准名称",IDC_STATIC,73,65,33,8
+END
+
+IDD_STANDARD_FIELD_EDIT DIALOGEX 0, 0, 717, 448
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "应用标准",IDOK,99,254,50,16
+    PUSHBUTTON      "取消",IDCANCEL,511,254,50,16,NOT WS_VISIBLE
+    GROUPBOX        "错误类型管理",IDC_STATIC,7,7,301,219,0,WS_EX_TRANSPARENT
+    LISTBOX         IDC_ERROR_TYPE_LIST,25,21,221,165,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_ERRORTYPE,25,202,179,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "添加",IDC_ERRTYPE_ADD,212,202,34,14
+    PUSHBUTTON      "删除",IDC_ERRORTYPE_DELETE,261,58,41,14
+    GROUPBOX        "错误警告管理",IDC_STATIC,327,7,303,219,0,WS_EX_TRANSPARENT
+    LISTBOX         IDC_ERROR_CLASS_LIST,344,21,221,165,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_ERRORWRANING,345,202,179,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "添加",IDC_ERRCLASS_ADD,532,202,34,14
+    PUSHBUTTON      "删除",IDC_ERRCLASS_DELETE,581,58,41,14
+END
+
+IDD_ADMINUSER_USEREDIT_VIEW DIALOGEX 0, 0, 725, 343
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_LIST_USER,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,271,274
+    LISTBOX         IDC_LIST_USERPROJECT,304,7,268,119,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "应用",IDC_OK,598,241,79,40
+    PUSHBUTTON      "编辑用户",IDC_EDITUSER,598,62,79,40
+    PUSHBUTTON      "新增用户",IDC_ADDUSER,598,7,79,40
+    LISTBOX         IDC_LIST_NOUSING_USERPROJECT,304,162,268,119,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "↑↑增加↑↑",IDC_ADDPRO,343,137,50,14
+    PUSHBUTTON      "↓↓移除↓↓",IDC_REMOVEPRO,457,137,50,14
+    PUSHBUTTON      "删除选定用户",IDC_DELSELUSER,598,118,79,40
+END
+
+IDD_ADMINUSER_USERADDEDIT_DLG DIALOGEX 0, 0, 370, 181
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_BORDER
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_USERNAME,131,44,106,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PASSWORD,131,65,106,14,ES_PASSWORD | ES_AUTOHSCROLL
+    EDITTEXT        IDC_REPASSWORD,131,86,106,14,ES_PASSWORD | ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_USERTYPE,131,112,146,79,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "确定",IDC_OK,313,160,50,14
+    PUSHBUTTON      "取消",IDC_CANCAL,7,160,50,14
+    LTEXT           "用户名",IDC_STATIC,97,47,25,8
+    LTEXT           "密码",IDC_STATIC,105,67,17,8
+    LTEXT           "确认密码",IDC_STATIC,89,88,33,8
+    LTEXT           "用户类型",IDC_STATIC,89,113,33,8
+END
+
+IDD_LOGONIN_DLG DIALOGEX 0, 0, 341, 150
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "请选择登陆"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT_USERNAME,80,63,113,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PASSWORD,80,86,113,14,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "登陆",IDOK,259,119,66,23
+    PUSHBUTTON      "配置",ID_CONFIG,259,81,66,22
+    PUSHBUTTON      "取消",IDCANCEL,14,119,67,23
+    COMBOBOX        IDC_COMBO_LOGON_TYPE,80,11,198,101,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "选择登陆目标:",IDC_STATIC,23,13,52,8
+    LTEXT           "用户名:",IDC_STATIC,46,65,28,8
+    LTEXT           "密码:",IDC_STATIC,52,88,20,8
+    COMBOBOX        IDC_COMBO_LOGON_APP_TYPE,80,33,198,98,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "选择登陆应用:",IDC_STATIC,23,35,52,8
+END
+
+IDD_CONFIG DIALOGEX 0, 0, 416, 157
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "登陆配置"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,299,110,78,31
+    PUSHBUTTON      "取消",IDCANCEL,45,110,78,31
+    EDITTEXT        IDC_LOCALDIR,112,17,265,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SOAPDIR,112,46,265,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SOAPTIMEOUT,112,76,128,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "本地对象系统工作路径",IDC_STATIC,21,19,81,8
+    LTEXT           "WebService WSDL地址",IDC_STATIC,26,49,76,8
+    LTEXT           "SOAP请求超时",IDC_STATIC,50,78,51,8
+    LTEXT           "毫秒",IDC_STATIC,243,79,17,8
+END
+
+IDD_FLOATWND DIALOGEX 0, 0, 168, 18
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "",IDC_STATIC_TIP2,160,6,8,8,0,WS_EX_TRANSPARENT
+END
+
+IDD_DEVUSER_REPORT_VIEW DIALOGEX 0, 0, 782, 427
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "查看第三方描述",IDC_LOOKTHIRD,621,181,65,40,NOT WS_VISIBLE
+    CONTROL         "",IDC_LIST_REPORT,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,0,0,742,115
+    PUSHBUTTON      "提交",IDC_SUBMIT,653,252,65,25
+    PUSHBUTTON      "重新获取",IDC_REFRESH,653,215,65,26
+    LTEXT           "统一编号：",IDC_STATIC,637,123,41,8
+    LTEXT           "第三方编号：",IDC_STATIC,629,135,49,8
+    LTEXT           "###",IDC_ERROR_NUM_UNITE,679,123,17,8
+    LTEXT           "###",IDC_ERROR_NUM_THIRD,679,135,15,8
+    LTEXT           "错误类型：",IDC_STATIC,637,148,41,8
+    LTEXT           "###",IDC_ERROR_TYPE,679,148,61,8
+    LTEXT           "警告级别：",IDC_STATIC,637,161,41,8
+    LTEXT           "###",IDC_ERROR_CLASS,680,161,44,8
+    PUSHBUTTON      "生成报告总结",IDC_MAKE_SUMMARY,650,191,65,14,NOT WS_VISIBLE
+    CONTROL         "",IDC_TAB_DATA,"SysTabControl32",TCS_VERTICAL | TCS_BUTTONS | TCS_MULTILINE | WS_BORDER,0,119,620,301,WS_EX_TRANSPARENT | WS_EX_CLIENTEDGE
+    LTEXT           "人员指派：",IDC_STATIC,637,175,40,10
+    COMBOBOX        IDC_COMBO_DISPATCH,678,173,64,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "反馈状态：",IDC_STATIC,637,193,41,10
+    COMBOBOX        IDC_COMBO_DEVSTATE,678,191,64,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "新建问题",IDC_SENDPOST,653,294,65,25
+    PUSHBUTTON      "编辑问题",IDC_EDITPOST,653,329,65,25
+END
+
+IDD_DEVUSER_REPORT_VIEW_2 DIALOGEX 0, 0, 776, 340
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "静态",IDC_STATIC,0,0,602,294
+END
+
+IDD_DEVUSER_REPORT_VIEW_1 DIALOGEX 0, 0, 547, 235
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "行号：",IDC_STATIC,23,33,26,9
+    EDITTEXT        IDC_LINE_NUM,52,28,486,17,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN
+    LTEXT           "问题位置：",IDC_STATIC,7,11,41,9
+    EDITTEXT        IDC_FILENAME,52,7,486,17,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN
+    LTEXT           "描述：",IDC_STATIC,23,77,26,9
+    EDITTEXT        IDC_DESCRIPTION,52,72,486,17,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN
+    EDITTEXT        IDC_EDIT_SUGGEST,52,94,486,126,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "建议：",IDC_STATIC,23,94,25,10
+    LTEXT           "错误描述：",IDC_STATIC,7,55,42,9
+    EDITTEXT        IDC_ERROR_DESCRIPTION,52,50,486,17,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN
+END
+
+IDD_CODEVIEW_DLG DIALOGEX 0, 0, 636, 380
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "静态",IDC_STATIC,0,0,602,294
+END
+
+IDD_NEWPOST DIALOGEX 0, 0, 484, 231
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,104,183,100,32
+    PUSHBUTTON      "取消",IDCANCEL,278,183,100,32
+    EDITTEXT        IDC_EDIT_SUBJECT,54,15,403,14,ES_AUTOHSCROLL | ES_WANTRETURN
+    LTEXT           "主题：",IDC_STATIC,25,17,25,8
+    EDITTEXT        IDC_EDIT_POSITION,54,150,403,14,ES_AUTOHSCROLL | ES_WANTRETURN
+    LTEXT           "问题位置：",IDC_STATIC,10,153,41,8
+    EDITTEXT        IDC_EDIT_CONTENT,54,35,403,109,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "内容：",IDC_STATIC,25,35,25,8
+END
+
+IDD_SUBPROJECTMANGERDLG DIALOGEX 0, 0, 316, 185
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "应用",IDOK,259,164,50,14
+    PUSHBUTTON      "取消",IDCANCEL,7,164,50,14
+    COMBOBOX        IDC_COMBO_PROJECTSTATE,120,49,121,68,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "项目信息",IDC_STATIC,27,16,261,84,0,WS_EX_TRANSPARENT
+    LTEXT           "项目阶段:",IDC_STATIC,67,51,36,8
+END
+
+IDD_ADDR_NAVIGATE DIALOGEX 0, 0, 437, 25
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_ADDR,56,0,266,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_ADDRTYPE,0,0,48,71,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_CODEVIEW DIALOGEX 0, 0, 464, 245
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_MSGSHOW_VIEW DIALOGEX 0, 0, 316, 185
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_UNIT_TEST_AUTOREPORT DIALOGEX 0, 0, 668, 331
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_UnitList,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,580,317
+    PUSHBUTTON      "编辑",IDC_EDIT,611,50,50,14
+    PUSHBUTTON      "新建",IDC_NEW,611,22,50,13
+    PUSHBUTTON      "自动生成报告",IDC_AutoMake,611,161,50,14
+    PUSHBUTTON      "复制选中",IDC_COPYSEL,611,86,50,14
+    PUSHBUTTON      "删除选中",IDC_DELSEL,611,122,50,14
+END
+
+IDD_UNITADDEDIT DIALOGEX 0, 0, 450, 269
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "新建"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,55,248,50,14
+    PUSHBUTTON      "取消",IDCANCEL,393,248,50,14
+    EDITTEXT        IDC_EDIT_PRJNAME,77,7,105,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_SYSNAME,77,28,105,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_MODULENAME,77,47,105,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_JUDGE,77,87,105,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_TESTER,77,68,105,14,ES_AUTOHSCROLL
+    LTEXT           "项目名称",IDC_STATIC,33,10,33,8
+    LTEXT           "系统名称",IDC_STATIC,33,28,33,8
+    LTEXT           "模块名称",IDC_STATIC,33,47,33,8
+    LTEXT           "测试者",IDC_STATIC,33,71,25,8
+    LTEXT           "评审者",IDC_STATIC,33,92,25,8
+    LTEXT           "起始日期",IDC_STATIC,33,111,33,8
+    EDITTEXT        IDC_EDIT_SUG,77,154,344,84,ES_MULTILINE | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL
+    LTEXT           "结束日期",IDC_STATIC,33,135,33,8,NOT WS_VISIBLE
+    LTEXT           "建议改进",IDC_STATIC,33,156,33,8
+    EDITTEXT        IDC_EDIT_IVT,327,28,42,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_INVT,327,49,42,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_BT,327,68,42,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_TCCDT,327,108,42,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_RCT,327,89,42,14,ES_AUTOHSCROLL
+    LTEXT           "接口功能测试-有效等价类(IVT)",IDC_STATIC,205,28,108,8
+    LTEXT           "接口功能测试-无效等价类(INVT)",IDC_STATIC,201,52,112,8
+    LTEXT           "边界测试（BT）",IDC_STATIC,256,71,57,8
+    LTEXT           "关系判定表测试（RCT）",IDC_STATIC,227,94,86,8
+    LTEXT           "用例覆盖度测试(TCCDT)",IDC_STATIC,229,113,84,8
+    EDITTEXT        IDC_EDIT_IVT2,379,28,42,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_INVT2,379,49,42,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_BT2,379,68,42,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_TCCDT2,379,108,42,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_RCT2,379,89,42,14,ES_AUTOHSCROLL
+    CONTROL         "",IDC_DATE_JUDGEDATE,"SysDateTimePick32",DTS_RIGHTALIGN | NOT WS_VISIBLE | WS_TABSTOP,77,133,105,15
+    CONTROL         "",IDC_DATE_TESTDATE,"SysDateTimePick32",DTS_RIGHTALIGN | WS_TABSTOP,77,108,105,15
+    LTEXT           "缺陷率",IDC_STATIC,332,13,25,8
+    LTEXT           "用例数",IDC_STATIC,388,13,25,8
+END
+
+IDD_UNIT_ENDTime DIALOGEX 0, 0, 316, 109
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "项目结束时间"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,205,88,50,14
+    PUSHBUTTON      "取消",IDCANCEL,259,88,50,14
+    CONTROL         "",IDC_DATETIMEPICKER1,"SysDateTimePick32",DTS_RIGHTALIGN | WS_TABSTOP,102,28,100,15
+END
+
+IDD_STRCUTDATA_DESIGN_VIEW DIALOGEX 0, 0, 622, 425
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_TYPE_TYPE,"SysTreeView32",WS_BORDER | WS_HSCROLL | WS_TABSTOP,7,7,163,336
+    GROUPBOX        "模板类型列表",IDC_STATIC,183,7,397,124,0,WS_EX_TRANSPARENT
+    LISTBOX         IDC_TEMPLATE_LIST,203,23,106,94,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_PARAMNAME,397,23,66,14,ES_AUTOHSCROLL
+    LTEXT           "模板参数名称",IDC_STATIC,336,26,49,8
+    EDITTEXT        IDC_DESC,397,51,151,42,ES_AUTOHSCROLL
+    LTEXT           "模板参数说明",IDC_STATIC,336,55,49,8
+    PUSHBUTTON      "添加",IDC_AddTemplate,326,103,50,14
+    PUSHBUTTON      "删除",IDC_DelTemplate,397,103,50,14
+    PUSHBUTTON      "刷新",IDC_UpData,462,103,50,14
+    GROUPBOX        "参数列表",IDC_STATIC,183,137,397,140,0,WS_EX_TRANSPARENT
+    LISTBOX         IDC_PRARM_LIST,203,153,106,113,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_PARAMNAME2,397,175,66,14,ES_AUTOHSCROLL
+    LTEXT           "参数名称",IDC_STATIC,352,178,33,8
+    EDITTEXT        IDC_DESC2,397,204,151,42,ES_AUTOHSCROLL
+    LTEXT           "参数说明",IDC_STATIC,352,207,33,8
+    PUSHBUTTON      "添加到类型库",IDC_AddToTypeLib,464,292,50,14
+    PUSHBUTTON      "删除",IDC_DelTemplate2,397,252,50,14
+    PUSHBUTTON      "刷新",IDC_UpData2,462,252,50,14
+    COMBOBOX        IDC_COMBO_PRARMTYPE,397,153,150,139,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "参数类型",IDC_STATIC,352,155,33,8
+    COMBOBOX        IDC_COMBO_PRARMTYPE2,235,292,91,139,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "对象类型",IDC_STATIC,186,294,33,8
+    EDITTEXT        IDC_PARAMNAME3,382,292,66,14,ES_AUTOHSCROLL
+    LTEXT           "类型名称",IDC_STATIC,337,293,33,8
+    PUSHBUTTON      "添加",IDC_AddTemplate3,326,252,50,14
+    PUSHBUTTON      "保存生效",IDC_SAVE,530,292,50,14
+END
+
+IDD_AUTOSTRUCTDATADESIGN_DIALOG DIALOGEX 0, 0, 558, 373
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    LISTBOX         IDC_LIST_FUNC,7,7,544,134,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_LIST_PRARMDEF,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,181,544,117
+    EDITTEXT        IDC_EDIT_DESC,45,320,351,14,ES_AUTOHSCROLL
+    LTEXT           "参数名",IDC_STATIC,17,304,22,8
+    LTEXT           "参数说明",IDC_STATIC,7,321,28,8
+    EDITTEXT        IDC_EDIT_PARAMNAME2,39,145,205,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_FUNCDESC,39,163,399,14,ES_AUTOHSCROLL
+    LTEXT           "过程名",IDC_STATIC,12,147,22,8
+    LTEXT           "过程说明",IDC_STATIC,7,164,28,8
+    COMBOBOX        IDC_COMBO1,304,146,134,108,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "过程类型",IDC_STATIC,268,147,28,8
+    EDITTEXT        IDC_EDIT_DEFAULTPARAM,162,302,77,14,ES_AUTOHSCROLL
+    LTEXT           "默认值",IDC_STATIC,129,303,22,8
+    PUSHBUTTON      "添加过程定义",IDC_ADDFUNC,446,146,50,14
+    PUSHBUTTON      "删除过程定义",IDC_DELFUNC,501,164,50,14
+    PUSHBUTTON      "添加参数",IDC_ADDPRRARM,404,302,50,14
+    PUSHBUTTON      "删除参数",IDC_DELPARAM,501,302,50,14
+    PUSHBUTTON      "修改当前选定参数",IDC_UPDATA_PARAMDEF,404,320,69,14
+    LTEXT           "参数属性",IDC_STATIC,247,304,28,8
+    COMBOBOX        IDC_COMBO2,282,302,114,64,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "修改过程定义",IDC_EDITFUNC,501,146,50,14
+    EDITTEXT        IDC_EDIT_PARAMNAME,45,302,76,14,ES_AUTOHSCROLL
+END
+
+IDD_NEWEXPDLG DIALOGEX 0, 0, 312, 146
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "添加用例"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,255,125,50,14
+    PUSHBUTTON      "取消",IDCANCEL,7,125,50,14
+    COMBOBOX        IDC_COMBO1,70,11,128,65,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO2,70,28,128,65,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO3,70,45,128,67,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "驱动用例",IDC_STATIC,25,15,33,8
+    LTEXT           "期望",IDC_STATIC,41,48,17,8
+    LTEXT           "场景用例",IDC_STATIC,25,31,33,8
+    COMBOBOX        IDC_COMBO4,70,62,128,67,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "系统配置",IDC_STATIC,25,65,33,8
+    EDITTEXT        IDC_EDIT_USECASENAME,70,80,128,14,ES_AUTOHSCROLL
+    LTEXT           "用例名称",IDC_STATIC,25,82,33,8
+    EDITTEXT        IDC_EDIT_USECASEDESC,70,99,235,14,ES_AUTOHSCROLL
+    LTEXT           "用例描述",IDC_STATIC,25,101,33,8
+END
+
+IDD_ExpMake DIALOGEX 0, 0, 646, 358
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LISTBOX         IDC_LIST_EXP,7,7,631,136,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_PARAMNAME3,42,289,315,15,ES_AUTOHSCROLL
+    CONTROL         "",IDC_LIST_PRARM2,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,158,632,128
+    PUSHBUTTON      "修改当前选定参数",IDC_UPDATA_PARAM2,558,308,81,16
+    LTEXT           "参数值",IDC_STATIC,7,292,26,9
+    PUSHBUTTON      "添加用例表达式",IDC_ADDCASEEXP,8,308,65,16
+    PUSHBUTTON      "删除用例表达式",IDC_DELCASEEXP,97,308,63,16
+    PUSHBUTTON      "执行选定的用例表达式",IDC_RunSel,309,331,92,20
+    PUSHBUTTON      "执行全部用例表达式",IDC_RunAll,423,331,90,20
+    EDITTEXT        IDC_EDIT1,110,331,175,15,ES_AUTOHSCROLL
+    LTEXT           "执行命令格式化字符串",IDC_STATIC,17,334,82,9
+    COMBOBOX        IDC_COMBO_ENUMEXP,471,289,168,88,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "枚举表达式",IDC_STATIC,403,291,47,9
+    LTEXT           "",IDC_STATIC_DESC,7,145,632,11
+END
+
+IDD_MAIN DIALOGEX 0, 0, 662, 394
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "白盒系统测试平台"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_TAB1,"SysTabControl32",0x0,0,0,662,373
+    PUSHBUTTON      "保存用例库",IDC_SAVE,595,377,50,14
+END
+
+IDD_TESTLIBMGR DIALOGEX 0, 0, 519, 289
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_LIST_TESTLIB,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,261,275
+    PUSHBUTTON      "删除测试库",IDC_DELLIB,321,105,50,14
+    COMBOBOX        IDC_COMBO1,321,43,191,152,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT1,321,7,192,14,ES_AUTOHSCROLL
+    LTEXT           "测试库名",IDC_STATIC,284,9,33,8
+    LTEXT           "复制来源",IDC_STATIC,284,44,33,8
+    PUSHBUTTON      "新建测试库",IDC_NEWTESTLIB,321,80,50,14
+    PUSHBUTTON      "加载选定的库",IDC_BUTTON_LOADLIB,321,130,61,14
+    CONTROL         "是否复制库",IDC_CHECK_ISCOPYLIB,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,282,27,56,10
+END
+
+IDD_MACRO DIALOGEX 0, 0, 741, 377
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_LIST_PRARMDEF_CLOSE,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,348,194,386,126
+    EDITTEXT        IDC_EDIT_DESC,45,344,494,15,ES_AUTOHSCROLL
+    LTEXT           "参数说明",IDC_STATIC,11,346,33,9
+    EDITTEXT        IDC_EDIT_MACRONAME,45,156,258,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_FUNCDESC,45,175,494,15,ES_AUTOHSCROLL
+    LTEXT           "宏名",IDC_STATIC,13,159,26,9
+    LTEXT           "过程说明",IDC_STATIC,7,177,33,9
+    COMBOBOX        IDC_COMBO_MACROTYPE,363,156,176,108,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "宏类型",IDC_STATIC,323,159,33,9
+    EDITTEXT        IDC_EDIT_DEFAULTPARAM,45,324,258,15,ES_AUTOHSCROLL
+    LTEXT           "默认值",IDC_STATIC,18,327,26,9
+    PUSHBUTTON      "添加宏定义",IDC_ADDFUNC,562,156,59,15
+    PUSHBUTTON      "删除宏定义",IDC_DELFUNC,626,175,59,15
+    PUSHBUTTON      "删除参数",IDC_DELPARAM,626,324,59,15
+    PUSHBUTTON      "修改当前选定参数",IDC_UPDATA_PARAMDEF,604,344,81,15
+    LTEXT           "参数属性",IDC_STATIC,326,327,33,9
+    COMBOBOX        IDC_COMBO2,378,324,161,64,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "修改宏定义",IDC_EDITFUNC,626,156,59,15
+    CONTROL         "",IDC_LIST_MACRO,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,226,144
+    CONTROL         "",IDC_LIST_MACRO_FUNC,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,239,7,226,144
+    CONTROL         "",IDC_LIST_MACRO_FUNC_CLOSE,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,499,7,235,144
+    PUSHBUTTON      "↑",IDC_UP,471,23,20,14
+    PUSHBUTTON      "←",IDC_LEFT,471,46,20,14
+    PUSHBUTTON      "→",IDC_RIGHT,471,71,20,14
+    PUSHBUTTON      "↓",IDC_DOWN,471,95,20,14
+    CONTROL         "",IDC_LIST_PRARMDEF,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,194,307,126
+    PUSHBUTTON      "←",IDC_LEFT_PAR,320,236,20,14
+    PUSHBUTTON      "→",IDC_RIGHT_PAR,320,260,20,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080403a8"
+        BEGIN
+            VALUE "CompanyName", "TODO: <公司名>"
+            VALUE "FileDescription", "TODO: <文件说明>"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "WhiteboxTestingPlatform.exe"
+            VALUE "LegalCopyright", "TODO: (C) <公司名>。保留所有权利。"
+            VALUE "OriginalFilename", "WhiteboxTestingPlatform.exe"
+            VALUE "ProductName", "TODO: <产品名>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 936
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_LOGONIN_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 86
+        VERTGUIDE, 331
+        BOTTOMMARGIN, 143
+        HORZGUIDE, 82
+        HORZGUIDE, 112
+        HORZGUIDE, 142
+    END
+
+    IDD_CONFIG, DIALOG
+    BEGIN
+        VERTGUIDE, 44
+        VERTGUIDE, 377
+        VERTGUIDE, 395
+        HORZGUIDE, 110
+    END
+
+    IDD_AUTOSTRUCTDATADESIGN_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 551
+        VERTGUIDE, 21
+        VERTGUIDE, 45
+        VERTGUIDE, 181
+        VERTGUIDE, 239
+        VERTGUIDE, 244
+        VERTGUIDE, 282
+        VERTGUIDE, 321
+        VERTGUIDE, 396
+        VERTGUIDE, 404
+        VERTGUIDE, 438
+        VERTGUIDE, 461
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 366
+        HORZGUIDE, 105
+        HORZGUIDE, 123
+        HORZGUIDE, 127
+        HORZGUIDE, 133
+        HORZGUIDE, 146
+        HORZGUIDE, 160
+        HORZGUIDE, 178
+        HORZGUIDE, 181
+        HORZGUIDE, 302
+        HORZGUIDE, 307
+        HORZGUIDE, 321
+        HORZGUIDE, 334
+        HORZGUIDE, 339
+    END
+
+    IDD_NEWEXPDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 305
+        VERTGUIDE, 57
+        VERTGUIDE, 100
+        VERTGUIDE, 112
+        VERTGUIDE, 240
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 139
+    END
+
+    IDD_ExpMake, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 639
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 351
+        HORZGUIDE, 272
+        HORZGUIDE, 308
+        HORZGUIDE, 331
+    END
+
+    IDD_TESTLIBMGR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 512
+        VERTGUIDE, 282
+        VERTGUIDE, 321
+        VERTGUIDE, 371
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 282
+        HORZGUIDE, 37
+    END
+
+    IDD_MACRO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 734
+        VERTGUIDE, 45
+        VERTGUIDE, 52
+        VERTGUIDE, 303
+        VERTGUIDE, 320
+        VERTGUIDE, 471
+        VERTGUIDE, 539
+        VERTGUIDE, 685
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 370
+        HORZGUIDE, 151
+        HORZGUIDE, 156
+        HORZGUIDE, 190
+        HORZGUIDE, 320
+        HORZGUIDE, 324
+        HORZGUIDE, 359
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// HTML
+//
+
+IDR_HTML_USECASEEXPMAKEDLG HTML                    "res\\UseCaseExpMakeDlg.htm"
+IDR_HTML_NEWPOST        HTML                    "NewPost.htm"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_DEVUSER_REPORT_VIEW DLGINIT
+BEGIN
+    IDC_COMBO_DEVSTATE, 0x403, 5, 0
+0xc2d0, 0xf6d4, "\000" 
+    IDC_COMBO_DEVSTATE, 0x403, 5, 0
+0xded0, 0xb4b8, "\000" 
+    IDC_COMBO_DEVSTATE, 0x403, 5, 0
+0xd2b9, 0xf0c6, "\000" 
+    IDC_COMBO_DEVSTATE, 0x403, 5, 0
+0xb4ce, 0xf6be, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDP_OLE_INIT_FAILED     "OLE 初始化失败。请确保 OLE 库是正确的版本。"
+    IDP_SOCKETS_INIT_FAILED "Windows 套接字初始化失败。"
+END
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "WhiteboxTestingPlatform"
+    IDR_WhiteboxTestingTYPE "\nWhiteboxTesting\nWhiteboxTesting\n\n\nWhiteboxTestingPlatform.Document\nWhiteboxTestingPlatform.Document"
+    IDS_WINDOWS_MANAGER     "窗口(&W)..."
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "WhiteboxTestingPlatform"
+    AFX_IDS_IDLEMESSAGE     "就绪"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_NEW             "创建新文档\n新建"
+    ID_FILE_OPEN            "打开现有文档\n打开"
+    ID_FILE_CLOSE           "关闭活动文档\n关闭"
+    ID_FILE_SAVE            "保存活动文档\n保存"
+    ID_FILE_SAVE_AS         "用新名称保存活动文档\n另存为"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "显示程序信息、版本号和版权\n关于"
+    ID_APP_EXIT             "退出应用程序；提示保存文档\n退出"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "打开此文档"
+    ID_FILE_MRU_FILE2       "打开此文档"
+    ID_FILE_MRU_FILE3       "打开此文档"
+    ID_FILE_MRU_FILE4       "打开此文档"
+    ID_FILE_MRU_FILE5       "打开此文档"
+    ID_FILE_MRU_FILE6       "打开此文档"
+    ID_FILE_MRU_FILE7       "打开此文档"
+    ID_FILE_MRU_FILE8       "打开此文档"
+    ID_FILE_MRU_FILE9       "打开此文档"
+    ID_FILE_MRU_FILE10      "打开此文档"
+    ID_FILE_MRU_FILE11      "打开此文档"
+    ID_FILE_MRU_FILE12      "打开此文档"
+    ID_FILE_MRU_FILE13      "打开此文档"
+    ID_FILE_MRU_FILE14      "打开此文档"
+    ID_FILE_MRU_FILE15      "打开此文档"
+    ID_FILE_MRU_FILE16      "打开此文档"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NEXT_PANE            "切换到下一个窗格\n下一窗格"
+    ID_PREV_PANE            "切换回上一个窗格\n上一窗格"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_WINDOW_NEW           "为活动文档打开另一个窗口\n新建窗口"
+    ID_WINDOW_ARRANGE       "在窗口底部排列图标\n排列图标"
+    ID_WINDOW_CASCADE       "以重叠方式排列窗口\n层叠窗口"
+    ID_WINDOW_TILE_HORZ     "以非重叠的平铺方式排列窗口\n平铺窗口"
+    ID_WINDOW_TILE_VERT     "以非重叠的平铺方式排列窗口\n平铺窗口"
+    ID_WINDOW_SPLIT         "将活动窗口拆分为多个窗格\n拆分"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_CLEAR           "清除选定内容\n清除"
+    ID_EDIT_CLEAR_ALL       "清除全部内容\n全部清除"
+    ID_EDIT_COPY            "复制选定内容并将其放到剪贴板上\n复制"
+    ID_EDIT_CUT             "剪切选定内容并将其放到剪贴板上\n剪切"
+    ID_EDIT_FIND            "查找指定的文本\n查找"
+    ID_EDIT_PASTE           "插入剪贴板内容\n粘贴"
+    ID_EDIT_REPEAT          "重复上一操作\n重复"
+    ID_EDIT_REPLACE         "用其他文本替换特定的文本\n替换"
+    ID_EDIT_SELECT_ALL      "选定整个文档\n全选"
+    ID_EDIT_UNDO            "撤消上一操作\n撤消"
+    ID_EDIT_REDO            "恢复上次撤消的操作\n重做"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_STATUS_BAR      "显示或隐藏状态栏\n切换状态栏"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "更改窗口大小"
+    AFX_IDS_SCMOVE          "更改窗口位置"
+    AFX_IDS_SCMINIMIZE      "将窗口缩小为图标"
+    AFX_IDS_SCMAXIMIZE      "使窗口最大化显示"
+    AFX_IDS_SCNEXTWINDOW    "切换到下一个文档窗口"
+    AFX_IDS_SCPREVWINDOW    "切换到前一个文档窗口"
+    AFX_IDS_SCCLOSE         "关闭活动窗口并提示保存文档"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "将窗口恢复到正常大小"
+    AFX_IDS_SCTASKLIST      "激活任务列表"
+    AFX_IDS_MDICHILD        "激活此窗口"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_STATUS_PANE1        "窗格 1"
+    IDS_STATUS_PANE2        "窗格 2"
+    IDS_TOOLBAR_STANDARD    "标准"
+    IDS_TOOLBAR_CUSTOMIZE   "自定义..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_FILE_VIEW           "文件视图"
+    IDS_CLASS_VIEW          "类视图"
+    IDS_OUTPUT_WND          "输出"
+    IDS_PROPERTIES_WND      "属性"
+    IDS_PROJECT_VIEW        "项目视图"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_EXPLORER            "资源管理器"
+    IDS_EDIT_MENU           "编辑"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BUILD_TAB           "生成"
+    IDS_DEBUG_TAB           "调试"
+    IDS_FIND_TAB            "查找"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_32817                "ID_REPORT_REGET"
+END
+
+#endif    // 中文(中华人民共和国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\WhiteboxTestingPlatform.rc2"  // 非 Microsoft Visual C++ 编辑的资源
+#include "l.CHS\afxres.rc"          // 标准组件
+#if !defined(_AFXDLL)
+#include "l.CHS\afxprint.rc"                // 打印/打印预览资源
+#include "l.CHS\afxribbon.rc"               // MFC 功能区和控件条资源
+#endif
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

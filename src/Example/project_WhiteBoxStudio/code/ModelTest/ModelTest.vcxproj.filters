@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{a2b765f1-cbc2-40db-8277-4c67c9ed0e38}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{de62a561-e142-4ed0-9007-f62b1ac2a2f8}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{23424d5e-1835-4966-bb60-4037fee6bbda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\SerializeFunction">
+      <UniqueIdentifier>{2355f7f3-8ede-43e1-ae98-b27038480918}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{ffb4677b-8e9d-4fa9-8860-72f940db8c66}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ModelTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common\SerializeFunction\XmlRender.cpp">
+      <Filter>common\SerializeFunction</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DataModuleDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Lock.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\SerializeFunction\BaseFunctionTool.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="common\SerializeFunction\BaseObjectSerialize.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="common\SerializeFunction\InterlayerContainer.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="common\SerializeFunction\Serialize.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="common\SerializeFunction\SerializeInterface.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="common\SerializeFunction\SerIni.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="common\SerializeFunction\StorageObject.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="common\SerializeFunction\XmlRender.h">
+      <Filter>common\SerializeFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+</Project>
