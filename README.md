@@ -12,9 +12,13 @@ HereticOS-ObjectSystem是一款C++语言开发的windows平台的轻量级分布
 |Example\ObjectSystemComServer    |   第一版ObjectSystem的MSSOAP对象服务器  |  
 |Example\project_WhiteBoxStudio   |   第一版ObjectSystem框架基础上设计的一款软件，体现敏捷开发的思路。|     
 |Example\XMLObjectTest1        |    c++对象序列化例子  |  
-|Example\ObjectSystem2Test     |    ObjectSystem第二版测试例子，以及一款击鼓传花的例子。  |  
-    
-    
+|Example\ObjectSystem2Test     |    ObjectSystem第二版测试例子，以及一款击鼓传花的例子。  |   
+  
+**代码需要用VS2017才能编译**   
+  
+
+
+
 ## ObjectSystem V1介绍  
   
 第一版实做了C++对象序列化，以及对象服务器的基本功能UpdataObject GetObject以及对象锁等，系统在设计时使用KV查询模式，如果需要在不同组件中同步对象，则需要应用自行在KV上设计邮箱，并自行轮询，多组件对相同对象写时需要对对象上锁，以防止对象被不同角色篡改。  
