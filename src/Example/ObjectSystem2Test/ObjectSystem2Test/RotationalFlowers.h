@@ -127,6 +127,7 @@ public:
 						for (int s=5;s>0;s--)
 						{
 							printf_t(_T("游戏结束,%ds后退出..."),s);
+							Sleep(1000);
 						}
 						
 						::ExitProcess(0);

@@ -72,12 +72,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)..\bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)..\bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -157,6 +159,7 @@
     <ClInclude Include="..\..\..\other\ObjectSystem2\ObjectSystem.h" />
     <ClInclude Include="..\..\..\other\ObjectSystem2\ObjectSystem_Local.h" />
     <ClInclude Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\CommonTypeDef.h" />
+    <ClInclude Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagCallParameterV2_StructInfo.h" />
     <ClInclude Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagCallParameter_StructInfo.h" />
     <ClInclude Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagDirectoryInfoSet_StructInfo.h" />
     <ClInclude Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagDirectoryInfo_StructInfo.h" />
@@ -190,6 +193,7 @@
     <ClCompile Include="..\..\..\other\ObjectSystem2\ObjectFileOperation.cpp" />
     <ClCompile Include="..\..\..\other\ObjectSystem2\ObjectSystem.cpp" />
     <ClCompile Include="..\..\..\other\ObjectSystem2\ObjectSystem_Local.cpp" />
+    <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagCallParameterV2_StructInfo.cpp" />
     <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagCallParameter_StructInfo.cpp" />
     <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagDirectoryInfoSet_StructInfo.cpp" />
     <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagDirectoryInfo_StructInfo.cpp" />

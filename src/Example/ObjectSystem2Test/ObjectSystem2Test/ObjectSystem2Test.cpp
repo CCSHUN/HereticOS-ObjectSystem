@@ -21,6 +21,10 @@
 #define LAB2(x) LAB1(x)
 
 #define KEEPALIVED_MODE	TRUE
+#define HAS_FILE_SYSTEM
+
+
+
 //#define KEEPALIVED_MODE	FALSE
 /*
 #define SEROBJ_HEAD(_name) "../../../other/ObjectSystem2/ObjectSystem_"##_name##".cpp"
@@ -37,7 +41,11 @@
 #include "../../../other/ObjectSystem2/ObjectFileOperation.h"
 
 
-
+#ifdef HAS_FILE_SYSTEM
+typedef CObjectFileOperation_Nop FileSystem_T;
+#else
+typedef CObjectFileOperation FileSystem_T;
+#endif 
 
 
 class ObjectSystem2Config
@@ -110,10 +118,11 @@ void TestEvent2()
 	printf_t(_T("=============TestEvent2 End============\n"));
 }
 //CObjectSystem_Local<ObjectSystem2Config, CObjectFileOperation> g_localObjectSystem;
-typedef CObjectSystem_Local<ObjectSystem2Config, CObjectFileOperation> LocalObjectServerT;
-typedef Transport::Client<TransportMiniDirectCall<Transport::Server< LocalObjectServerT > >> LocalTransportT;
-typedef CObjectSystem_Client<LocalTransportT, 1> LocalClient1T;
-typedef CObjectSystem_Client<LocalTransportT, 2> LocalClient2T;
+typedef CObjectSystem_Local<ObjectSystem2Config, FileSystem_T> LocalObjectServerT;
+typedef Transport::Client<TransportMiniDirectCall<Transport::Server< LocalObjectServerT >>,false,false,1>	LocalTransport1T;
+typedef Transport::Client<TransportMiniDirectCall<Transport::Server< LocalObjectServerT >>>					LocalTransport2T;
+typedef CObjectSystem_Client<LocalTransport1T, 1> LocalClient1T;
+typedef CObjectSystem_Client<LocalTransport2T, 2> LocalClient2T;
 
 //TransportMini
 //typename Transport::Server<LocalObjectServerT>
@@ -350,7 +359,7 @@ void ObjectSystemTest()
 	for (int i=0;;i++)
 	{
 		Sleep(1000);
-		LocalTransportT::GetInstance().Loop(KEEPALIVED_MODE);
+		LocalTransport1T::GetInstance().Loop(KEEPALIVED_MODE);
 		Sleep(1000);
 		ClientNeed<LocalClient1T>(_T("LocalClient1T"),Object1Path,i);
 		Sleep(1000);
@@ -392,6 +401,84 @@ void UDPObjectSystemTest(BOOL bHasSever=TRUE)
 	
 	
 }
+
+template<typename ClientT,bool bTestSer=false>
+void TestPerformance()
+{
+	
+	SYSTEMERROR error;
+	ClientT & Client1 = ClientT::GetInstance();
+	printf_t(_T("Client1.LogonInSystem %s %d\n"),
+		Client1.LogonInSystem(tstring(_T("Test")), tstring(_T("123")), &error) ? _T("Ok") : _T("Fail"), error);
+
+	_tagObjectState_Wrap<ClientT> state_wrap(Object1Path);
+	tstring szState;
+	_tagObjectState state, state1;
+	state.szLockUser = _T("Client1-init");
+	SerObjectToXmlBuffer(_tagObjectState, state, szState);
+	state_wrap.szLockUser = _T("Client1-init");
+	__int64 nSucessCount, nLastnSucessCount, nErrorCount, nUsedTime, nLastUsedTime, nTempTime, nTempErrTime, nErrorUsedTime, nLastTick, nLastErrorTick;
+	nLastErrorTick = nTempTime = nTempErrTime = nLastnSucessCount = nLastUsedTime = nUsedTime = nLastTick = nErrorUsedTime = nSucessCount = nErrorCount = 0;
+	for (int s = 0;; s++)
+	{
+		nLastTick = ::GetTickCount64();
+		nLastnSucessCount = nSucessCount;
+		for (int i = 0; i < 100; i++)
+		{
+			nLastErrorTick = ::GetTickCount64();
+			nTempErrTime = 0;
+			/**/
+			if (bTestSer)
+			{
+				_tagCallParameterV2 Par,RetPar;
+				Par.Object = szState;
+				tstring szPar,OutPar;
+				//SerObjectToXmlBuffer(_tagObjectState, state, szState);
+				SerObjectToXmlBuffer(_tagCallParameterV2, Par, szPar);
+				//OutPar = szPar;
+				//SerTCHARXmlBufferToObject(_tagCallParameterV2, RetPar, (OutPar.c_str()));
+
+				nSucessCount++;
+			}
+			else
+			{
+				if (state_wrap.UpDataObject())
+				{
+					nSucessCount++;
+					/*
+					if (state_wrap.GetObject(state1))
+					{
+						if (state_wrap.szLockUser == state1.szLockUser)
+						{
+							nSucessCount++;
+						}
+					}
+					*/
+				}
+				else
+				{
+					nErrorCount++;
+					nErrorUsedTime += ::GetTickCount64() - nLastErrorTick;
+					nTempErrTime += ::GetTickCount64() - nLastErrorTick;
+				}
+			}
+			
+		}
+		nTempTime = ::GetTickCount64() - nLastTick;
+		nUsedTime += nTempTime;
+		if (nUsedTime - nLastUsedTime > 3000)
+		{
+			
+			printf_t(_T("QPS(数量=%llu 用时=%llu 速率=%llu)  瞬时QPS(数量=%llu 用时=%llu 速率=%llu) Error(数量=%llu 用时=%llu 速率=%llu)\n"),
+				nSucessCount, nUsedTime - nErrorUsedTime, ((1000*nSucessCount) / (nUsedTime - nErrorUsedTime)),
+				nSucessCount - nLastnSucessCount, (nTempTime - nTempErrTime), ((1000*(nSucessCount - nLastnSucessCount)) / (nTempTime - nTempErrTime)),
+				nErrorCount, nErrorUsedTime, (1000*nErrorCount) / (nErrorUsedTime? nErrorUsedTime:(nErrorUsedTime+1)));
+			
+			nLastUsedTime = nUsedTime;
+		}
+	}
+
+}
 #include "RotationalFlowers.h"
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -427,6 +514,30 @@ int _tmain(int argc, _TCHAR* argv[])
 		{
 			printf_t(_T("Game Server mode entry...\n"));
 			GameServerEntry();
+			bMatch = TRUE;
+		}
+		else if (argv[1] == tstring(_T("-tu")))
+		{
+			if (UDPClientTransport1T::TransportMiniT::GetInstance().init())
+			{
+				TestPerformance<UDPClient1T>();
+			}
+			
+			bMatch = TRUE;
+		}
+		else if (argv[1] == tstring(_T("-tl1")))
+		{
+			TestPerformance<LocalClient1T>();
+			bMatch = TRUE;
+		}
+		else if (argv[1] == tstring(_T("-tl2")))
+		{
+			TestPerformance<LocalClient2T>();
+			bMatch = TRUE;
+		}
+		else if (argv[1] == tstring(_T("-tls")))
+		{
+			TestPerformance<LocalClient1T,true>();
 			bMatch = TRUE;
 		}
 		

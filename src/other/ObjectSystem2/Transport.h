@@ -28,25 +28,28 @@ public:
 		static _Myt _self;
 		return _self;
 	}
+	BOOL CallInterface(_tagCallParameter & tagCallParameter, _tagCallParameter & RetParameter, SYSTEMERROR & error)
+	{
+		return ServerTransportT::GetInstance().CallInterface(tagCallParameter, RetParameter, error);
+	}
+
 	BOOL CallInterface(tstring & szInPar, tstring & szOutPar,SYSTEMERROR & error)
 	{
 		return ServerTransportT::GetInstance().CallInterface(szInPar, szOutPar, error);
 	}
+	
 private:
 
 };
 
-class Transport
+namespace Transport
 {
-public:
-	Transport() {};
-	~Transport() {};
 
-	template<typename TransportMiniT, bool bAutoLoop = false, int nName = 1>
+	template<typename TransportMiniT, bool bAutoLoop = false, bool bSerialize = true, int nName = 1>
 	class Client
 	{
 	public:
-		typedef Client<TransportMiniT, bAutoLoop,nName> _Myt;
+		typedef Client<TransportMiniT, bAutoLoop, bSerialize,nName> _Myt;
 		typedef TransportMiniT TransportMiniT;
 		struct ClientSession
 		{
@@ -69,16 +72,26 @@ public:
 			tagCallParameter.nOpCode = nOpCode;
 			tagCallParameter.szUser = szUserName;
 			tagCallParameter.szSession = szConversation;
-
-			SerObjectToXmlBuffer(_tagCallParameter, tagCallParameter, szInPar);
-			
+			BOOL bRet = FALSE;
 			SYSTEMERROR error;
 			RetParameter.nError = Error_Sys_Transport_Fail;
-			BOOL bRet=TransportMiniT::GetInstance().CallInterface(szInPar, szOutPar, error);
+			if (bSerialize)
+			{
+				SerObjectToXmlBuffer(_tagCallParameter, tagCallParameter, szInPar);
+				bRet = TransportMiniT::GetInstance().CallInterface(szInPar, szOutPar, error);
+				if (bRet)
+				{
+					SerTCHARXmlBufferToObject(_tagCallParameter, RetParameter, (szOutPar.c_str()));
+				}
+			}
+			else
+			{
+				bRet = TransportMiniT::GetInstance().CallInterface(tagCallParameter, RetParameter, error);
+			}
+			
 			if (bRet)
 			{
 				
-				SerTCHARXmlBufferToObject(_tagCallParameter , RetParameter, (szOutPar.c_str()));
 				if (error == Error_Sys_Transport_Fail) {
 					RetParameter.bCallSuccess = FALSE;
 				}
@@ -138,14 +151,12 @@ public:
 		{
 			static _Myt _self;
 			return _self;
-		}
+		};
 		
-		BOOL CallInterface(tstring & szInPar, tstring & szOutPar, SYSTEMERROR & error)
+		//BOOL CallInterface(_tagCallParameter & tagCallParameter, _tagCallParameter & RetParameter,SYSTEMERROR & error)
+		BOOL CallInterface(_tagCallParameter&tagCallParameter, _tagCallParameter&RetParameter,SYSTEMERROR&error)
 		{
-			//return LocalServerTansportT::GetInstance().CallInterface(szInPar, szOutPar);
-			_tagCallParameter tagCallParameter, RetParameter;
 			BOOL bRet = TRUE;
-			SerTCHARXmlBufferToObject(_tagCallParameter, tagCallParameter, (szInPar.c_str()));
 			_tagObjectState ObjectState;
 			ObjectState.bLock = tagCallParameter.tagObjectState.bLock;
 			ObjectState.nLockTime = tagCallParameter.tagObjectState.nLockTime;
@@ -210,25 +221,25 @@ public:
 				RetParameter.bCallSuccess = ObjectSystemT::GetInstance().ReleaseObjectState(tagCallParameter.ObjectPath, &Error);
 				break;
 			case OBJECT_SYSTEM_OP_REGIST_OBJEVENT:
-				
+
 				RetParameter.bCallSuccess = ObjectSystemT::GetInstance().RegistObjectEvent(tagCallParameter.szUser, tagCallParameter.szSession, Event, &Error);
 				break;
 			case OBJECT_SYSTEM_OP_NEED_NEWOBJECT:
 				RetParameter.bCallSuccess = ObjectSystemT::GetInstance().NeedNewObject(tagCallParameter.ObjectPath, &Error);
 				Event.nEventType = ObjectEvent_NeedNew;
-				if(RetParameter.bCallSuccess) ObjectSystemT::GetInstance().BroadcastObjectEvent(tagCallParameter.szUser, tagCallParameter.szSession,Event, &Error);
+				if (RetParameter.bCallSuccess) ObjectSystemT::GetInstance().BroadcastObjectEvent(tagCallParameter.szUser, tagCallParameter.szSession, Event, &Error);
 
 				break;
 			case OBJECT_SYSTEM_OP_KEEPALIVED:
+			{
+				_tagstrParameter strPar;
+				if (ObjectSystemT::GetInstance().KeepAlived(tagCallParameter.szUser, tagCallParameter.szSession, strPar.szData, &Error))
 				{
-					_tagstrParameter strPar;
-					if (ObjectSystemT::GetInstance().KeepAlived(tagCallParameter.szUser, tagCallParameter.szSession, strPar.szData, &Error))
-					{
-						RetParameter.strPar[_T("kpalv")] = strPar;
-					}
+					RetParameter.strPar[_T("kpalv")] = strPar;
 				}
-				
-				break;
+			}
+
+			break;
 			default:
 				bRet = FALSE;
 				_DebugOutput(_T("´íÎóµÄÃüÁî"));
@@ -244,6 +255,17 @@ public:
 				}
 			}
 			RetParameter.nError = (unsigned int)Error;
+			return bRet;
+		}
+
+
+		BOOL CallInterface(tstring & szInPar, tstring & szOutPar, SYSTEMERROR & error)
+		{
+			//return LocalServerTansportT::GetInstance().CallInterface(szInPar, szOutPar);
+			_tagCallParameter tagCallParameter, RetParameter;
+			BOOL bRet = TRUE;
+			SerTCHARXmlBufferToObject(_tagCallParameter, tagCallParameter, (szInPar.c_str()));
+			bRet = CallInterface( tagCallParameter,   RetParameter, error);
 
 			SerObjectToXmlBuffer(_tagCallParameter, RetParameter, szOutPar);
 			/*
@@ -264,7 +286,6 @@ public:
 
 	};
 
-private:
 
 };
 

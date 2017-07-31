@@ -13,6 +13,26 @@
 
 #pragma once
 
+class CObjectFileOperation_Nop
+{
+public:
+	CObjectFileOperation_Nop(void) {};
+	~CObjectFileOperation_Nop(void) {};
+	HANDLE m_hObject;
+	BOOL OpenObjectFile(tstring & szDirPath, BOOL bClear) { return TRUE; };
+	BOOL ReadObject(OUT tstring & szObject) { return TRUE; };
+	BOOL WriteObject(IN tstring & szObject) { return TRUE; };
+	BOOL DelObjectOrDir(tstring & szDirPath) { return TRUE; };
+	BOOL CloseObject() { return TRUE; };
+
+	BOOL ClearFile(tstring & szObjectPath) { return TRUE; };
+	BOOL OpenObjectFile_OnlyOpen(tstring & szObject) { return FALSE; };
+
+	static BOOL GetDirectoryInfo(IN tstring & DirectoryPath, IN tstring & szFinder, OUT ObjectSystem::_tagDirectoryInfo & DirectoryInfo, OUT ObjectSystem::SYSTEMERROR * pError) { return TRUE; };
+
+
+};
+
 class CObjectFileOperation
 {
 public:

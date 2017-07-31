@@ -107,10 +107,12 @@ namespace ObjectSystem
 		unsigned int			nOpCode;
 		tstring					szPassword;
 		BOOL					bCallSuccess;
-		SER_TO_X<tstring, Base64ZipString> 				ObjectPath;
+		//SER_TO_X<tstring, Base64ZipString> 				ObjectPath;
+		tstring 				ObjectPath;
 		unsigned int			nRegEventType;
 		SER_TO_X<tstring, Base64ZipString> 				Object;
-		_tagObjectState		tagObjectState;
+		//tstring					Object;
+		_tagObjectState			tagObjectState;
 		unsigned int			nError;
 		tstring					szFinder;
 		_tagDirectoryInfo	DirectoryInfo;
@@ -118,12 +120,30 @@ namespace ObjectSystem
 		map<tstring, _tagstrParameter, less<tstring> > strPar;
 	}CallParameter, *PCallParameter;
 
+	typedef struct _tagCallParameterV2
+	{
+		tstring					szUser;
+		tstring					szSession;
+		unsigned int			nOpCode;
+		tstring					szPassword;
+		BOOL					bCallSuccess;
+		tstring 				ObjectPath;
+		unsigned int			nRegEventType;
+		tstring					Object;
+		_tagObjectState		tagObjectState;
+		unsigned int			nError;
+		tstring					szFinder;
+		_tagDirectoryInfo	DirectoryInfo;
+		vector<_tagObjectSystemEvent>	EventList;
+		map<tstring, _tagstrParameter, less<tstring> > strPar;
+	}CallParameterV2, *PCallParameterV2;
+
 	typedef struct _tagKeepAlivedPar
 	{
 		unsigned int nCyc;			//推送周期 单位ms, time_t time 1970年1月1日00:00:00开始至今的秒数模除 nCyc得到当前时间所处窗口坐标
 		unsigned int nWndPos;       //推送窗口坐标 ms
 		unsigned int nWndLen;		//窗口宽度
-	};
+	}KeepAlivedPar,*PKeepAlivedPar;
 	typedef struct _tagUserMapSet
 	{
 		tstring szUserName;
@@ -165,6 +185,9 @@ MAKESTRUCTINFO(_tagKeepAlivedPar)
 //#include "..\ObjectSerDef\_tagCallParameter_StructInfo.h"
 #include SERPROTO_HEAD(_tagCallParameter)
 MAKESTRUCTINFO(_tagCallParameter)
+
+#include SERPROTO_HEAD(_tagCallParameterV2)
+MAKESTRUCTINFO(_tagCallParameterV2)
 
 
 

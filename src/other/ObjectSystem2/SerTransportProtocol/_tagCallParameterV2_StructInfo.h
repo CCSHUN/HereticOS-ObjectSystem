@@ -1,9 +1,9 @@
  #pragma once
 
-class Serialize__tagCallParameter : public Serialize_StructBase<_tagCallParameter,Serialize__tagCallParameter>
+class Serialize__tagCallParameterV2 : public Serialize_StructBase<_tagCallParameterV2,Serialize__tagCallParameterV2>
 {
 	public:
-	typedef _tagCallParameter _MyObjectType;
+	typedef _tagCallParameterV2 _MyObjectType;
  
 	Serialize_BaseObject<tstring> szUser; 
 	Serialize_BaseObject<tstring> szSession; 
@@ -12,7 +12,7 @@ class Serialize__tagCallParameter : public Serialize_StructBase<_tagCallParamete
 	Serialize_BaseObject<BOOL> bCallSuccess; 
 	Serialize_BaseObject<tstring> ObjectPath; 
 	Serialize_BaseObject<unsigned int> nRegEventType; 
-	Serialize_BaseObject<SER_TO_X<tstring ,Base64ZipString>> Object; 
+	Serialize_BaseObject<tstring> Object; 
 	Serialize__tagObjectState tagObjectState; 
 	Serialize_BaseObject<unsigned int> nError; 
 	Serialize_BaseObject<tstring> szFinder; 
@@ -20,12 +20,12 @@ class Serialize__tagCallParameter : public Serialize_StructBase<_tagCallParamete
 	Serialize_vector< Serialize__tagObjectSystemEvent> EventList; 
 	Serialize_map<Serialize_BaseObject<tstring> ,Serialize__tagstrParameter ,less<tstring>> strPar;
 
-	Serialize__tagCallParameter(){};
-	~Serialize__tagCallParameter(){};
-	_Myt& operator=(_tagCallParameter & _X);
+	Serialize__tagCallParameterV2(){};
+	~Serialize__tagCallParameterV2(){};
+	_Myt& operator=(_tagCallParameterV2 & _X);
 	void GetData();
 	BOOL Construct(StorageObjectInterface * pOutObject);
-	void SetData(_tagCallParameter & _X);
+	void SetData(_tagCallParameterV2 & _X);
 	BOOL LoadGetCurSerializeObject(FieldAddr & CurFieldAddr, SerializeLoadSaveInterface * * RetObj);
 	BOOL Save(StorageObjectInterface * pStorageObject);
 	BOOL GetObjectMap(IN OUT vector<SerializeObjectInterface *> & ObjectInterfaceMap);

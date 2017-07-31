@@ -141,6 +141,9 @@
     <ClInclude Include="AppProtocol\_tagNeedSlotRet_StructInfo.h">
       <Filter>FlowerGame\AppDataMode</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagCallParameterV2_StructInfo.h">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -202,6 +205,9 @@
     </ClCompile>
     <ClCompile Include="AppProtocol\_tagNeedSlotRet_StructInfo.cpp">
       <Filter>FlowerGame\AppDataMode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagCallParameterV2_StructInfo.cpp">
+      <Filter>ObjectSystem2\ProtocalSer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

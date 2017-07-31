@@ -200,8 +200,8 @@ namespace TransportMini
 				if (_TransportServerT::GetInstance().CallInterface(Par.szData, szOutPar, error))
 				{
 					TransportUDPRequestHead ResponseHead;
-					Par.szData = szOutPar;
-					SerObjectToXmlBuffer(_tagstrParameter, Par, szOutPar);
+					//Par.szData = szOutPar;
+					//SerObjectToXmlBuffer(_tagstrParameter, Par, szOutPar);
 
 					ResponseHead.nMagicCode = _nMagicCode;
 					ResponseHead.nErrorType = error;
@@ -258,7 +258,7 @@ namespace TransportMini
 					if (itClient == pCtl->m_ClientSessionMap.end()) {
 						if (pCtl->m_ClientSessionMap.size() >= MAX_TRANSPORT_SESSION_COUNT)
 						{
-							_DebugOutput(_T("Server-%d Received message Session Too much from ip=%s port=%d len=%d \n"),nName, inet_ntoa(from.sin_addr), from.sin_port, fromlen);
+							_DebugOutputA("Server-%d Received message Session Too much from ip=%s port=%d len=%d \n",nName, inet_ntoa(from.sin_addr), from.sin_port, fromlen);
 							continue;
 						}
 						pCtl->m_ClientSessionMap[ClientKey] = ClientSession();
@@ -267,7 +267,7 @@ namespace TransportMini
 					itClient->second.m_SessionBuffer.insert(itClient->second.m_SessionBuffer.end(), RecvMsg.begin(), RecvMsg.begin()+ nIoRetLen);
 					if (pCtl->ProcessRequest(itClient->second,&from, nIoRetLen) == FALSE)
 					{
-						_DebugOutput(_T("Server-%d ProcessRequest Fail from ip=%s port=%d len=%d \n"), nName, inet_ntoa(from.sin_addr), from.sin_port, fromlen);
+						_DebugOutputA("Server-%d ProcessRequest Fail from ip=%s port=%d len=%d \n", nName, inet_ntoa(from.sin_addr), from.sin_port, fromlen);
 						pCtl->m_ClientSessionMap.erase(itClient);
 					}
 
@@ -425,7 +425,10 @@ namespace TransportMini
 			if (nPort) m_nPort = nPort;
 			return reinit();
 		}
-
+		BOOL CallInterface(_tagCallParameter & tagCallParameter, _tagCallParameter & RetParameter, SYSTEMERROR & error)
+		{
+			return FALSE;
+		}
 		BOOL CallInterface(tstring & szInPar, tstring & szOutPar, SYSTEMERROR & error)
 		{
 			BOOL bRet = FALSE;
@@ -471,9 +474,9 @@ namespace TransportMini
 							{
 								bRet = TRUE;
 								szOutPar = (TCHAR*)&ResponseBuffer[0];
-								_tagstrParameter Par;
-								SerTCHARXmlBufferToObject(_tagstrParameter, Par, (szOutPar.c_str()));
-								szOutPar = Par.szData;
+								//_tagstrParameter Par;
+								//SerTCHARXmlBufferToObject(_tagstrParameter, Par, (szOutPar.c_str()));
+								//szOutPar = Par.szData;
 								bSysFail = FALSE;
 								return bRet;
 							}
