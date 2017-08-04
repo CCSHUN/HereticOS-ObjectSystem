@@ -25,6 +25,7 @@ typedef enum
 
 
 #include "XmlRender.h"
+
 class XMLStorageObject : public StorageObjectInterface
 {
 public:
@@ -54,16 +55,16 @@ public:
 	BOOL m_bLastIsValue;
 	BOOL m_bSave;
 	CharacterType m_StringType;
-	tstring m_XmlBuffer;
+	tstring_tmp m_XmlBuffer;
 	StorageObjectType m_StorageObjectType;
 
 
 	//当前节点数据
 	typedef struct _tagXmlNodeInfo
 	{
-		tstring m_CurNodeName;
-		tstring m_CurNodeAttributes;
-		tstring m_CurNodeVal;
+		tstring_tmp m_CurNodeName;
+		tstring_tmp m_CurNodeAttributes;
+		tstring_tmp m_CurNodeVal;
 	}XmlNodeInfo;
 	typedef enum
 	{
@@ -71,7 +72,8 @@ public:
 		ObjectVal,
 	}ObjectCurSaveType;
 	ObjectCurSaveType m_ObjectCurSaveType;
-	list<XmlNodeInfo> m_XmlNodeInfoList;
+	typedef list<XmlNodeInfo, yss_allocator<XmlNodeInfo, MemoryMgr__StaticGC_Tmp >> XmlNodeInfoListT;
+	XmlNodeInfoListT m_XmlNodeInfoList;
 	
 	BOOL ReCreateFile()
 	{
@@ -111,20 +113,18 @@ public:
 		return TRUE;
 	}
 
-	template<typename StringType>
-	BOOL WriteString(StringType * pStr,unsigned int nBufLen)
+	
+	BOOL WriteString(TCHAR * pStr,unsigned int nBufLen)
 	{
-		CMyString szOut(pStr,nBufLen);
-		
-		list<XmlNodeInfo>::iterator itBack=m_XmlNodeInfoList.end();
+		XmlNodeInfoListT::iterator itBack=m_XmlNodeInfoList.end();
 		itBack--;
 		switch(m_ObjectCurSaveType)
 		{
 		case ObjectAttributes:
-			itBack->m_CurNodeAttributes+=tstring(_T("=\""))+tstring((TCHAR*)szOut)+tstring(_T("\""));
+			itBack->m_CurNodeAttributes+=tstring_tmp(_T("=\""))+ tstring_tmp((TCHAR*)pStr)+ tstring_tmp(_T("\""));
 			break;
 		case ObjectVal:
-			itBack->m_CurNodeVal+=tstring((TCHAR*)szOut);
+			itBack->m_CurNodeVal+= pStr;
 			break;
 		default:
 			break;
@@ -205,21 +205,21 @@ public:
 		{
 		case ToBuffer:
 			{
-				CMyString szBuf((TCHAR *)szObject.c_str(),szObject.length()*sizeof(TCHAR));
-				void * pXmlBuf=(char *)szBuf;
-				if(szBuf.m_nRefBufLen)
+				CMyString szBuf((TCHAR *)szObject.c_str(), szObject.length() * sizeof(TCHAR));
+				void * pXmlBuf = (char *)szBuf;
+				if (szBuf.m_nRefBufLen)
 				{
-					if(m_pxml->LoadFromMem((BYTE *)pXmlBuf,
+					if (m_pxml->LoadFromMem((BYTE *)pXmlBuf,
 						szBuf.m_nRefBufLen,
-						XMLFILE_ENCODING_ASNI)==false)
+						XMLFILE_ENCODING_ASNI) == false)
 					{
 						return FALSE;
 					}
-				}else
+				}
+				else
 				{
 					return FALSE;
 				}
-
 				
 			}
 			
@@ -280,7 +280,7 @@ public:
 		LPCTSTR pstrName = NULL;
 		LPCTSTR pstrValue = NULL;
 		LPCTSTR pstrTotalNum = NULL;
-		map<tstring,unsigned int,less<tstring> > FeildPos;
+		map<tstring_tmp,unsigned int,less<tstring_tmp> > FeildPos;
 		FieldAddr ChildAddr;
 		pParent->pChild=&ChildAddr;
 		pObj->LoadObjectBegin(pObj);
@@ -292,14 +292,14 @@ public:
 			pstrValue = node.GetValue();
 			if(ChildAddr.pFieldName)
 			{
-				map<tstring,unsigned int,less<tstring> >::iterator itMap=FeildPos.find(tstring(ChildAddr.pFieldName));
+				map<tstring_tmp,unsigned int,less<tstring_tmp> >::iterator itMap=FeildPos.find(tstring_tmp(ChildAddr.pFieldName));
 				if(itMap!=FeildPos.end())
 				{
 					itMap->second+=1;
 					ChildAddr.nIndex=itMap->second;
 				}else
 				{
-					FeildPos[tstring(ChildAddr.pFieldName)]=0;
+					FeildPos[tstring_tmp(ChildAddr.pFieldName)]=0;
 					ChildAddr.nIndex=0;
 				}
 			}else
@@ -309,11 +309,12 @@ public:
 
 
 			SerializeLoadSaveInterface * pGetObj=0;
+			/*
 			if(tstring(_T("szReport_log"))==tstring(ChildAddr.pFieldName))
 			{
 				printf("asdasd");
 			}
-
+			*/
 			if(pObj->LoadGetCurSerializeObject(ChildAddr,&pGetObj))
 			{
 				//int nstrValuelen=strlen(pstrValue);
@@ -321,7 +322,7 @@ public:
 				if(node.HasChildren()==false)
 				{
 					//最终值型不需要begin end控制
-					if(pGetObj->LoadSetData(tstring(pstrValue))==FALSE)
+					if(pGetObj->LoadSetData((TCHAR*)pstrValue)==FALSE)
 					{
 						return FALSE;
 					}
@@ -378,29 +379,7 @@ public:
 		return TRUE;
 	}
 
-	BOOL PushDataVal(IN void * pInData,IN OUT unsigned int & nLen)
-	{
-		char cpBuf[32] = {0};
-		if(nLen==4)
-		{
-			_itoa_s(*(unsigned int *)pInData,cpBuf,10);
-		}else if(nLen==8)
-		{
-			_ui64toa_s(*(unsigned __int64 *)pInData,cpBuf,32,10);
-		}else if(nLen==2)
-		{
-			_itoa_s(*(USHORT *)pInData,cpBuf,10);
-		}else
-		{
-			return FALSE;
-		}
-
-		DWORD nRetLen=0;
-		m_bLastIsValue=TRUE;
-
-		return WriteString((char *)cpBuf,strlen(cpBuf));
-
-	}
+	
 
 	BOOL PushDataBinary(IN void * pInData,IN OUT unsigned int & nLen)
 	{
@@ -421,7 +400,7 @@ public:
 	}
 
 	//顺序保存节点开始
-	void GetFormatTab(tstring & szTab)
+	void GetFormatTab(tstring_tmp & szTab)
 	{
 		for(unsigned int i=0;i<m_nCurDepth;i++)
 		{
@@ -458,7 +437,7 @@ public:
 		*/
 		if(m_ObjectCurSaveType==ObjectVal)
 		{
-			if(tstring(CurFieldAddr->m_pFieldName)==tstring(_T("MyObjectAttributes")))
+			if(tstring_tmp(CurFieldAddr->m_pFieldName)==tstring_tmp(_T("MyObjectAttributes")))
 			{
 				m_ObjectCurSaveType=ObjectAttributes;
 			}else
@@ -471,9 +450,9 @@ public:
 
 		}else if(m_ObjectCurSaveType==ObjectAttributes)
 		{
-			list<XmlNodeInfo>::iterator itBack=m_XmlNodeInfoList.end();
+			XmlNodeInfoListT::iterator itBack=m_XmlNodeInfoList.end();
 			itBack--;
-			itBack->m_CurNodeAttributes+=tstring(_T(" "))+tstring(CurFieldAddr->m_pFieldName);
+			itBack->m_CurNodeAttributes+= tstring_tmp(_T(" "))+ tstring_tmp(CurFieldAddr->m_pFieldName);
 		}
 		
 		
@@ -484,13 +463,13 @@ public:
 	{
 		DWORD nRetLen=0;
 		m_nCurDepth--;
-		tstring  szEndData;
+		tstring_tmp  szEndData;
 		if(!m_bLastIsValue)
 		{
 			szEndData=_T("\n");
 			GetFormatTab(szEndData);
 		}
-		tstring  szBeginData=_T("\n");
+		tstring_tmp  szBeginData=_T("\n");
 		GetFormatTab(szBeginData);
 
 		m_bLastIsValue=FALSE;
@@ -499,43 +478,42 @@ public:
 		
 		
 				return WriteString((TCHAR*)szData.c_str(),szData.length()*sizeof(TCHAR));*/
-		if(tstring(CurFieldAddr->m_pFieldName)==tstring(_T("MyObjectAttributes")))
+		if(tstring_tmp(CurFieldAddr->m_pFieldName)== tstring_tmp(_T("MyObjectAttributes")))
 		{
 			m_ObjectCurSaveType=ObjectVal;
 			//
 		}else
 		{
 			//保存数据
-			list<XmlNodeInfo>::iterator itBack=m_XmlNodeInfoList.end();
+			XmlNodeInfoListT::iterator itBack=m_XmlNodeInfoList.end();
 			itBack--;
 			if(itBack==m_XmlNodeInfoList.end()) return FALSE;
 			if(m_nCurDepth==0)
 			{
-				m_XmlBuffer+=
-					tstring(_T("<"))+itBack->m_CurNodeName;
+				m_XmlBuffer+=tstring_tmp(_T("<"))+itBack->m_CurNodeName;
 				
 				if(itBack->m_CurNodeAttributes.length())
 				{
-					m_XmlBuffer+=tstring(_T(" "));
+					m_XmlBuffer+= tstring_tmp(_T(" "));
 				}
-					m_XmlBuffer+=itBack->m_CurNodeAttributes+tstring(_T(">"))+itBack->m_CurNodeVal+
-					szEndData+tstring(_T("</"))+itBack->m_CurNodeName+tstring(_T(">"));
+					m_XmlBuffer+=itBack->m_CurNodeAttributes+ tstring_tmp(_T(">"))+itBack->m_CurNodeVal+
+					szEndData+ tstring_tmp(_T("</"))+itBack->m_CurNodeName+ tstring_tmp(_T(">"));
 				SaveXmlBuf();
 			}else
 			{
 				if(m_ObjectCurSaveType==ObjectVal)
 				{
-					list<XmlNodeInfo>::iterator itBackFrout=itBack;
+					XmlNodeInfoListT::iterator itBackFrout=itBack;
 					itBackFrout--;
 					itBackFrout->m_CurNodeVal+=szBeginData+
-						tstring(_T("<"))+itBack->m_CurNodeName;
+						tstring_tmp(_T("<"))+itBack->m_CurNodeName;
 					
 					if(itBack->m_CurNodeAttributes.length())
 					{
-						itBackFrout->m_CurNodeVal+=tstring(_T(" "));
+						itBackFrout->m_CurNodeVal+= tstring_tmp(_T(" "));
 					}
-					itBackFrout->m_CurNodeVal+=itBack->m_CurNodeAttributes+tstring(_T(">"))+itBack->m_CurNodeVal+
-						szEndData+tstring(_T("</"))+itBack->m_CurNodeName+tstring(_T(">"));
+					itBackFrout->m_CurNodeVal+=itBack->m_CurNodeAttributes+ tstring_tmp(_T(">"))+itBack->m_CurNodeVal+
+						szEndData+ tstring_tmp(_T("</"))+itBack->m_CurNodeName+ tstring_tmp(_T(">"));
 
 					m_XmlNodeInfoList.pop_back();
 				}

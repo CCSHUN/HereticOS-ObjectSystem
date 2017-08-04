@@ -102,40 +102,37 @@ namespace ObjectSystem
 
 	typedef struct _tagCallParameter
 	{
-		tstring					szUser;
-		tstring					szSession;
-		unsigned int			nOpCode;
-		tstring					szPassword;
-		BOOL					bCallSuccess;
-		//SER_TO_X<tstring, Base64ZipString> 				ObjectPath;
-		tstring 				ObjectPath;
-		unsigned int			nRegEventType;
-		SER_TO_X<tstring, Base64ZipString> 				Object;
-		//tstring					Object;
-		_tagObjectState			tagObjectState;
-		unsigned int			nError;
-		tstring					szFinder;
-		_tagDirectoryInfo	DirectoryInfo;
-		vector<_tagObjectSystemEvent>	EventList;
-		map<tstring, _tagstrParameter, less<tstring> > strPar;
+		tstring					su;//szUser
+		tstring					ss;//szSession
+		unsigned int			oc;//nOpcode
+		BOOL					bcs; //bCallSucess;
+		tstring 				op;	//ObjectPath
+		unsigned int			np;//nPar
+		SER_TO_X<tstring, Base64ZipString> 				ob;//Object
+		_tagObjectState			Os;	//ObjectState
+		unsigned int			Err;
+		tstring					sf;				//szFinder
+		_tagDirectoryInfo	di;
+		vector<_tagObjectSystemEvent>	el;//EventList;
+		map<tstring_tmp, _tagstrParameter, less<tstring_tmp> > sp;//strPar
 	}CallParameter, *PCallParameter;
 
 	typedef struct _tagCallParameterV2
 	{
-		tstring					szUser;
-		tstring					szSession;
+		tstring_tmp				szUser;
+		tstring_tmp				szSession;
 		unsigned int			nOpCode;
-		tstring					szPassword;
+		tstring_tmp				szPassword;
 		BOOL					bCallSuccess;
-		tstring 				ObjectPath;
-		unsigned int			nRegEventType;
-		tstring					Object;
-		_tagObjectState		tagObjectState;
+		tstring_tmp 			ObjectPath;
+		unsigned int			nPar;
+		tstring_tmp				Object;
+		_tagObjectState			tagObjectState;
 		unsigned int			nError;
-		tstring					szFinder;
+		tstring_tmp				szFinder;
 		_tagDirectoryInfo	DirectoryInfo;
 		vector<_tagObjectSystemEvent>	EventList;
-		map<tstring, _tagstrParameter, less<tstring> > strPar;
+		map<tstring_tmp, _tagstrParameter, less<tstring_tmp> > strPar;
 	}CallParameterV2, *PCallParameterV2;
 
 	typedef struct _tagKeepAlivedPar

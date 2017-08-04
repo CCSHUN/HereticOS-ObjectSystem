@@ -181,13 +181,14 @@ namespace ObjectSystem
 
 }
 
+
 class CObjectSystemInterface
 {
 public:
-	
 
-	CObjectSystemInterface(){};
-	~CObjectSystemInterface(){};
+
+	CObjectSystemInterface() {};
+	~CObjectSystemInterface() {};
 
 	//////////////////////////////////////////对象基本操作///////////////////////////////////////
 
@@ -199,7 +200,7 @@ public:
 	//ObjectPath	对象地址
 	//Object		返回的XML对象
 	//ObjectState	输入申请该对象的锁定时间 0申请为不锁，返回该对象的锁定信息，如果对象已经被其他用户锁定，则返回其他用户的锁信息
-	virtual BOOL GetObject(IN tstring & ObjectPath,OUT tstring & Object,IN OUT ObjectSystem::_tagObjectState & ObjectState,OUT ObjectSystem::SYSTEMERROR * pError)
+	virtual BOOL GetObject(IN tstring & ObjectPath, OUT tstring & Object, IN OUT ObjectSystem::_tagObjectState & ObjectState, OUT ObjectSystem::SYSTEMERROR * pError)
 	{
 		return TRUE;
 	}
@@ -210,24 +211,24 @@ public:
 	}
 
 	//更新对象到存储
-	virtual BOOL UpDataObject(IN tstring & ObjectPath,IN tstring & Object,OUT ObjectSystem::SYSTEMERROR * pError)
+	virtual BOOL UpDataObject(IN tstring & ObjectPath, IN tstring & Object, OUT ObjectSystem::SYSTEMERROR * pError)
 	{
 		return TRUE;
 	}
 
 	//更新对象到存储
-	virtual BOOL UpDataObject(IN tstring & ObjectPath,IN tstring & Object,IN ObjectSystem::_tagObjectState & ObjectState,OUT ObjectSystem::SYSTEMERROR * pError)
+	virtual BOOL UpDataObject(IN tstring & ObjectPath, IN tstring & Object, IN ObjectSystem::_tagObjectState & ObjectState, OUT ObjectSystem::SYSTEMERROR * pError)
 	{
 		return TRUE;
 	}
 
 	//获取目录信息
-	virtual BOOL GetDirectoryInfo(IN tstring & DirectoryPath,IN tstring & szFinder,OUT ObjectSystem::_tagDirectoryInfo & DirectoryInfo,OUT ObjectSystem::SYSTEMERROR * pError)
+	virtual BOOL GetDirectoryInfo(IN tstring & DirectoryPath, IN tstring & szFinder, OUT ObjectSystem::_tagDirectoryInfo & DirectoryInfo, OUT ObjectSystem::SYSTEMERROR * pError)
 	{
 		return TRUE;
 	}
 
-	
+
 	//删除对象
 	virtual BOOL DeleteObject(IN tstring & ObjectOrDir, ObjectSystem::SYSTEMERROR * pError)
 	{
@@ -235,7 +236,7 @@ public:
 	}
 
 	//释放目录状态
-	virtual BOOL ReleaseObjectState(IN tstring & ObjectOrDir,OUT ObjectSystem::SYSTEMERROR * pError)
+	virtual BOOL ReleaseObjectState(IN tstring & ObjectOrDir, OUT ObjectSystem::SYSTEMERROR * pError)
 	{
 		return TRUE;
 	}
@@ -243,7 +244,7 @@ public:
 
 	//////////////////////////////////////////对象系统登陆登出///////////////////////////////////////
 	//登陆对象存储系统
-	virtual BOOL LogonInSystem(IN tstring & szUserName,IN tstring & szPassword, OUT tstring & szSession)
+	virtual BOOL LogonInSystem(IN tstring & szUserName, IN tstring & szPassword, OUT tstring & szSession)
 	{
 		return TRUE;
 	}
@@ -257,36 +258,36 @@ public:
 	//////////////////////////////////////////对象锁操作///////////////////////////////////////
 
 	//更新对象锁信息
-	virtual BOOL UpDataObjectState(IN tstring & ObjectPath,OUT ObjectSystem::_tagObjectState & ObjectState,OUT ObjectSystem::SYSTEMERROR * pError)
+	virtual BOOL UpDataObjectState(IN tstring & ObjectPath, OUT ObjectSystem::_tagObjectState & ObjectState, OUT ObjectSystem::SYSTEMERROR * pError)
 	{
 		return TRUE;
 	}
 
 	//获取对象锁信息
-	virtual BOOL GetObjectState(IN tstring & ObjectPath,OUT ObjectSystem::_tagObjectState & ObjectState,OUT ObjectSystem::SYSTEMERROR * pError)
+	virtual BOOL GetObjectState(IN tstring & ObjectPath, OUT ObjectSystem::_tagObjectState & ObjectState, OUT ObjectSystem::SYSTEMERROR * pError)
 	{
 		return TRUE;
 	}
 
-	virtual BOOL GetCurTime(SYSTEMTIME *  npTime,SYSTEMTIME * nCurTime)
+	virtual BOOL GetCurTime(SYSTEMTIME *  npTime, SYSTEMTIME * nCurTime)
 	{
 		return TRUE;
 	}
 
-	
+
 	////////////////////////////////////////对象事物////////////////////////////////////////////////
 	/*
 	class ObjectEventProcessInterface
 	{
-	public: 
-		ObjectEventProcessInterface(){};
-		~ObjectEventProcessInterface(){};
-		
+	public:
+	ObjectEventProcessInterface(){};
+	~ObjectEventProcessInterface(){};
 
-		virtual BOOL ObjectEventProcess(IN tstring & ObjectPath,IN ObjectSystem::EventType & nEvent)
-		{
-			return TRUE;
-		}
+
+	virtual BOOL ObjectEventProcess(IN tstring & ObjectPath,IN ObjectSystem::EventType & nEvent)
+	{
+	return TRUE;
+	}
 	};
 
 
@@ -296,7 +297,7 @@ public:
 	{
 		return;
 	}
-	
+
 	//Client KeepAlived
 	virtual BOOL KeepAlived()
 	{
@@ -304,7 +305,7 @@ public:
 	}
 
 	//Server 使用的消息接口
-	virtual BOOL BroadcastObjectEvent(IN tstring & szUser,IN tstring & szSession, IN ObjectSystem::ObjectSystemEvent & nEvent, OUT ObjectSystem::SYSTEMERROR * pError)
+	virtual BOOL BroadcastObjectEvent(IN tstring & szUser, IN tstring & szSession, IN ObjectSystem::ObjectSystemEvent & nEvent, OUT ObjectSystem::SYSTEMERROR * pError)
 	{
 		return TRUE;
 	}
@@ -316,7 +317,6 @@ protected:
 
 private:
 };
-
 
 
 
@@ -342,190 +342,201 @@ public:
 		static _MyClientT _slef;
 		return _slef;
 	}
+	_tagCallParameter m_Par;
+	_tagCallParameter m_RetPar;
 	BOOL  GetCurTime(SYSTEMTIME * npTime, SYSTEMTIME * nCurTime)
 	{
 
-		_tagCallParameter Par, RetPar, Par1, RetPar2;
 		tstring szTime;
 		CBase64Zip::Base64ZipCompress((unsigned char *)npTime, sizeof(SYSTEMTIME), szTime);
 		_tagstrParameter Var;
 		Var.szData = szTime;
-		Par.strPar[_T("npTime")] = Var;
+		m_Par.sp[_T("npTime")] = Var;
 		CBase64Zip::Base64ZipCompress((unsigned char *)nCurTime, sizeof(SYSTEMTIME), szTime);
 		Var.szData = szTime;
-		Par.strPar[_T("nCurTime")] = Var;
+		m_Par.sp[_T("nCurTime")] = Var;
+		m_Par.oc = OBJECT_SYSTEM_OP_GETCURTIME;
 
-		tstring szCallParameter;
-		Par1 = Par;
-
-		BOOL bRet = TransportT::GetInstance().CallInterface(m_szUserName, m_szConversation, OBJECT_SYSTEM_OP_GETCURTIME, Par, RetPar);
-
+		BOOL bRet = TransportT::GetInstance().CallInterface(m_Par, m_RetPar);
 
 		if (bRet)
 		{
 			vector<unsigned char> var;
-			if (CBase64Zip::Base64ZipUnCompress(RetPar.strPar[_T("nCurTime")].szData, var))
+			if (CBase64Zip::Base64ZipUnCompress(m_RetPar.sp[_T("nCurTime")].szData, var))
 			{
 				*nCurTime = *(SYSTEMTIME *)&var[0];
 			}
-			return RetPar.bCallSuccess;
+			return m_RetPar.bcs;
 		}
 		return FALSE;
 	}
-
-	BOOL LogonInSystem(IN tstring & szUserName, IN tstring & szPassword,OUT SYSTEMERROR * pError)
+	template<typename StringT>
+	BOOL LogonInSystem(IN StringT & szUserName, IN StringT & szPassword,OUT SYSTEMERROR * pError)
 	{
-		m_szUserName = szUserName;
-		m_szConversation = szPassword;
-		_tagCallParameter Par, RetPar;
-		Par.szPassword = szPassword;
-		BOOL bRet = TransportT::GetInstance().CallInterface(m_szUserName, m_szConversation, OBJECT_SYSTEM_OP_LOGONINSYSTEM, Par, RetPar);
+		m_szUserName = szUserName.c_str();
+		m_Par.sp[_T("ps")] = _tagstrParameter();
+		m_Par.sp[_T("ps")].szData = szPassword.c_str();
+		m_Par.oc = OBJECT_SYSTEM_OP_LOGONINSYSTEM;
+		m_Par.su= szUserName.c_str();
+		BOOL bRet = TransportT::GetInstance().CallInterface( m_Par, m_RetPar);
 		if (bRet)
 		{
-			m_szConversation = RetPar.szSession;
+			m_szConversation = m_RetPar.ss.c_str();
+			m_Par.ss = m_szConversation;
+			m_Par.su = szUserName.c_str();
 			TransportT::GetInstance().RegistClient(m_szConversation, this);
-			return RetPar.bCallSuccess;
+			return m_RetPar.bcs;
 		}
 		return FALSE;
 	}
-
-	BOOL ReleaseObjectState(IN tstring & ObjectOrDir, OUT SYSTEMERROR * pError)
+	template<typename StringT>
+	BOOL ReleaseObjectState(IN StringT & ObjectOrDir, OUT SYSTEMERROR * pError)
 	{
-
-		_tagCallParameter Par, RetPar;
-		Par.ObjectPath = ObjectOrDir;
-		BOOL bRet = TransportT::GetInstance().CallInterface(m_szUserName, m_szConversation, OBJECT_SYSTEM_OP_RELEASEOBJSTATE, Par, RetPar);
+		m_Par.oc = OBJECT_SYSTEM_OP_RELEASEOBJSTATE;
+		Par.ob = ObjectOrDir.c_str();
+		BOOL bRet = TransportT::GetInstance().CallInterface(m_Par, m_RetPar);
 		if (bRet)
 		{
-			*pError = (SYSTEMERROR)RetPar.nError;
+			*pError = (SYSTEMERROR)RetPar.Err;
 
-			return RetPar.bCallSuccess;
+			return m_RetPar.bcs;
 		}
 		return FALSE;
 	}
 
 	BOOL LogonOutSystem()
 	{
-		_tagCallParameter Par, RetPar;
-		BOOL bRet = TransportT::GetInstance().CallInterface(m_szUserName, m_szConversation, OBJECT_SYSTEM_OP_LOGONOUTSYSTEM, Par, RetPar);
+		m_Par.oc = OBJECT_SYSTEM_OP_LOGONOUTSYSTEM;
+		BOOL bRet = TransportT::GetInstance().CallInterface(m_Par, m_RetPar);
 		if (bRet)
 		{
-			return RetPar.bCallSuccess;
+			return m_RetPar.bcs;
 		}
 		return FALSE;
 	}
 	
 	BOOL KeepAlived()
 	{
-		_tagCallParameter Par, RetPar;
-		BOOL bRet = TransportT::GetInstance().CallInterface(m_szUserName, m_szConversation, OBJECT_SYSTEM_OP_KEEPALIVED, Par, RetPar);
+		m_Par.oc = OBJECT_SYSTEM_OP_KEEPALIVED;
+		m_Par.ob.clear();
+		m_Par.op.clear();
+		BOOL bRet = TransportT::GetInstance().CallInterface(m_Par, m_RetPar);
 		if (bRet)
 		{
-			map<tstring, _tagstrParameter, less<tstring> >::iterator itPar = RetPar.strPar.find(_T("kpalv"));
-			if (itPar!= RetPar.strPar.end())
+			map<tstring_tmp, _tagstrParameter, less<tstring_tmp> >::iterator itPar = m_RetPar.sp.find(_T("kpalv"));
+			if (itPar!= m_RetPar.sp.end())
 			{
 				SerTCHARXmlBufferToObject(_tagKeepAlivedPar, m_KeepAlived, (itPar->second.szData.c_str()));
 			}
-			return RetPar.bCallSuccess;
+			m_Par.sp.clear();
+			return m_RetPar.bcs;
 		}
 		return FALSE;
 	}
-
-	BOOL GetObject(IN tstring & ObjectPath, OUT tstring & Object, IN OUT _tagObjectState & ObjectState, OUT SYSTEMERROR * pError)
+	template<typename StringT>
+	BOOL GetObject(IN StringT & ObjectPath, OUT StringT & Object, IN OUT _tagObjectState & ObjectState, OUT SYSTEMERROR * pError)
 	{
-		_tagCallParameter Par, RetPar;
-		Par.ObjectPath = ObjectPath;
-		Par.tagObjectState.bLock = ObjectState.bLock;
-		Par.tagObjectState.nType = (unsigned int)ObjectState.nType;
-		Par.tagObjectState.nLockTime = ObjectState.nLockTime;
-		Par.tagObjectState.szLockUser = ObjectState.szLockUser;
-		BOOL bRet = TransportT::GetInstance().CallInterface(m_szUserName, m_szConversation, OBJECT_SYSTEM_OP_GETOBJECT, Par, RetPar);
+		m_Par.oc = OBJECT_SYSTEM_OP_GETOBJECT;
+		m_Par.op = ObjectPath;
+		m_Par.Os.bLock = ObjectState.bLock;
+		m_Par.Os.nType = (unsigned int)ObjectState.nType;
+		m_Par.Os.nLockTime = ObjectState.nLockTime;
+		m_Par.Os.szLockUser = ObjectState.szLockUser;
+		m_Par.ob.clear();
+		BOOL bRet = TransportT::GetInstance().CallInterface(m_Par, m_RetPar);
 		if (bRet)
 		{
-			*pError = (SYSTEMERROR)RetPar.nError;
-			ObjectState.bLock = RetPar.tagObjectState.bLock;
-			ObjectState.nLockTime = RetPar.tagObjectState.nLockTime;
-			ObjectState.nType = (LockType)RetPar.tagObjectState.nType;
-			ObjectState.szLockUser = RetPar.tagObjectState.szLockUser;
+			*pError = (SYSTEMERROR)m_RetPar.Err;
+			ObjectState.bLock = m_RetPar.Os.bLock;
+			ObjectState.nLockTime = m_RetPar.Os.nLockTime;
+			ObjectState.nType = (LockType)m_RetPar.Os.nType;
+			ObjectState.szLockUser = m_RetPar.Os.szLockUser;
 
-			if (RetPar.bCallSuccess)
+			if (m_RetPar.bcs)
 			{
-				Object = RetPar.Object;
+				Object = m_RetPar.ob;
 			}
-			return RetPar.bCallSuccess;
+			return m_RetPar.bcs;
 		}
 		return FALSE;
 	}
-
-	BOOL NeedNewObject(IN tstring & ObjectPath, OUT ObjectSystem::SYSTEMERROR * pError)
+	template<typename StringT>
+	BOOL NeedNewObject(IN StringT & ObjectPath, OUT ObjectSystem::SYSTEMERROR * pError)
 	{
-		_tagCallParameter Par, RetPar;
-		Par.ObjectPath = ObjectPath;
-		Par.tagObjectState.bLock = FALSE;
-		Par.tagObjectState.nType = Nonmoral;
-		Par.tagObjectState.nLockTime = 0;
-		Par.tagObjectState.szLockUser = m_szUserName;
-		BOOL bRet = TransportT::GetInstance().CallInterface(m_szUserName, m_szConversation, OBJECT_SYSTEM_OP_NEED_NEWOBJECT, Par, RetPar);
+		m_Par.oc = OBJECT_SYSTEM_OP_NEED_NEWOBJECT;
+		m_Par.op = ObjectPath;
+		m_Par.Os.bLock = FALSE;
+		m_Par.Os.nType = Nonmoral;
+		m_Par.Os.nLockTime = 0;
+		m_Par.Os.szLockUser = m_szUserName;
+		m_Par.ob.clear();
+		BOOL bRet = TransportT::GetInstance().CallInterface(m_Par, m_RetPar);
 		if (bRet)
 		{
-			*pError = (SYSTEMERROR)RetPar.nError;
+			*pError = (SYSTEMERROR)m_RetPar.Err;
 			
-			return RetPar.bCallSuccess;
+			return m_RetPar.bcs;
 		}
 		return FALSE;
 	}
 
 
 	//更新对象到存储
-	BOOL UpDataObject(IN tstring & ObjectPath, IN tstring & Object, SYSTEMERROR * pError)
+	template<typename StringT>
+	BOOL UpDataObject(IN StringT & ObjectPath, IN StringT & Object, SYSTEMERROR * pError)
 	{
-		_tagCallParameter Par, RetPar;
-		Par.ObjectPath = ObjectPath;
-		Par.Object = Object;
-		BOOL bRet = TransportT::GetInstance().CallInterface(m_szUserName, m_szConversation, OBJECT_SYSTEM_OP_UPDATAOBJECT, Par, RetPar);
+		m_Par.oc = OBJECT_SYSTEM_OP_UPDATAOBJECT;
+		m_Par.op = ObjectPath;
+		m_Par.ob = Object;
+		BOOL bRet = TransportT::GetInstance().CallInterface(m_Par, m_RetPar);
 		if (bRet)
 		{
-			*pError = (SYSTEMERROR)RetPar.nError;
-			return RetPar.bCallSuccess;
+			*pError = (SYSTEMERROR)m_RetPar.Err;
+			
+			return m_RetPar.bcs;
 		}
 		return FALSE;
 	}
 
 
 	//获取目录信息
-	BOOL GetDirectoryInfo(IN tstring & DirectoryPath, IN tstring & szFinder, OUT _tagDirectoryInfo & DirectoryInfo, OUT SYSTEMERROR * pError)
+	template<typename StringT>
+	BOOL GetDirectoryInfo(IN StringT & DirectoryPath, IN StringT & szFinder, OUT _tagDirectoryInfo & DirectoryInfo, OUT SYSTEMERROR * pError)
 	{
-		_tagCallParameter Par, RetPar;
-		Par.ObjectPath = DirectoryPath;
-		Par.szFinder = szFinder;
-		BOOL bRet = TransportT::GetInstance().CallInterface(m_szUserName, m_szConversation, OBJECT_SYSTEM_OP_GETDIRECTORYINFO, Par, RetPar);
+		m_Par.oc = OBJECT_SYSTEM_OP_GETDIRECTORYINFO;
+		m_Par.op = DirectoryPath.c_str();
+		m_Par.sf = szFinder.c_str();
+		m_Par.ob.clear();
+		BOOL bRet = TransportT::GetInstance().CallInterface(m_Par, m_RetPar);
 		if (bRet)
 		{
-			*pError = (SYSTEMERROR)RetPar.nError;
+			*pError = (SYSTEMERROR)m_RetPar.Err;
 			_tagDirectoryInfoSet set;
-			DirectoryInfo.DirectoryInfoArray.resize(RetPar.DirectoryInfo.DirectoryInfoArray.size());
+			DirectoryInfo.DirectoryInfoArray.resize(m_RetPar.di.DirectoryInfoArray.size());
 			for (unsigned int i = 0; i<DirectoryInfo.DirectoryInfoArray.size(); i++)
 			{
-				DirectoryInfo.DirectoryInfoArray[i].ObjectName = RetPar.DirectoryInfo.DirectoryInfoArray[i].ObjectName;
-				DirectoryInfo.DirectoryInfoArray[i].ObjectType = (DirectoryObjectType)RetPar.DirectoryInfo.DirectoryInfoArray[i].ObjectType;
-				DirectoryInfo.DirectoryInfoArray[i].OtherInfo = RetPar.DirectoryInfo.DirectoryInfoArray[i].OtherInfo;
+				DirectoryInfo.DirectoryInfoArray[i].ObjectName = m_RetPar.di.DirectoryInfoArray[i].ObjectName;
+				DirectoryInfo.DirectoryInfoArray[i].ObjectType = (DirectoryObjectType)m_RetPar.di.DirectoryInfoArray[i].ObjectType;
+				DirectoryInfo.DirectoryInfoArray[i].OtherInfo = m_RetPar.di.DirectoryInfoArray[i].OtherInfo;
 			}
-			return RetPar.bCallSuccess;
+			return m_RetPar.bcs;
 		}
 		return FALSE;
 	}
 
 
 	//删除对象
-	BOOL DeleteObject(IN tstring & ObjectOrDir, SYSTEMERROR * pError)
+	template<typename StringT>
+	BOOL DeleteObject(IN StringT& ObjectOrDir, SYSTEMERROR * pError)
 	{
-		_tagCallParameter Par, RetPar;
-		Par.ObjectPath = ObjectOrDir;
-		BOOL bRet = TransportT::GetInstance().CallInterface(m_szUserName, m_szConversation, OBJECT_SYSTEM_OP_DELETEOBJECT, Par, RetPar);
+		m_Par.oc = OBJECT_SYSTEM_OP_DELETEOBJECT;
+		m_Par.op = ObjectOrDir.c_str();
+		m_Par.ob.clear();
+		BOOL bRet = TransportT::GetInstance().CallInterface(m_Par, m_RetPar);
 		if (bRet)
 		{
-			*pError = (SYSTEMERROR)RetPar.nError;
-			return RetPar.bCallSuccess;
+			*pError = (SYSTEMERROR)m_RetPar.Err;
+			return m_RetPar.bcs;
 		}
 		return FALSE;
 	}
@@ -618,26 +629,27 @@ public:
 	
 	BOOL RegistObjectEvent(ObjectSystemEvent & RegEvent, OUT SYSTEMERROR * pError)
 	{
-		_tagCallParameter Par, RetPar;
-		Par.ObjectPath = RegEvent.szObjectAddress;
-		Par.nRegEventType = RegEvent.nEventType;
+		m_Par.oc = OBJECT_SYSTEM_OP_REGIST_OBJEVENT;
+		m_Par.op = RegEvent.szObjectAddress.c_str();
+		m_Par.np = RegEvent.nEventType;
+		m_Par.ob.clear();
 		//TransportT::GetInstance().RegistInterface(this);
-		BOOL bRet = TransportT::GetInstance().CallInterface(m_szUserName, m_szConversation, OBJECT_SYSTEM_OP_REGIST_OBJEVENT, Par, RetPar);
+		BOOL bRet = TransportT::GetInstance().CallInterface(m_Par, m_RetPar);
 		if (bRet)
 		{
-			*pError = (SYSTEMERROR)RetPar.nError;
-			return RetPar.bCallSuccess;
+			*pError = (SYSTEMERROR)m_RetPar.Err;
+			return m_RetPar.bcs;
 		}
 		return FALSE;
 	}
-
-	BOOL UpDataObjectState(IN tstring & ObjectPath, OUT _tagObjectState & ObjectState, OUT SYSTEMERROR * pError)
+	template<typename StringT>
+	BOOL UpDataObjectState(IN StringT & ObjectPath, OUT _tagObjectState & ObjectState, OUT SYSTEMERROR * pError)
 	{
 		return TRUE;
 	}
 
-
-	BOOL GetObjectState(IN tstring & ObjectPath, OUT _tagObjectState & ObjectState, OUT SYSTEMERROR * pError)
+	template<typename StringT>
+	BOOL GetObjectState(IN StringT & ObjectPath, OUT _tagObjectState & ObjectState, OUT SYSTEMERROR * pError)
 	{
 		return TRUE;
 	}

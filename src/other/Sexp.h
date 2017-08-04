@@ -450,10 +450,10 @@ public:
 	}
 	
 
-	
-	CSexp(wstring & szExp)
+	template<typename StringT>
+	CSexp(StringT & szExp)
 	{
-		m_szExp = wstring((WCHAR*)CMyString(szExp));
+		m_szExp = wstring((WCHAR*)CMyString(szExp.c_str()));
 		m_Node.tStackType=StackType_None;
 		vector<_tagWordBaseInfo>  szWordArray;
 		if(GetWordArray((TCHAR *)szExp.c_str(),szWordArray))
@@ -578,11 +578,7 @@ public:
 		return GetStackByPos(&m_Node,nCurPos);
 	}
 
-	CSexp(string & szExp)
-	{
-		wstring wszExps=wstring((WCHAR*)CMyString(szExp));
-		CSexp((wstring &)wszExps);	
-	}
+	
 	
 	BOOL GetContainer(SExpTree & TreeNode,ContainerT & Node)
 	{

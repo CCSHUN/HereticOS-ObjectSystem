@@ -270,8 +270,8 @@ public:
 	//vector
 	//UnioVal m_Val;
 
-	wstring m_UnicodeString;
-	string m_ANSIString;
+	wstring_tmp m_UnicodeString;
+	string_tmp m_ANSIString;
 
 	CAutoVal(){m_ValType=typeError;};
 
@@ -297,17 +297,20 @@ public:
 		}
 	}
 
-
-	CAutoVal(wstring & Val)
+	template<typename PoolT>
+	CAutoVal(tstring_pool<PoolT,wchar_t> & Val)
 	{
-		m_UnicodeString=Val;
+		m_UnicodeString=Val.c_str();
 		m_ValType=typeUnicodeString;
 	}
-	CAutoVal(string & Val)
+
+	template<typename PoolT>
+	CAutoVal(tstring_pool<PoolT, char> & Val)
 	{
-		m_ANSIString=Val;
+		m_ANSIString=Val.c_str();
 		m_ValType=typeANSIString;
 	}
+	
 
 	CAutoVal(const WCHAR * Val)
 	{
@@ -399,7 +402,7 @@ public:
 
 #endif
 	//ÀàÐÍ×ª»»
-	operator string &()
+	operator string_tmp &()
 	{
 		
 #define CASE_VAL(AutoType,Val,fmt) case AutoType: \
@@ -452,7 +455,7 @@ public:
 				CAutoParameter::ContainerT::iterator itPos=m_ContainerVal.begin();
 				for(unsigned int i=0;itPos!=m_ContainerVal.end();itPos++,i++)
 				{
-					string tmp=(string)*itPos;
+					string_tmp tmp=(string_tmp)*itPos;
 					m_ANSIString+=tmp;
 					if(i!=(m_ContainerVal.size()-1))
 					{
@@ -470,7 +473,7 @@ public:
 		return m_ANSIString;
 	}
 
-	operator wstring & ()
+	operator wstring_tmp & ()
 	{
 #define WCASE_VAL(AutoType,Val,fmt) case AutoType: \
 	swprintf_s(szVal,63,L##fmt,m_Val.Val);\
@@ -523,7 +526,7 @@ public:
 				CAutoParameter::ContainerT::iterator itPos=m_ContainerVal.begin();
 				for(unsigned int i=0;itPos!=m_ContainerVal.end();itPos++,i++)
 				{
-					wstring tmp=(wstring)*itPos;
+					wstring_tmp tmp=(wstring_tmp&)*itPos;
 					m_UnicodeString+=tmp;
 					if(i!=(m_ContainerVal.size()-1))
 					{
@@ -540,6 +543,14 @@ public:
 		m_UnicodeString=szVal;
 		return m_UnicodeString;
 	}
+	operator const char *()
+	{
+		return ((string_tmp&)*this).c_str();
+	}
+	operator const wchar_t *()
+	{
+		return ((wstring_tmp&)*this).c_str();
+	}
 
 #define COMMON_TRANS(DstType,AutoType,Val,szFmt) \
 	operator DstType () \
@@ -555,7 +566,7 @@ public:
 			swscanf_s(m_UnicodeString.c_str(),L##szFmt,&m_Val.Val);\
 		}else\
 		{\
-			CAutoVal tmp=(tstring)*this;\
+			CAutoVal tmp=(tstring_tmp&)*this;\
 			*this=tmp;\
 			return (DstType)*this;\
 		}\
@@ -605,19 +616,19 @@ public:
 		}else if (m_ValType==typeUnicodeString)
 		{
 			//sscanf(m_ANSIString,szFmt,&m_Val.Val);
-			if(wstring(L"false")==m_UnicodeString)
+			if(wstring_tmp(L"false")==m_UnicodeString)
 			{
 				return false;
-			}else if(wstring(L"true")==m_UnicodeString)
+			}else if(wstring_tmp(L"true")==m_UnicodeString)
 			{
 				return true;
 			}
 		}else if (m_ValType==typeANSIString)
 		{
-			if(string("false")==m_ANSIString)
+			if(string_tmp("false")==m_ANSIString)
 			{
 				return false;
-			}else if(string("true")==m_ANSIString)
+			}else if(string_tmp("true")==m_ANSIString)
 			{
 				return true;
 			}

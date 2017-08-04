@@ -126,7 +126,7 @@ public:
 					{
 						for (int s=5;s>0;s--)
 						{
-							printf_t(_T("游戏结束,%ds后退出..."),s);
+							printf_t(_T("游戏结束,%ds后退出...\n"),s);
 							Sleep(1000);
 						}
 						
@@ -159,14 +159,14 @@ public:
 	static void GetSlotAddr(tstring & OutAddr, int nSlot)
 	{
 		OutAddr = _T("Slot");
-		OutAddr += CAutoVal(nSlot);
+		OutAddr += (tstring)CAutoVal(nSlot);
 		OutAddr += _T("\\FlowerSlot");
 		
 	}
 	void GetSlotAddr(tstring & OutAddr)
 	{
 		OutAddr = _T("Slot");
-		OutAddr += CAutoVal(m_nSlot);
+		OutAddr += (tstring)CAutoVal(m_nSlot);
 		OutAddr += _T("\\FlowerSlot");
 
 	}
@@ -174,7 +174,7 @@ public:
 	{
 		tstring  OutAddr;
 		OutAddr = _T("Slot");
-		OutAddr += CAutoVal(m_nSlot);
+		OutAddr += (tstring)CAutoVal(m_nSlot);
 		OutAddr += _T("\\FlowerSlot");
 		return OutAddr;
 
@@ -230,9 +230,9 @@ public:
 		m_ToFlowerSlot.m_szAddr = szNextAddr;
 
 		m_ToFlowerSlot.szLastLog = _T("Sender:Slot-");
-		m_ToFlowerSlot.szLastLog += CAutoVal(m_nSlot);
+		m_ToFlowerSlot.szLastLog += (tstring)CAutoVal(m_nSlot);
 		m_ToFlowerSlot.szLastLog += _T("  To:Slot-");
-		m_ToFlowerSlot.szLastLog += CAutoVal((m_nSlot + 1) % m_bb.nMaxFlowerSlotCount);
+		m_ToFlowerSlot.szLastLog += (tstring)CAutoVal((m_nSlot + 1) % m_bb.nMaxFlowerSlotCount);
 
 		_tagFlowerSlot_Wrap<ClientT> Slot(szSlotAddr, ObjectEvent_Updata, [this](ObjectSystemEvent & Event) {
 			
@@ -339,9 +339,9 @@ public:
 						m_SelfSlot.bOwn = TRUE;
 						m_SelfSlot.nFlowerTransportCount = (m_PrevSlot.nFlowerTransportCount + 1);
 						m_SelfSlot.szLastLog = _T("Slot-");
-						m_SelfSlot.szLastLog += CAutoVal(m_nSlot);
+						m_SelfSlot.szLastLog += (tstring)CAutoVal(m_nSlot);
 						m_SelfSlot.szLastLog = _T("pick form: Slot-");
-						m_SelfSlot.szLastLog += CAutoVal(m_nPrevSlot);
+						m_SelfSlot.szLastLog += (tstring)CAutoVal(m_nPrevSlot);
 						printf_t(_T("发现(Slot-%d)花朵(传递次数%d 传递消息-%s)用时(%dms)\n"), m_nPrevSlot,
 							m_PrevSlot.nFlowerTransportCount, m_PrevSlot.szLastLog.c_str(), ::GetTickCount() - m_nFlowerTickCount);
 					}else{
@@ -672,6 +672,7 @@ void UserSelect()
 void GameServerEntry()
 {
 	GameServerTransportT::GetInstance().init();
+	
 }
 
 void GameEntry(BOOL bMaster=FALSE)
@@ -680,7 +681,7 @@ void GameEntry(BOOL bMaster=FALSE)
 	/*[3].string map yss_allocator StaticGC*/
 	if (GameClientTransportT::TransportMiniT::GetInstance().init()){
 		SYSTEMERROR error;
-		if (GameClientT::GetInstance().LogonInSystem(tstring(_T("User")), tstring(_T("123")), &error)){
+		if (GameClientT::GetInstance().LogonInSystem(tstring(bMaster ? _T("Master") :_T("User")), tstring(_T("123")), &error)){
 			if (bMaster){
 				GameLoop<Game_Master<GameClientT>>();
 			}else{

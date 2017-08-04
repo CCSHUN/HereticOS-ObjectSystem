@@ -28,6 +28,9 @@
     <Filter Include="FlowerGame\AppDataMode">
       <UniqueIdentifier>{7b43c5f1-49e4-4872-a468-4027a596930f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mempool">
+      <UniqueIdentifier>{d7fd1f7c-6dc0-46f3-8fdd-d9ec8f14ad82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -144,6 +147,15 @@
     <ClInclude Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagCallParameterV2_StructInfo.h">
       <Filter>ObjectSystem2\ProtocalSer</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\other\SmartSTL\stlallocator.h">
+      <Filter>mempool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\SmartSTL\yssmemory.hpp">
+      <Filter>mempool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\SmartSTL\aligned_mem.h">
+      <Filter>mempool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -152,17 +164,11 @@
     <ClCompile Include="ObjectSystem2Test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\other\ObjectSystem2\ObjectFileOperation.cpp">
-      <Filter>ObjectSystem2</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\other\ObjectSystem2\ObjectSystem.cpp">
       <Filter>ObjectSystem2</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\other\ObjectSystem2\ObjectSystem_Local.cpp">
       <Filter>ObjectSystem2</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\other\Base64.cpp">
-      <Filter>SerLib</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\other\BaseFunctionTool.cpp">
       <Filter>SerLib</Filter>
@@ -208,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagCallParameterV2_StructInfo.cpp">
       <Filter>ObjectSystem2\ProtocalSer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\other\SmartSTL\yssmemory.cpp">
+      <Filter>mempool</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

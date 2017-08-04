@@ -15,6 +15,7 @@
 
 #include "ObjectSystem.h"
 #include "ObjectFileOperation.h"
+#define _DebugOutput
 #define MAX_EVENT_COUNT_PRESESSION 32
 #define MAX_SESSION_COUNT	10000
 #define MAX_IOPS	10000
@@ -28,7 +29,7 @@ public:
 		static DefAuth _self;
 		return _self;
 	};
-	BOOL GetUser(tstring & szUserName, tstring & szPassword, _tagUserMapSet &Set)
+	BOOL GetUser(const TCHAR * szUserName, const TCHAR * szPassword, _tagUserMapSet &Set)
 	{
 		Set.szUserName = szUserName;
 		Set.szPassword = szPassword;
@@ -56,44 +57,259 @@ public:
 		return _self;
 	}
 
-	BOOL LogonInSystem(IN tstring & szUserName, IN tstring & szPassword, OUT tstring & szSession);
+	template<typename StringT>
+	BOOL LogonInSystem(IN  const TCHAR * szUserName, IN  const TCHAR * szPassword, OUT StringT & szSession)
+	{
+
+		_DebugOutput(_T("CObjectSystem_Local"), _T("LogonInSystem %s UserName=%s"), _T(""), szUserName);
+		_tagUserMapSet Set;
+		if (AuthT::GetInstance().GetUser(szUserName, szPassword, Set))
+		{
+
+			//map<tstring, int, less<tstring>>::iterator
+			UserContextMapT::iterator itUser = m_UserContextMap.find(szUserName);
+
+			if (itUser == m_UserContextMap.end())
+			{
+				UserContext uc;
+				uc.nCurrentID = 0;
+				uc.nEventTypeMask = 0;
+				m_UserContextMap[szUserName] = uc;
+				itUser = m_UserContextMap.find(szUserName);
+
+			}
+
+			_tagUserSession tmp;
+			tmp.nEventTypeMask = 0;
+			tmp.KeepAlived.nCyc = (1000 * MAX_SESSION_COUNT) / MAX_IOPS;
+			++itUser->second.nCurrentID;
+			unsigned int nNewSession = 0;
+			if (m_FreeSessionQueue.size())
+			{
+				nNewSession = m_FreeSessionQueue.front();
+				m_FreeSessionQueue.pop();
+			}
+			else
+			{
+				nNewSession = ++m_nCurSessionNum;
+			}
+
+			szSession = (const TCHAR *)CAutoVal(nNewSession);
+			tmp.KeepAlived.nWndPos = nNewSession;
+			tmp.KeepAlived.nWndLen = (1000) / MAX_IOPS;
+			itUser->second.SessionMap[szSession.c_str()] = tmp;
+
+			return TRUE;
+		}
+		return FALSE;
+	}
+
 	BOOL LogonOutSystem();
 
-	BOOL GetObject(IN tstring & ObjectPath,OUT tstring & Object,IN OUT ObjectSystem::_tagObjectState & ObjectState,OUT ObjectSystem::SYSTEMERROR * pError);
+	template<typename StringT, typename String1T>
+	BOOL GetObject(IN  StringT& ObjectPath,OUT  String1T & Object,IN OUT ObjectSystem::_tagObjectState & ObjectState,OUT ObjectSystem::SYSTEMERROR * pError)
+	{
+		map<tstring, FileContext, less<tstring> >::iterator itObject;
+		//if(strstr_t(ObjectPath.c_str(),_T("MachineCheckStandardLib")))
+		{
+			/*printf("MachineCheckStandardLib");
+			for(unsigned int i=0;i<768;i++)
+			{
+			Object+=_T("1234");
+			}
+			OutputDebugString(_T("768"));
+			return TRUE;*/
+		}
+
+		*pError = ObjectSystem::Error_No;
+		itObject = m_FileCacheMap.find(ObjectPath.c_str());
+		if (itObject != m_FileCacheMap.end())
+		{
+			Object = itObject->second.szData;
+			if (itObject->second.ObjectState.szLockUser.length()
+				&& itObject->second.ObjectState.bLock)
+			{
+				if (itObject->second.ObjectState.szLockUser ==
+					ObjectState.szLockUser)
+				{
+					itObject->second.ObjectState = ObjectState;
+					_DebugOutput(_T("GetObject"), _T("对象[%s]锁已更新 Object=%s 请求用户=%s 是否占用=%d"),
+						itObject->second.ObjectState.szLockUser.c_str(),
+						ObjectPath.c_str(), ObjectState.szLockUser.c_str(), ObjectState.bLock);
+				}
+				else
+				{
+					//对象已锁定 返回对象当前的锁
+					ObjectState = itObject->second.ObjectState;
+					_DebugOutput(_T("GetObject"), _T("对象[%s]已锁定，只读打开 Object=%s 请求用户=%s 是否占用=%d"),
+						itObject->second.ObjectState.szLockUser.c_str(),
+						ObjectPath.c_str(), ObjectState.szLockUser.c_str(), ObjectState.bLock);
+					*pError = ObjectSystem::Error_ObjectAlreadyLock;
+				}
+
+			}
+			else
+			{
+
+				//占用对象锁
+				itObject->second.ObjectState = ObjectState;
+				_DebugOutput(_T("GetObject"), _T("覆盖获取锁 Object=%s 请求用户=%s 是否占用=%d"),
+					ObjectPath.c_str(), ObjectState.szLockUser.c_str(), ObjectState.bLock);
+			}
+
+		}
+		else
+		{
+			FileContext Context;
+			tstring_tmp ObjectAddr = ConfigT::GetInstance().strLocalSystemDirectory.c_str();
+			ObjectAddr +=ObjectPath.c_str();
+			if (Context.FileOperation.OpenObjectFile_OnlyOpen(ObjectAddr))
+			{
+				if (Context.FileOperation.ReadObject(Object))
+				{
+					Context.szData = Object;
+					/*pContext->ObjectState.bLock=FALSE;
+					pContext->ObjectState.nLockTime=0;
+					pContext->ObjectState.szLockUser=_T("");
+					pContext->ObjectState.nType=CObjectSystemInterface::Nonmoral;*/
+					Context.ObjectState = ObjectState;
+
+					m_FileCacheMap[ObjectPath.c_str()] = Context;
+					if (Object.length() == 0)
+					{
+						*pError = ObjectSystem::Error_Sys_OpenFileFail;
+						return FALSE;
+					}
+
+
+					//if(ObjectState.bLock)
+
+					Context.ObjectState = ObjectState;
+					_DebugOutput(_T("GetObject"), _T("覆盖锁 Object=%s 请求用户=%s 是否占用=%d"),
+						ObjectPath.c_str(), ObjectState.szLockUser.c_str(), ObjectState.bLock);
+
+
+					return TRUE;
+				}
+				Context.FileOperation.CloseObject();
+			}
+
+			*pError = ObjectSystem::Error_Sys_OpenFileFail;
+
+			return FALSE;
+		}
+
+		return TRUE;
+	};
 	
-	BOOL NeedNewObject(IN tstring & ObjectPath, OUT ObjectSystem::SYSTEMERROR * pError);
+	BOOL NeedNewObject(IN  const TCHAR * ObjectPath, OUT ObjectSystem::SYSTEMERROR * pError);
 
-	BOOL BroadcastObjectEvent(IN tstring & szUser, IN tstring & szSession, IN ObjectSystem::ObjectSystemEvent & Event, OUT ObjectSystem::SYSTEMERROR * pError);
+	template<typename StringT>
+	BOOL BroadcastObjectEvent(IN  StringT & szUser, IN  StringT & szSession, IN ObjectSystem::ObjectSystemEvent & Event, OUT ObjectSystem::SYSTEMERROR * pError)
+	{
+		UserContextMapT::iterator itUser = m_UserContextMap.begin();
+		for (; itUser != m_UserContextMap.end(); itUser++)
+		{
+			if (itUser->second.nEventTypeMask&Event.nEventType)
+			{
+				UserContext::SessionT::iterator itSession = itUser->second.SessionMap.begin();
+				for (; itSession != itUser->second.SessionMap.end(); itSession++)
+				{
+					if (itSession->second.EventQueue.size() > MAX_EVENT_COUNT_PRESESSION)
+					{
+						//*pError = Error_Sys_Event_Too_Much;
+						//return FALSE;
+						continue;
+					}
+					else
+					{
+						if (itSession->second.nEventTypeMask&Event.nEventType)
+						{
+							_tagUserSession::EventSubscribeT::iterator itSubscribe = itSession->second.EventSubscribeMap.find(Event.szObjectAddress);
+							if (itSubscribe != itSession->second.EventSubscribeMap.end())
+							{
 
-	BOOL RegistObjectEvent(IN tstring & szUser, IN tstring & szSession, IN ObjectSystemEvent & RegEvent, OUT ObjectSystem::SYSTEMERROR * pError);
+								itSession->second.EventQueue.push_back(Event);
+
+							}
+						}
+					}
+
+				}
+			}
+		}
+		return TRUE;
+	};
+
+	BOOL RegistObjectEvent(IN  const TCHAR * szUser, IN  const TCHAR * szSession, IN ObjectSystemEvent & RegEvent, OUT ObjectSystem::SYSTEMERROR * pError);
 	//更新对象到存储
-	BOOL UpDataObject(IN tstring & ObjectPath,IN tstring & Object, ObjectSystem::SYSTEMERROR * pError);
+	template<typename StringT, typename String1T >
+	BOOL UpDataObject(StringT & ObjectPath,IN  String1T & Object, ObjectSystem::SYSTEMERROR * pError)
+	{
+		map<tstring, FileContext, less<tstring> >::iterator itObject;
 
-	BOOL UpDataObject(IN tstring & ObjectPath,IN tstring & Object,IN ObjectSystem::_tagObjectState & ObjectState,OUT ObjectSystem::SYSTEMERROR * pError);
+		itObject = m_FileCacheMap.find(ObjectPath);
+		if (itObject != m_FileCacheMap.end())
+		{
+			itObject->second.szData = Object;
+
+			itObject->second.FileOperation.ClearFile(ObjectPath);
+			if (itObject->second.FileOperation.WriteObject(Object))
+			{
+
+				//释放对象锁
+				/*itObject->second->ObjectState.szLockUser.clear();
+				itObject->second->ObjectState.bLock=FALSE;*/
+				return TRUE;
+			}
+		}
+		else
+		{
+			FileContext Context;// = new _tagFileContext;
+			if (Context.FileOperation.OpenObjectFile(ObjectPath, TRUE))
+			{
+
+				if (Context.FileOperation.WriteObject(Object))
+				{
+					//保存到cache
+					Context.szData = Object;
+					m_FileCacheMap[ObjectPath] = Context;
+					return TRUE;
+				}
+				Context.FileOperation.CloseObject();
+			}
+			return FALSE;
+		}
+
+
+		return FALSE;
+	};
+
+	BOOL UpDataObject(IN  const TCHAR * ObjectPath,IN  const TCHAR * Object,IN ObjectSystem::_tagObjectState & ObjectState,OUT ObjectSystem::SYSTEMERROR * pError);
 
 	//获取目录信息
-	BOOL GetDirectoryInfo(IN tstring & DirectoryPath,IN tstring & szFinder,OUT ObjectSystem::_tagDirectoryInfo & DirectoryInfo,OUT ObjectSystem::SYSTEMERROR * pError);
+	BOOL GetDirectoryInfo(IN  const TCHAR * DirectoryPath,IN  const TCHAR * szFinder,OUT ObjectSystem::_tagDirectoryInfo & DirectoryInfo,OUT ObjectSystem::SYSTEMERROR * pError);
 
 	//删除对象
-	BOOL DeleteObject(IN tstring & ObjectOrDir, ObjectSystem::SYSTEMERROR * pError);
+	BOOL DeleteObject(IN  const TCHAR * ObjectOrDir, ObjectSystem::SYSTEMERROR * pError);
 
 	//获取对象状态
-	BOOL GetObjectState(IN tstring & ObjectPath,OUT ObjectSystem::_tagObjectState & ObjectState,OUT ObjectSystem::SYSTEMERROR * pError);
+	BOOL GetObjectState(IN  const TCHAR * ObjectPath,OUT ObjectSystem::_tagObjectState & ObjectState,OUT ObjectSystem::SYSTEMERROR * pError);
 	
 
-	BOOL ReleaseObjectState(IN tstring & ObjectOrDir,OUT ObjectSystem::SYSTEMERROR * pError);
+	BOOL ReleaseObjectState(IN  const TCHAR * ObjectOrDir,OUT ObjectSystem::SYSTEMERROR * pError);
 
 	BOOL GetCurTime(SYSTEMTIME * npTime, SYSTEMTIME * nCurTime);
 
-	void GetEventQueue(IN tstring & szUser, IN tstring & szSession, _tagCallParameter & RetPar);
+	void GetEventQueue(IN  const TCHAR * szUser, IN  const TCHAR * szSession, _tagCallParameter & RetPar);
 
-	BOOL KeepAlived(IN tstring & szUser, IN tstring & szSession, IN OUT tstring & szKeepAlivedPar, OUT ObjectSystem::SYSTEMERROR * pError);
+	BOOL KeepAlived(IN  const TCHAR * szUser, IN  const TCHAR * szSession, IN OUT tstring & szKeepAlivedPar, OUT ObjectSystem::SYSTEMERROR * pError);
 
 private:
 
 	typedef struct _tagFileContext
 	{ 
-		FileSystemT	FileOperation;
+		FileSystemT				FileOperation;
 		tstring					szData;
 		__int64					nLastAccessTime;
 		ObjectSystem::_tagObjectState			ObjectState;
@@ -118,15 +334,15 @@ private:
 		unsigned int nEventTypeMask;
 	}UserContext, *PUserContext;
 
-	map<tstring, PFileContext,less<tstring> > m_FileCacheMap;
+	map<tstring, FileContext,less<tstring> > m_FileCacheMap;
 
 	typedef map<tstring, UserContext, less<tstring>> UserContextMapT;
 	UserContextMapT m_UserContextMap;
 	//清理
-	BOOL ClearDirCache(tstring & ObjectOrDirPath);
+	BOOL ClearDirCache(const TCHAR * ObjectOrDirPath);
 
 	//解锁对象
-	BOOL ReleaseObjectLock(tstring & ObjectPath);
+	BOOL ReleaseObjectLock(const TCHAR * ObjectPath);
 
 	std::queue<unsigned int> m_FreeSessionQueue;
 

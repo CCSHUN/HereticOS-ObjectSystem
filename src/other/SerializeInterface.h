@@ -16,6 +16,7 @@
 //作者：叶树深 2010.6.10
 //对象序列化接口抽象
 
+
 typedef struct _tagFieldAddr
 {
 	TCHAR * pFieldName;
@@ -107,7 +108,7 @@ public:
 		return FALSE;
 	}
 
-	virtual BOOL GetStringObject(IN SerializeRunData * Addr,tstring & pOutData)
+	virtual BOOL GetStringObject(IN SerializeRunData * Addr,const TCHAR * pOutData)
 	{
 		return FALSE;
 	}
@@ -117,7 +118,7 @@ public:
 		return FALSE;
 	}
 
-	virtual BOOL SetStringObject(IN SerializeRunData * Addr,IN tstring & pInData)
+	virtual BOOL SetStringObject(IN SerializeRunData * Addr,IN const TCHAR * pInData)
 	{
 		return FALSE;
 	}
@@ -184,7 +185,7 @@ public:
 		return FALSE;
 	};
 	//设置节点数据
-	virtual BOOL LoadSetData(tstring & Data)
+	virtual BOOL LoadSetData(TCHAR * Data)
 	{
 		return FALSE;
 	};

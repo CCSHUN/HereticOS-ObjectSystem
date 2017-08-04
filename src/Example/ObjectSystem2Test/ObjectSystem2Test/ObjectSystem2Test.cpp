@@ -148,25 +148,25 @@ void ObjectSystemTestInit()
 	//CObjectSystem_Local<ObjectSystem2Config, CObjectFileOperation>::GetInstance().LogonInSystem(tstring(_T("Test")), tstring(_T("123")), szSession);
 	LocalClient1T & LocalClient1 = LocalClient1T::GetInstance();
 	printf_t(_T("LocalClient1.LogonInSystem %s %d\n"),
-	LocalClient1.LogonInSystem(tstring(_T("Test")), tstring(_T("123")), &error) ? _T("Ok") : _T("Fail"), error);
+	LocalClient1.LogonInSystem(tstring_tmp(_T("Test")), tstring_tmp(_T("123")), &error) ? _T("Ok") : _T("Fail"), error);
 
 	LocalClient2T & LocalClient2 = LocalClient2T::GetInstance();
 	printf_t(_T("LocalClient2.LogonInSystem %s %d\n"),
-	LocalClient2.LogonInSystem(tstring(_T("Test")), tstring(_T("123")), &error) ? _T("Ok") : _T("Fail"), error);
+	LocalClient2.LogonInSystem(tstring_tmp(_T("Test")), tstring_tmp(_T("123")), &error) ? _T("Ok") : _T("Fail"), error);
 
 	_tagObjectState state;
-	tstring szState;
+	tstring_tmp szState;
 	state.szLockUser = _T("LocalClient1-init");
 	SerObjectToXmlBuffer(_tagObjectState, state, szState);
 	
 	printf_t(_T("LocalClient1.UpDataObject %s %d\n"),
-		LocalClient1.UpDataObject(tstring(Object1Path), szState, &error) ? _T("Ok") : _T("Fail"), error);
+		LocalClient1.UpDataObject(tstring_tmp(Object1Path), szState, &error) ? _T("Ok") : _T("Fail"), error);
 
 
 	state.szLockUser = _T("LocalClient2-init");
 	SerObjectToXmlBuffer(_tagObjectState, state, szState);
 	printf_t(_T("LocalClient1.UpDataObject %s %d\n"),
-		LocalClient2.UpDataObject(tstring(Object2Path), szState, &error) ? _T("Ok") : _T("Fail"), error);
+		LocalClient2.UpDataObject(tstring_tmp(Object2Path), szState, &error) ? _T("Ok") : _T("Fail"), error);
 
 	ObjectSystemEvent  RegEvent;
 
@@ -215,13 +215,13 @@ void ObjectSystemTestInit()
 		printf_t(_T("LocalClient1T NeedNew Event=(%s %d)  szEventName=%s\n"), Event.szObjectAddress.c_str(), Event.nEventType, szEventName.c_str());
 
 		_tagObjectState state;
-		tstring szState;
+		tstring_tmp szState;
 		state.szLockUser = _T("LocalClient1-");
-		state.szLockUser+=CAutoVal(++g_nClient1Log);
+		state.szLockUser+=(tstring)CAutoVal(++g_nClient1Log);
 		SerObjectToXmlBuffer(_tagObjectState, state, szState);
 		SYSTEMERROR error;
 		printf_t(_T("LocalClient1.UpDataObject %s %d\n"),
-			LocalClient1T::GetInstance().UpDataObject(tstring(Object1Path), szState, &error) ? _T("Ok") : _T("Fail"), error);
+			LocalClient1T::GetInstance().UpDataObject(tstring_tmp(Object1Path), szState, &error) ? _T("Ok") : _T("Fail"), error);
 
 	});
 
@@ -232,13 +232,13 @@ void ObjectSystemTestInit()
 		printf_t(_T("LocalClient2T NeedNew Event=(%s %d)  szEventName=%s\n"), Event.szObjectAddress.c_str(), Event.nEventType, szEventName.c_str());
 
 		_tagObjectState state;
-		tstring szState;
+		tstring_tmp szState;
 		state.szLockUser = _T("LocalClient2-");
-		state.szLockUser += CAutoVal(++g_nClient2Log);
+		state.szLockUser += (tstring)CAutoVal(++g_nClient2Log);
 		SerObjectToXmlBuffer(_tagObjectState, state, szState);
 		SYSTEMERROR error;
 		printf_t(_T("LocalClient2.UpDataObject %s %d\n"),
-			LocalClient2T::GetInstance().UpDataObject(tstring(Object2Path), szState, &error) ? _T("Ok") : _T("Fail"), error);
+			LocalClient2T::GetInstance().UpDataObject(tstring_tmp(Object2Path), szState, &error) ? _T("Ok") : _T("Fail"), error);
 	});
 
 
@@ -321,7 +321,7 @@ void ObjectSystemTestMiniInit()
 
 		_tagObjectState_Wrap<Client1T> state_wrap1(Event.szObjectAddress); 
 		state_wrap1.szLockUser = _T("Client1-");
-		state_wrap1.szLockUser += CAutoVal(g_nClient1Log);
+		state_wrap1.szLockUser += (tstring)CAutoVal(g_nClient1Log);
 		g_nClient1Log++;
 		printf_t(_T("Client1.UpDataObject Object1 %s %d\n"),
 			state_wrap1.UpDataObject() ? _T("Ok") : _T("Fail"), state_wrap1.m_nCurError);
@@ -334,7 +334,7 @@ void ObjectSystemTestMiniInit()
 		printf_t(_T("Client2 NeedNew Object2 Event=(%s %d)  szEventName=%s\n"), Event.szObjectAddress.c_str(), Event.nEventType, szEventName.c_str());
 		_tagObjectState_Wrap<Client2T> state_wrap2(Event.szObjectAddress);
 		state_wrap2.szLockUser = _T("Client2-");
-		state_wrap2.szLockUser += CAutoVal(g_nClient2Log);
+		state_wrap2.szLockUser += (tstring)CAutoVal(g_nClient2Log);
 		BigString(state_wrap2.szLockUser, 200 * 1024);
 		g_nClient2Log++;
 		printf_t(_T("Client2.UpDataObject Object2 %s %d\n"),
@@ -401,6 +401,14 @@ void UDPObjectSystemTest(BOOL bHasSever=TRUE)
 	
 	
 }
+void TestZip()
+{
+	string szData = "1234";
+	string szOutData;
+	vector<u_char> OutData;
+	CBase64Zip::Base64ZipCompress((unsigned char *)szData.c_str(), szData.length() * sizeof(TCHAR), szOutData);
+	CBase64Zip::Base64ZipUnCompress(szOutData, OutData);
+}
 
 template<typename ClientT,bool bTestSer=false>
 void TestPerformance()
@@ -410,9 +418,10 @@ void TestPerformance()
 	ClientT & Client1 = ClientT::GetInstance();
 	printf_t(_T("Client1.LogonInSystem %s %d\n"),
 		Client1.LogonInSystem(tstring(_T("Test")), tstring(_T("123")), &error) ? _T("Ok") : _T("Fail"), error);
-
+	//TestZip();
 	_tagObjectState_Wrap<ClientT> state_wrap(Object1Path);
 	tstring szState;
+	tstring ssAddr = Object1Path;
 	_tagObjectState state, state1;
 	state.szLockUser = _T("Client1-init");
 	SerObjectToXmlBuffer(_tagObjectState, state, szState);
@@ -423,26 +432,28 @@ void TestPerformance()
 	{
 		nLastTick = ::GetTickCount64();
 		nLastnSucessCount = nSucessCount;
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 1000; i++)
 		{
 			nLastErrorTick = ::GetTickCount64();
 			nTempErrTime = 0;
 			/**/
 			if (bTestSer)
 			{
-				_tagCallParameterV2 Par,RetPar;
-				Par.Object = szState;
-				tstring szPar,OutPar;
+				//_tagCallParameterV2 Par,RetPar;
+				_tagCallParameter Par, RetPar;
+				Par.ob = szState;
+				tstring_tmp szPar,OutPar;
 				//SerObjectToXmlBuffer(_tagObjectState, state, szState);
-				SerObjectToXmlBuffer(_tagCallParameterV2, Par, szPar);
+				SerObjectToXmlBuffer(_tagCallParameter, Par, szPar);
 				//OutPar = szPar;
-				//SerTCHARXmlBufferToObject(_tagCallParameterV2, RetPar, (OutPar.c_str()));
+				//SerTCHARXmlBufferToObject(_tagCallParameter, RetPar, (OutPar.c_str()));
 
 				nSucessCount++;
 			}
 			else
 			{
-				if (state_wrap.UpDataObject())
+				//if (state_wrap.UpDataObject())
+				if(ClientT::GetInstance().UpDataObject(ssAddr, szState, &error))
 				{
 					nSucessCount++;
 					/*
@@ -466,15 +477,19 @@ void TestPerformance()
 		}
 		nTempTime = ::GetTickCount64() - nLastTick;
 		nUsedTime += nTempTime;
+		MemoryMgr__StaticGC_Tmp::GetInstance().DelGc(FALSE);
+		MemoryMgr__StaticGC::GetInstance().DelGc(FALSE);
 		if (nUsedTime - nLastUsedTime > 3000)
 		{
 			
+
 			printf_t(_T("QPS(数量=%llu 用时=%llu 速率=%llu)  瞬时QPS(数量=%llu 用时=%llu 速率=%llu) Error(数量=%llu 用时=%llu 速率=%llu)\n"),
 				nSucessCount, nUsedTime - nErrorUsedTime, ((1000*nSucessCount) / (nUsedTime - nErrorUsedTime)),
 				nSucessCount - nLastnSucessCount, (nTempTime - nTempErrTime), ((1000*(nSucessCount - nLastnSucessCount)) / (nTempTime - nTempErrTime)),
 				nErrorCount, nErrorUsedTime, (1000*nErrorCount) / (nErrorUsedTime? nErrorUsedTime:(nErrorUsedTime+1)));
 			
 			nLastUsedTime = nUsedTime;
+			
 		}
 	}
 
@@ -551,8 +566,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	{
 		::Sleep(100);
 	}
-	tstring szSession;
-	CObjectSystem_Local<ObjectSystem2Config, CObjectFileOperation>::GetInstance().LogonInSystem(tstring(_T("Test")), tstring(_T("123")), szSession);
+	//tstring szSession;
+	//CObjectSystem_Local<ObjectSystem2Config, CObjectFileOperation>::GetInstance().LogonInSystem((_T("Test")), (_T("123")), szSession);
 	LocalClient1T & LocalClient = LocalClient1T::GetInstance();
 	return 0;
 }

@@ -1,0 +1,115 @@
+变长模板、变长参数是依靠C++11新引入的参数包的机制实现的。
+
+一个简单的例子是std::tuple的声明：
+
+template <typename... Elements>
+class tuple;
+这里的三个点“...”表示这个模板参数是变长的。
+
+有了这个强大的工具，我们可以编写更加丰富的函数，例如任意类型参数的printf等。由于这个技术还比较新，还没有见到成熟的用法用例，我把我尝试的一些结果总结如下，希望对大家有帮助。
+
+1,参数包
+
+考虑到这个知识点很多朋友都不熟悉，首先明确几个概念：
+
+1,模板参数包（template parameter pack）：
+
+它指模板参数位置上的变长参数（可以是类型参数，也可以是非类型参数），例如上面例子中的 Elements。
+
+
+2,函数参数包（function parameter pack）：
+
+它指函数参数位置上的变长参数，例如下面例子中的args，（ARGS是模板参数包）：
+
+template <typename ... ARGS>
+void fun(ARGS ... args)
+在很多情况下它们是密切相关的（例如上面的例子），而且很多概念和用法也都一致，在不引起误解的情况下，后面我在讨论时会将他们合并起来讨论，或只讨论其中一个（另一个于此相同）。
+
+注意：
+模板参数包本身在模板推导过程中被认为是 一个 特殊的类型（函数参数包被认为是 一个 特殊类型的参数）。
+
+一个包可以打包任意多数量的参数（包含0个）。 
+一般情况下 参数包必须在最后面，例如：
+
+template <typename T, typename ... Args>
+void fun(T t,Args ... args);//合法
+
+template <typename ... Args, typename T>
+void fun(Args ... args,T t);//非法
+有一个新的运算符：sizeof...(T) 可以用来获知参数包中打包了几个参数，注意 不是 参数所占的字节数之和。 
+2,解包
+
+在实际使用时，拿到一个复合而成的包对没有并没有什么用，我们通常需要获得它里面内一个元素的内容。解包是把参数包展开为它所表示的具体内容的动作。
+
+解包时采用“包扩展表达式”，就是包名加上三个点，如“Args...”。
+
+例如：
+
+假设我们有一个模板类Base：
+
+template <typename ... Args>
+class D1 : public Base<A...>{};
+或
+template <typename ... Args>
+class D2 : public Base<A>...{};
+解包用两种常见的形式：
+1,直接解包（上面第一个）
+
+D1<X,Y,Z> 相当于 D1:public Base<X,Y,Z> 
+2,先参与其他表达式再解包（上面第二个）
+
+D2<X,Y,Z> 相当于 D2: public Base<X>, Base<Y>, Base<Z>
+
+直观上理解就是在...所在的位置将包含了参数包的表达式展开为若干个具体形式。
+
+3,函数实例
+
+一个常用的技巧是：利用模板推导机制，每次从参数包里面取第一个元素，缩短参数包，直到包为空。
+
+template <typename T>
+void fun(const T& t){
+  cout << t << '\n';
+}
+
+template <typename T, typename ... Args>
+void fun(const T& t, Args ... args){
+  cout << t << ',';
+  fun(args...);//递归解决，利用模板推导机制，每次取出第一个，缩短参数包的大小。
+}
+
+下面我以打印出一组参数为例，简单介绍一下变成参数函数怎么用。
+方法一：
+
+template <typename ... T>
+void DummyWrapper(T... t){};
+
+template <class T>
+T unpacker(const T& t){
+  cout<<','<<t;
+  return t;
+}
+
+template <typename T, typename... Args>
+void write_line(const T& t, const Args& ... data){
+  cout << t;
+  DummyWrapper(unpacker(data)...);//直接用unpacker(data)...是非法的，（可以认为直接逗号并列一堆结果没有意义），需要包裹一下，好像这些结果还有用
+  cout << '\n';
+}
+推荐这种方法，虽然写起来麻烦一点，但是它在运行期的效率比较高（没有递归，顺序搞定，DummyWrapper的参数传递会被编译器优化掉），而且编译期的代价也不是很高（对于相同类型的子元素，unpacker<T>只需要特化出一份即可，但DummyWrapper需要根据参数类型特化很多版本）。
+
+template <typename T>
+void _write(const T& t){
+  cout << t << '\n';
+}
+
+template <typename T, typename ... Args>
+void _write(const T& t, Args ... args){
+  cout << t << ',';
+  _write(args...);//递归解决，利用模板推导机制，每次取出第一个，缩短参数包的大小。
+}
+
+template <typename T, typename... Args>
+inline void write_line(const T& t, const Args& ... data){
+  _write(t, data...);
+}
+这种方法思路直观，书写便捷。但是运行时有递归，效率有所下降。编译时也需要生成不少版本的_write。

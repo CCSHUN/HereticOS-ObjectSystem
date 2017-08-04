@@ -99,8 +99,8 @@ namespace TransportMini
 				nRecvedLen += nIoRetLen;
 				if (RecvBuffer.size() == nRecvedLen)
 				{
-					RecvBuffer[RecvBuffer.size() - 1] = 0;
-					RecvBuffer[RecvBuffer.size() - 2] = 0;
+					//RecvBuffer[RecvBuffer.size() - 1] = 0;
+					//RecvBuffer[RecvBuffer.size() - 2] = 0;
 					//_DebugOutput(_T("Client-%d Sendto server confirm OK (%d)\n"), nName, ResponseHead.nPacketLen);
 					bRet = TRUE;
 					break;
@@ -190,15 +190,16 @@ namespace TransportMini
 			{
 				tstring szInPar,szOutPar;
 				szInPar = (TCHAR *)&Session.m_SessionBuffer[sizeof(TransportUDPRequestHead)];
-				_tagstrParameter Par;
+				//_tagstrParameter Par;
 				//Par.szData = szInPar;
 				//SerObjectToXmlBuffer(_tagstrParameter, Par, szInPar);
-				SerTCHARXmlBufferToObject(_tagstrParameter, Par, (szInPar.c_str()));
+				//SerTCHARXmlBufferToObject(_tagstrParameter, Par, (szInPar.c_str()));
 
 				SYSTEMERROR error;
 
-				if (_TransportServerT::GetInstance().CallInterface(Par.szData, szOutPar, error))
+				if (_TransportServerT::GetInstance().CallInterfaceStr(szInPar, szOutPar, error))
 				{
+					g_pMemoryMgr[MEMMGR_TYPE_STATICGC_TMP]->DelGc(FALSE);
 					TransportUDPRequestHead ResponseHead;
 					//Par.szData = szOutPar;
 					//SerObjectToXmlBuffer(_tagstrParameter, Par, szOutPar);
@@ -425,29 +426,29 @@ namespace TransportMini
 			if (nPort) m_nPort = nPort;
 			return reinit();
 		}
-		BOOL CallInterface(_tagCallParameter & tagCallParameter, _tagCallParameter & RetParameter, SYSTEMERROR & error)
+		BOOL CallInterfacePar(_tagCallParameter & tagCallParameter, _tagCallParameter & RetParameter, SYSTEMERROR & error)
 		{
 			return FALSE;
 		}
-		BOOL CallInterface(tstring & szInPar, tstring & szOutPar, SYSTEMERROR & error)
+		BOOL CallInterfaceStr(tstring & szInPar, tstring & szOutPar, SYSTEMERROR & error)
 		{
 			BOOL bRet = FALSE;
 			BOOL bSysFail = TRUE;
 			int len = sizeof(m_ServerAddr);
 
 			TransportUDPRequestHead Head;
-			_tagstrParameter Par;
-			Par.szData = szInPar;
-			tstring szInPar1;
-			SerObjectToXmlBuffer(_tagstrParameter, Par, szInPar1);
+			//_tagstrParameter Par;
+			//Par.szData = szInPar;
+			//tstring szInPar1;
+			//SerObjectToXmlBuffer(_tagstrParameter, Par, szInPar1);
 
 			TransportUDPRequestHead ResponseHead;
 			Head.nMagicCode = _nMagicCode;
-			Head.nPacketLen = (szInPar1.size() + 1) * sizeof(TCHAR) + sizeof(TransportUDPRequestHead);
+			Head.nPacketLen = (szInPar.size() + 1) * sizeof(TCHAR) + sizeof(TransportUDPRequestHead);
 			vector<u_char> RequestBuffer;
 			RequestBuffer.resize(Head.nPacketLen- sizeof(TransportUDPRequestHead));
 			//memcpy(&Buffer[0], &Head, sizeof(TransportUDPRequestHead));
-			memcpy(&RequestBuffer[0], szInPar1.c_str(), (szInPar1.size() + 1) * sizeof(TCHAR));
+			memcpy(&RequestBuffer[0], szInPar.c_str(), (szInPar.size() + 1) * sizeof(TCHAR));
 			int nIoRetLen = 0;
 			nIoRetLen = sendto(m_hSocket, (const char *)&Head, sizeof(Head), 0, (struct sockaddr*)&m_ServerAddr, len);
 			do

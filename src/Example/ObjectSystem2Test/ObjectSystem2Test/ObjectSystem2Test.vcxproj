@@ -30,14 +30,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -79,7 +79,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)..\bin\</OutDir>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -118,6 +118,9 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,7 +129,11 @@
       <AdditionalDependencies>..\..\..\other\zlib\lib\zlibstat.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
       <UACExecutionLevel>AsInvoker</UACExecutionLevel>
+      <Profile>true</Profile>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(TargetPath) $(SolutionDir)$(Configuration)\..\..\bin\$(ProjectName).exe</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -143,6 +150,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>..\..\..\other\zlib\lib\zlibstat.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -174,6 +182,9 @@
     <ClInclude Include="..\..\..\other\SerializeInterface.h" />
     <ClInclude Include="..\..\..\other\SerIni.h" />
     <ClInclude Include="..\..\..\other\Sexp.h" />
+    <ClInclude Include="..\..\..\other\SmartSTL\aligned_mem.h" />
+    <ClInclude Include="..\..\..\other\SmartSTL\stlallocator.h" />
+    <ClInclude Include="..\..\..\other\SmartSTL\yssmemory.hpp" />
     <ClInclude Include="..\..\..\other\StorageObject.h" />
     <ClInclude Include="..\..\..\other\XmlRender.h" />
     <ClInclude Include="AppProtocol\CommonTypeDef.h" />
@@ -188,9 +199,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\other\Base64.cpp" />
     <ClCompile Include="..\..\..\other\BaseFunctionTool.cpp" />
-    <ClCompile Include="..\..\..\other\ObjectSystem2\ObjectFileOperation.cpp" />
     <ClCompile Include="..\..\..\other\ObjectSystem2\ObjectSystem.cpp" />
     <ClCompile Include="..\..\..\other\ObjectSystem2\ObjectSystem_Local.cpp" />
     <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagCallParameterV2_StructInfo.cpp" />
@@ -201,6 +210,7 @@
     <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagObjectState_StructInfo.cpp" />
     <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagObjectSystemEvent_StructInfo.cpp" />
     <ClCompile Include="..\..\..\other\ObjectSystem2\SerTransportProtocol\_tagstrParameter_StructInfo.cpp" />
+    <ClCompile Include="..\..\..\other\SmartSTL\yssmemory.cpp" />
     <ClCompile Include="..\..\..\other\XmlRender.cpp" />
     <ClCompile Include="AppProtocol\_tagBulletinBoard_StructInfo.cpp" />
     <ClCompile Include="AppProtocol\_tagFlowerSlot_StructInfo.cpp" />

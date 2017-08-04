@@ -16,6 +16,8 @@
 #include <queue>
 //#define _DebugOutput
 #define _DebugOutput printf_t
+#define _DebugOutput1 
+//#define _DebugOutput1 printf_t
 template<typename ServerTransportT>
 class TransportMiniDirectCall
 {
@@ -28,14 +30,14 @@ public:
 		static _Myt _self;
 		return _self;
 	}
-	BOOL CallInterface(_tagCallParameter & tagCallParameter, _tagCallParameter & RetParameter, SYSTEMERROR & error)
+	BOOL CallInterfacePar(_tagCallParameter & tagCallParameter, _tagCallParameter & RetParameter, SYSTEMERROR & error)
 	{
-		return ServerTransportT::GetInstance().CallInterface(tagCallParameter, RetParameter, error);
+		return ServerTransportT::GetInstance().CallInterfacePar(tagCallParameter, RetParameter, error);
 	}
 
-	BOOL CallInterface(tstring & szInPar, tstring & szOutPar,SYSTEMERROR & error)
+	BOOL CallInterfaceStr(tstring & szInPar, tstring & szOutPar,SYSTEMERROR & error)
 	{
-		return ServerTransportT::GetInstance().CallInterface(szInPar, szOutPar, error);
+		return ServerTransportT::GetInstance().CallInterfaceStr(szInPar, szOutPar, error);
 	}
 	
 private:
@@ -66,42 +68,40 @@ namespace Transport
 			static _Myt _self;
 			return _self;
 		}
-		BOOL CallInterface(tstring & szUserName, tstring & szConversation, int nOpCode, _tagCallParameter & tagCallParameter, _tagCallParameter & RetParameter)
+		BOOL CallInterface(_tagCallParameter & tagCallParameter, _tagCallParameter & RetParameter)
 		{
-			tstring szInPar,szOutPar;
-			tagCallParameter.nOpCode = nOpCode;
-			tagCallParameter.szUser = szUserName;
-			tagCallParameter.szSession = szConversation;
 			BOOL bRet = FALSE;
 			SYSTEMERROR error;
-			RetParameter.nError = Error_Sys_Transport_Fail;
+			RetParameter.Err = Error_Sys_Transport_Fail;
 			if (bSerialize)
 			{
+				tstring szInPar, szOutPar;
 				SerObjectToXmlBuffer(_tagCallParameter, tagCallParameter, szInPar);
-				bRet = TransportMiniT::GetInstance().CallInterface(szInPar, szOutPar, error);
+				bRet = TransportMiniT::GetInstance().CallInterfaceStr(szInPar, szOutPar, error);
 				if (bRet)
 				{
+					if (tagCallParameter.oc == OBJECT_SYSTEM_OP_GETOBJECT)_DebugOutput1(_T("Client GetObject %s %s\n"), tagCallParameter.op.c_str(), RetParameter.ob.c_str());
 					SerTCHARXmlBufferToObject(_tagCallParameter, RetParameter, (szOutPar.c_str()));
 				}
 			}
 			else
 			{
-				bRet = TransportMiniT::GetInstance().CallInterface(tagCallParameter, RetParameter, error);
+				bRet = TransportMiniT::GetInstance().CallInterfacePar(tagCallParameter, RetParameter, error);
 			}
 			
 			if (bRet)
 			{
 				
 				if (error == Error_Sys_Transport_Fail) {
-					RetParameter.bCallSuccess = FALSE;
+					RetParameter.bcs = FALSE;
 				}
 
-				ClientSessionT::iterator itSession = m_ClientSession.find(RetParameter.szSession);
+				ClientSessionT::iterator itSession = m_ClientSession.find(RetParameter.ss.c_str());
 				if (itSession != m_ClientSession.end())
 				{
-					for (unsigned int i = 0; i<RetParameter.EventList.size(); i++)
+					for (unsigned int i = 0; i<RetParameter.el.size(); i++)
 					{
-						itSession->second.EventQueue.push(RetParameter.EventList[i]);
+						itSession->second.EventQueue.push(RetParameter.el[i]);
 					}
 				}
 			}
@@ -154,88 +154,95 @@ namespace Transport
 		};
 		
 		//BOOL CallInterface(_tagCallParameter & tagCallParameter, _tagCallParameter & RetParameter,SYSTEMERROR & error)
-		BOOL CallInterface(_tagCallParameter&tagCallParameter, _tagCallParameter&RetParameter,SYSTEMERROR&error)
+		template<typename CallParameterT>
+		BOOL CallInterfacePar(CallParameterT & tagCallParameter, CallParameterT & RetParameter,SYSTEMERROR&error)
 		{
 			BOOL bRet = TRUE;
-			_tagObjectState ObjectState;
-			ObjectState.bLock = tagCallParameter.tagObjectState.bLock;
-			ObjectState.nLockTime = tagCallParameter.tagObjectState.nLockTime;
-			ObjectState.nType = tagCallParameter.tagObjectState.nType;
-			ObjectState.szLockUser = tagCallParameter.tagObjectState.szLockUser;
+			
 			SYSTEMERROR		Error = Error_No;
 			ObjectSystemEvent Event;
-			Event.szObjectAddress = tagCallParameter.ObjectPath;
-			Event.nEventType = tagCallParameter.nRegEventType;
+			Event.szObjectAddress = tagCallParameter.op;
+			Event.nEventType = tagCallParameter.np;
 
-			switch (tagCallParameter.nOpCode)
+			switch (tagCallParameter.oc)
 			{
 			case OBJECT_SYSTEM_OP_GETOBJECT:
 			{
-				RetParameter.bCallSuccess = ObjectSystemT::GetInstance().GetObject(tagCallParameter.ObjectPath, RetParameter.Object, tagCallParameter.tagObjectState, &Error);
-				if (RetParameter.bCallSuccess)
+				RetParameter.bcs = ObjectSystemT::GetInstance().GetObject(tagCallParameter.op, RetParameter.ob, tagCallParameter.Os, &Error);
+				if (RetParameter.bcs)
 				{
 					Event.nEventType = ObjectEvent_Get;
-					if (RetParameter.bCallSuccess) ObjectSystemT::GetInstance().BroadcastObjectEvent(tagCallParameter.szUser, tagCallParameter.szSession, Event, &Error);
+					if (RetParameter.bcs) ObjectSystemT::GetInstance().BroadcastObjectEvent(tagCallParameter.su, tagCallParameter.ss, Event, &Error);
 				}
+				_DebugOutput1(_T("Server GetObject %s %s\n"), tagCallParameter.op.c_str(), RetParameter.ob.c_str());
 			}
 
 			break;
 			case OBJECT_SYSTEM_OP_UPDATAOBJECT:
 				//ObjectState.szLockUser=szUserName;
 				//RetParameter.bCallSuccess=gpObjectSystem->UpDataObject(tagCallParameter.ObjectPath,tagCallParameter.Object,ObjectState,&Error);
-				RetParameter.bCallSuccess = ObjectSystemT::GetInstance().UpDataObject(tagCallParameter.ObjectPath, tagCallParameter.Object, &Error);
+				RetParameter.bcs = ObjectSystemT::GetInstance().UpDataObject(tagCallParameter.op, tagCallParameter.ob, &Error);
 				Event.nEventType = ObjectEvent_Updata;
-				if (RetParameter.bCallSuccess) ObjectSystemT::GetInstance().BroadcastObjectEvent(tagCallParameter.szUser, tagCallParameter.szSession, Event, &Error);
+				if (RetParameter.bcs) ObjectSystemT::GetInstance().BroadcastObjectEvent(tagCallParameter.su, tagCallParameter.ss, Event, &Error);
 				break;
 			case OBJECT_SYSTEM_OP_GETDIRECTORYINFO:
-				RetParameter.bCallSuccess = ObjectSystemT::GetInstance().GetDirectoryInfo(tagCallParameter.ObjectPath, tagCallParameter.szFinder, RetParameter.DirectoryInfo, &Error);
+				RetParameter.bcs = ObjectSystemT::GetInstance().GetDirectoryInfo(tagCallParameter.op.c_str(), tagCallParameter.sf.c_str(), RetParameter.di, &Error);
 				break;
 			case OBJECT_SYSTEM_OP_DELETEOBJECT:
-				RetParameter.bCallSuccess = ObjectSystemT::GetInstance().DeleteObject(tagCallParameter.ObjectPath, &Error);
+				RetParameter.bcs = ObjectSystemT::GetInstance().DeleteObject(tagCallParameter.op.c_str(), &Error);
 				Event.nEventType = ObjectEvent_Delete;
-				if (RetParameter.bCallSuccess) ObjectSystemT::GetInstance().BroadcastObjectEvent(tagCallParameter.szUser, tagCallParameter.szSession, Event, &Error);
+				if (RetParameter.bcs) ObjectSystemT::GetInstance().BroadcastObjectEvent(tagCallParameter.su, tagCallParameter.ss, Event, &Error);
 				break;
 			case OBJECT_SYSTEM_OP_GETOBJECTSTATE:
 				break;
 			case OBJECT_SYSTEM_OP_UPDATAOBJECTSTATE:
 				break;
 			case OBJECT_SYSTEM_OP_LOGONINSYSTEM:
-				RetParameter.bCallSuccess = ObjectSystemT::GetInstance().LogonInSystem(tagCallParameter.szUser, tagCallParameter.szPassword, tagCallParameter.szSession);
+			{
+				tstring_tmp szPassword = _T("");
+				map<tstring_tmp, _tagstrParameter, less<tstring_tmp> >::iterator itFind = tagCallParameter.sp.find(_T("ps"));
+				if (itFind != tagCallParameter.sp.end())
+				{
+					szPassword = itFind->second.szData.c_str();
+				}
+				RetParameter.bcs = ObjectSystemT::GetInstance().LogonInSystem(tagCallParameter.su.c_str(), szPassword.c_str(), tagCallParameter.ss);
+			}
+				
 				break;
 			case OBJECT_SYSTEM_OP_LOGONOUTSYSTEM:
-				RetParameter.bCallSuccess = ObjectSystemT::GetInstance().LogonOutSystem();
+				RetParameter.bcs = ObjectSystemT::GetInstance().LogonOutSystem();
 
 				break;
 			case OBJECT_SYSTEM_OP_GETCURTIME:
 			{
 				vector<unsigned char> npTime, nCurTime;
 
-				CBase64Zip::Base64ZipUnCompress(tagCallParameter.strPar[_T("npTime")].szData, npTime);
-				CBase64Zip::Base64ZipUnCompress(tagCallParameter.strPar[_T("nCurTime")].szData, nCurTime);
-				RetParameter.bCallSuccess = ObjectSystemT::GetInstance().GetCurTime((SYSTEMTIME*)&npTime[0], (SYSTEMTIME*)&nCurTime[0]);
-				CBase64Zip::Base64ZipCompress(&nCurTime[0], sizeof(SYSTEMTIME), RetParameter.strPar[_T("nCurTime")].szData);
+				CBase64Zip::Base64ZipUnCompress(tagCallParameter.sp[_T("npTime")].szData, npTime);
+				CBase64Zip::Base64ZipUnCompress(tagCallParameter.sp[_T("nCurTime")].szData, nCurTime);
+				RetParameter.bcs = ObjectSystemT::GetInstance().GetCurTime((SYSTEMTIME*)&npTime[0], (SYSTEMTIME*)&nCurTime[0]);
+				CBase64Zip::Base64ZipCompress(&nCurTime[0], sizeof(SYSTEMTIME), RetParameter.sp[_T("nCurTime")].szData);
 
 			}
 			break;
 			case OBJECT_SYSTEM_OP_RELEASEOBJSTATE:
-				RetParameter.bCallSuccess = ObjectSystemT::GetInstance().ReleaseObjectState(tagCallParameter.ObjectPath, &Error);
+				RetParameter.bcs = ObjectSystemT::GetInstance().ReleaseObjectState(tagCallParameter.op.c_str(), &Error);
 				break;
 			case OBJECT_SYSTEM_OP_REGIST_OBJEVENT:
 
-				RetParameter.bCallSuccess = ObjectSystemT::GetInstance().RegistObjectEvent(tagCallParameter.szUser, tagCallParameter.szSession, Event, &Error);
+				RetParameter.bcs = ObjectSystemT::GetInstance().RegistObjectEvent(tagCallParameter.su.c_str(), tagCallParameter.ss.c_str(), Event, &Error);
 				break;
 			case OBJECT_SYSTEM_OP_NEED_NEWOBJECT:
-				RetParameter.bCallSuccess = ObjectSystemT::GetInstance().NeedNewObject(tagCallParameter.ObjectPath, &Error);
+				RetParameter.bcs = ObjectSystemT::GetInstance().NeedNewObject(tagCallParameter.op.c_str(), &Error);
 				Event.nEventType = ObjectEvent_NeedNew;
-				if (RetParameter.bCallSuccess) ObjectSystemT::GetInstance().BroadcastObjectEvent(tagCallParameter.szUser, tagCallParameter.szSession, Event, &Error);
+				if (RetParameter.bcs) ObjectSystemT::GetInstance().BroadcastObjectEvent(tagCallParameter.su, tagCallParameter.ss, Event, &Error);
 
 				break;
 			case OBJECT_SYSTEM_OP_KEEPALIVED:
 			{
 				_tagstrParameter strPar;
-				if (ObjectSystemT::GetInstance().KeepAlived(tagCallParameter.szUser, tagCallParameter.szSession, strPar.szData, &Error))
+				if (ObjectSystemT::GetInstance().KeepAlived(tagCallParameter.su.c_str(), tagCallParameter.ss.c_str(), strPar.szData, &Error))
 				{
-					RetParameter.strPar[_T("kpalv")] = strPar;
+					RetParameter.sp[_T("kpalv")] = strPar;
 				}
 			}
 
@@ -247,27 +254,29 @@ namespace Transport
 			}
 			if (bRet)
 			{
-				RetParameter.szSession = tagCallParameter.szSession;
-				ObjectSystemT::GetInstance().GetEventQueue(tagCallParameter.szUser, tagCallParameter.szSession, RetParameter);
-				if (RetParameter.EventList.size())
+				RetParameter.ss = tagCallParameter.ss;
+				ObjectSystemT::GetInstance().GetEventQueue(tagCallParameter.su.c_str(), tagCallParameter.ss.c_str(), RetParameter);
+				if (RetParameter.el.size())
 				{
 					//printf_t(_T("111"));
 				}
 			}
-			RetParameter.nError = (unsigned int)Error;
+			RetParameter.Err = (unsigned int)Error;
 			return bRet;
 		}
 
-
-		BOOL CallInterface(tstring & szInPar, tstring & szOutPar, SYSTEMERROR & error)
+		template<typename StringT>
+		BOOL CallInterfaceStr(StringT & szInPar, StringT & szOutPar, SYSTEMERROR & error)
 		{
 			//return LocalServerTansportT::GetInstance().CallInterface(szInPar, szOutPar);
 			_tagCallParameter tagCallParameter, RetParameter;
 			BOOL bRet = TRUE;
 			SerTCHARXmlBufferToObject(_tagCallParameter, tagCallParameter, (szInPar.c_str()));
-			bRet = CallInterface( tagCallParameter,   RetParameter, error);
+			bRet = CallInterfacePar( tagCallParameter,   RetParameter, error);
 
 			SerObjectToXmlBuffer(_tagCallParameter, RetParameter, szOutPar);
+			if(tagCallParameter.oc == OBJECT_SYSTEM_OP_GETOBJECT) _DebugOutput1(_T("RetPar %s %s\n"), tagCallParameter.op.c_str(), szOutPar.c_str());
+			
 			/*
 			if (tagCallParameter.nOpCode == OBJECT_SYSTEM_OP_GETOBJECT)
 			{

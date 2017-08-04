@@ -94,6 +94,7 @@ static inline void prefetch_static(const volatile void *p)
 #define prefetch0(x)  
 #define prefetch1(x)  
 #define prefetch2(x)  
+#define prefetch3(x)  
 #define prefetch_static(x)
 #define prefetch_object(_obj, _op)
 #define prefetch_object_array(_obj, _op)
@@ -115,7 +116,7 @@ using namespace std;
 
 #ifdef _UNICODE
 #define sprintf_t swprintf 
-typedef wstring tstring;
+
 #define gets_t _getws
 #define gets_s_t _getws_s 
 #define printf_t wprintf
@@ -157,7 +158,7 @@ typedef wstring tstring;
 
 #else
 #define sprintf_t sprintf 
-typedef string tstring;
+
 #define printf_t printf
 #define gets_t gets
 #define gets_s_t gets_s
@@ -205,7 +206,37 @@ typedef string tstring;
 
 #endif
 
+#include "./SmartSTL/stlallocator.h"
 
+
+typedef MemoryMgr_OS<PointInterfaceForMemoryMgr<IndexType>, 0> MemoryMgr_Heap;
+typedef MemoryMgr_OS_VirtualMem<PointInterfaceForMemoryMgr<IndexType>, 0> MemoryMgr_OSVm;
+typedef MemoryMgr_OS<PointInterfaceForMemoryMgr<IndexType>, 1> MemoryMgr_Heap1;
+typedef MemoryMgr_OS_VirtualMem<PointInterfaceForMemoryMgr<IndexType>, 1> MemoryMgr_OSVm1;
+typedef MemoryMgr_FreeList<PointInterfaceForMemoryMgr<IndexType>, MemoryMgr_Heap, 18, 6, 4096> MemoryMgr_FreeList1T;
+typedef MemoryMgr_StaticGC<PointInterfaceForMemoryMgr<IndexType>, MemoryMgr_Heap, 4 * 1024 * 1024, 256> MemoryMgr__StaticGC;
+typedef MemoryMgr_StaticGC<PointInterfaceForMemoryMgr<IndexType>, MemoryMgr_Heap, 4 * 1024 * 1024, 512>	MemoryMgr__StaticGC_Tmp;
+
+template<class _Alloc, class _Elem = TCHAR, class _Traits = char_traits<_Elem>>
+using tstring_pool = std::basic_string<_Elem, std::char_traits<_Elem>, _Alloc  >;
+//MEMMGR_TYPE_FREELIST
+//MEMMGR_TYPE_STATICGC
+//MEMMGR_TYPE_STATICGC_TMP
+typedef tstring_pool<yss_allocator<wchar_t, MemoryMgr_FreeList1T >, wchar_t> wstring_tmp;
+typedef tstring_pool<yss_allocator<char, MemoryMgr_FreeList1T >, char  > string_tmp;
+typedef tstring_pool<yss_allocator<TCHAR, MemoryMgr_FreeList1T >> tstring_tmp;
+//typedef tstring tstring_tmp;
+typedef tstring_pool<yss_allocator<TCHAR, MemoryMgr_FreeList1T >> tstring;
+
+/*
+template<class _Alloc, class _Elem , class _Traits >
+template<typename Pool1T>
+tstring_pool<_Alloc, _Elem, _Traits> &  tstring_pool<_Alloc, _Elem, _Traits>::operator =(tstring_pool<Pool1T, _Elem, _Traits> & str)
+{
+	*this = str.c_str();
+	return *this;
+}
+*/
 
 #ifdef _DLL_SHARE_OBJECT
 
@@ -437,6 +468,8 @@ using map_pvheap3 = map<_Kty, _Ty, _Pr, yss_share_allocator<_Ty, HEAP_ADDR_PVHEA
 
 
 
+
+
 class CMyString
 {
 public:
@@ -474,28 +507,42 @@ public:
 	}
 	CMyString(wchar_t * pStr,size_t nRefBufLen)
 	{
-		m_refStr=pStr;
+		m_refStr= (void*)pStr;
 		m_reftype=Unicode;
 		m_nRefBufLen=nRefBufLen;
 		m_pStr=NULL;
 	}
 
-	CMyString(char * pStr)
+	CMyString(const char * pStr)
 	{
-		m_refStr = pStr;
+		m_refStr = (void*)pStr;
 		m_reftype = Ansi;
 		m_nRefBufLen = strlen(pStr);
 		m_pStr = NULL;
 	}
 
-	CMyString(wchar_t * pStr )
+	CMyString(const wchar_t * pStr )
 	{
-		m_refStr = pStr;
+		m_refStr = (void*)pStr;
 		m_reftype = Unicode;
 		m_nRefBufLen = wcslen(pStr)*2;
 		m_pStr = NULL;
 	}
+	CMyString( char * pStr)
+	{
+		m_refStr = (void*)pStr;
+		m_reftype = Ansi;
+		m_nRefBufLen = strlen(pStr);
+		m_pStr = NULL;
+	}
 
+	CMyString( wchar_t * pStr)
+	{
+		m_refStr = (void*)pStr;
+		m_reftype = Unicode;
+		m_nRefBufLen = wcslen(pStr) * 2;
+		m_pStr = NULL;
+	}
 
 	CMyString(CMyString & pStr)
 	{
@@ -657,6 +704,10 @@ static BOOL DecodeHex(TCHAR * pData,BYTE * pOutData,IN unsigned int  nOutDataLen
 	return TRUE;
 }
 #ifdef ZIP
+#include "Base64.h"
+#define ZLIB_WINAPI
+
+#include ".\zlib/include/zlib.h"  
 class CBase64Zip
 {
 private:
@@ -664,12 +715,112 @@ private:
 	~CBase64Zip(){};
 
 public:
-	static BOOL Base64ZipCompress(IN unsigned char * pBuf,IN unsigned long nLen,OUT string & szOutData);
-	static BOOL Base64ZipCompress(IN unsigned char * pBuf,IN unsigned long nLen,OUT wstring & szOutData);
+	template<typename StringT>
+	static BOOL Base64ZipCompress(IN unsigned char * pBuf,IN unsigned long nLen,OUT StringT & szOutData)
+	{
+		BOOL bOk = FALSE;
+		unsigned long bufLen = nLen + 4096;
+		unsigned char * buf = (unsigned char *)MemoryMgr__StaticGC_Tmp::GetInstance().NewMemory(bufLen + 64);
+		memcpy(buf, "yesszip#", 8);
+		*((uLongf *)(buf + 8)) = nLen;
+		if (compress(buf + 8 + sizeof(uLongf), &bufLen, pBuf, nLen) == Z_OK)
+		{
+			//Base64<StringT::value_type>::GetInstance(). base;
+			bufLen += 8 + sizeof(uLongf);
+			int buf1len = bufLen * 2;
+			/*
+			StringT::value_type * buf1 = new StringT::value_type[buf1len];
+			std::auto_ptr< StringT::value_type> mem1(buf1);
+			base.Base64EnCode(buf, bufLen, buf1, buf1len);
+			szOutData = buf1;
+			*/
+			szOutData.reserve(buf1len);
+			Base64<StringT::value_type>::GetInstance().Base64EnCode(buf, bufLen, szOutData);
+			bOk = TRUE; 
+			
+		}
+		return bOk;
+	};
 
-	static BOOL Base64ZipUnCompress(IN string & inBuf,OUT vector<unsigned char> & OutBuf);
-	static BOOL Base64ZipUnCompress(IN wstring & inBuf,OUT vector<unsigned char> & OutBuf);
-	
+	template<typename StringT, typename VectorT>
+	static BOOL Base64ZipUnCompress(IN StringT & inBuf,OUT VectorT & OutBuf)
+	{
+		//uLongf
+		//uncompress(strDst, &dstLen, buf, bufLen);  
+		//Base64<StringT::value_type> base;
+		//unsigned char * pDstBuf = new unsigned char[inBuf.length() * sizeof(StringT::value_type) * 2];
+		BOOL bRet = FALSE;
+		int nDstLen = inBuf.length() << (sizeof(StringT::value_type) - 1) << 1;
+		unsigned char * pDstBuf = (unsigned char *)MemoryMgr__StaticGC_Tmp::GetInstance().NewMemory(nDstLen);
+		//std::auto_ptr<unsigned char> mem(pDstBuf);
+		
+		Base64<StringT::value_type>::GetInstance().Base64DeCode(inBuf.c_str(), inBuf.length(), pDstBuf, nDstLen);
+		do
+		{
+			if (memcmp(pDstBuf, "yesszip#", 8) == 0)
+			{
+				uLongf nZipDstLen = *((uLongf *)(pDstBuf + 8));
+				if (nZipDstLen>256 * 1024 * 1024)
+				{
+					//内存超大了
+					bRet= FALSE;
+					break;
+				}
+
+				OutBuf.resize(nZipDstLen + 4096);
+				int ret = uncompress(&OutBuf[0], &nZipDstLen, pDstBuf + 8 + sizeof(uLongf), nDstLen - 8 - sizeof(uLongf));
+				if (ret == Z_OK)
+				{
+					bRet= TRUE;
+					break;
+				}
+			}
+		} while (false);
+		//MemoryMgr__StaticGC::GetInstance().DelMemory(pDstBuf, nDstLen);
+		return bRet;
+	};
+	template<typename BufferT, typename VectorT>
+	static BOOL Base64ZipUnCompress(IN BufferT * inBuf,unsigned int nLen, OUT VectorT & OutBuf)
+	{
+		BOOL bRet = FALSE;
+		int nDstLen = nLen << (sizeof(BufferT) - 1) << 1;
+		unsigned char * pDstBuf = (unsigned char *)MemoryMgr__StaticGC_Tmp::GetInstance().NewMemory(nDstLen);
+
+		Base64<BufferT>::GetInstance().Base64DeCode(inBuf, nLen, pDstBuf, nDstLen);
+		do
+		{
+			if (memcmp(pDstBuf, "yesszip#", 8) == 0)
+			{
+				uLongf nZipDstLen = *((uLongf *)(pDstBuf + 8));
+				if (nZipDstLen>256 * 1024 * 1024)
+				{
+					//内存超大了
+					bRet = FALSE;
+					break;
+				}
+
+				OutBuf.resize(nZipDstLen + 4096);
+				//unsigned char pZipDstBuf=new unsigned char[nDstLen+4096];
+				//std::auto_ptr<unsigned char> mem(pZipDstBuf);
+				int ret = uncompress(&OutBuf[0], &nZipDstLen, pDstBuf + 8 + sizeof(uLongf), nDstLen - 8 - sizeof(uLongf));
+				if (ret == Z_OK)
+				{
+					bRet = TRUE;;
+					break;
+				}
+			}
+		} while (false);
+		//MemoryMgr__StaticGC::GetInstance().DelMemory(pDstBuf, nDstLen);
+		return bRet;
+	};
+	/*
+	template<typename StringT>
+	static BOOL Base64ZipUnCompress(IN StringT & inBuf,OUT vector<unsigned char> & OutBuf)
+	{
+		string inbuf1 = (char *)CMyString((WCHAR *)inBuf.c_str(), inBuf.length() * 2);
+		return Base64ZipUnCompress(inbuf1, OutBuf);
+	};
+	*/
 private:
 };
 
@@ -685,8 +836,78 @@ class CXmlString
 {
 public:
 	CXmlString(){};
-	static BOOL GetXMLStringFromtstring(OUT tstring & XmlString,IN tstring &SrcString );
-	static BOOL GetStringFromXMLString(OUT tstring & String,IN tstring &XMLString );
+	template<typename StringT, typename String1T>
+	static BOOL GetXMLStringFromtstring(OUT StringT & XmlString,IN String1T &SrcString ) {
+		WCHAR * pSrcString = (WCHAR *)CMyString((TCHAR *)SrcString.c_str(), SrcString.length() * sizeof(TCHAR));
+		XmlString.clear();
+		for (unsigned int i = 0; pSrcString[i] != 0; i++)
+		{
+			switch (pSrcString[i])
+			{
+			case '<':
+				XmlString += _T("&lt;");
+				break;
+			case  '>':
+				XmlString += _T("&gt;");
+				break;
+			case '&':
+				XmlString += _T("&amp;");
+				break;
+			case '\'':
+				XmlString += _T("&apos;");
+				break;
+			case '\"':
+				XmlString += _T("&quot;");
+				break;
+			case '\n':
+				XmlString += _T("&#10;");
+				break;
+			default:
+				XmlString += pSrcString[i];
+				break;
+			}
+		}
+		return TRUE;
+	};
+	template<typename StringT, typename String1T>
+	static BOOL GetStringFromXMLString(OUT StringT & String,IN String1T & XMLString ) {
+		TCHAR * pSrcString = (TCHAR *)CMyString(XMLString);
+		String.clear();
+		for (unsigned int i = 0; pSrcString[i] != 0; i++)
+		{
+			if (strstr_t(pSrcString + i, _T("&lt;")) == pSrcString + i)
+			{
+				String += _T("<");
+			}
+			else if (strstr_t(pSrcString + i, _T("&gt;")) == pSrcString + i)
+			{
+				String += _T(">");
+			}
+			else if (strstr_t(pSrcString + i, _T("&amp;")) == pSrcString + i)
+			{
+				String += _T("&");
+			}
+			else if (strstr_t(pSrcString + i, _T("&apos;")) == pSrcString + i)
+			{
+				String += _T("\'");
+			}
+			else if (strstr_t(pSrcString + i, _T("&quot;")) == pSrcString + i)
+			{
+				String += _T("\"");
+			}
+			else if (strstr_t(pSrcString + i, _T("&#10;")) == pSrcString + i)
+			{
+				String += _T("\n");
+			}
+			else
+			{
+				String += pSrcString[i];
+			}
+
+		}
+		return TRUE;
+	}
+	;
 
 	~CXmlString(){};
 protected:

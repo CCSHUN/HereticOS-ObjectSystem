@@ -16,7 +16,7 @@ void Serialize__tagCallParameterV2::GetData()
 	m_Val.szPassword=szPassword; 
 	m_Val.bCallSuccess=bCallSuccess; 
 	m_Val.ObjectPath=ObjectPath; 
-	m_Val.nRegEventType=nRegEventType; 
+	m_Val.nPar=nPar; 
 	m_Val.Object=Object; 
 	m_Val.tagObjectState=tagObjectState; 
 	m_Val.nError=nError; 
@@ -34,7 +34,7 @@ BOOL Serialize__tagCallParameterV2::Construct(StorageObjectInterface * pOutObjec
 	szPassword.init(this,_T("szPassword"),0,pOutObject); 
 	bCallSuccess.init(this,_T("bCallSuccess"),0,pOutObject); 
 	ObjectPath.init(this,_T("ObjectPath"),0,pOutObject); 
-	nRegEventType.init(this,_T("nRegEventType"),0,pOutObject); 
+	nPar.init(this,_T("nPar"),0,pOutObject); 
 	Object.init(this,_T("Object"),0,pOutObject); 
 	tagObjectState.init(this,_T("tagObjectState"),0,pOutObject); 
 	nError.init(this,_T("nError"),0,pOutObject); 
@@ -53,7 +53,7 @@ BOOL Serialize__tagCallParameterV2::Construct(StorageObjectInterface * pOutObjec
 	szPassword=_X.szPassword; 
 	bCallSuccess=_X.bCallSuccess; 
 	ObjectPath=_X.ObjectPath; 
-	nRegEventType=_X.nRegEventType; 
+	nPar=_X.nPar; 
 	Object=_X.Object; 
 	tagObjectState=_X.tagObjectState; 
 	nError=_X.nError; 
@@ -84,9 +84,9 @@ BOOL Serialize__tagCallParameterV2::LoadGetCurSerializeObject(FieldAddr & CurFie
 	} else if(tstring(CurFieldAddr.pFieldName)==tstring(_T("ObjectPath")))
 	{
 		*RetObj=&ObjectPath;
-	} else if(tstring(CurFieldAddr.pFieldName)==tstring(_T("nRegEventType")))
+	} else if(tstring(CurFieldAddr.pFieldName)==tstring(_T("nPar")))
 	{
-		*RetObj=&nRegEventType;
+		*RetObj=&nPar;
 	} else if(tstring(CurFieldAddr.pFieldName)==tstring(_T("Object")))
 	{
 		*RetObj=&Object;
@@ -123,7 +123,7 @@ BOOL Serialize__tagCallParameterV2::Save(StorageObjectInterface * pStorageObject
 	szPassword.Save(pStorageObject); 
 	bCallSuccess.Save(pStorageObject); 
 	ObjectPath.Save(pStorageObject); 
-	nRegEventType.Save(pStorageObject); 
+	nPar.Save(pStorageObject); 
 	Object.Save(pStorageObject); 
 	tagObjectState.Save(pStorageObject); 
 	nError.Save(pStorageObject); 
@@ -145,7 +145,7 @@ BOOL Serialize__tagCallParameterV2::GetObjectMap(IN OUT vector<SerializeObjectIn
 	ObjectInterfaceMap.push_back((SerializeObjectInterface *)&szPassword); 
 	ObjectInterfaceMap.push_back((SerializeObjectInterface *)&bCallSuccess); 
 	ObjectInterfaceMap.push_back((SerializeObjectInterface *)&ObjectPath); 
-	ObjectInterfaceMap.push_back((SerializeObjectInterface *)&nRegEventType); 
+	ObjectInterfaceMap.push_back((SerializeObjectInterface *)&nPar); 
 	ObjectInterfaceMap.push_back((SerializeObjectInterface *)&Object); 
 	ObjectInterfaceMap.push_back((SerializeObjectInterface *)&tagObjectState); 
 	ObjectInterfaceMap.push_back((SerializeObjectInterface *)&nError); 

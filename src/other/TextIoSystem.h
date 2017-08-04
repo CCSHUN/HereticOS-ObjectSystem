@@ -274,31 +274,17 @@ public:
 		}
 	}
 
-	template<typename T>
-	void operator()(basic_string<char, char_traits<char>, T> & szDst, const char * fmt, ...)
+	
+	template<typename StringT>
+	void operator()(StringT & szDst, const typename StringT::value_type * fmt, ...)
 	{
-		char cpBuf[LogBugLen];	
-		memset(cpBuf,0,sizeof(cpBuf));
-		//swprintf_s(cpBuf,2048,L"%s tid=%d log:",szHead,GetCurrentThreadId());
-		va_list	vl;
-		va_start( vl, fmt );
-		size_t len=strlen(cpBuf);
-		vsprintf_s(cpBuf+len,LogBugLen-len, fmt, vl );
-		va_end( vl);
-		//strcat_t(cpBuf,_T("\r\n"));
-		szDst=cpBuf;
-		return ;
-	}
-	template<typename T>
-	void operator()(basic_string<wchar_t, char_traits<wchar_t>, T> & szDst, const WCHAR * fmt, ...)
-	{
-		WCHAR cpBuf[LogBugLen];
+		StringT::value_type cpBuf[LogBugLen];
 		memset(cpBuf, 0, sizeof(cpBuf));
 		//swprintf_s(cpBuf,2048,L"%s tid=%d log:",szHead,GetCurrentThreadId());
 		va_list	vl;
 		va_start(vl, fmt);
-		size_t len = wcslen(cpBuf);
-		vswprintf_s(cpBuf + len, LogBugLen - len, fmt, vl);
+		size_t len = strlen_t(cpBuf);
+		vsprintf_s_t(cpBuf + len, LogBugLen - len, fmt, vl);
 		va_end(vl);
 		//strcat_t(cpBuf,_T("\r\n"));
 		szDst = cpBuf;
@@ -307,35 +293,22 @@ public:
 	
 
 	//格式化追加到szDst
-	void cat(string & szDst, const char * fmt, ...)
+	template<typename StringT>
+	void cat(StringT & szDst, const typename StringT::value_type * fmt, ...)
 	{
-		char cpBuf[LogBugLen];
+		StringT::value_type cpBuf[LogBugLen];
 		memset(cpBuf, 0, sizeof(cpBuf));
 		//swprintf_s(cpBuf,2048,L"%s tid=%d log:",szHead,GetCurrentThreadId());
 		va_list	vl;
 		va_start(vl, fmt);
-		size_t len = strlen(cpBuf);
-		vsprintf_s(cpBuf + len, LogBugLen - len, fmt, vl);
+		size_t len = strlen_t(cpBuf);
+		vsprintf_s_t(cpBuf + len, LogBugLen - len, fmt, vl);
 		va_end(vl);
 		//strcat_t(cpBuf,_T("\r\n"));
 		szDst += cpBuf;
 		return;
 	}
-	//格式化追加到szDst
-	void cat(wstring & szDst, const WCHAR * fmt, ...)
-	{
-		WCHAR cpBuf[LogBugLen];
-		memset(cpBuf, 0, sizeof(cpBuf));
-		//swprintf_s(cpBuf,2048,L"%s tid=%d log:",szHead,GetCurrentThreadId());
-		va_list	vl;
-		va_start(vl, fmt);
-		size_t len = wcslen(cpBuf);
-		vswprintf_s(cpBuf + len, LogBugLen - len, fmt, vl);
-		va_end(vl);
-		//strcat_t(cpBuf,_T("\r\n"));
-		szDst += cpBuf;
-		return;
-	}
+	
 
 	bool OpenLog(tstring & szLogName)
 	{

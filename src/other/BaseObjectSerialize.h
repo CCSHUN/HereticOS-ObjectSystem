@@ -124,10 +124,10 @@ public:
 		* RetObj=&(*this)[CurFieldAddr.nIndex];
 		return TRUE;
 	};
-	BOOL LoadSetData(tstring & Data)
+	BOOL LoadSetData(TCHAR * Data)
 	{
 		//unsigned int nLen=Data.size()
-		if(Data.at(0)==_T('\n'))
+		if(Data[0]=='\n')
 		{
 			//空数组返回成功,继续下个字段
 			return TRUE;
@@ -263,10 +263,10 @@ public:
 
 		return TRUE;
 	};
-	BOOL LoadSetData(tstring & Data)
+	BOOL LoadSetData(TCHAR * Data)
 	{
 		//unsigned int nLen=Data.size()
-		if(Data.at(0)==_T('\n'))
+		if(Data[0]=='\n')
 		{
 			//空数组返回成功,继续下个字段
 			return TRUE;
@@ -313,7 +313,15 @@ public:
 	typedef Serialize_Set<FirstSerializeObject, SecondSerializeObject> _Myt;
 	FirstSerializeObject	m_Key;
 	SecondSerializeObject	m_Val;
-
+	inline void* operator new(size_t size)
+	{
+		return MemoryMgr__StaticGC_Tmp::GetInstance().NewMemory(size);
+	}
+	inline void operator delete(void * ptr)
+	{
+		//aligned_delete(ptr); 
+		return;
+	}
 	Serialize_Set()
 	{
 
@@ -347,10 +355,10 @@ public:
 		*RetObj=0;
 		//tstring szKey=tstring(m_pFieldName)+tstring("_Key");
 		//tstring szVal=tstring(m_pFieldName)+tstring("_Val");
-		if(tstring(CurFieldAddr.pFieldName)==tstring(_T("Key")))
+		if(tstring_tmp(CurFieldAddr.pFieldName)== tstring_tmp(_T("Key")))
 		{
 			*RetObj=&m_Key;
-		}else if(tstring(CurFieldAddr.pFieldName)==tstring(_T("Val")))
+		}else if(tstring_tmp(CurFieldAddr.pFieldName)== tstring_tmp(_T("Val")))
 		{
 			*RetObj=&m_Val;
 		}
@@ -359,7 +367,7 @@ public:
 		return FALSE;
 	};
 
-	BOOL LoadSetData(tstring & Data)
+	BOOL LoadSetData(TCHAR * Data)
 	{
 		return FALSE;
 	};
@@ -532,7 +540,8 @@ public:
 	{
 		if(m_pTempSet) delete m_pTempSet;
 		m_pTempSet=new Serialize_Set<SerializeObjectKeyType,SerializeObjectType>;
-
+		//MemoryMgr__StaticGC_Tmp::GetInstance().New
+		//YSS_NEW(Serialize_Set<SerializeObjectKeyType, SerializeObjectType>)
 		m_pTempSet->m_nIndex=this->size();
 		m_pTempSet->init(this,(TCHAR *)m_szFieldName.c_str(),0,m_pOutObject);
 		/*
@@ -549,7 +558,7 @@ public:
 		* RetObj=m_pTempSet;
 		return TRUE;
 	};
-	BOOL LoadSetData(tstring & Data)
+	BOOL LoadSetData(TCHAR * Data)
 	{
 		return TRUE;
 	};
@@ -609,9 +618,7 @@ public:
 
 
 		m_pOutObject=pOutObject;
-		/*
-		Meminfo.init(this,"Meminfo",0);
-				IOInfo.init(this,"IOInfo",0);*/
+		
 		return TRUE;
 		
 	}
@@ -635,10 +642,7 @@ public:
 			
 		}else
 		{
-			/*
-			m_Val.Meminfo=Meminfo;
-						m_Val.IOInfo=IOInfo;*/
-			//vector<FieldAddr > Addr;
+			
 			unsigned int nLen=sizeof(_MyObjectType);
 			m_pOutObject->GetObjectVal(this,&m_Val,nLen);
 			
@@ -664,35 +668,13 @@ public:
 
 		return *this;
 	}
-	/*
-	_Myt& operator=(ObjectType & _X) 
-		{
-			runstate.bCache=1;
-			//vector<FieldAddr > Addr;
 	
-			unsigned int nLen=sizeof(ObjectType);
-			m_Val=_X;
-			m_pOutObject->SetObjectVal(this,&m_Val,nLen);
-			
-			//清除缓存
-			for(SerializeRunData * pPos=m_pParent;pPos!=NULL;pPos=pPos->m_pParent)
-			{
-				pPos->runstate.bCache=0;
-			}
-			/ *
-			Meminfo=_X.Meminfo;
-					IOInfo=_X.IOInfo;* /
-			
-	
-			return *this;
-		}*/
 	
 
 	
-	BOOL LoadSetData(tstring & Data)
+	BOOL LoadSetData(TCHAR * Data)
 	{
 		
-		CMyString szData((TCHAR *)Data.c_str(),Data.length()*sizeof(TCHAR));
 		//m_Val=AtoVal((TCHAR *)Data.c_str(),10,ObjectType());
 		m_Val=(ObjectType)CAutoVal(Data);
 			//atoi((char *)szData);
@@ -706,7 +688,7 @@ public:
 	{
 		unsigned int nRetLen=sizeof(_MyObjectType);
 		pStorageObject->PushNodeCtlBegin(_T("VAL"),this);
-		tstring szVal=CAutoVal(m_Val);
+		tstring_tmp szVal=CAutoVal(m_Val);
 		unsigned int nLen=szVal.length()*sizeof(TCHAR);
 		pStorageObject->PushDataString((LPTSTR)szVal.c_str(),nLen);
 		//pStorageObject->PushDataVal(&m_Val,nRetLen);
@@ -715,6 +697,7 @@ public:
 	}
 
 };
+
 
 template<>
 class Serialize_BaseObject<double> : public SerializeObjectInterface
@@ -797,9 +780,9 @@ public:
 	
 
 	
-	BOOL LoadSetData(tstring & Data)
+	BOOL LoadSetData(TCHAR * Data)
 	{
-		CMyString szData((TCHAR *)Data.c_str(),Data.length()*sizeof(TCHAR));
+		CMyString szData((TCHAR *)Data);
 		m_Val=atof((char *)szData);
 		runstate.bCache=1;
 		return TRUE;
@@ -821,13 +804,13 @@ public:
 };
 
 
-template<>
-class Serialize_BaseObject<tstring> : public SerializeObjectInterface
+template<typename PoolT>
+class Serialize_BaseObject<tstring_pool<PoolT>> : public SerializeObjectInterface
 {
 public:
-	typedef Serialize_BaseObject<tstring> _Myt;
-	typedef tstring _MyObjectType;
-	tstring m_Val;
+	typedef Serialize_BaseObject<tstring_pool<PoolT>> _Myt;
+	typedef tstring_pool<PoolT> _MyObjectType;
+	tstring_pool<PoolT> m_Val;
 	StorageObjectInterface * m_pOutObject;
 	Serialize_BaseObject()
 	{
@@ -879,7 +862,7 @@ public:
 						m_Val.IOInfo=IOInfo;*/
 			//vector<FieldAddr > Addr;
 			//unsigned int nLen=sizeof(tstring);
-			m_pOutObject->GetStringObject(this,m_Val);
+			m_pOutObject->GetStringObject(this,m_Val.c_str());
 			
 
 			runstate.bCache=1;
@@ -893,7 +876,7 @@ public:
 
 		unsigned int nLen=sizeof(_MyObjectType);
 		m_Val=_X;
-		m_pOutObject->SetStringObject(this,m_Val);
+		m_pOutObject->SetStringObject(this,m_Val.c_str());
 		
 		//清除缓存
 		for(SerializeRunData * pPos=m_pParent;pPos!=NULL;pPos=pPos->m_pParent)
@@ -911,7 +894,7 @@ public:
 
 		unsigned int nLen=sizeof(_MyObjectType);
 		m_Val=_X;
-		m_pOutObject->SetStringObject(this,m_Val);
+		m_pOutObject->SetStringObject(this,m_Val.c_str());
 
 		//清除缓存
 		for(SerializeRunData * pPos=m_pParent;pPos!=NULL;pPos=pPos->m_pParent)
@@ -923,7 +906,7 @@ public:
 	}
 	
 	
-	BOOL LoadSetData(tstring & Data)
+	BOOL LoadSetData(TCHAR * Data)
 	{
 		m_Val=Data;
 		runstate.bCache=1;
@@ -1033,7 +1016,7 @@ public:
 
 		unsigned int nLen=sizeof(_MyObjectType);
 		m_Val=_X;
-		m_pOutObject->SetStringObject(this,(tstring)m_Val);
+		m_pOutObject->SetStringObject(this,(const TCHAR*)m_Val);
 
 		//清除缓存
 		for(SerializeRunData * pPos=m_pParent;pPos!=NULL;pPos=pPos->m_pParent)
@@ -1045,7 +1028,7 @@ public:
 	}
 	
 	
-	BOOL LoadSetData(tstring & Data)
+	BOOL LoadSetData(TCHAR * Data)
 	{
 		m_Val=Data;
 		runstate.bCache=1;
@@ -1183,12 +1166,12 @@ public:
 	}
 	
 	
-	BOOL LoadSetData(tstring & Data)
+	BOOL LoadSetData(TCHAR * Data)
 	{
 		//m_Val=atof(Data.c_str());
 		//TCHAR szOut[64];
 		//BOOL bRst=DecodeHex((TCHAR *)Data.c_str(),(BYTE *)&m_Val.m_Val,sizeof(ValType));
-		BOOL bRet=SetMe(Data);
+		BOOL bRet=SetMe(tstring_tmp(Data));
 		if(bRet) runstate.bCache=1;
 		return bRet;
 	};
@@ -1231,7 +1214,7 @@ private:
 		}
 		return r;
 	}
-	BOOL SetMe(IN tstring & Val)
+	BOOL SetMe(IN TCHAR * Val)
 	{
 		
 		if(DstType==Base64String)
@@ -1395,8 +1378,8 @@ public:
 						m_Val.IOInfo=IOInfo;*/
 			//vector<FieldAddr > Addr;
 			//unsigned int nLen=sizeof(double);
-			tstring szRst;
-			m_pOutObject->GetStringObject(this,szRst);
+			tstring_tmp szRst;
+			m_pOutObject->GetStringObject(this,szRst.c_str());
 			
 
 			runstate.bCache=1;
@@ -1408,8 +1391,8 @@ public:
 		runstate.bCache=1;
 
 		m_Val=_X;
-		tstring szRst;
-		m_pOutObject->SetStringObject(this,szRst);
+		tstring_tmp szRst;
+		m_pOutObject->SetStringObject(this,szRst.c_str());
 		
 		//清除缓存
 		for(SerializeRunData * pPos=m_pParent;pPos!=NULL;pPos=pPos->m_pParent)
@@ -1421,12 +1404,12 @@ public:
 	}
 	
 	
-	BOOL LoadSetData(tstring & Data)
+	BOOL LoadSetData(TCHAR * Data)
 	{
 		//m_Val=atof(Data.c_str());
 		//TCHAR szOut[64];
 		//BOOL bRst=DecodeHex((TCHAR *)Data.c_str(),(BYTE *)&m_Val.m_Val,sizeof(ValType));
-		BOOL bRet=SetMe(Data);
+		BOOL bRet=SetMe(tstring_tmp(Data));
 		if(bRet) runstate.bCache=1;
 		return bRet;
 	};
@@ -1469,7 +1452,8 @@ private:
 		}
 		return r;
 	}
-	BOOL SetMe(IN tstring & Val)
+	template<typename StringT>
+	BOOL SetMe(IN StringT & Val)
 	{
 		switch(DstType)
 		{
@@ -1488,7 +1472,7 @@ private:
 					memset(pBuffer,0,nLen);
 					DecodeHex((TCHAR*)Val.c_str(),pBuffer,nLen);
 					m_Val=(TCHAR *)pBuffer;
-					delete pBuffer;
+					delete [] pBuffer;
 				}
 			}
 			//r=16;
@@ -1506,8 +1490,8 @@ private:
 					m_Val.clear();
 				}else
 				{
-					unsigned int nLen=Val.length()*sizeof(TCHAR);
-					vector<unsigned char> Buf;
+					
+					vector<unsigned char,yss_allocator<unsigned char,MemoryMgr__StaticGC_Tmp>> Buf;
 					if(CBase64Zip::Base64ZipUnCompress(Val,Buf))
 					{
 						m_Val=(TCHAR *)(&Buf[0]);
@@ -1703,7 +1687,7 @@ public:
 	}
 
 	
-	BOOL LoadSetData(tstring & Data)
+	BOOL LoadSetData(TCHAR * Data)
 	{
 		BOOL bRst = DecodeHex((TCHAR *)Data.c_str(), (BYTE *)&m_Val[0], sizeof(m_Val)*sizeof(SerializeObjectType));
 		if(bRst)
@@ -1810,7 +1794,7 @@ public:
 	}
 
 	
-	BOOL LoadSetData(tstring & Data)
+	BOOL LoadSetData(TCHAR * Data)
 	{
 		unsigned int nLen=min(sizeof(m_Val)-1,Data.length()*sizeof(TCHAR));
 		memset(m_Val,0,sizeof(m_Val));
@@ -1881,7 +1865,7 @@ public:
 
 	
 
-	BOOL LoadSetData(tstring & Data)
+	BOOL LoadSetData(TCHAR * Data)
 	{
 		return FALSE;
 	};
