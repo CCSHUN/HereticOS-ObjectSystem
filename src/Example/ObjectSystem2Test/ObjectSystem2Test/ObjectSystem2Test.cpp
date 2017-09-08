@@ -20,7 +20,7 @@
 #define LAB1(x) #x
 #define LAB2(x) LAB1(x)
 
-#define KEEPALIVED_MODE	TRUE
+#define KEEPALIVED_MODE	FALSE
 #define HAS_FILE_SYSTEM
 
 
@@ -118,19 +118,25 @@ void TestEvent2()
 	printf_t(_T("=============TestEvent2 End============\n"));
 }
 //CObjectSystem_Local<ObjectSystem2Config, CObjectFileOperation> g_localObjectSystem;
-typedef CObjectSystem_Local<ObjectSystem2Config, FileSystem_T> LocalObjectServerT;
-typedef Transport::Client<TransportMiniDirectCall<Transport::Server< LocalObjectServerT >>,false,false,1>	LocalTransport1T;
-typedef Transport::Client<TransportMiniDirectCall<Transport::Server< LocalObjectServerT >>>					LocalTransport2T;
-typedef CObjectSystem_Client<LocalTransport1T, 1> LocalClient1T;
-typedef CObjectSystem_Client<LocalTransport2T, 2> LocalClient2T;
+template<typename _ContainerT>
+struct ObjectSystemContianer
+{
+	typedef _ContainerT ContainerT;
+	typedef CObjectSystem_Local<ObjectSystem2Config, FileSystem_T, ContainerT, DefAuth> LocalObjectServerT;
+	typedef Transport::Client<TransportMiniDirectCall<Transport::Server< LocalObjectServerT, ContainerT>>, ContainerT, false, false > 			LocalTransport1T;
+	typedef Transport::Client<TransportMiniDirectCall<Transport::Server< LocalObjectServerT, ContainerT>>, ContainerT>				LocalTransport2T;
+	typedef CObjectSystem_Client<LocalTransport1T, ContainerT> LocalClient1T;
+	typedef CObjectSystem_Client<LocalTransport2T, ContainerT> LocalClient2T;
 
-//TransportMini
-//typename Transport::Server<LocalObjectServerT>
-typedef TransportMini::TransportMiniUDPServer<Transport::Server<LocalObjectServerT>, 8484,'yssy'> UDPServerTransportT;
-typedef Transport::Client<TransportMini::TransportMiniUDPClient<8484, 'yssy',1>> UDPClientTransport1T;
-typedef Transport::Client<TransportMini::TransportMiniUDPClient<8484, 'yssy',2>> UDPClientTransport2T;
-typedef CObjectSystem_Client<UDPClientTransport1T, 1> UDPClient1T;
-typedef CObjectSystem_Client<UDPClientTransport2T, 2> UDPClient2T;
+	//TransportMini
+	//typename Transport::Server<LocalObjectServerT>
+	typedef TransportMini::TransportMiniUDPServer<Transport::Server<LocalObjectServerT, ContainerT, false>, ContainerT, 8484, 'yssy'> UDPServerTransportT;
+	typedef Transport::Client<TransportMini::TransportMiniUDPClient<ContainerT, 8484, 'yssy'>, ContainerT> UDPClientTransport1T;
+	typedef Transport::Client<TransportMini::TransportMiniUDPClient<ContainerT, 8484, 'yssy'>, ContainerT > UDPClientTransport2T;
+	typedef CObjectSystem_Client<UDPClientTransport1T, ContainerT> UDPClient1T;
+	typedef CObjectSystem_Client<UDPClientTransport2T, ContainerT> UDPClient2T;
+};
+
 
 void BigString(tstring & szStr, int nLen)
 {
@@ -141,16 +147,18 @@ unsigned int g_nClient2Log = 0;
 
 #define Object1Path _T("Test\\Object1")
 #define Object2Path _T("Test\\Object2")
+
+
 void ObjectSystemTestInit()
 {
 	tstring szSession;
 	SYSTEMERROR error;
 	//CObjectSystem_Local<ObjectSystem2Config, CObjectFileOperation>::GetInstance().LogonInSystem(tstring(_T("Test")), tstring(_T("123")), szSession);
-	LocalClient1T & LocalClient1 = LocalClient1T::GetInstance();
+	ObjectSystemContianer<Container_DefaultT>::LocalClient1T & LocalClient1 = ObjectSystemContianer<Container_DefaultT>::LocalClient1T::GetInstance();
 	printf_t(_T("LocalClient1.LogonInSystem %s %d\n"),
 	LocalClient1.LogonInSystem(tstring_tmp(_T("Test")), tstring_tmp(_T("123")), &error) ? _T("Ok") : _T("Fail"), error);
 
-	LocalClient2T & LocalClient2 = LocalClient2T::GetInstance();
+	ObjectSystemContianer<Container_DefaultT>::LocalClient2T & LocalClient2 = ObjectSystemContianer<Container_DefaultT>::LocalClient2T::GetInstance();
 	printf_t(_T("LocalClient2.LogonInSystem %s %d\n"),
 	LocalClient2.LogonInSystem(tstring_tmp(_T("Test")), tstring_tmp(_T("123")), &error) ? _T("Ok") : _T("Fail"), error);
 
@@ -175,12 +183,12 @@ void ObjectSystemTestInit()
 	RegEvent.nEventType = ObjectEvent_Updata;
 	RegEvent.szObjectAddress = Object2Path;
 	//Client1注册Object2更新事件
-	LocalClient1T::Event(RegEvent, [szEventName](ObjectSystemEvent & Event) {
+	ObjectSystemContianer<Container_DefaultT>::LocalClient1T::Event(RegEvent, [szEventName](ObjectSystemEvent & Event) {
 		printf_t(_T("LocalClient1T Updata Event=(%s %d)  szEventName=%s\n"), Event.szObjectAddress.c_str(), Event.nEventType, szEventName.c_str());
 		tstring szObject;
 		_tagObjectState state;
 		SYSTEMERROR error;
-		BOOL bRet = LocalClient1T::GetInstance().GetObject(Event.szObjectAddress, szObject, state, &error);
+		BOOL bRet = ObjectSystemContianer<Container_DefaultT>::LocalClient1T::GetInstance().GetObject(Event.szObjectAddress, szObject, state, &error);
 		if (bRet)
 		{
 			SerTCHARXmlBufferToObject(_tagObjectState, state, (szObject.c_str()));
@@ -193,12 +201,12 @@ void ObjectSystemTestInit()
 	//Client2注册Object1更新事件
 	szEventName = _T("Client2Event");
 	RegEvent.szObjectAddress = Object1Path;
-	LocalClient2T::Event(RegEvent, [szEventName](ObjectSystemEvent & Event) {
+	ObjectSystemContianer<Container_DefaultT>::LocalClient2T::Event(RegEvent, [szEventName](ObjectSystemEvent & Event) {
 		printf_t(_T("LocalClient2T Updata Event=(%s %d)  szEventName=%s\n"), Event.szObjectAddress.c_str(), Event.nEventType, szEventName.c_str());
 		tstring szObject;
 		_tagObjectState state;
 		SYSTEMERROR error;
-		BOOL bRet = LocalClient2T::GetInstance().GetObject(Event.szObjectAddress, szObject, state, &error);
+		BOOL bRet = ObjectSystemContianer<Container_DefaultT>::LocalClient2T::GetInstance().GetObject(Event.szObjectAddress, szObject, state, &error);
 		if (bRet)
 		{
 			SerTCHARXmlBufferToObject(_tagObjectState, state, (szObject.c_str()));
@@ -211,7 +219,7 @@ void ObjectSystemTestInit()
 	RegEvent.nEventType = ObjectEvent_NeedNew;
 	RegEvent.szObjectAddress = Object1Path;
 	//Client1注册Object1需求事件
-	LocalClient1T::Event(RegEvent, [szEventName](ObjectSystemEvent & Event) {
+	ObjectSystemContianer<Container_DefaultT>::LocalClient1T::Event(RegEvent, [szEventName](ObjectSystemEvent & Event) {
 		printf_t(_T("LocalClient1T NeedNew Event=(%s %d)  szEventName=%s\n"), Event.szObjectAddress.c_str(), Event.nEventType, szEventName.c_str());
 
 		_tagObjectState state;
@@ -221,14 +229,14 @@ void ObjectSystemTestInit()
 		SerObjectToXmlBuffer(_tagObjectState, state, szState);
 		SYSTEMERROR error;
 		printf_t(_T("LocalClient1.UpDataObject %s %d\n"),
-			LocalClient1T::GetInstance().UpDataObject(tstring_tmp(Object1Path), szState, &error) ? _T("Ok") : _T("Fail"), error);
+			ObjectSystemContianer<Container_DefaultT>::LocalClient1T::GetInstance().UpDataObject(tstring_tmp(Object1Path), szState, &error) ? _T("Ok") : _T("Fail"), error);
 
 	});
 
 	szEventName = _T("Client2Event");
 	//Client2注册Object2需求事件
 	RegEvent.szObjectAddress = Object2Path;
-	LocalClient2T::Event(RegEvent, [szEventName](ObjectSystemEvent & Event) {
+	ObjectSystemContianer<Container_DefaultT>::LocalClient2T::Event(RegEvent, [szEventName](ObjectSystemEvent & Event) {
 		printf_t(_T("LocalClient2T NeedNew Event=(%s %d)  szEventName=%s\n"), Event.szObjectAddress.c_str(), Event.nEventType, szEventName.c_str());
 
 		_tagObjectState state;
@@ -238,7 +246,7 @@ void ObjectSystemTestInit()
 		SerObjectToXmlBuffer(_tagObjectState, state, szState);
 		SYSTEMERROR error;
 		printf_t(_T("LocalClient2.UpDataObject %s %d\n"),
-			LocalClient2T::GetInstance().UpDataObject(tstring_tmp(Object2Path), szState, &error) ? _T("Ok") : _T("Fail"), error);
+			ObjectSystemContianer<Container_DefaultT>::LocalClient2T::GetInstance().UpDataObject(tstring_tmp(Object2Path), szState, &error) ? _T("Ok") : _T("Fail"), error);
 	});
 
 
@@ -355,39 +363,40 @@ void ClientNeed(TCHAR * pClientName, TCHAR * pObjectPath,int nCount)
 void ObjectSystemTest()
 {
 	//ObjectSystemTestInit();
-	ObjectSystemTestMiniInit<LocalClient1T,LocalClient2T>();
+	ObjectSystemTestMiniInit<ObjectSystemContianer<Container_DefaultT>::LocalClient1T, ObjectSystemContianer<Container_DefaultT>::LocalClient2T>();
 	for (int i=0;;i++)
 	{
 		Sleep(1000);
-		LocalTransport1T::GetInstance().Loop(KEEPALIVED_MODE);
+		ObjectSystemContianer<Container_DefaultT>::LocalTransport1T::GetInstance().Loop(KEEPALIVED_MODE);
 		Sleep(1000);
-		ClientNeed<LocalClient1T>(_T("LocalClient1T"),Object1Path,i);
+		ClientNeed<ObjectSystemContianer<Container_DefaultT>::LocalClient1T>(_T("LocalClient1T"),Object1Path,i);
 		Sleep(1000);
-		ClientNeed<LocalClient2T>(_T("LocalClient2T"), Object2Path,i);
+		ClientNeed<ObjectSystemContianer<Container_DefaultT>::LocalClient2T>(_T("LocalClient2T"), Object2Path,i);
 	}
 }
+template<typename ObjectContainerT>
 void UDPObjectSystemTest(BOOL bHasSever=TRUE)
 {
 	//ObjectSystemTestInit();
 	BOOL bOk = TRUE;
 	if (bHasSever)
 	{
-		bOk = UDPServerTransportT::GetInstance().init();
+		bOk = ObjectContainerT::UDPServerTransportT::GetInstance().init();
 	}
 	if(bOk)
 	{
-		if (UDPClientTransport1T::TransportMiniT::GetInstance().init()&& UDPClientTransport2T::TransportMiniT::GetInstance().init())
+		if (ObjectContainerT::UDPClientTransport1T::TransportMiniT::GetInstance().init()&& ObjectContainerT::UDPClientTransport2T::TransportMiniT::GetInstance().init())
 		{
-			ObjectSystemTestMiniInit<UDPClient1T, UDPClient2T>();
+			ObjectSystemTestMiniInit<ObjectContainerT::UDPClient1T, ObjectContainerT::UDPClient2T>();
 			for (int i = 0;; i++)
 			{
 				Sleep(1000);
-				UDPClientTransport1T::GetInstance().Loop(KEEPALIVED_MODE);
-				UDPClientTransport2T::GetInstance().Loop(KEEPALIVED_MODE);
+				ObjectContainerT::UDPClientTransport1T::GetInstance().Loop(KEEPALIVED_MODE);
+				ObjectContainerT::UDPClientTransport2T::GetInstance().Loop(KEEPALIVED_MODE);
 				Sleep(1000);
-				ClientNeed<UDPClient1T>(_T("LocalClient1T"), Object1Path, i);
+				ClientNeed<ObjectContainerT::UDPClient1T>(_T("LocalClient1T"), Object1Path, i);
 				Sleep(1000);
-				ClientNeed<UDPClient2T>(_T("LocalClient2T"), Object2Path, i);
+				ClientNeed<ObjectContainerT::UDPClient2T>(_T("LocalClient2T"), Object2Path, i);
 			}
 			
 		}
@@ -410,14 +419,14 @@ void TestZip()
 	CBase64Zip::Base64ZipUnCompress(szOutData, OutData);
 }
 
-template<typename ClientT,bool bTestSer=false>
-void TestPerformance()
+template<typename ObjectSystemContainerT,typename ClientT,bool bTestSer=false>
+void TestPerformance(int nCount=1,int nContainerCount=1)
 {
+	tstring szObjectPathBase = _T("Test\\Object");
 	
-	SYSTEMERROR error;
-	ClientT & Client1 = ClientT::GetInstance();
-	printf_t(_T("Client1.LogonInSystem %s %d\n"),
-		Client1.LogonInSystem(tstring(_T("Test")), tstring(_T("123")), &error) ? _T("Ok") : _T("Fail"), error);
+	SYSTEMERROR error=Error_No;
+	//ClientT & Client1 = ClientT::GetInstance();
+	
 	//TestZip();
 	_tagObjectState_Wrap<ClientT> state_wrap(Object1Path);
 	tstring szState;
@@ -426,12 +435,22 @@ void TestPerformance()
 	state.szLockUser = _T("Client1-init");
 	SerObjectToXmlBuffer(_tagObjectState, state, szState);
 	state_wrap.szLockUser = _T("Client1-init");
-	__int64 nSucessCount, nLastnSucessCount, nErrorCount, nUsedTime, nLastUsedTime, nTempTime, nTempErrTime, nErrorUsedTime, nLastTick, nLastErrorTick;
-	nLastErrorTick = nTempTime = nTempErrTime = nLastnSucessCount = nLastUsedTime = nUsedTime = nLastTick = nErrorUsedTime = nSucessCount = nErrorCount = 0;
-	for (int s = 0;; s++)
+	__int64 nSucessCount, nLastSucessCount, nErrorCount, nUsedTime, nLastUsedTime, nTempTime, nTempErrTime, nErrorUsedTime, nLastTick, nLastErrorTick;
+	nLastErrorTick = nTempTime = nTempErrTime = nLastSucessCount = nLastUsedTime = nUsedTime = nLastTick = nErrorUsedTime = nSucessCount = nErrorCount = 0;
+	int nIndex = 0;
+	int nBeginContainer = 0;
+	for(int j=1;j<nContainerCount;j++) nBeginContainer= ObjectSystemContainerT::ContainerT::SystemContainerMgrT::GetInstance().CreateContainer();
+
+	nBeginContainer -= (nContainerCount-1);
+
+	printf_t(_T("Client1.LogonInSystem %s %d\n"),
+		ClientT::GetInstance().LogonInSystem(tstring(_T("Test")), tstring(_T("123")), &error) ? _T("Ok") : _T("Fail"), error);
+
+	for (int nCurrentContainer = nBeginContainer,s=0;; )
 	{
+		
 		nLastTick = ::GetTickCount64();
-		nLastnSucessCount = nSucessCount;
+		nLastSucessCount = nSucessCount;
 		for (int i = 0; i < 1000; i++)
 		{
 			nLastErrorTick = ::GetTickCount64();
@@ -447,13 +466,14 @@ void TestPerformance()
 				SerObjectToXmlBuffer(_tagCallParameter, Par, szPar);
 				//OutPar = szPar;
 				//SerTCHARXmlBufferToObject(_tagCallParameter, RetPar, (OutPar.c_str()));
-
+				GCContainer<MemoryMgr__StaticGC_Tmp>::GetInstance().ReleaseGC(MEMGC_CLIENT_LEVEL);
 				nSucessCount++;
 			}
 			else
 			{
+				if(nCount!=1)state_wrap.m_szAddr = szObjectPathBase + (tstring&)CAutoVal(nIndex%nCount);
 				//if (state_wrap.UpDataObject())
-				if(ClientT::GetInstance().UpDataObject(ssAddr, szState, &error))
+				if(ClientT::GetInstance().UpDataObject(state_wrap.m_szAddr, szState, &error))
 				{
 					nSucessCount++;
 					/*
@@ -473,44 +493,76 @@ void TestPerformance()
 					nTempErrTime += ::GetTickCount64() - nLastErrorTick;
 				}
 			}
-			
+			nIndex++;
 		}
 		nTempTime = ::GetTickCount64() - nLastTick;
 		nUsedTime += nTempTime;
-		MemoryMgr__StaticGC_Tmp::GetInstance().DelGc(FALSE);
-		MemoryMgr__StaticGC::GetInstance().DelGc(FALSE);
+		//MemoryMgr__StaticGC_Tmp::GetInstance().DelGc(FALSE);
+		//MemoryMgr__StaticGC::GetInstance().DelGc(FALSE);
 		if (nUsedTime - nLastUsedTime > 3000)
 		{
 			
 
-			printf_t(_T("QPS(数量=%llu 用时=%llu 速率=%llu)  瞬时QPS(数量=%llu 用时=%llu 速率=%llu) Error(数量=%llu 用时=%llu 速率=%llu)\n"),
-				nSucessCount, nUsedTime - nErrorUsedTime, ((1000*nSucessCount) / (nUsedTime - nErrorUsedTime)),
-				nSucessCount - nLastnSucessCount, (nTempTime - nTempErrTime), ((1000*(nSucessCount - nLastnSucessCount)) / (nTempTime - nTempErrTime)),
+			printf_t(_T("Container-%d QPS(数量=%llu 用时=%llu 速率=%llu)  瞬时QPS(数量=%llu 用时=%llu 速率=%llu) Error(数量=%llu 用时=%llu 速率=%llu)\n"),
+				nCurrentContainer,nSucessCount, nUsedTime - nErrorUsedTime, ((1000*nSucessCount) / (nUsedTime - nErrorUsedTime)),
+				nSucessCount - nLastSucessCount, (nTempTime - nTempErrTime), ((1000*(nSucessCount - nLastSucessCount)) / (nTempTime - nTempErrTime)),
 				nErrorCount, nErrorUsedTime, (1000*nErrorCount) / (nErrorUsedTime? nErrorUsedTime:(nErrorUsedTime+1)));
 			
 			nLastUsedTime = nUsedTime;
 			
+			nCurrentContainer = nBeginContainer + (s % nContainerCount);
+			ObjectSystemContainerT::ContainerT::SystemContainerMgrT::GetInstance().SwitchContainer(nCurrentContainer);
+			//printf_t(_T("Entry Container-%d\n"), nCurrentContainer);
+
+			s++;
+			
 		}
+		
 	}
 
 }
 #include "RotationalFlowers.h"
+int InputTestObjectCount()
+{
+	int nRet = 0;
+	printf_t(_T("请输入样本数量:\n"));
+	scanf_t(_T("%u"), &nRet);
+	return nRet;
+}
+
+int InputTestContainerCount()
+{
+	int nRet = 0;
+	printf_t(_T("请输入容器数量:\n"));
+	scanf_t(_T("%u"), &nRet);
+	return nRet;
+}
 
 int _tmain(int argc, _TCHAR* argv[])
 {
 	BOOL bMatch = FALSE;
 	if (argc > 1)
 	{
+		
 		if (argv[1] == tstring(_T("-s")))
 		{
 			printf_t(_T("Server mode entry...\n"));
-			UDPServerTransportT::GetInstance().init();
+			ObjectSystemContianer<Container_DefaultT>::UDPServerTransportT::GetInstance().init();
+			for (;;)
+			{
+				Sleep(3000);
+				printf_t(_T("===========================================================\n"));
+				printf_t(MemoryMgr_FreeList1T::GetInstance().PrintMemPoolInfo(_T("MemoryMgr_FreeList1T")));
+				//printf_t(MemoryMgr__StaticGC::GetInstance().PrintMemPoolInfo(_T("MemoryMgr__StaticGC")));
+				printf_t(MemoryMgr__StaticGC_Tmp::GetInstance().PrintMemPoolInfo(_T("MemoryMgr__StaticGC_Tmp")));
+				printf_t(_T("===========================================================\n\n\n"));
+			}
 			bMatch = TRUE;
 		}
 		else if (argv[1] == tstring(_T("-c")))
 		{
 			printf_t(_T("Client mode entry...\n"));
-			UDPObjectSystemTest(FALSE);
+			UDPObjectSystemTest<ObjectSystemContianer<Container_DefaultT>>(FALSE);
 			bMatch = TRUE;
 		}
 		else if (argv[1] == tstring(_T("-gcu")))
@@ -533,33 +585,33 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 		else if (argv[1] == tstring(_T("-tu")))
 		{
-			if (UDPClientTransport1T::TransportMiniT::GetInstance().init())
+			if (ObjectSystemContianer<Container_DefaultT>::UDPClientTransport1T::TransportMiniT::GetInstance().init())
 			{
-				TestPerformance<UDPClient1T>();
+				TestPerformance<ObjectSystemContianer<Container_DefaultT>, ObjectSystemContianer<Container_DefaultT>::UDPClient1T>(InputTestObjectCount(), InputTestContainerCount());
 			}
 			
 			bMatch = TRUE;
 		}
 		else if (argv[1] == tstring(_T("-tl1")))
 		{
-			TestPerformance<LocalClient1T>();
+			TestPerformance<ObjectSystemContianer<Container_DefaultT>, ObjectSystemContianer<Container_DefaultT>::LocalClient1T>(InputTestObjectCount(), InputTestContainerCount());
 			bMatch = TRUE;
 		}
 		else if (argv[1] == tstring(_T("-tl2")))
 		{
-			TestPerformance<LocalClient2T>();
+			TestPerformance<ObjectSystemContianer<Container_DefaultT>, ObjectSystemContianer<Container_DefaultT>::LocalClient2T>(InputTestObjectCount(), InputTestContainerCount());
 			bMatch = TRUE;
 		}
 		else if (argv[1] == tstring(_T("-tls")))
 		{
-			TestPerformance<LocalClient1T,true>();
+			TestPerformance<ObjectSystemContianer<Container_DefaultT>,ObjectSystemContianer<Container_DefaultT>::LocalClient1T,true>(InputTestObjectCount(), InputTestContainerCount());
 			bMatch = TRUE;
 		}
 		
 	}
 	if (!bMatch)
 	{
-		UDPObjectSystemTest();
+		UDPObjectSystemTest<ObjectSystemContianer<Container_DefaultT>>();
 	}
 	//ObjectSystemTest();
 	for (;;)
@@ -568,7 +620,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 	//tstring szSession;
 	//CObjectSystem_Local<ObjectSystem2Config, CObjectFileOperation>::GetInstance().LogonInSystem((_T("Test")), (_T("123")), szSession);
-	LocalClient1T & LocalClient = LocalClient1T::GetInstance();
+	ObjectSystemContianer<Container_DefaultT>::LocalClient1T & LocalClient = ObjectSystemContianer<Container_DefaultT>::LocalClient1T::GetInstance();
 	return 0;
 }
 

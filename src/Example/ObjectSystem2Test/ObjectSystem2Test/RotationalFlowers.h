@@ -34,14 +34,14 @@
 
 #include "RotationalFlowersDataMode.h"
 
-typedef TransportMini::TransportMiniUDPServer<Transport::Server<LocalObjectServerT>, 8485, 'game'> GameServerTransportT;
-typedef Transport::Client<TransportMini::TransportMiniUDPClient<8485, 'game'>> GameClientTransportT;
-typedef CObjectSystem_Client<GameClientTransportT, 1> GameClientT;
+typedef TransportMini::TransportMiniUDPServer<Transport::Server<ObjectSystemContianer<Container_DefaultT>::LocalObjectServerT, Container_DefaultT>, Container_DefaultT, 8485, 'game'> GameServerTransportT;
+typedef Transport::Client<TransportMini::TransportMiniUDPClient<Container_DefaultT,8485, 'game'>, Container_DefaultT> GameClientTransportT;
+typedef CObjectSystem_Client<GameClientTransportT, Container_DefaultT> GameClientT;
 
 #define Address_BulletinBoard _T("Share\\BulletinBoard")
 #define Address_ManagerMsg _T("Master\\BroadcastMsg")
 #define Address_NeedNewSlot _T("Master\\NeedNewSlot")
-#define LOOP_TIMEOUT_TICK			50
+#define LOOP_TIMEOUT_TICK			1
 #define LOOP_TIMEOUT_KEEPALIVED		6*LOOP_TIMEOUT_TICK
 #define LOOP_TIMEOUT_GAME_UPDATA	LOOP_TIMEOUT_TICK
 enum eUserType
@@ -172,16 +172,16 @@ public:
 	}
 	tstring GetSlotAddr()
 	{
-		tstring  OutAddr;
-		OutAddr = _T("Slot");
-		OutAddr += (tstring)CAutoVal(m_nSlot);
-		OutAddr += _T("\\FlowerSlot");
-		return OutAddr;
+	tstring  OutAddr;
+	OutAddr = _T("Slot");
+	OutAddr += (tstring)CAutoVal(m_nSlot);
+	OutAddr += _T("\\FlowerSlot");
+	return OutAddr;
 
 	}
 	static tstring GetNewSlotAddr(tstring & szSession)
 	{
-		tstring OutAddr=_T("Session\\Session-");
+		tstring OutAddr = _T("Session\\Session-");
 		OutAddr += szSession;
 		OutAddr += _T("\\NeedNewSlotRet");
 		return OutAddr;
@@ -189,7 +189,7 @@ public:
 	}
 	tstring GetNewSlotAddr()
 	{
-		tstring OutAddr=_T("Session\\Session-");
+		tstring OutAddr = _T("Session\\Session-");
 		OutAddr += ClientT::GetInstance().GetSession();
 		OutAddr += _T("\\NeedNewSlotRet");
 		return OutAddr;
@@ -205,7 +205,7 @@ class Game_PublishSubscribe :public GameUserBase<ClientT>
 public:
 	BOOL m_bInit;
 	_tagFlowerSlot_Wrap<ClientT> m_ToFlowerSlot;
-	Game_PublishSubscribe() { 
+	Game_PublishSubscribe() {
 		m_bInit = FALSE;
 	};
 	~Game_PublishSubscribe() {};
@@ -215,9 +215,12 @@ public:
 		static _Myt _self;
 		return _self;
 	}
+	unsigned int m_nCount;
+	unsigned int m_nLastLogFlowerTransportCount;
 	BOOL init()
 	{
-		BOOL bRet=GameUserBase<ClientT>::init();
+
+		BOOL bRet = GameUserBase<ClientT>::init();
 		if (bRet == FALSE) return bRet;
 
 		if (m_bInit) return m_bInit;
@@ -235,27 +238,35 @@ public:
 		m_ToFlowerSlot.szLastLog += (tstring)CAutoVal((m_nSlot + 1) % m_bb.nMaxFlowerSlotCount);
 
 		_tagFlowerSlot_Wrap<ClientT> Slot(szSlotAddr, ObjectEvent_Updata, [this](ObjectSystemEvent & Event) {
-			
-				_tagFlowerSlot_Wrap<ClientT> FlowerSlot(Event.szObjectAddress);
-				if (FlowerSlot.GetObject())
+
+			_tagFlowerSlot_Wrap<ClientT> FlowerSlot(Event.szObjectAddress);
+			if (FlowerSlot.GetObject())
+			{
+				if ((m_nCount % 50) == 0)
 				{
-					printf_t(_T("收到花朵(传递次数%d 传递消息-%s)用时(%d)\n"),
-						FlowerSlot.nFlowerTransportCount, FlowerSlot.szLastLog.c_str(),::GetTickCount()- m_nFlowerTickCount);
-					
-					m_ToFlowerSlot.nFlowerTransportCount = FlowerSlot.nFlowerTransportCount;
-
-					m_ToFlowerSlot.nFlowerTransportCount++;
-					
-					//Sleep(m_bb.nTransportWaitTime);
+					printf_t(_T("收到花朵(传递次数%d(pps=%d) 传递消息-%s)用时(%d)\n"), FlowerSlot.nFlowerTransportCount,
+						(((FlowerSlot.nFlowerTransportCount- m_nLastLogFlowerTransportCount)*1000)/ (::GetTickCount() - m_nFlowerTickCount)),
+						FlowerSlot.szLastLog.c_str(), ::GetTickCount() - m_nFlowerTickCount);
 					m_nFlowerTickCount = ::GetTickCount();
-					m_bGetFlower = TRUE;
-					
+					m_nLastLogFlowerTransportCount = FlowerSlot.nFlowerTransportCount;
 				}
-		});
 
+				m_ToFlowerSlot.nFlowerTransportCount = FlowerSlot.nFlowerTransportCount;
+
+				m_ToFlowerSlot.nFlowerTransportCount++;
+
+				//Sleep(m_bb.nTransportWaitTime);
+				
+				m_bGetFlower = TRUE;
+
+			}
+		});
+		m_nLastLogFlowerTransportCount = 0;
+		m_nCount = 0;
 		m_bInit = TRUE;
 		return m_bInit;
 	}
+
 	void Loop()
 	{
 		if (m_LastCtlState == MangerMsgType_Start)
@@ -267,8 +278,12 @@ public:
 					
 					if (m_ToFlowerSlot.UpDataObject())
 					{
-						printf_t(_T("放置花朵到(%s)(传递次数%d 传递消息-%s)\n"), m_ToFlowerSlot.m_szAddr.c_str(),
-							m_ToFlowerSlot.nFlowerTransportCount, m_ToFlowerSlot.szLastLog.c_str());
+						if ((m_nCount % 50) == 0)
+						{
+							printf_t(_T("放置花朵到(%s)(传递次数%d 传递消息-%s)\n"), m_ToFlowerSlot.m_szAddr.c_str(),
+								m_ToFlowerSlot.nFlowerTransportCount, m_ToFlowerSlot.szLastLog.c_str());
+						}
+						m_nCount++;
 						m_bGetFlower = FALSE;
 					}
 					
@@ -386,7 +401,7 @@ template<typename ClientT>
 class Game_Master
 {
 public:
-	int m_nNewSlot;
+	unsigned int m_nNewSlot;
 	BOOL m_bInit;
 	Game_Master() {
 		m_bInit = FALSE;
@@ -532,7 +547,7 @@ public:
 		bb.UpDataObject(m_bb);
 
 		//创建花槽
-		for (int s = 0; s < m_bb.nMaxFlowerSlotCount; s++)
+		for (unsigned int s = 0; s < m_bb.nMaxFlowerSlotCount; s++)
 		{
 			tstring szSlotAddr;
 			GameUserBase<ClientT>::GetSlotAddr(szSlotAddr, s);
@@ -623,7 +638,7 @@ void GameLoop()
 				GameClientTransportT::GetInstance().Loop(KEEPALIVED_MODE);
 				nLastKeepAlived = nCurTick;
 			}
-			if (nCurTick - nLastGameUpData > LOOP_TIMEOUT_KEEPALIVED)
+			if (nCurTick - nLastGameUpData > LOOP_TIMEOUT_TICK)
 			{
 				ClientT::GetInstance().Loop();
 				//推送事件
@@ -672,7 +687,15 @@ void UserSelect()
 void GameServerEntry()
 {
 	GameServerTransportT::GetInstance().init();
-	
+	for (;;)
+	{
+		Sleep(3000);
+		printf_t(_T("===========================================================\n"));
+		printf_t(MemoryMgr_FreeList1T::GetInstance().PrintMemPoolInfo(_T("MemoryMgr_FreeList1T")));
+		printf_t(MemoryMgr__StaticGC::GetInstance().PrintMemPoolInfo(_T("MemoryMgr__StaticGC")));
+		printf_t(MemoryMgr__StaticGC_Tmp::GetInstance().PrintMemPoolInfo(_T("MemoryMgr__StaticGC_Tmp")));
+		printf_t(_T("===========================================================\n\n\n"));
+	}
 }
 
 void GameEntry(BOOL bMaster=FALSE)

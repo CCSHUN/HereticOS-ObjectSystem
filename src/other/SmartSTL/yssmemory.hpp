@@ -12,6 +12,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
+#include "SystemContainer.h"
 #include "tool.hpp"
 //2005.4.16 内存分配器
 #include "yssmemory_os.hpp"
@@ -28,6 +29,66 @@
 #define MEMMGR_TYPE_OS_VM		5		
 #define MEMMGR_TYPE_BITMAP			6
 #define MEMMGR_TYPE_FREELIST		7
+
+#define MEM_DBG
+class MemPoolDbg
+{
+public:
+
+	__int64 m_nAllocCount;
+	__int64 m_nFreeCount;
+	__int64 m_nAllocSize;
+	__int64 m_nFreeSize;
+	__int64 m_nCurAllocSize;
+	__int64 m_nCurAllocCount;
+
+	__int64 m_nGcAllocCount;
+	__int64 m_nGcAllocSize;
+	TCHAR szInfo[512];
+	MemPoolDbg() {
+		m_nAllocCount=m_nFreeCount=m_nAllocSize=m_nFreeSize=m_nCurAllocSize=m_nCurAllocCount=0;
+	};
+	~MemPoolDbg() {};
+	void DbgNewMem(size_t nSize)
+	{
+		m_nAllocCount++;
+		m_nCurAllocCount++;
+		m_nCurAllocSize += nSize;
+		m_nAllocSize += nSize;
+	}
+	void DbgDelMem(size_t nSize)
+	{
+		m_nFreeCount++;
+		m_nCurAllocCount--;
+		m_nCurAllocSize -= nSize;
+		m_nFreeSize += nSize;
+	}
+
+	void DbgGcNewMem(size_t nSize)
+	{
+		m_nGcAllocCount++;
+		m_nGcAllocSize += nSize;
+	}
+	void DbgGcDelMem(size_t nSize)
+	{
+		m_nGcAllocCount--;
+		m_nGcAllocSize -= nSize;
+	}
+
+	TCHAR * PrintMemPoolInfo(TCHAR *szHead=_T("MemPool"))
+	{
+		sprintf_t(szInfo,_T("%s CurAlloc(%llu %lluKB) GcAlloc(%llu %lluKB) Alloc(%llu %lluKB)  Free(%llu %lluKB)\n"), szHead,
+			m_nCurAllocCount, m_nCurAllocSize / 1024,
+			m_nGcAllocCount, m_nGcAllocSize / 1024,
+			m_nAllocCount, m_nAllocSize / 1024,
+			m_nFreeCount, m_nFreeSize/1024);
+		return &szInfo[0];
+	}
+
+private:
+
+};
+
 
 
 
@@ -436,8 +497,11 @@ extern MemoryMgrInterface< PointInterfaceForMemoryMgr<IndexType> > * g_pMemoryMg
 //但不适合于有大量临时对象反复构造析构的场合，因为内存在期间不会释放，导致内存占用过大。
 //优点： 占用内存最小，构造速度=父分配器分配速度，0析构速度
 //缺点： 需要在合适的时候主动调用GC，尤其是应对临时对象时。
-template<typename PointInterfaceT, typename ParentMemMgr, int nGrowSize, int nGrowCount>
-class MemoryMgr_StaticGC : public MemoryMgrInterface<PointInterfaceT>
+template<typename PointInterfaceT, typename ContainerT, int nGrowSize, int nGrowCount>
+class MemoryMgr_StaticGC : 
+	public MemoryMgrInterface<PointInterfaceT>,
+	public MemPoolDbg,
+	public CSystemContainerObjectBase<MemoryMgr_StaticGC<PointInterfaceT, ContainerT, nGrowSize, nGrowCount>, ContainerT>
 {
 public:
 	struct BlockCtl
@@ -450,58 +514,73 @@ public:
 	unsigned int m_nCurrentBlockCount;
 
 public:
-	typedef MemoryMgr_StaticGC<PointInterfaceT, ParentMemMgr,  nGrowSize,  nGrowCount> _Myt;
+	typedef MemoryMgr_StaticGC<PointInterfaceT, ContainerT,  nGrowSize,  nGrowCount > _Myt;
+	/*
 	static _Myt & GetInstance()
 	{
 		static _Myt _self;
 		return _self;
 	}
+	*/
 
 private:
-	bool GrowHeap()
-	{
-		if (m_nCurrentBlockCount >= nGrowCount)
-		{
-			YSS_ASSERT(TRUE);
-		}
-		//非0或者当前heap有内容
-		if (m_nCurrentBlockCount || m_MemBlock[m_nCurrentBlockCount].nCurLen)m_nCurrentBlockCount++;
-
-		if (m_MemBlock[m_nCurrentBlockCount].pBlock == NULL)
-		{
-			m_MemBlock[m_nCurrentBlockCount].pBlock = ParentMemMgr::GetInstance().NewMemory(nGrowSize);
-		}
-		m_MemBlock[m_nCurrentBlockCount].nCurLen = 0;
-		m_MemBlock[m_nCurrentBlockCount].nMaxLen = nGrowSize;
-		return true;
-	}
+	
 	bool GrowHeap(unsigned int nLen)
 	{
-		if (m_nCurrentBlockCount >= nGrowCount)
+		if (m_nCurrentBlockCount == (nGrowCount-1))
 		{
 			YSS_ASSERT(TRUE);
+			return false;
 		}
 		//非0或者当前heap有内容
-		if (m_nCurrentBlockCount || m_MemBlock[m_nCurrentBlockCount].nCurLen)m_nCurrentBlockCount++;
+		
 
 		if (m_MemBlock[m_nCurrentBlockCount].pBlock == NULL)
 		{
-			m_MemBlock[m_nCurrentBlockCount].pBlock = ParentMemMgr::GetInstance().NewMemory(nLen);
+			m_MemBlock[m_nCurrentBlockCount].pBlock = ContainerT::SystemMemPoolT::GetInstance().NewMemory(max(nLen, nGrowSize));
+			m_MemBlock[m_nCurrentBlockCount].nCurLen = 0;
+			m_MemBlock[m_nCurrentBlockCount].nMaxLen = max(nLen, nGrowSize);
+#ifdef MEM_DBG
+			
+			DbgGcNewMem(max(nLen, nGrowSize));
+#endif
 		}
-		m_MemBlock[m_nCurrentBlockCount].nCurLen = 0;
-		m_MemBlock[m_nCurrentBlockCount].nMaxLen = nLen;
+		else
+		{
+			m_nCurrentBlockCount++;
+			if (m_MemBlock[m_nCurrentBlockCount].pBlock == NULL) return GrowHeap(nLen);
+			if (nLen > nGrowSize)
+			{
+				ContainerT::SystemMemPoolT::GetInstance().DelMemory(m_MemBlock[m_nCurrentBlockCount].pBlock, m_MemBlock[m_nCurrentBlockCount].nMaxLen);
+				m_MemBlock[m_nCurrentBlockCount].pBlock = ContainerT::SystemMemPoolT::GetInstance().NewMemory(max(nLen, nGrowSize));
+#ifdef MEM_DBG
+				DbgGcDelMem(m_MemBlock[m_nCurrentBlockCount].nMaxLen);
+				DbgGcNewMem(max(nLen, nGrowSize));
+#endif
+			}
+			m_MemBlock[m_nCurrentBlockCount].nCurLen = 0;
+			m_MemBlock[m_nCurrentBlockCount].nMaxLen = max(nLen, nGrowSize);
+		}
+		
 
 		return true;
 	}
 	void * NewMem(__int64 nLen)
 	{
-#ifdef _DEBUG
+#ifdef MEM_DBG
 		if (m_nCurrentBlockCount >= nGrowCount) YSS_ASSERT(TRUE);
 #endif 
-		if (nLen > nGrowSize) GrowHeap(nLen);
-		if (m_MemBlock[m_nCurrentBlockCount].pBlock==NULL) GrowHeap();
-		if (m_MemBlock[m_nCurrentBlockCount].nCurLen + nLen>m_MemBlock[m_nCurrentBlockCount].nMaxLen) GrowHeap();
+		//if (nLen > nGrowSize) GrowHeap(nLen);
+		//if (m_MemBlock[m_nCurrentBlockCount].pBlock==NULL) GrowHeap();
+		if (m_MemBlock[m_nCurrentBlockCount].nCurLen + nLen>m_MemBlock[m_nCurrentBlockCount].nMaxLen) GrowHeap(nLen);
 		void * pMem = (void*)((char *)m_MemBlock[m_nCurrentBlockCount].pBlock + m_MemBlock[m_nCurrentBlockCount].nCurLen);
+#ifdef MEM_DBG
+		if (pMem == NULL)
+		{
+			YSS_ASSERT(TRUE);
+		}
+		DbgNewMem(nLen);
+#endif
 		m_MemBlock[m_nCurrentBlockCount].nCurLen += nLen;
 		return pMem;
 	}
@@ -509,7 +588,7 @@ private:
 public:
 	MemoryMgr_StaticGC(){ 
 		memset(&m_MemBlock, 0, sizeof(m_MemBlock));
-		m_nCurrentBlockCount = NULL; 
+		m_nCurrentBlockCount = 0; 
 	};
 	~MemoryMgr_StaticGC(){};
 	//GC全局初始化分配内存
@@ -520,21 +599,17 @@ public:
 	//全局GC模式时释放gc内存
 	void DelGc(bool bRealClear)
 	{
-		if (bRealClear)
+		
+		for (unsigned int i=0;m_MemBlock[i].pBlock!=NULL;i++)
 		{
-			for (unsigned int i=0;m_MemBlock[i].pBlock!=NULL;i++)
+			if (bRealClear)
 			{
-				ParentMemMgr::GetInstance().DelMemory(m_MemBlock[i].pBlock, nGrowSize);
+				ContainerT::SystemMemPoolT::GetInstance().DelMemory(m_MemBlock[i].pBlock, m_MemBlock[i].nMaxLen);
 				m_MemBlock[i].pBlock = 0;
-				m_MemBlock[0].nCurLen = 0;
 			}
-			m_nCurrentBlockCount = 0;
-		}
-		else
-		{
-			m_nCurrentBlockCount = 0;
 			m_MemBlock[0].nCurLen = 0;
 		}
+		m_nCurrentBlockCount = 0;
 		
 		return;
 	}
@@ -545,6 +620,9 @@ public:
 		return NewMem(nLen);
 	};
 	bool DelMemory(void * pMem, __int64 nLen) {
+#ifdef MEM_DBG
+		DbgDelMem(nLen);
+#endif
 		return FALSE;//g_pMemoryMgr[nParentMemMgr].DelMemory(pMem);
 	};
 
@@ -1330,8 +1408,10 @@ public:
 //256(Level0) 512(Level1) 1024(Level2) 2048(Level3)
 //优点： 预热后拥有最快的内存分配速度，用于优化减少系统内存分配,特别适合于临时对象的内存加速
 //缺点: 需要考虑gc主动释放cache，需要考虑nBlockSizeLog2的应用场合，内存占用较大
-template<typename PointInterfaceT, typename ParentMemMgr, unsigned int nBlockSizeLog2, unsigned int nLevel, unsigned int nListMaxCount>
-class MemoryMgr_FreeList : public MemoryMgrInterface<PointInterfaceT>
+template<typename PointInterfaceT, unsigned int nBlockSizeLog2, unsigned int nLevel, unsigned int nListMaxCount, typename ContainerT>
+class MemoryMgr_FreeList : public MemoryMgrInterface<PointInterfaceT>,
+	public MemPoolDbg,
+	public CSystemContainerObjectBase<MemoryMgr_FreeList<PointInterfaceT, nBlockSizeLog2, nLevel, nListMaxCount, ContainerT>, ContainerT>
 {
 private:
 	PowerTab<nLevel, 1> m_LevelPower;
@@ -1364,10 +1444,12 @@ private:
 		if (nDepth > nLevel)
 		{
 			YSS_ASSERT(1);
-			return ParentMemMgr::GetInstance().NewMemory(nUseLen);
+			return ContainerT::SystemMemPoolT::GetInstance().NewMemory(nUseLen);
 		}
 		volatile MemNode  * pNode = m_FreeListArray[nDepth].GetNode(0);
-
+#ifdef MEM_DBG
+		DbgNewMem(nLen);
+#endif
 		if (pNode )
 		{
 			//m_nCurListCount -= LevelNodeCount(nLevel - nDepth);
@@ -1375,7 +1457,10 @@ private:
 		}
 		else
 		{
-			return ParentMemMgr::GetInstance().NewMemory(nUseLen);
+#ifdef MEM_DBG
+			DbgGcNewMem(nUseLen);
+#endif
+			return ContainerT::SystemMemPoolT::GetInstance().NewMemory(nUseLen);
 		}
 	};
 	bool DelMem(void * pMem, __int64 nLen) {
@@ -1400,9 +1485,11 @@ private:
 		}
 		else
 		{
-			return ParentMemMgr::GetInstance().DelMemory(pMem,nLen);
+			return ContainerT::SystemMemPoolT::GetInstance().DelMemory(pMem,nLen);
 		}
-		
+#ifdef MEM_DBG
+		DbgDelMem(nLen);
+#endif
 		return true;
 	};
 	//清理释放FreeList
@@ -1416,7 +1503,10 @@ private:
 				volatile MemNode  * pNode = m_FreeListArray[i].GetNode(0);
 				if (pNode)
 				{
-					ParentMemMgr::GetInstance().DelMemory(pNode->pMemBlock,pNode->nLen);
+#ifdef MEM_DBG
+					DbgGcDelMem(pNode->nLen);
+#endif
+					ContainerT::SystemMemPoolT::GetInstance().DelMemory(pNode->pMemBlock,pNode->nLen);
 				}
 				else
 				{
@@ -1434,12 +1524,14 @@ public:
 	~MemoryMgr_FreeList(){
 
 	};
-	typedef MemoryMgr_FreeList<PointInterfaceT, ParentMemMgr, nBlockSizeLog2, nLevel, nListMaxCount> _Myt;
+	typedef MemoryMgr_FreeList<PointInterfaceT, nBlockSizeLog2, nLevel, nListMaxCount, ContainerT> _Myt;
+	/*
 	static _Myt & GetInstance()
 	{
 		static _Myt _self;
 		return _self;
-	}
+	}*/
+	
 	//GC全局初始化分配内存
 	void * NewGc()
 	{
@@ -1479,7 +1571,35 @@ public:
 };
 
 
+template<typename _MemPoolT>
+class GCContainer
+{
+public:
+	//越大的管理者越具备管理权限
+	unsigned int m_nManagerLevel;
+	GCContainer() { m_nManagerLevel = 0; };
+	~GCContainer() {};
 
+	typedef GCContainer<_MemPoolT> _Myt;
+	static _Myt & GetInstance()
+	{
+		static _Myt _self;
+		return _self;
+	}
+	void RegistManager(unsigned int nManagerLevel)
+	{
+		m_nManagerLevel = nManagerLevel>m_nManagerLevel? nManagerLevel: m_nManagerLevel;
+	}
+	void ReleaseGC(unsigned int nManagerLevel,BOOL bRealFree=FALSE)
+	{
+		if (nManagerLevel >= m_nManagerLevel)
+		{
+			_MemPoolT::GetInstance().DelGc(bRealFree);
+		}
+	}
+private:
+
+};
 
 
 

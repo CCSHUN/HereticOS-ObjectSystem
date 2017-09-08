@@ -1,9 +1,3 @@
-#pragma once
-#include "windows.h"
-#define _DebugOutput printf_t
-//#define _DebugOutputA printf
-//#define _DebugOutput
-#define _DebugOutputA 
 ///////////////////////////////////////////////////////////////////////////////////
 //	Copyright 2017 shushen,ye
 //	Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,22 +11,38 @@
 //	limitations under the License.
 ///////////////////////////////////////////////////////////////////////////////////
 
+
+#pragma once
+
+
+//#include "windows.h"
+#define _DebugOutput printf_t
+#define _DebugOutputLogA 
+#define _DebugOutputErrorA printf_t
+
+
 #include <unordered_map>
 #include <vector>
 #include "TransportProtocol.h"
-#pragma comment(lib, "ws2_32.lib")
+//#include <mswsock.h>
+
+
 
 namespace TransportMini
 {
 
+//#define IOC_IN  0x80000000
+//#define IOC_VENDOR  0x18000000
+//#define SIO_UDP_CONNRESET (IOC_IN | IOC_VENDOR | 12)
 
 #define MAX_TRANSPORT_LEN 1024*1024			//会话最大尺寸。
 #define MAX_TRANSPORT_PACKET_LEN  32*1024	//分包尺寸，如果太大会导致IP 64K buffer不够用。
-#define MAX_TRANSPORT_SESSION_COUNT 64		//最大session数量
+#define MAX_TRANSPORT_SESSION_COUNT 128		//最大session数量
 
-#define MAX_SERVER_TRANSPORT_BUFFER 1024*1024   //1M 如果太小则会丢包
+#define MAX_SERVER_TRANSPORT_BUFFER 128*1024   //1M 如果太小则会丢包
 #define MAX_CLIENT_TIMEOUT		10*1000			//Client 传输超时
-
+#define SERVER_SELECT_TIMEOUT	1*1000			//1ms
+#define CLIENT_SELECT_TIMEOUT	1*1000			//1ms
 	inline  auto _sHash(unsigned char *_First, size_t _Count)
 	{	// FNV-1a hash function for bytes in [_First, _First + _Count)
 		//#ifdef __amd64
@@ -60,22 +70,22 @@ namespace TransportMini
 	{
 		unsigned int nMagicCode;
 		unsigned int nErrorType;
+		unsigned int nChannelNo;
 		unsigned int nPacketLen;
 		unsigned int nCheckSum;
 	};
-
-	BOOL UDPSend(SOCKET socket,std::vector<u_char> & SendBuffer, sockaddr_in * from, int  & fromlen)
+	BOOL UDPSend(SOCKET socket, const u_char * pSendBuffer, size_t nLen, sockaddr_in * from, int  & fromlen)
 	{
 		int nSendedLen = 0;
 		int nIoRetLen = 0;
 		for (;;)
 		{
-			int nSendLen = min((SendBuffer.size() - nSendedLen), MAX_TRANSPORT_PACKET_LEN);
-			nIoRetLen = sendto(socket, (char *)&SendBuffer[nSendedLen], nSendLen, 0, (sockaddr*)from, fromlen);
+			int nSendLen = min((nLen - nSendedLen), MAX_TRANSPORT_PACKET_LEN);
+			nIoRetLen = sendto(socket, (char *)&pSendBuffer[nSendedLen], nSendLen, 0, (sockaddr*)from, fromlen);
 			if (nIoRetLen != SOCKET_ERROR)
 			{
 				nSendedLen += nIoRetLen;
-				if (nSendedLen == SendBuffer.size()) break;
+				if (nSendedLen == nLen) break;
 			}
 			else
 			{
@@ -85,19 +95,20 @@ namespace TransportMini
 		}
 		return TRUE;
 	}
-	BOOL UDPRecv(SOCKET socket, std::vector<u_char> & RecvBuffer, sockaddr_in * from, int  & fromlen)
+	
+	BOOL UDPRecv(SOCKET socket, const u_char* pRecvBuffer, size_t nLen, sockaddr_in * from, int  & fromlen)
 	{
 		BOOL bRet = FALSE;
 		int nRecvedLen = 0;
 		int nIoRetLen = 0;
 		for (;;)
 		{
-			int nRecvLen= min(RecvBuffer.size()- nRecvedLen, MAX_TRANSPORT_PACKET_LEN);
-			nIoRetLen = recvfrom(socket, (char *)&RecvBuffer[nRecvedLen], nRecvLen, 0, (struct sockaddr*)from, &fromlen);
+			int nRecvLen= min(nLen - nRecvedLen, MAX_TRANSPORT_PACKET_LEN);
+			nIoRetLen = recvfrom(socket, (char *)&pRecvBuffer[nRecvedLen], nRecvLen, 0, (struct sockaddr*)from, &fromlen);
 			if (nIoRetLen != SOCKET_ERROR)
 			{
 				nRecvedLen += nIoRetLen;
-				if (RecvBuffer.size() == nRecvedLen)
+				if (nLen == nRecvedLen)
 				{
 					//RecvBuffer[RecvBuffer.size() - 1] = 0;
 					//RecvBuffer[RecvBuffer.size() - 2] = 0;
@@ -114,15 +125,85 @@ namespace TransportMini
 		}
 		return bRet;
 	}
-	template<typename _TransportServerT, int nUDPPort = 8484, unsigned int _nMagicCode = 'yssy',int nName=0>
-	class TransportMiniUDPServer
+	BOOL UDPSend(SOCKET socket, std::vector<u_char> & SendBuffer, sockaddr_in * from, int  & fromlen)
+	{
+		return UDPSend(socket, &SendBuffer[0], SendBuffer.size(), from, fromlen);
+	}
+	BOOL UDPRecv(SOCKET socket, std::vector<u_char> & RecvBuffer, sockaddr_in * from, int  & fromlen)
+	{
+		return UDPRecv(socket, &RecvBuffer[0], RecvBuffer.size(), from, fromlen);
+	}
+	template<unsigned int _nMagicCode>
+	BOOL UDPSendMsg(SOCKET socket, const u_char * pSendBuffer, size_t nLen, sockaddr_in * from, int  & fromlen, SYSTEMERROR & error,unsigned int nChannelNo=0)
+	{
+		BOOL bRet = FALSE;
+		TransportUDPRequestHead MsgHead;
+		MsgHead.nMagicCode = _nMagicCode;
+		MsgHead.nErrorType = error;
+		MsgHead.nChannelNo = nChannelNo;
+		MsgHead.nPacketLen = nLen + sizeof(TransportUDPRequestHead);
+
+		int nSendLen = 0;
+		int nIoRetLen = 0;
+		nIoRetLen = sendto(socket, (char *)&MsgHead, sizeof(MsgHead), 0, (sockaddr*)from, fromlen);
+		if (nIoRetLen == sizeof(MsgHead))
+		{
+			if (UDPSend(socket, pSendBuffer, nLen, from, fromlen))
+			{
+				bRet= TRUE;
+			}
+		}
+		return bRet;
+	}
+	template<unsigned int _nMagicCode, unsigned int nName, typename ContainerT>
+	BOOL UDPRecvMsg(SOCKET socket, ContainerT & RecvBuffer, sockaddr_in * from, int  & fromlen, SYSTEMERROR & error, unsigned int * nChannelNo = NULL)
+	{
+		BOOL bRet = FALSE;
+		size_t nRecvLen = 0;
+		TransportUDPRequestHead ResponseHead;
+		do
+		{
+			int nIoRetLen = recvfrom(socket, (char *)&ResponseHead, sizeof(ResponseHead), 0, (sockaddr *)from, &fromlen);
+			if (nIoRetLen == sizeof(ResponseHead))
+			{
+				//std::vector<u_char> ResponseBuffer;
+				if ((ResponseHead.nMagicCode != _nMagicCode) || (ResponseHead.nPacketLen > MAX_TRANSPORT_LEN))
+				{
+					error = Error_Sys_Transport_Fail;
+					_DebugOutput(_T("Client-%d  recv head data error %x\n"), nName, ResponseHead.nMagicCode);
+					break;
+				}
+				if (nChannelNo) *nChannelNo = ResponseHead.nChannelNo;
+				nRecvLen += sizeof(TransportUDPRequestHead);
+				RecvBuffer.resize(ResponseHead.nPacketLen - sizeof(TransportUDPRequestHead));
+				//ResponseBuffer.resize(ResponseHead.nPacketLen - sizeof(TransportUDPRequestHead));
+				if (UDPRecv(socket, (const u_char*)&RecvBuffer[0], ResponseHead.nPacketLen - sizeof(TransportUDPRequestHead), from, fromlen))
+				{
+					bRet = TRUE;
+					return bRet;
+				}
+
+
+			}
+			else
+			{
+				_DebugOutput(_T("Client-%d  recv head fail %d %d\n"), nName, WSAGetLastError(), nIoRetLen);
+			}
+
+		} while (false);
+		
+		return bRet;
+	}
+
+	template<typename _TransportServerT,  typename ContainerT, int nUDPPort = 8484, unsigned int _nMagicCode = 'yssy'>
+	class TransportMiniUDPServer :public CSystemContainerObjectBase<TransportMiniUDPServer<_TransportServerT, ContainerT, nUDPPort, _nMagicCode>, ContainerT>
 	{
 	public:
 		HANDLE m_hServerThread;
 		SOCKET m_hSocket;
 		volatile BOOL m_bClose;
 		u_short m_nPort;
-		typedef TransportMiniUDPServer<_TransportServerT, nUDPPort, _nMagicCode, nName> _Myt;
+		typedef TransportMiniUDPServer<_TransportServerT, ContainerT, nUDPPort, _nMagicCode> _Myt;
 
 		TransportMiniUDPServer() {
 			m_nPort = nUDPPort;
@@ -130,12 +211,13 @@ namespace TransportMini
 			m_hSocket = INVALID_SOCKET;
 		};
 		~TransportMiniUDPServer() {};
-
+		/*
 		static _Myt & GetInstance()
 		{
 			static _Myt _self;
 			return _self;
 		}
+		*/
 		struct IpSessionKey_Client
 		{
 			unsigned int	src_addr;		//源地址,32位
@@ -174,6 +256,10 @@ namespace TransportMini
 
 		struct ClientSession
 		{
+			sockaddr_in from;
+			int fromlen;
+			BOOL bNeedNewBuildSession;
+			unsigned int nChannelNo;
 			std::vector<u_char> m_SessionBuffer;
 		};
 
@@ -190,100 +276,177 @@ namespace TransportMini
 			{
 				tstring szInPar,szOutPar;
 				szInPar = (TCHAR *)&Session.m_SessionBuffer[sizeof(TransportUDPRequestHead)];
+				Session.nChannelNo = pReqHead->nChannelNo;
 				//_tagstrParameter Par;
 				//Par.szData = szInPar;
 				//SerObjectToXmlBuffer(_tagstrParameter, Par, szInPar);
 				//SerTCHARXmlBufferToObject(_tagstrParameter, Par, (szInPar.c_str()));
 
 				SYSTEMERROR error;
-
-				if (_TransportServerT::GetInstance().CallInterfaceStr(szInPar, szOutPar, error))
+				Transport::TransportHandle hHandle = Session.bNeedNewBuildSession ? &Session : NULL;
+				if (_TransportServerT::GetInstance().CallInterfaceStr<_Myt>(hHandle,szInPar, szOutPar, error))
 				{
-					g_pMemoryMgr[MEMMGR_TYPE_STATICGC_TMP]->DelGc(FALSE);
-					TransportUDPRequestHead ResponseHead;
-					//Par.szData = szOutPar;
-					//SerObjectToXmlBuffer(_tagstrParameter, Par, szOutPar);
-
-					ResponseHead.nMagicCode = _nMagicCode;
-					ResponseHead.nErrorType = error;
-					ResponseHead.nPacketLen = (szOutPar.size() + 1) * sizeof(TCHAR) + sizeof(TransportUDPRequestHead);
-					vector<u_char> Buffer;
-					
-					Buffer.resize((szOutPar.size() + 1) * sizeof(TCHAR));
-
-					
-					//memcpy(&Buffer[0], &ResponseHead, sizeof(TransportUDPRequestHead));
-					memcpy(&Buffer[0], szOutPar.c_str(), (szOutPar.size() + 1) * sizeof(TCHAR));
-					
-					int nSendLen = 0;
-					int nIoRetLen = 0;
-					nIoRetLen = sendto(m_hSocket, (char *)&ResponseHead,sizeof(ResponseHead), 0, (sockaddr*)from, fromlen);
-					if (nIoRetLen == sizeof(ResponseHead))
+					if (hHandle) Session.bNeedNewBuildSession = FALSE;
+					if (!UDPSendMsg<_nMagicCode>(m_hSocket, (const u_char*)szOutPar.c_str(), (szOutPar.size() + 1) * sizeof(TCHAR),from, fromlen, error, pReqHead->nChannelNo))
 					{
-						if (!UDPSend(m_hSocket, Buffer, from, fromlen))
-						{
-							return FALSE;
-						}
+						return FALSE;
 					}
-					
 
 				}
+				
+
 				Session.m_SessionBuffer.clear();
 			}
 
 
 			return TRUE;
 		}
-
+		fd_set m_RecvFD;
+		fd_set m_SendFD;
+		timeval m_SelectTimeOut;
+		BOOL CanRecv(BOOL & bTransoprt)
+		{
+			FD_ZERO(&m_RecvFD); FD_SET(m_hSocket, &m_RecvFD);
+			if (SOCKET_ERROR != select(0, &m_RecvFD, 0, 0, &m_SelectTimeOut))
+			{
+				bTransoprt = FD_ISSET(m_hSocket, &m_RecvFD) ? TRUE : FALSE;
+				return TRUE;
+			}
+			return FALSE;
+		}
+		
+		BOOL CanSend(BOOL & bTransoprt)
+		{
+			FD_ZERO(&m_SendFD); FD_SET(m_hSocket, &m_SendFD);
+			if (SOCKET_ERROR != select(0, 0, &m_SendFD, 0, &m_SelectTimeOut))
+			{
+				bTransoprt = FD_ISSET(m_hSocket, &m_SendFD) ? TRUE : FALSE;
+				return TRUE;
+			}
+			return FALSE;
+		}
+		void ClearSession(Transport::TransportHandle  hHandle)
+		{
+			if (hHandle)
+			{
+				ClientSession * pSession = (ClientSession *)hHandle;
+				IpSessionKey_Client ClientKey;
+				ClientKey.src_addr = pSession->from.sin_addr.S_un.S_addr;
+				ClientKey.src_port = pSession->from.sin_port;
+				IpSessionClientT::iterator itClient = m_ClientSessionMap.find(ClientKey);
+				if (itClient != m_ClientSessionMap.end())
+				{
+					m_ClientSessionMap.erase(itClient);
+				}
+			}
+		}
+		void ClearAllSession()
+		{
+			IpSessionClientT::iterator itClient = m_ClientSessionMap.begin();
+			for (; itClient!= m_ClientSessionMap.end(); itClient++)
+			{
+				itClient->second.bNeedNewBuildSession = TRUE;
+			}
+		}
+		BOOL CanPush(Transport::TransportHandle & hTransport)
+		{
+			BOOL bRet = FALSE;
+			if (hTransport)
+			{
+				ClientSession * pSession = (ClientSession *)hTransport;
+				if ((!pSession->bNeedNewBuildSession))
+				{
+					BOOL bCanSend = FALSE;
+					if (CanSend(bCanSend)&& bCanSend)
+					{
+						bRet = TRUE;
+					}
+					
+				}
+			}
+			
+			return bRet;
+		}
 		static DWORD WINAPI ServerUDPThread(LPVOID lpParameter)
 		{
 			_Myt * pCtl = (_Myt *)lpParameter;
-			_DebugOutput(_T("Server-%d ServerUDPThread entry....\n"),nName);
+			_DebugOutput(_T("Server-%d ServerUDPThread entry....\n"), ContainerT::nContainerName);
 			std::vector<char> RecvMsg;
 			RecvMsg.resize(512*1024);
 			int nIoRetLen = 0;
+
 			for (; pCtl->m_bClose == false;)
 			{
-
-				sockaddr_in from;
-				int fromlen = sizeof(from);
-				//_DebugOutput(_T("Wait for recv message"));
-				nIoRetLen = recvfrom(pCtl->m_hSocket, (char *)&RecvMsg[0], RecvMsg.size(), 0, (struct sockaddr*)&from, &fromlen);
-				if (nIoRetLen != SOCKET_ERROR)
+				BOOL bCanRecv;
+				if (pCtl->CanRecv(bCanRecv))
 				{
-					_DebugOutputA("Server-%d Received message from ip=%s port=%d len=%d\n",nName, inet_ntoa(from.sin_addr), from.sin_port, nIoRetLen);
-					IpSessionKey_Client ClientKey;
-					ClientKey.src_addr = from.sin_addr.S_un.S_addr;
-					ClientKey.src_port = from.sin_port;
-					IpSessionClientT::iterator itClient = pCtl->m_ClientSessionMap.find(ClientKey);
-					if (itClient == pCtl->m_ClientSessionMap.end()) {
-						if (pCtl->m_ClientSessionMap.size() >= MAX_TRANSPORT_SESSION_COUNT)
-						{
-							_DebugOutputA("Server-%d Received message Session Too much from ip=%s port=%d len=%d \n",nName, inet_ntoa(from.sin_addr), from.sin_port, fromlen);
-							continue;
-						}
-						pCtl->m_ClientSessionMap[ClientKey] = ClientSession();
-						itClient = pCtl->m_ClientSessionMap.find(ClientKey);
-					}
-					itClient->second.m_SessionBuffer.insert(itClient->second.m_SessionBuffer.end(), RecvMsg.begin(), RecvMsg.begin()+ nIoRetLen);
-					if (pCtl->ProcessRequest(itClient->second,&from, nIoRetLen) == FALSE)
+					if (bCanRecv)
 					{
-						_DebugOutputA("Server-%d ProcessRequest Fail from ip=%s port=%d len=%d \n", nName, inet_ntoa(from.sin_addr), from.sin_port, fromlen);
-						pCtl->m_ClientSessionMap.erase(itClient);
-					}
+						sockaddr_in from;
+						int fromlen = sizeof(from);
+						//_DebugOutput(_T("Wait for recv message"));
+						nIoRetLen = recvfrom(pCtl->m_hSocket, (char *)&RecvMsg[0], RecvMsg.size(), 0, (struct sockaddr*)&from, &fromlen);
+						IpSessionKey_Client ClientKey;
+						ClientKey.src_addr = from.sin_addr.S_un.S_addr;
+						ClientKey.src_port = from.sin_port;
+						IpSessionClientT::iterator itClient = pCtl->m_ClientSessionMap.find(ClientKey);
+						if (nIoRetLen != SOCKET_ERROR)
+						{
+							_DebugOutputLogA("Server-%d Received message from ip=%s port=%d len=%d\n", ContainerT::nContainerName, inet_ntoa(from.sin_addr), ntohs(from.sin_port), nIoRetLen);
+							
+							
+							if (itClient == pCtl->m_ClientSessionMap.end()) {
+								if (pCtl->m_ClientSessionMap.size() >= MAX_TRANSPORT_SESSION_COUNT)
+								{
+									_DebugOutputErrorA("Server-%d Received message Session Too much from ip=%s port=%d len=%d \n", ContainerT::nContainerName, inet_ntoa(from.sin_addr), ntohs(from.sin_port), fromlen);
+									continue;
+								}
+								pCtl->m_ClientSessionMap[ClientKey] = ClientSession();
+								itClient = pCtl->m_ClientSessionMap.find(ClientKey);
+								itClient->second.from = from;
+								itClient->second.fromlen = fromlen;
+								itClient->second.bNeedNewBuildSession = TRUE;
+								
+							}
+							itClient->second.m_SessionBuffer.insert(itClient->second.m_SessionBuffer.end(), RecvMsg.begin(), RecvMsg.begin() + nIoRetLen);
+							if (pCtl->ProcessRequest(itClient->second, &from, nIoRetLen) == FALSE)
+							{
+								_DebugOutputErrorA("Server-%d ProcessRequest Fail from ip=%s port=%d len=%d \n", ContainerT::nContainerName, inet_ntoa(from.sin_addr), ntohs(from.sin_port), fromlen);
+								//pCtl->m_ClientSessionMap.erase(itClient);
+								itClient->second.bNeedNewBuildSession = TRUE;
+							}
 
+						}
+						else
+						{
+							DWORD nError = WSAGetLastError();
+							_DebugOutputErrorA(_T("Server-%d Received message error from ip=%s port=%d err=%d\n"), ContainerT::nContainerName, inet_ntoa(from.sin_addr), ntohs(from.sin_port), nError);
+							//break;
+							if (nError == WSAECONNRESET)
+							{
+								//清除链接
+								if (itClient != pCtl->m_ClientSessionMap.end()) {
+									itClient->second.bNeedNewBuildSession = TRUE;
+								}
+							}
+							else
+							{
+								pCtl->ClearAllSession();
+								Sleep(5000);
+								closesocket(pCtl->m_hSocket);
+								pCtl->reinit();
+							}
+							
+						}
+					}
+					else
+					{
+						pCtl->Loop();
+					}
 				}
-				else
-				{
-					_DebugOutput(_T("Server-%d Received message error %d\n"),nName, WSAGetLastError());
-					//break;
-					Sleep(5000);
-					closesocket(pCtl->m_hSocket);
-					
-					pCtl->reinit();
-				}
+				
 			}
-			_DebugOutput(_T("Server-%d ServerUDPThread leave...."),nName);
+			_DebugOutput(_T("Server-%d ServerUDPThread leave...."), ContainerT::nContainerName);
 			return 0;
 		}
 		BOOL reinit()
@@ -296,6 +459,9 @@ namespace TransportMini
 				_DebugOutput(_T("WSAStartup Fail %u..."), ::WSAGetLastError());
 				return FALSE;
 			}
+			m_SelectTimeOut.tv_sec = 0;
+			m_SelectTimeOut.tv_usec = SERVER_SELECT_TIMEOUT;
+
 			do
 			{
 				SOCKADDR_IN LocalAddr;
@@ -309,12 +475,12 @@ namespace TransportMini
 
 				if (m_hSocket == INVALID_SOCKET)
 				{
-					_DebugOutput(_T("Server-%d socket Fail %u..."), nName, ::WSAGetLastError());
+					_DebugOutput(_T("Server-%d socket Fail %u..."), ContainerT::nContainerName, ::WSAGetLastError());
 					break;
 				}
 				if (::bind(m_hSocket, (sockaddr*)&LocalAddr, sizeof(LocalAddr)) == -1)
 				{
-					_DebugOutput(_T("Server-%d bind socket Fail %u..."), nName, ::WSAGetLastError());
+					_DebugOutput(_T("Server-%d bind socket Fail %u..."), ContainerT::nContainerName, ::WSAGetLastError());
 					break;
 				}
 
@@ -323,6 +489,29 @@ namespace TransportMini
 				//发送缓冲区
 				int nSendBuf = MAX_SERVER_TRANSPORT_BUFFER;
 				setsockopt(m_hSocket, SOL_SOCKET, SO_SNDBUF, (const char*)&nSendBuf, sizeof(int));
+				
+				//u_long ul = 1;
+				//ioctlsocket(m_hSocket, FIONBIO, &ul);
+
+				DWORD dwBytesReturned = 0;
+				BOOL bNewBehavior = FALSE;
+				DWORD status;
+
+				// disable  new behavior using  
+				// IOCTL: SIO_UDP_CONNRESET 
+
+				status = ::WSAIoctl(m_hSocket, SIO_UDP_CONNRESET,
+					&bNewBehavior, sizeof(bNewBehavior),
+					NULL, 0, &dwBytesReturned,
+					NULL, NULL);
+
+
+				FD_ZERO(&m_RecvFD);
+				FD_SET(m_hSocket, &m_RecvFD);
+				FD_ZERO(&m_SendFD);
+				FD_SET(m_hSocket, &m_SendFD);
+
+				
 
 				bRet = TRUE;
 				
@@ -342,26 +531,54 @@ namespace TransportMini
 
 					m_hServerThread = CreateThread(NULL, 0, ServerUDPThread, this, 0, NULL);
 					if (NULL == m_hServerThread) {
-						_DebugOutput(_T("Server-%d CreateThread fail %x....\n"), nName, GetLastError());
+						_DebugOutput(_T("Server-%d CreateThread fail %x....\n"), ContainerT::nContainerName, GetLastError());
 						break;
 					}
 					bRet = TRUE;
 
 				} while (FALSE);
 			}
-			
+			GCContainer<MemoryMgr__StaticGC_Tmp>::GetInstance().RegistManager(MEMGC_SERVER_LEVEL);
 			return bRet;
 
 		}
-
-
+		
+		BOOL SendMsg(Transport::TransportHandle & hHandle, const u_char * pSendBuffer, size_t nLen, SYSTEMERROR & error,unsigned int nChannelNoOffset)
+		{
+			BOOL bRet = FALSE;
+			ClientSession * pSession = (ClientSession *)hHandle;
+			if (pSession)
+			{
+				if (pSession->bNeedNewBuildSession == FALSE)
+				{
+					bRet = UDPSendMsg<_nMagicCode>(m_hSocket, pSendBuffer, nLen, &pSession->from, pSession->fromlen, error, pSession->nChannelNo + nChannelNoOffset);
+					if (!bRet)
+					{
+						_DebugOutputErrorA("Server-%d SendMsg Fail from ip=%s port=%d err=%d \n", ContainerT::nContainerName, inet_ntoa(pSession->from.sin_addr), ntohs(pSession->from.sin_port), WSAGetLastError());
+						pSession->bNeedNewBuildSession = TRUE;
+					}
+				}
+				else
+				{
+					ClearSession(hHandle);
+					hHandle = NULL;
+				}
+				
+			}
+			return bRet;
+		}
+		void Loop()
+		{
+			//推送消息
+			_TransportServerT::GetInstance().Loop(this);
+		}
 
 	private:
 
 	};
 
-	template<int nUDPPort = 8484, unsigned int _nMagicCode = 'yssy',int nName=0>
-	class TransportMiniUDPClient
+	template<typename ContainerT,int nUDPPort = 8484, unsigned int _nMagicCode = 'yssy'>
+	class TransportMiniUDPClient :public CSystemContainerObjectBase<TransportMiniUDPClient<ContainerT, nUDPPort, _nMagicCode>, ContainerT>
 	{
 	public:
 		BOOL m_bInitOk;
@@ -369,20 +586,110 @@ namespace TransportMini
 		SOCKET m_hSocket;
 		string m_szIp;
 		u_short m_nPort;
+		unsigned int m_nChannel;
+		typedef std::queue<tstring> MsgQueueT;
+		typedef std::map<unsigned int, MsgQueueT, less<unsigned int>> MsgQueueMapT;
+		MsgQueueMapT m_ChannelMsgQueue;
 		TransportMiniUDPClient() {
 			m_bInitOk = FALSE;
 			m_hSocket = INVALID_SOCKET;
 			m_nPort = nUDPPort;
 			m_szIp = "127.0.0.1";
+			m_nChannel = ContainerT::nContainerName<< PRE_TRANSOPRT_CHANNEL_COUNT_LOG2;
+			for (int i=0;i<(1<< PRE_TRANSOPRT_CHANNEL_COUNT_LOG2);i++)
+			{
+				m_ChannelMsgQueue[m_nChannel + i] = MsgQueueT();
+			}
 		};
 		~TransportMiniUDPClient() {};
-		typedef TransportMiniUDPClient<nUDPPort, _nMagicCode, nName> _Myt;
+		typedef TransportMiniUDPClient<ContainerT,nUDPPort, _nMagicCode> _Myt;
+		/*
 		static _Myt & GetInstance()
 		{
 			static _Myt _self;
 			return _self;
 		}
-		
+		*/
+
+		fd_set m_RecvFD;
+		fd_set m_SendFD;
+		timeval m_SelectTimeOut;
+		BOOL CanRecv(BOOL & bTransoprt)
+		{
+			FD_ZERO(&m_RecvFD); FD_SET(m_hSocket, &m_RecvFD);
+			if (SOCKET_ERROR != select(0, &m_RecvFD, 0, 0, &m_SelectTimeOut))
+			{
+				bTransoprt = FD_ISSET(m_hSocket, &m_RecvFD) ? TRUE : FALSE;
+				return TRUE;
+			}
+			return FALSE;
+		}
+		BOOL CanSend(BOOL & bTransoprt)
+		{
+			FD_ZERO(&m_SendFD); FD_SET(m_hSocket, &m_SendFD);
+			if (SOCKET_ERROR != select(0, 0, &m_SendFD, 0, &m_SelectTimeOut))
+			{
+				bTransoprt = FD_ISSET(m_hSocket, &m_SendFD) ? TRUE : FALSE;
+				return TRUE;
+			}
+			return FALSE;
+		}
+		BOOL RecvAllMsg(BOOL bBlock=FALSE)
+		{
+			BOOL bRet = FALSE;
+			SYSTEMERROR error;
+			int len = sizeof(m_ServerAddr);
+			BOOL  bRecv, bSend;
+			BOOL bOutRecved = FALSE;
+			tstring szRecvPar;
+			for (;;)
+			{
+				if ((bBlock)||(CanRecv(bRecv) && bRecv))
+				{
+					unsigned int nRecvChannel = 0;
+
+					if (UDPRecvMsg<_nMagicCode, ContainerT::nContainerName, tstring>(m_hSocket, szRecvPar, &m_ServerAddr, len, error, &nRecvChannel))
+					{
+						if (nRecvChannel<(m_nChannel + PRE_TRANSOPRT_CHANNEL_COUNT))
+						{
+							m_ChannelMsgQueue[nRecvChannel].push(szRecvPar);
+							bRet = TRUE;
+						}
+						else
+						{
+							break;
+						}
+						
+					}
+					else
+					{
+						break;
+					}
+
+				}
+				else
+				{
+					break;
+				}
+			}
+			return bRet;
+		}
+		BOOL RecvMsg(unsigned int nChannelNoOffset, tstring & szOutPar, BOOL bRecvNew = FALSE;)
+		{
+			BOOL bRet = FALSE;
+			
+			
+			if(bRecvNew) RecvAllMsg();
+			MsgQueueMapT::iterator itQueue = m_ChannelMsgQueue.find(m_nChannel + nChannelNoOffset);
+			if (itQueue->second.size())
+			{
+				szOutPar = itQueue->second.front();
+				itQueue->second.pop();
+				bRet = TRUE;
+			}
+			
+			return bRet;
+		}
 
 		BOOL reinit()
 		{
@@ -392,7 +699,7 @@ namespace TransportMini
 
 			if (m_hSocket == INVALID_SOCKET)
 			{
-				_DebugOutput(_T("Client-%d socket Fail %u...\n"), nName, ::WSAGetLastError());
+				_DebugOutput(_T("Client-%d socket Fail %u...\n"), ContainerT::nContainerName, ::WSAGetLastError());
 				return FALSE;
 			}
 
@@ -405,11 +712,27 @@ namespace TransportMini
 			timeval tv = { MAX_CLIENT_TIMEOUT, 0 };
 			setsockopt(m_hSocket, SOL_SOCKET, SO_RCVTIMEO, (char*)&tv, sizeof(timeval));
 
+			m_SelectTimeOut.tv_sec = 0;
+			m_SelectTimeOut.tv_usec = CLIENT_SELECT_TIMEOUT;
 
 			m_ServerAddr.sin_family = AF_INET;
 			m_ServerAddr.sin_port = htons(m_nPort);
 			m_ServerAddr.sin_addr.s_addr = inet_addr(m_szIp.c_str());
 
+			DWORD dwBytesReturned = 0;
+			BOOL bNewBehavior = FALSE;
+			DWORD status;
+
+			// disable  new behavior using  
+			// IOCTL: SIO_UDP_CONNRESET 
+			
+			status = ::WSAIoctl(m_hSocket, SIO_UDP_CONNRESET,
+				&bNewBehavior, sizeof(bNewBehavior),
+				NULL, 0, &dwBytesReturned,
+				NULL, NULL);
+			
+			ContainerT::SystemContainerMgrT::GetInstance().PrintInfo();
+			_DebugOutput(_T("Client-%d reint...\n"), ContainerT::nContainerName);
 			m_bInitOk = TRUE;
 			return m_bInitOk;
 		}
@@ -424,6 +747,9 @@ namespace TransportMini
 			}
 			if (pszIP) m_szIp = pszIP;
 			if (nPort) m_nPort = nPort;
+
+			GCContainer<MemoryMgr__StaticGC_Tmp>::GetInstance().RegistManager(MEMGC_CLIENT_LEVEL);
+
 			return reinit();
 		}
 		BOOL CallInterfacePar(_tagCallParameter & tagCallParameter, _tagCallParameter & RetParameter, SYSTEMERROR & error)
@@ -433,72 +759,37 @@ namespace TransportMini
 		BOOL CallInterfaceStr(tstring & szInPar, tstring & szOutPar, SYSTEMERROR & error)
 		{
 			BOOL bRet = FALSE;
-			BOOL bSysFail = TRUE;
 			int len = sizeof(m_ServerAddr);
-
-			TransportUDPRequestHead Head;
-			//_tagstrParameter Par;
-			//Par.szData = szInPar;
-			//tstring szInPar1;
-			//SerObjectToXmlBuffer(_tagstrParameter, Par, szInPar1);
-
-			TransportUDPRequestHead ResponseHead;
-			Head.nMagicCode = _nMagicCode;
-			Head.nPacketLen = (szInPar.size() + 1) * sizeof(TCHAR) + sizeof(TransportUDPRequestHead);
-			vector<u_char> RequestBuffer;
-			RequestBuffer.resize(Head.nPacketLen- sizeof(TransportUDPRequestHead));
-			//memcpy(&Buffer[0], &Head, sizeof(TransportUDPRequestHead));
-			memcpy(&RequestBuffer[0], szInPar.c_str(), (szInPar.size() + 1) * sizeof(TCHAR));
 			int nIoRetLen = 0;
-			nIoRetLen = sendto(m_hSocket, (const char *)&Head, sizeof(Head), 0, (struct sockaddr*)&m_ServerAddr, len);
 			do
 			{
-
-				if (nIoRetLen == sizeof(Head))
+				//m_nCurSessionNo += (m_nCurSessionNo + 1) ? 1 : 2;
+				if (UDPSendMsg<_nMagicCode>(m_hSocket, (const u_char *)szInPar.c_str(), (szInPar.size() + 1) * sizeof(TCHAR), &m_ServerAddr, len, error, m_nChannel))
 				{
-
-					if (UDPSend(m_hSocket, RequestBuffer, &m_ServerAddr, len))
+					for (;;)
 					{
-						size_t nRecvLen = 0;
-						nIoRetLen = recvfrom(m_hSocket, (char *)&ResponseHead, sizeof(ResponseHead), 0, (struct sockaddr*)&m_ServerAddr, &len);
-						if (nIoRetLen == sizeof(ResponseHead))
+						unsigned int nRecvChannel = 0;
+						if (UDPRecvMsg<_nMagicCode, ContainerT::nContainerName, tstring>(m_hSocket, szOutPar, &m_ServerAddr, len, error, &nRecvChannel))
 						{
-							std::vector<u_char> ResponseBuffer;
-							if ((ResponseHead.nMagicCode != _nMagicCode) || (ResponseHead.nPacketLen > MAX_TRANSPORT_LEN))
-							{
-								error = Error_Sys_Transport_Fail;
-								break;
-							}
-							nRecvLen += sizeof(TransportUDPRequestHead);
-							ResponseBuffer.resize(ResponseHead.nPacketLen- sizeof(TransportUDPRequestHead));
-							if (UDPRecv(m_hSocket, ResponseBuffer, &m_ServerAddr, len))
+							if (nRecvChannel == m_nChannel)
 							{
 								bRet = TRUE;
-								szOutPar = (TCHAR*)&ResponseBuffer[0];
-								//_tagstrParameter Par;
-								//SerTCHARXmlBufferToObject(_tagstrParameter, Par, (szOutPar.c_str()));
-								//szOutPar = Par.szData;
-								bSysFail = FALSE;
-								return bRet;
+								break;
 							}
-						
-
+							else if(nRecvChannel<(m_nChannel+(1<<PRE_TRANSOPRT_CHANNEL_COUNT_LOG2)))
+							{
+								m_ChannelMsgQueue[nRecvChannel].push(szOutPar);
+							}
 						}
 						else
 						{
-							_DebugOutput(_T("Client-%d  recv head fail %d %d\n"),nName,WSAGetLastError(), nIoRetLen);
+							_DebugOutput(_T("CallInterfaceStr Recv Error Channel(%d)\n"), nRecvChannel);
+							bRet = FALSE;
+							break;
 						}
 					}
-					else
-					{
-						_DebugOutput(_T("Client-%d UDPSend Fail err=%d io=%d size=%d\n"), nName, WSAGetLastError(), nIoRetLen, RequestBuffer.size());
-					}
+					
 				}
-				else
-				{
-					_DebugOutput(_T("Client-%d send head Transport Fail err=%d io=%d size=%d\n"), nName, WSAGetLastError(), nIoRetLen, RequestBuffer.size());
-				}
-
 			} while (false);
 			if (!bRet)
 			{
@@ -507,7 +798,7 @@ namespace TransportMini
 			return bRet;
 		}
 
-
+		
 	private:
 
 	};

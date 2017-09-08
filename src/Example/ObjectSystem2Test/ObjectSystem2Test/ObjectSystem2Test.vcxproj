@@ -184,6 +184,7 @@
     <ClInclude Include="..\..\..\other\Sexp.h" />
     <ClInclude Include="..\..\..\other\SmartSTL\aligned_mem.h" />
     <ClInclude Include="..\..\..\other\SmartSTL\stlallocator.h" />
+    <ClInclude Include="..\..\..\other\SmartSTL\SystemContainer.h" />
     <ClInclude Include="..\..\..\other\SmartSTL\yssmemory.hpp" />
     <ClInclude Include="..\..\..\other\StorageObject.h" />
     <ClInclude Include="..\..\..\other\XmlRender.h" />

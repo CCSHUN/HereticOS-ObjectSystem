@@ -42,6 +42,21 @@
 #define YSS_MALLC_MEM(size) ((void *)(new char[(size)]))
 #define YSS_DELETE_MEM(pMem) (delete [] pMem)
 
+template<typename MemPoolT, typename ObjectT>
+ObjectT * NewObjectFormMemPool()
+{
+	ObjectT * pObject=(ObjectT *)MemPoolT::GetInstance().NewMemory(sizeof(ObjectT));
+	Yss_Construct<ObjectT>((ObjectT *)(pObject));
+	//ObjectT * pObject1=new (pObject) ObjectT();
+	return pObject;
+}
+
+template<typename MemPoolT, typename ObjectT,bool bDestroy=false>
+void DeleteObjectFormMemPool(ObjectT * pObject)
+{
+	if(bDestroy)Yss_Destroy<ObjectT>((ObjectT *)(pObject));
+	MemPoolT::GetInstance().DelMemory(pObject, sizeof(ObjectT));
+}
 
 //调用构造函数
 template<class T>

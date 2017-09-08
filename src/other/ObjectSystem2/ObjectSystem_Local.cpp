@@ -16,15 +16,14 @@
 
 
 
-template<typename ConfigT, typename FileSystemT, typename AuthT>
-BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::LogonOutSystem()
+template<typename ConfigT, typename FileSystemT, typename ContainerT, typename AuthT>
+BOOL CObjectSystem_Local<ConfigT, FileSystemT, ContainerT, AuthT>::LogonOutSystem()
 {
 	return TRUE;
 }
 
-
-template<typename ConfigT, typename FileSystemT, typename AuthT>
-void CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::GetEventQueue(IN  const TCHAR * szUser, IN  const TCHAR * szSession, _tagCallParameter & RetPar)
+template<typename ConfigT, typename FileSystemT, typename ContainerT, typename AuthT>
+void CObjectSystem_Local<ConfigT, FileSystemT, ContainerT, AuthT>::GetEventQueue(IN  const TCHAR * szUser, IN  const TCHAR * szSession, _tagCallParameter & RetPar)
 {
 	UserContextMapT::iterator itUser = m_UserContextMap.find(szUser);
 
@@ -33,8 +32,13 @@ void CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::GetEventQueue(IN  const T
 		UserContext::SessionT::iterator itSession = itUser->second.SessionMap.find(szSession);
 		if (itSession != itUser->second.SessionMap.end())
 		{
-			RetPar.el=itSession->second.EventQueue ;
-
+			//RetPar.el=itSession->second.EventQueue ;
+			RetPar.el.resize(itSession->second.EventQueue.size());
+			std::copy(itSession->second.EventQueue.begin(),
+				itSession->second.EventQueue.end(),
+				//itSession->second.EventQueue.begin()
+				RetPar.el.begin()
+			);
 			//没有确认，后续再做吧
 			itSession->second.EventQueue.clear();
 		}
@@ -42,8 +46,8 @@ void CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::GetEventQueue(IN  const T
 	return ;
 }
 
-template<typename ConfigT, typename FileSystemT, typename AuthT>
-BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::KeepAlived(IN const  TCHAR * szUser, IN  const TCHAR * szSession,IN OUT tstring & szKeepAlivedPar, OUT ObjectSystem::SYSTEMERROR * pError)
+template<typename ConfigT, typename FileSystemT, typename ContainerT, typename AuthT>
+BOOL CObjectSystem_Local<ConfigT, FileSystemT, ContainerT, AuthT>::KeepAlived(IN const  TCHAR * szUser, IN  const TCHAR * szSession,IN OUT tstring & szKeepAlivedPar, OUT ObjectSystem::SYSTEMERROR * pError)
 {
 	UserContextMapT::iterator itUser = m_UserContextMap.find(szUser);
 
@@ -59,22 +63,22 @@ BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::KeepAlived(IN const  TCHA
 	return FALSE;
 }
 
-template<typename ConfigT, typename FileSystemT, typename AuthT>
-BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::GetCurTime(SYSTEMTIME * npTime, SYSTEMTIME * nCurTime)
+template<typename ConfigT, typename FileSystemT, typename ContainerT, typename AuthT>
+BOOL CObjectSystem_Local<ConfigT, FileSystemT, ContainerT, AuthT>::GetCurTime(SYSTEMTIME * npTime, SYSTEMTIME * nCurTime)
 {
 	GetLocalTime(nCurTime);
 	return TRUE;
 }
 
 
-template<typename ConfigT, typename FileSystemT, typename AuthT>
-BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::NeedNewObject(IN  const TCHAR * ObjectPath, OUT ObjectSystem::SYSTEMERROR * pError)
+template<typename ConfigT, typename FileSystemT, typename ContainerT, typename AuthT>
+BOOL CObjectSystem_Local<ConfigT, FileSystemT, ContainerT, AuthT>::NeedNewObject(IN  const TCHAR * ObjectPath, OUT ObjectSystem::SYSTEMERROR * pError)
 {
 	return TRUE;
 }
 
-template<typename ConfigT, typename FileSystemT, typename AuthT>
-BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::RegistObjectEvent(IN  const TCHAR * szUser, IN  const TCHAR * szSession, IN ObjectSystemEvent & RegEvent, OUT ObjectSystem::SYSTEMERROR * pError)
+template<typename ConfigT, typename FileSystemT, typename ContainerT, typename AuthT>
+BOOL CObjectSystem_Local<ConfigT, FileSystemT, ContainerT, AuthT>::RegistObjectEvent(IN  const TCHAR * szUser, IN  const TCHAR * szSession, IN ObjectSystemEvent & RegEvent, OUT ObjectSystem::SYSTEMERROR * pError)
 {
 	UserContextMapT::iterator itUser = m_UserContextMap.find(szUser);
 
@@ -94,8 +98,8 @@ BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::RegistObjectEvent(IN  con
 }
 
 
-template<typename ConfigT, typename FileSystemT, typename AuthT>
-BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::GetObjectState(IN  const TCHAR * ObjectPath,OUT ObjectSystem::_tagObjectState & ObjectState,OUT ObjectSystem::SYSTEMERROR * pError)
+template<typename ConfigT, typename FileSystemT, typename ContainerT, typename AuthT>
+BOOL CObjectSystem_Local<ConfigT, FileSystemT, ContainerT, AuthT>::GetObjectState(IN  const TCHAR * ObjectPath,OUT ObjectSystem::_tagObjectState & ObjectState,OUT ObjectSystem::SYSTEMERROR * pError)
 {
 	map<tstring, FileContext,less<tstring> >::iterator itObject;
 
@@ -107,8 +111,8 @@ BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::GetObjectState(IN  const 
 	return FALSE;
 }
 
-template<typename ConfigT, typename FileSystemT, typename AuthT>
-BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::UpDataObject(IN  const TCHAR * ObjectPath,IN  const TCHAR * Object,IN ObjectSystem::_tagObjectState & ObjectState,OUT ObjectSystem::SYSTEMERROR * pError)
+template<typename ConfigT, typename FileSystemT, typename ContainerT, typename AuthT>
+BOOL CObjectSystem_Local<ConfigT, FileSystemT, ContainerT, AuthT>::UpDataObject(IN  const TCHAR * ObjectPath,IN  const TCHAR * Object,IN ObjectSystem::_tagObjectState & ObjectState,OUT ObjectSystem::SYSTEMERROR * pError)
 {
 	map<tstring, FileContext,less<tstring> >::iterator itObject;
 	
@@ -173,8 +177,8 @@ BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::UpDataObject(IN  const TC
 //更新对象到存储
 
 
-template<typename ConfigT, typename FileSystemT, typename AuthT>
-BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::GetDirectoryInfo(IN const  TCHAR * DirectoryPath,IN  const TCHAR * szFinder,OUT ObjectSystem::_tagDirectoryInfo & DirectoryInfo,OUT ObjectSystem::SYSTEMERROR * pError)
+template<typename ConfigT, typename FileSystemT, typename ContainerT, typename AuthT>
+BOOL CObjectSystem_Local<ConfigT, FileSystemT, ContainerT, AuthT>::GetDirectoryInfo(IN const  TCHAR * DirectoryPath,IN  const TCHAR * szFinder,OUT ObjectSystem::_tagDirectoryInfo & DirectoryInfo,OUT ObjectSystem::SYSTEMERROR * pError)
 {
 	tstring_tmp ObjectAddr= (ConfigT::GetInstance().strLocalSystemDirectory+DirectoryPath).c_str();
 	tstring_tmp strFinder = szFinder;
@@ -187,14 +191,14 @@ BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::GetDirectoryInfo(IN const
 	return TRUE;
 }
 
-template<typename ConfigT, typename FileSystemT, typename AuthT>
-BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::ReleaseObjectLock(const TCHAR * ObjectPath)
+template<typename ConfigT, typename FileSystemT, typename ContainerT, typename AuthT>
+BOOL CObjectSystem_Local<ConfigT, FileSystemT, ContainerT, AuthT>::ReleaseObjectLock(const TCHAR * ObjectPath)
 {
 	return TRUE;
 }
 
-template<typename ConfigT, typename FileSystemT, typename AuthT>
-BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::ReleaseObjectState(IN  const TCHAR * ObjectOrDir,OUT ObjectSystem::SYSTEMERROR * pError)
+template<typename ConfigT, typename FileSystemT, typename ContainerT, typename AuthT>
+BOOL CObjectSystem_Local<ConfigT, FileSystemT, ContainerT, AuthT>::ReleaseObjectState(IN  const TCHAR * ObjectOrDir,OUT ObjectSystem::SYSTEMERROR * pError)
 {
 	map<tstring, FileContext,less<tstring> >::iterator itObject=m_FileCacheMap.begin();
 	map<tstring, FileContext,less<tstring> >::iterator itOldObject=itObject;
@@ -213,8 +217,8 @@ BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::ReleaseObjectState(IN  co
 	return TRUE;
 }
 
-template<typename ConfigT, typename FileSystemT, typename AuthT>
-BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::ClearDirCache(const TCHAR * ObjectOrDirPath)
+template<typename ConfigT, typename FileSystemT, typename ContainerT, typename AuthT>
+BOOL CObjectSystem_Local<ConfigT, FileSystemT, ContainerT, AuthT>::ClearDirCache(const TCHAR * ObjectOrDirPath)
 {
 	map<tstring, FileContext,less<tstring> >::iterator itObject=m_FileCacheMap.begin();
 	map<tstring, FileContext,less<tstring> >::iterator itOldObject=itObject;
@@ -230,8 +234,8 @@ BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::ClearDirCache(const TCHAR
 	return TRUE;
 }
 //删除对象
-template<typename ConfigT, typename FileSystemT, typename AuthT>
-BOOL CObjectSystem_Local<ConfigT, FileSystemT, AuthT>::DeleteObject(IN  const TCHAR * ObjectOrDir, ObjectSystem::SYSTEMERROR * pError)
+template<typename ConfigT, typename FileSystemT, typename ContainerT, typename AuthT>
+BOOL CObjectSystem_Local<ConfigT, FileSystemT, ContainerT, AuthT>::DeleteObject(IN  const TCHAR * ObjectOrDir, ObjectSystem::SYSTEMERROR * pError)
 {
 	
 	ClearDirCache(ObjectOrDir);

@@ -114,7 +114,7 @@ namespace ObjectSystem
 		tstring					sf;				//szFinder
 		_tagDirectoryInfo	di;
 		vector<_tagObjectSystemEvent>	el;//EventList;
-		map<tstring_tmp, _tagstrParameter, less<tstring_tmp> > sp;//strPar
+		map<tstring, _tagstrParameter, less<tstring> > sp;//strPar
 	}CallParameter, *PCallParameter;
 
 	typedef struct _tagCallParameterV2

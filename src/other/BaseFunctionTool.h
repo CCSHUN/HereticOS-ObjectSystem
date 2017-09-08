@@ -207,27 +207,49 @@ using namespace std;
 #endif
 
 #include "./SmartSTL/stlallocator.h"
-
-
 typedef MemoryMgr_OS<PointInterfaceForMemoryMgr<IndexType>, 0> MemoryMgr_Heap;
 typedef MemoryMgr_OS_VirtualMem<PointInterfaceForMemoryMgr<IndexType>, 0> MemoryMgr_OSVm;
+//class Container_DefaultT;
+
+#include "./SmartSTL/SystemContainer.h"
+
+typedef SystemContainer<MemoryMgr_Heap,int, int,int> Container_BaseT;
+
+
 typedef MemoryMgr_OS<PointInterfaceForMemoryMgr<IndexType>, 1> MemoryMgr_Heap1;
 typedef MemoryMgr_OS_VirtualMem<PointInterfaceForMemoryMgr<IndexType>, 1> MemoryMgr_OSVm1;
-typedef MemoryMgr_FreeList<PointInterfaceForMemoryMgr<IndexType>, MemoryMgr_Heap, 18, 6, 4096> MemoryMgr_FreeList1T;
-typedef MemoryMgr_StaticGC<PointInterfaceForMemoryMgr<IndexType>, MemoryMgr_Heap, 4 * 1024 * 1024, 256> MemoryMgr__StaticGC;
-typedef MemoryMgr_StaticGC<PointInterfaceForMemoryMgr<IndexType>, MemoryMgr_Heap, 4 * 1024 * 1024, 512>	MemoryMgr__StaticGC_Tmp;
+typedef MemoryMgr_FreeList<PointInterfaceForMemoryMgr<IndexType>, 6, 18, 4096, Container_BaseT> MemoryMgr_FreeList1T;
+typedef MemoryMgr_FreeList<PointInterfaceForMemoryMgr<IndexType>, 6, 18, 4096, Container_BaseT> MemoryMgr_FreeList2T;
+typedef MemoryMgr_StaticGC<PointInterfaceForMemoryMgr<IndexType>, Container_BaseT, 4 * 1024 * 1024, 256> MemoryMgr__StaticGC;
+typedef MemoryMgr_StaticGC<PointInterfaceForMemoryMgr<IndexType>, Container_BaseT, 4 * 1024 * 1024, 512> MemoryMgr__StaticGC_Tmp;
+
+typedef SystemContainer<MemoryMgr_Heap, MemoryMgr_FreeList1T, MemoryMgr__StaticGC, MemoryMgr__StaticGC_Tmp> Container_DefaultT;
+
+template < class _Kty, class _Ty, class _Pr = less<_Kty> >
+using map_gc = map<_Kty, _Ty, _Pr, yss_allocator<_Ty, MemoryMgr__StaticGC>  >;
+
+template < class _Kty, class _Ty, class _Pr = less<_Kty> >
+using map_freelist = map<_Kty, _Ty, _Pr, yss_allocator<_Ty, MemoryMgr_FreeList1T>  >;
+
+template<class _Ty >
+using vector_gc = vector<_Ty, yss_allocator<_Ty, MemoryMgr__StaticGC>>;
+
+template<class _Ty >
+using vector_freelist = vector<_Ty, yss_allocator<_Ty, MemoryMgr_FreeList1T>>;
 
 template<class _Alloc, class _Elem = TCHAR, class _Traits = char_traits<_Elem>>
 using tstring_pool = std::basic_string<_Elem, std::char_traits<_Elem>, _Alloc  >;
 //MEMMGR_TYPE_FREELIST
 //MEMMGR_TYPE_STATICGC
 //MEMMGR_TYPE_STATICGC_TMP
-typedef tstring_pool<yss_allocator<wchar_t, MemoryMgr_FreeList1T >, wchar_t> wstring_tmp;
-typedef tstring_pool<yss_allocator<char, MemoryMgr_FreeList1T >, char  > string_tmp;
-typedef tstring_pool<yss_allocator<TCHAR, MemoryMgr_FreeList1T >> tstring_tmp;
+typedef tstring_pool<yss_allocator<wchar_t, MemoryMgr_FreeList2T >, wchar_t> wstring_tmp;
+typedef tstring_pool<yss_allocator<char, MemoryMgr_FreeList2T >, char  > string_tmp;
+typedef tstring_pool<yss_allocator<TCHAR, MemoryMgr_FreeList2T >> tstring_tmp;
 //typedef tstring tstring_tmp;
-typedef tstring_pool<yss_allocator<TCHAR, MemoryMgr_FreeList1T >> tstring;
+typedef tstring_pool<yss_allocator<TCHAR, MemoryMgr_FreeList2T >> tstring;
 
+//typedef std::basic_string<TCHAR, std::char_traits<TCHAR>  > tstring;
+//typedef std::basic_string<TCHAR, std::char_traits<TCHAR>  > tstring_tmp;
 /*
 template<class _Alloc, class _Elem , class _Traits >
 template<typename Pool1T>

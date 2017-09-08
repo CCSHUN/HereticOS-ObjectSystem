@@ -47,12 +47,12 @@ public:
 	{
 		return m_pThreadLocalObject;
 	}
-	/*
-	operator ->()
+	
+	ObjectT* operator ->()
 	{
 		return m_pThreadLocalObject;
 	}
-	
+	/*
 	
 	ObjectT* operator ()()
 	{

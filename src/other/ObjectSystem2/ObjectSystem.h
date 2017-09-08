@@ -27,13 +27,14 @@ template<class _Client > \
 using ObjectType##_Wrap = ObjectTypeWrap<ObjectType,Serialize_##ObjectType,_Client>; \
 
 
-
+#define MEMGC_SERVER_LEVEL 1
+#define MEMGC_CLIENT_LEVEL 2
 
 
 
 #include "TransportProtocol.h"
 #include <functional>
-
+//#include "../SmartSTL/SystemContainer.h"
 
 
 
@@ -93,6 +94,7 @@ public:
 			ValType & Data = *static_cast<ValType*>(this);
 			SerTCHARXmlBufferToObjectEx(ValType, SerType, Data, (Object.c_str()));
 		}
+		
 		return bRet;
 
 	}
@@ -166,7 +168,8 @@ AutoProlong=2,				//到期自动延迟锁，除非用户端应用停止响应
 #define OBJECT_SYSTEM_OP_RELEASEOBJSTATE			10				//_T("ROS")
 #define OBJECT_SYSTEM_OP_REGIST_OBJEVENT			11				//_T("ROE")
 #define OBJECT_SYSTEM_OP_NEED_NEWOBJECT			12				//_T("NNO")
-#define OBJECT_SYSTEM_OP_KEEPALIVED			13				//_T("NNO")
+#define OBJECT_SYSTEM_OP_KEEPALIVED			13				//_T("KA")
+#define OBJECT_SYSTEM_OP_EVENT_PUSH			14				//_T("EP")
 
 static TCHAR * Object_OPTab[]=
 {
@@ -320,8 +323,10 @@ private:
 
 
 
-template<typename TransportT,int nName=1>
-class CObjectSystem_Client :public CObjectSystemInterface
+template<typename TransportT,typename ContainerT >
+class CObjectSystem_Client :
+	public CObjectSystemInterface,
+	public CSystemContainerObjectBase<CObjectSystem_Client<TransportT, ContainerT>, ContainerT>
 {
 public:
 	_tagKeepAlivedPar m_KeepAlived;
@@ -335,13 +340,15 @@ public:
 	~CObjectSystem_Client(void)
 	{
 	}
-
-	typedef CObjectSystem_Client<TransportT, nName> _MyClientT;
-	static _MyClientT & GetInstance()
+	
+	typedef CObjectSystem_Client<TransportT, ContainerT> _MyClientT;
+	/*static _MyClientT & GetInstance()
 	{
 		static _MyClientT _slef;
 		return _slef;
 	}
+	*/
+
 	_tagCallParameter m_Par;
 	_tagCallParameter m_RetPar;
 	BOOL  GetCurTime(SYSTEMTIME * npTime, SYSTEMTIME * nCurTime)

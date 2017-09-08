@@ -38,12 +38,22 @@ public:
 		return TRUE;
 	};
 };
-
-template<typename ConfigT,typename FileSystemT, typename AuthT = DefAuth> 
-class CObjectSystem_Local: public CObjectSystemInterface
+/*
+template<typename _Ty>
+vector<_Ty> & operator =(vector<_Ty> &dst, vector_freelist<_Ty> & src)
+{
+	dst.resize(src.size());
+	memcpy(&dst[0], &src[0], src.size());
+	return dst;
+}
+*/
+template<typename ConfigT,typename FileSystemT, typename ContainerT, typename AuthT = DefAuth>
+class CObjectSystem_Local: 
+	public CObjectSystemInterface,
+	public CSystemContainerObjectBase<CObjectSystem_Local<ConfigT, FileSystemT, ContainerT, AuthT>, ContainerT>
 {
 public:
-	typedef CObjectSystem_Local<ConfigT, FileSystemT> _Myt;
+	typedef CObjectSystem_Local<ConfigT, FileSystemT, ContainerT, AuthT> _Myt;
 
 	unsigned int m_nCurSessionNum;
 	CObjectSystem_Local(void) {
@@ -51,12 +61,29 @@ public:
 	};
 	~CObjectSystem_Local(void) {};
 	//tstring m_szRootPath;
+	/*
 	static _Myt & GetInstance() {
 		
 		static _Myt _self;
 		return _self;
 	}
-
+	*/
+	Transport::TransportHandle ReBuildSession(IN Transport::TransportHandle hHandle, IN const TCHAR * szUserName, IN const TCHAR * szSession)
+	{
+		UserContextMapT::iterator itUser = m_UserContextMap.find(szUserName);
+		Transport::TransportHandle OldHandle = NULL;
+		if (itUser != m_UserContextMap.end())
+		{
+			UserContext::SessionT::iterator itSession = itUser->second.SessionMap.find(szSession);
+			if (itSession != itUser->second.SessionMap.end())
+			{
+				OldHandle = itSession->second.hHandle;
+				itSession->second.hHandle = hHandle;
+				return OldHandle;
+			}
+		}
+		return OldHandle;
+	}
 	template<typename StringT>
 	BOOL LogonInSystem(IN  const TCHAR * szUserName, IN  const TCHAR * szPassword, OUT StringT & szSession)
 	{
@@ -97,6 +124,7 @@ public:
 			szSession = (const TCHAR *)CAutoVal(nNewSession);
 			tmp.KeepAlived.nWndPos = nNewSession;
 			tmp.KeepAlived.nWndLen = (1000) / MAX_IOPS;
+			tmp.hHandle = NULL;
 			itUser->second.SessionMap[szSession.c_str()] = tmp;
 
 			return TRUE;
@@ -304,7 +332,45 @@ public:
 	void GetEventQueue(IN  const TCHAR * szUser, IN  const TCHAR * szSession, _tagCallParameter & RetPar);
 
 	BOOL KeepAlived(IN  const TCHAR * szUser, IN  const TCHAR * szSession, IN OUT tstring & szKeepAlivedPar, OUT ObjectSystem::SYSTEMERROR * pError);
-
+	
+	template<typename TransportPushT>
+	void Loop(TransportPushT & TransportPush)
+	{
+		//推送消息
+		_tagCallParameter SendParameter;
+		SYSTEMERROR Error;
+		UserContextMapT::iterator itUser = m_UserContextMap.begin();
+		for (; itUser != m_UserContextMap.end(); itUser++)
+		{
+			
+			UserContext::SessionT::iterator itSession = itUser->second.SessionMap.begin();
+			for (; itSession != itUser->second.SessionMap.end(); itSession++)
+			{
+				if (itSession->second.EventQueue.size())
+				{
+					if (TransportPush.CanPush(itSession->second.hHandle))
+					{
+						SendParameter.ss = itSession->first;
+						SendParameter.su = itUser->first;
+						SendParameter.oc = OBJECT_SYSTEM_OP_EVENT_PUSH;
+						//RetParameter.sn = tagCallParameter.sn;
+						SendParameter.el.resize(itSession->second.EventQueue.size());
+						std::copy(itSession->second.EventQueue.begin(),
+							itSession->second.EventQueue.end(),
+							//itSession->second.EventQueue.begin()
+							SendParameter.el.begin()
+						);
+						if (TransportPush.SendMsg(itSession->second.hHandle, SendParameter, Error))
+						{
+							itSession->second.EventQueue.clear();
+						}
+					}
+					
+				}
+			}
+			
+		}
+	}
 private:
 
 	typedef struct _tagFileContext
@@ -317,26 +383,27 @@ private:
 
 	typedef struct _tagUserSession
 	{
-		typedef vector<_tagObjectSystemEvent> EventQueueT;
-		typedef map<tstring,_tagObjectSystemEvent,less<tstring>> EventSubscribeT;
+		typedef vector_freelist<_tagObjectSystemEvent> EventQueueT;
+		typedef map_freelist<tstring,_tagObjectSystemEvent,less<tstring>> EventSubscribeT;
 		//Subscribe/Publish
 		EventSubscribeT EventSubscribeMap;
 		EventQueueT EventQueue;
 		unsigned int nEventTypeMask;
 		_tagKeepAlivedPar KeepAlived;
 		tstring szKeepAlived;
+		Transport::TransportHandle hHandle;
 	}UserSession,*PUserSession;
 	typedef struct _tagUserContext
 	{
-		typedef map<tstring, _tagUserSession, less<tstring>> SessionT;
+		typedef map_freelist<tstring, _tagUserSession, less<tstring>> SessionT;
 		SessionT	SessionMap;
 		unsigned int nCurrentID;
 		unsigned int nEventTypeMask;
 	}UserContext, *PUserContext;
 
-	map<tstring, FileContext,less<tstring> > m_FileCacheMap;
+	map_freelist<tstring, FileContext,less<tstring> > m_FileCacheMap;
 
-	typedef map<tstring, UserContext, less<tstring>> UserContextMapT;
+	typedef map_freelist<tstring, UserContext, less<tstring>> UserContextMapT;
 	UserContextMapT m_UserContextMap;
 	//清理
 	BOOL ClearDirCache(const TCHAR * ObjectOrDirPath);

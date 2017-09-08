@@ -1689,7 +1689,7 @@ public:
 	
 	BOOL LoadSetData(TCHAR * Data)
 	{
-		BOOL bRst = DecodeHex((TCHAR *)Data.c_str(), (BYTE *)&m_Val[0], sizeof(m_Val)*sizeof(SerializeObjectType));
+		BOOL bRst = DecodeHex(Data, (BYTE *)&m_Val[0], sizeof(m_Val)*sizeof(SerializeObjectType));
 		if(bRst)
 		{
 			runstate.bCache=1;

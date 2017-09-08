@@ -7,6 +7,9 @@
 
 #include "targetver.h"
 
+#include <winsock2.h>
+#include <mswsock.h>
+#pragma comment(lib, "ws2_32.lib")
 #include <stdio.h>
 #include <tchar.h>
 
@@ -23,5 +26,6 @@ using namespace std;
 #include "../../../other/Serialize.h"
 
 #include "../../../other/ObjectSystem2/ObjectSystem.h"
+
 
 // TODO: 在此处引用程序需要的其他头文件
